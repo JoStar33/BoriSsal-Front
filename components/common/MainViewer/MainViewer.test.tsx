@@ -1,5 +1,4 @@
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import MainViewer from "./MainViewer";
 
 describe("메인페이지 테스트", () => {
