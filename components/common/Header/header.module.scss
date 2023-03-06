@@ -1,11 +1,26 @@
 .header {
+  display: flex;
   width: 100vw;
   height: 10vh;
+  background-color: #9999CC;
+};
+
+.logo_box {
+  width: 90vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #9999CC;
   img {
     border-radius: 100px;
-  }
-}
+    user-select: none;
+  };
+};
+
+.side_bar_button {
+  cursor: pointer;
+  width: 5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} 
+
