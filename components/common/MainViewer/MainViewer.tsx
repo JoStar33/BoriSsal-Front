@@ -25,7 +25,9 @@ const MainViewer = () => {
 
     
     <div className={styles.wrapper}>
-      <figure className={styles.bori_img1} style={{ width: '25vw', height: '35vw' }}>
+      <figure
+        role="image_test1"
+        className={styles.bori_img1} style={{ width: '25vw', height: '35vw' }}>
         <Image
           className={styles.bori_img1}
           fill
@@ -49,7 +51,8 @@ const MainViewer = () => {
       >
         <h1>안녕🐶</h1>
       </div>
-      <figure         
+      <figure
+        role="image_test2"         
         className={styles.bori_img2}
         style={{
           width: '23vw', 
@@ -70,6 +73,7 @@ const MainViewer = () => {
           transform: `translateX(${position}px)`,
         }}>
         <Image
+          role="image_test3"
           src={mainImage4}
           fill
           alt=""
@@ -109,6 +113,7 @@ const MainViewer = () => {
       </p>
       <figure
         className={styles.bori_img4}
+        role="image_test"
         style={{
           width: '33vw', 
           height: '20vw',
