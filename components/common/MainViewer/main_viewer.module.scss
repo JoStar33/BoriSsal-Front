@@ -1,0 +1,91 @@
+.wrapper {
+  width: 100vw;
+  overflow: hidden;
+  min-height: 312.5rem;
+  p {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.bori_img {
+  &1 {
+    z-index: 1;
+    position: absolute;
+    left: 6.25rem;
+    bottom: 3.425rem;
+  }
+  &2 {
+    position: relative;
+    z-index: 2;
+    left: 100%;
+  }
+  &3 {
+    right: 50%;
+  }
+  &4 {
+    position: absolute;
+    top: 100rem;
+    right: 0;
+    opacity: 0.5;
+    z-index: 1;
+    right: 12.5rem;
+  }
+  &5 {
+    position: absolute;
+    top: 1600px;
+    right: 0;
+    opacity: 0.5;
+    z-index: 1;
+    left: 500px;
+    right: auto;
+    opacity: 1;
+  }
+  &6 {
+    position: relative;
+    z-index: 2;
+    left: 100%;
+    margin-top: 60%;
+  }
+}
+
+
+.wrapper p {
+  position: relative;
+  z-index: 2;
+}
+
+.bg {
+  width: 62.5rem;
+  margin: 0 auto;
+  display: flex;
+  height: 12.5rem;
+  justify-content: center;
+  align-items: center;
+  z-index: 4;
+  h1 {
+    font-size: 6.25rem;
+  }
+}
+
+.desc3 {
+  font-weight: bold;
+  text-align: center;
+  font-size: 3.75rem;
+  opacity: 1;
+}
+
+.last_box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  bottom: -380%;
+  left: 50%;
+  z-index: 2;
+  h1 {
+    font-size: 4vw;
+  }
+}
