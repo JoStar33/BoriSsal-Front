@@ -19,7 +19,7 @@ describe("메인페이지 테스트", () => {
     const image2 = screen.getByRole("image_test2");
     expect(image2).toHaveStyle({
       'width': '23vw',
-      'height': '35vw'
+      'height': '37vw'
     });
     const image3 = screen.getByRole("image_test3");
     expect(image3).toBeDefined();
