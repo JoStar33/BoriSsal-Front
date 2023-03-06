@@ -6,7 +6,7 @@ import logo from '/public/images/logo.jpg';
 
 const Header = () => {
   return (
-    <div className={styles.head}>
+    <div className={styles.header}>
       <Link
         href="/"
         aria-label='홈으로 이동'
