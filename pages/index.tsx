@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import DefaultHeader from '@/components/common/Header/Header'
 import { Inter } from 'next/font/google'
 import MainViewer from '@/components/common/MainViewer/MainViewer'
 
@@ -14,7 +13,6 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <DefaultHeader></DefaultHeader>
       <main>
         <MainViewer></MainViewer>
       </main>
