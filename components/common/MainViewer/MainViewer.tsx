@@ -22,8 +22,6 @@ const MainViewer = () => {
   }, []);
 
   return (
-
-    
     <div className={styles.wrapper}>
       <figure
         role="image_test1"
@@ -56,7 +54,7 @@ const MainViewer = () => {
         className={styles.bori_img2}
         style={{
           width: '23vw', 
-          height: '35vw',
+          height: '37vw',
           transform: `translateX(${-position}px)`,
         }}>
         <Image
@@ -160,6 +158,10 @@ const MainViewer = () => {
           alt=""/>
         <h1>어때 우리 귀여운 보리</h1>
         <h1>만나보지 않을래?</h1>
+        <div className={styles.last_button_box}>
+          <button className={styles.goods_button}>굿즈페이지 가기</button>
+          <button className={styles.bori_gallery_button}>보리갤러리 가기</button>
+        </div>
       </div>
     </div>
   );
