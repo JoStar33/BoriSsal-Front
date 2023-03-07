@@ -12,15 +12,15 @@ const Oauth = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   useEffect(()=> {
-    const params = new URL(document.location.toString()).searchParams;
-    const id = params.get("id");
+    const params = new URL(window.location.href.toString()).searchParams;
+    const id = parseInt(params.get("id") as string);
     const email = params.get("email");
     const nick = params.get("nick"); 
     dispatch(setUserState({
       id: id,
       email: email,
       nick: nick
-    } as userInfo));
+    } as unknown as userInfo));
     router.push('/');
   });
   return (
