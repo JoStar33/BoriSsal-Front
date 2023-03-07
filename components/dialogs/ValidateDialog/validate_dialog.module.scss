@@ -35,5 +35,19 @@
   }
   h2 {
     @include center;
+    margin: 10px;
+    margin-top: 20px;
   }
+}
+
+.dialog_bori {
+  position: absolute;
+  top: 2vw;
+  left: 2vw;
+}
+
+.dialog_question {
+  position: absolute;
+  top: 0vw;
+  left: 2vw;
 }

@@ -12,3 +12,8 @@ export const DialogTest = Template.bind({});
 DialogTest.args = {
   text: "ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"
 };
+
+export const NiceTest = Template.bind({});
+DialogTest.args = {
+  text: "제대로된 텍스트입니다."
+};
