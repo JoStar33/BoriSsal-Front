@@ -1,7 +1,7 @@
 .wrapper {
   width: 100vw;
   overflow: hidden;
-  height: 342.5rem;
+  height: 600vh;
   p {
     position: relative;
     z-index: 2;
@@ -10,10 +10,10 @@
 
 .bori_img {
   &1 {
-    z-index: 1;
+    z-index: -4;
     position: absolute;
     left: 6.25rem;
-    bottom: 3.425rem;
+    top: 25vh;
   }
   &2 {
     position: relative;

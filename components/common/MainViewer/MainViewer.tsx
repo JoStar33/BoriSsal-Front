@@ -25,9 +25,8 @@ const MainViewer = () => {
     <div className={styles.wrapper}>
       <figure
         role="image_test1"
-        className={styles.bori_img1} style={{ width: '25vw', height: '35vw' }}>
+        className={styles.bori_img1} style={{ width: '25vw', height: '37vw' }}>
         <Image
-          className={styles.bori_img1}
           fill
           src={mainImage7}
           alt=""
