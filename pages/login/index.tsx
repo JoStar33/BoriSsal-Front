@@ -4,7 +4,7 @@ import Image from 'next/image';
 import kakaoImage from '/public/login/kakao.png'
 import googleImage from '/public/login/google.png'
 import { validateEmail, validatePassword } from '@/utils/validate';
-import ValidateDialog from '@/components/dialogs/ValidateDialog';
+import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import { login } from '@/apis/user/auth';
 import { AppDispatch } from '@/store';
 import { useDispatch } from 'react-redux';
