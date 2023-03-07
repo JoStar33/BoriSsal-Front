@@ -20,6 +20,7 @@ const Login = () => {
   const [dialog, setDialog] = useState(false);
   const handleLogin = () => {
     if (!(account.email && account.password)) {
+      console.log("run");
       setDialog(true)
       return;
     }
@@ -65,18 +66,18 @@ const Login = () => {
               onChange={onChangeAccount}
             />
           </div>
-          <div>{validateEmail(account.email)}</div>
+          <div className={styles.validate_text}>{validateEmail(account.email)}</div>
           <div className={styles.input_container}>
             <p>비밀번호:</p>
             <input 
               type="password"             
-              name="email"
+              name="password"
               onKeyDown={handleOnKeyDown}
               onChange={onChangeAccount} />
           </div>
-          <div>{validatePassword(account.password)}</div>
+          <div className={styles.validate_text}>{validatePassword(account.password)}</div>
           <div>
-            <button className={styles.login_button}>로그인</button>
+            <button className={styles.login_button} onClick={() => handleLogin()}>로그인</button>
             <button className={styles.join_button}>회원가입</button>
           </div>
         </div>
