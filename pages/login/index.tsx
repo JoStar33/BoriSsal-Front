@@ -3,7 +3,7 @@ import styles from './login.module.scss';
 import Image from 'next/image';
 import kakaoImage from '/public/login/kakao.png'
 
-const index = () => {
+const Login = () => {
   return (
     <div className={styles.login_container}>
       <h1>로그인</h1>
@@ -35,4 +35,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Login;
