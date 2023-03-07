@@ -10,7 +10,7 @@ const SideBar = ({setShowSideBar}: propsType) => {
   return (
     <div className={styles.side_bar}>
       <div className={styles.exit_box} onClick={() => setShowSideBar(false)}>
-        <IoIosExit size={35} style={{marginRight: "10px", cursor: "pointer"}}/>
+        <IoIosExit size={50} style={{marginRight: "10px", cursor: "pointer"}}/>
       </div>
       <Link
         href="/"
