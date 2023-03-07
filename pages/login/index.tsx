@@ -10,9 +10,12 @@ import { AppDispatch } from '@/store';
 import { useDispatch } from 'react-redux';
 import { setUserState } from '@/store/user';
 import { userInfo } from '@/types/user';
+import { useRouter } from 'next/router';
 
 const Login = () => {
+  const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
+  const [dialogText, setDialogText] = useState('');
   const [account, setAccount] = useState({
     email: "",
     password: "",
@@ -20,8 +23,8 @@ const Login = () => {
   const [dialog, setDialog] = useState(false);
   const handleLogin = () => {
     if (!(account.email && account.password)) {
-      console.log("run");
-      setDialog(true)
+      setDialogText('이메일 비밀번호를 입력해주세요.');
+      setDialog(true);
       return;
     }
     if (validateEmail(account.email)) {
@@ -37,6 +40,11 @@ const Login = () => {
         email: res.data.email,
         nick: res.data.nick
       } as userInfo));
+      router.push('/');
+    })
+    .catch((error) => {
+      setDialogText(error.message);
+      setDialog(true);
     })
   };
   const handleOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -53,14 +61,16 @@ const Login = () => {
   return (
     <>
       {
-        dialog && <ValidateDialog text='이메일 비밀번호를 입력해주세요.' setDialog={setDialog}></ValidateDialog>
+        dialog && <ValidateDialog text={dialogText} setDialog={setDialog}></ValidateDialog>
       }
       <div className={styles.login_container}>
         <h1>로그인</h1>
         <div className={styles.login_box}>
           <div className={styles.input_container}>
             <p>이메일:</p>
-            <input type="text"  
+            <input 
+              role="email"
+              type="text"  
               name="email"
               onKeyDown={handleOnKeyDown}
               onChange={onChangeAccount}
@@ -70,6 +80,7 @@ const Login = () => {
           <div className={styles.input_container}>
             <p>비밀번호:</p>
             <input 
+              role="password"
               type="password"             
               name="password"
               onKeyDown={handleOnKeyDown}
@@ -77,7 +88,13 @@ const Login = () => {
           </div>
           <div className={styles.validate_text}>{validatePassword(account.password)}</div>
           <div>
-            <button className={styles.login_button} onClick={() => handleLogin()}>로그인</button>
+            <button 
+              className={styles.login_button} 
+              onClick={() => handleLogin()}
+              role="login"
+            >
+                로그인
+            </button>
             <button className={styles.join_button}>회원가입</button>
           </div>
         </div>
