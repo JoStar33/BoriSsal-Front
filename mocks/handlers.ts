@@ -4,6 +4,9 @@ import { rest } from 'msw';
 //아래와 같이 확인할 수 있다.
 export const handlers = [
   // Match a GET request to a third-party server.
+  /*
+  example)
+  
   rest.get('https://jsonplaceholder.typicode.com/todos', (req, res, ctx) => {
     return res(
       ctx.status(200), 
@@ -25,4 +28,5 @@ export const handlers = [
       }])
     )
   }),
+  */
 ]
