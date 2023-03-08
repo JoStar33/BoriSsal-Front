@@ -5,24 +5,18 @@ import kakaoImage from '/public/login/kakao.png'
 import googleImage from '/public/login/google.png'
 import { validateEmail, validatePassword } from '@/utils/validate';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
-import { login } from '@/apis/user/auth';
 import { useLoginMutation } from '@/hooks/auth/useLoginMutation';
-import { AppDispatch } from '@/store';
-import { useDispatch } from 'react-redux';
 import { loginType } from "@/types/auth";
-import { setUserState } from '@/store/user';
-import { userInfo } from '@/types/user';
-import { useRouter } from 'next/router';
 import Loading from '@/components/loading/Loading';
 
 const Login = () => {
+  const [dialog, setDialog] = useState(false);
   const [dialogText, setDialogText] = useState('');
   const [account, setAccount] = useState<loginType>({
     email: "",
     password: "",
   });
-  const [dialog, setDialog] = useState(false);
-  const joinMutation = useLoginMutation({loginInfo: account, setDialogText, setDialog});
+  const loginMutation = useLoginMutation({loginInfo: account, setDialogText, setDialog});
   const handleLogin = () => {
     if (!(account.email && account.password)) {
       setDialogText('이메일 비밀번호를 입력해주세요.');
@@ -35,7 +29,7 @@ const Login = () => {
     if (validatePassword(account.password)) {
       return;
     }
-    joinMutation.mutate();
+    loginMutation.mutate();
   };
   const handleOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -51,7 +45,7 @@ const Login = () => {
   return (
     <>
       {
-        joinMutation.isLoading && <Loading></Loading>
+        loginMutation.isLoading && <Loading></Loading>
       }
       {
         dialog && <ValidateDialog text={dialogText} setDialog={setDialog}></ValidateDialog>

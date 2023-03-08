@@ -27,7 +27,12 @@ test("일반적으로 버튼을 클릭했을 경우.", async () => {
 });
 
 test("이메일과 비밀번호를 입력후 테스트를 시도했을 경우(성공 케이스)", async () => {
-  render(<Provider store={store}><Login/></Provider>);
+  render(
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <Login/>
+      </Provider>
+    </QueryClientProvider>);
   const email = screen.getByRole("email");
   const password = screen.getByRole("password");
   fireEvent.change(email, { target: {value: "user12@test.com"}});
@@ -47,7 +52,12 @@ test("이메일과 비밀번호를 입력후 테스트를 시도했을 경우(�
       return res(ctx.status(500));
     })
   );
-  render(<Provider store={store}><Login/></Provider>);
+  render(
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <Login/>
+      </Provider>
+    </QueryClientProvider>);
   const email = screen.getByRole("email");
   const password = screen.getByRole("password");
   fireEvent.change(email, { target: {value: "user12@test.com"}});
