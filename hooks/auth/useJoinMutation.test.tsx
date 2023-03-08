@@ -1,9 +1,8 @@
-import { waitFor } from "@testing-library/react";
 import { server } from "@/mocks/server";
 import { rest } from "msw";
 import { useJoinMutation } from "./useJoinMutation";
 import { QueryClientProvider, QueryClient } from "react-query";
-import { renderHook } from "@testing-library/react";
+import { renderHook, waitFor } from "@testing-library/react";
 const queryClient = new QueryClient();
 
 const Wrapper = ({ children }: any) => {
