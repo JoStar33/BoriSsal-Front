@@ -29,4 +29,24 @@ export const handlers = [
     )
   }),
   */
+  rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/login`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        _id: 3333,
+        email: "user12@test.com",
+        nick: "클라나이"
+      })
+    );
+  }),
+  rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/join`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        _id: 3333,
+        email: "user12@test.com",
+        nick: "클라나이"
+      })
+    );
+  })
 ]
