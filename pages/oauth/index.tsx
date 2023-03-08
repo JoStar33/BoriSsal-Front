@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Image from 'next/image';
 import styles from './oauth.module.scss'
 import oauth_bori_ssuang from '/public/login/oauth_bori_ssuang.png';
-import { userInfo } from '@/types/user';
+import { userType } from '@/types/user';
 import { useRouter } from 'next/router';
 import { AppDispatch } from '@/store';
 import { useDispatch } from 'react-redux';
@@ -16,11 +16,12 @@ const Oauth = () => {
     const id = parseInt(params.get("id") as string);
     const email = params.get("email");
     const nick = params.get("nick"); 
+    //유저의 정보를 가져오는 customHook을 선언할 필요가 있음.
     dispatch(setUserState({
       id: id,
       email: email,
       nick: nick
-    } as unknown as userInfo));
+    } as unknown as userType));
     router.push('/');
   });
   return (
