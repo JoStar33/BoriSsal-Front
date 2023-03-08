@@ -32,7 +32,7 @@ export const useLoginMutation = ({
     },
     onError: (error: AxiosError) => {
       setDialogText(error.message);
-      setDialog(true)
+      setDialog(true);
     }
   });
 };
