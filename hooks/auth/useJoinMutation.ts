@@ -1,7 +1,7 @@
 import { useMutation } from "react-query";
 import { join } from "@/apis/user/auth";
 import { useRouter } from 'next/router';
-import { joinType } from "@/types/user";
+import { joinType } from "@/types/auth";
 
 
 export const useJoinMutation = ({

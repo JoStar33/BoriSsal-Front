@@ -1,7 +1,7 @@
-import { act, render, screen, waitFor } from "@testing-library/react";
+import { waitFor } from "@testing-library/react";
 import { server } from "@/mocks/server";
 import { rest } from "msw";
-import { useJoinMutation } from "./useJoinQuery";
+import { useJoinMutation } from "./useJoinMutation";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { renderHook } from "@testing-library/react";
 //라우터 모킹
@@ -31,7 +31,7 @@ const Wrapper = ({ children }: any) => {
   );
 };
 
-test('useJoinQuery 훅 테스트', async () => {
+test('useJoinMutation 훅 테스트', async () => {
   server.use(
     rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/join`, (req, res, ctx) => {
       return res(
@@ -50,7 +50,27 @@ test('useJoinQuery 훅 테스트', async () => {
   await waitFor(() => {
     result.current.mutate();
   }).then(() => {
-    console.log(result.current.data);
     expect(result.current.isSuccess).toBe(true);
+  });
+});
+
+test('useJoinMutation 훅 테스트', async () => {
+  server.use(
+    rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/join`, (req, res, ctx) => {
+      return res(
+        ctx.status(500)
+      );
+    })
+  );
+  const { result } = renderHook(() => useJoinMutation({email: 'test@naver.com', nick: 'jojo', password: '123123123'}), {
+    wrapper: Wrapper,
+  });
+  await waitFor(() => {
+    result.current.mutate();
+  }).then(() => {
+    if(result.current.error)
+      return
+    console.log(result.current.error);
+    expect(result.current.isSuccess).toBe(false);
   });
 });
