@@ -6,21 +6,23 @@ import googleImage from '/public/login/google.png'
 import { validateEmail, validatePassword } from '@/utils/validate';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import { login } from '@/apis/user/auth';
+import { useLoginMutation } from '@/hooks/auth/useLoginMutation';
 import { AppDispatch } from '@/store';
 import { useDispatch } from 'react-redux';
+import { loginType } from "@/types/auth";
 import { setUserState } from '@/store/user';
 import { userInfo } from '@/types/user';
 import { useRouter } from 'next/router';
+import Loading from '@/components/loading/Loading';
 
 const Login = () => {
-  const router = useRouter();
-  const dispatch = useDispatch<AppDispatch>();
   const [dialogText, setDialogText] = useState('');
-  const [account, setAccount] = useState({
+  const [account, setAccount] = useState<loginType>({
     email: "",
     password: "",
   });
   const [dialog, setDialog] = useState(false);
+  const joinMutation = useLoginMutation({loginInfo: account, setDialogText, setDialog});
   const handleLogin = () => {
     if (!(account.email && account.password)) {
       setDialogText('이메일 비밀번호를 입력해주세요.');
@@ -33,19 +35,7 @@ const Login = () => {
     if (validatePassword(account.password)) {
       return;
     }
-    login(account.email, account.password)
-    .then((res) => {
-      dispatch(setUserState({
-        id: res.data._id,
-        email: res.data.email,
-        nick: res.data.nick
-      } as userInfo));
-      router.push('/');
-    })
-    .catch((error) => {
-      setDialogText(error.message);
-      setDialog(true);
-    })
+    joinMutation.mutate();
   };
   const handleOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -60,6 +50,9 @@ const Login = () => {
   };
   return (
     <>
+      {
+        joinMutation.isLoading && <Loading></Loading>
+      }
       {
         dialog && <ValidateDialog text={dialogText} setDialog={setDialog}></ValidateDialog>
       }
