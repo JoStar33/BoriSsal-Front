@@ -1,0 +1,62 @@
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.join_container {
+  @include center;
+  flex-direction: column;
+  h1 {
+    font-size: 4vw;
+    margin: 6vh;
+  }
+  button {
+    @include center;
+    width: 40vw;
+    height: 15vh;
+    border: none;
+    font-weight: 800;
+    border-radius: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+    background-color: #CCCCFF;
+  }
+}
+
+.join_container__part {
+  @include center;
+  position: relative;
+  flex-direction: column;
+  width: 50vw;
+  height: 30vh;
+  margin: 2vw;
+  border: 6px solid black;
+  border-radius: 20px;
+  img {
+    top: 8vh;
+    left: 6vh;
+    position: absolute;
+  }
+}
+
+.input_container {
+  margin: 1rem;
+  margin-top: 2rem;
+  @include center;
+  p {
+    font-weight: 800;
+    font-size: 1.5rem;
+    width: 8rem;
+    margin: 0;
+  }
+  input {
+    height: 2rem;
+  }
+}
+
+.validate_text {
+  margin: 2rem;
+  color: red;
+  font-size: 0.7rem;
+}

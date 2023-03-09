@@ -3,33 +3,21 @@ import Login from ".";
 import { server } from "../../mocks/server";
 import { rest } from "msw";
 import { Provider } from 'react-redux';
+import { QueryClientProvider, QueryClient } from "react-query";
 import { store }from '@/store';
 import userEvent from "@testing-library/user-event";
 
 const user = userEvent.setup();
 
-//라우터 모킹
-jest.mock('next/router', () => ({
-  useRouter() {
-    return ({
-      route: '/',
-      pathname: '',
-      query: '',
-      asPath: '',
-      push: jest.fn(),
-      events: {
-        on: jest.fn(),
-        off: jest.fn()
-      },
-      beforePopState: jest.fn(() => null),
-      prefetch: jest.fn(() => null)
-    });
-  },
-}));
-
+const queryClient = new QueryClient();
 
 test("일반적으로 버튼을 클릭했을 경우.", async () => {
-  render(<Provider store={store}><Login/></Provider>);
+  render(
+  <QueryClientProvider client={queryClient}>
+    <Provider store={store}>
+      <Login/>
+    </Provider>
+  </QueryClientProvider>);
   const loginButton = screen.getByRole("login");
   await user.click(loginButton)
   .then(() => {
@@ -39,19 +27,12 @@ test("일반적으로 버튼을 클릭했을 경우.", async () => {
 });
 
 test("이메일과 비밀번호를 입력후 테스트를 시도했을 경우(성공 케이스)", async () => {
-  server.use(
-    rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/login`, (req, res, ctx) => {
-      return res(
-        ctx.status(200),
-        ctx.json({
-          _id: 3333,
-          email: "user12@test.com",
-          nick: "클라나이"
-        })
-      )
-    })
-  );
-  render(<Provider store={store}><Login/></Provider>);
+  render(
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <Login/>
+      </Provider>
+    </QueryClientProvider>);
   const email = screen.getByRole("email");
   const password = screen.getByRole("password");
   fireEvent.change(email, { target: {value: "user12@test.com"}});
@@ -71,7 +52,12 @@ test("이메일과 비밀번호를 입력후 테스트를 시도했을 경우(�
       return res(ctx.status(500));
     })
   );
-  render(<Provider store={store}><Login/></Provider>);
+  render(
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <Login/>
+      </Provider>
+    </QueryClientProvider>);
   const email = screen.getByRole("email");
   const password = screen.getByRole("password");
   fireEvent.change(email, { target: {value: "user12@test.com"}});

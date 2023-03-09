@@ -1,12 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { userInfo } from "../types/user";
+import { userType } from "../types/user";
 
 const initialState = {
   user: {
     id: '',
     email: ``,
     nick: ``,
-  } as userInfo,
+    sns_id: '',
+    profile_image: '',
+    user_role: 0,
+    created_at: new Date(),
+    user_product_like: [],
+    user_bori_gallery_like: [],
+  } as userType,
 };
 
 export const userSlice = createSlice({
@@ -16,7 +22,7 @@ export const userSlice = createSlice({
     resetUserState: (state) => {
       Object.assign(state, initialState);
     },
-    setUserState: (state, action: PayloadAction<userInfo>) => {
+    setUserState: (state, action: PayloadAction<userType>) => {
       Object.assign(state.user, action.payload);
     }
   },
