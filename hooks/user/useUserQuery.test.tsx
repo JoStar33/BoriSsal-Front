@@ -8,7 +8,6 @@ const queryClient = new QueryClient();
 
 const Wrapper = ({ children }: any) => {
   return (
-    /** Recoil의 훅 사용을 위해 RecoilRoot로 컴포넌트를 래핑한다  */
     <Provider store={store}><QueryClientProvider client={queryClient}>{children}</QueryClientProvider></Provider>
   );
 };
@@ -26,9 +25,7 @@ test('useUserQuery 정상동작 확인 테스트', async () => {
   const { result } = renderHook(() => useUserQuery({setDialog: setState, setDialogText: setState}), {
     wrapper: Wrapper,
   });
-  await waitFor(() => {
-    result.current.data
-  }).then(() => {
+  await waitFor(() => expect(result.current.isSuccess).toBe(true)).then(() => {
     const state = store.getState().userStore;
     console.log(state.user);
     expect(state.user.id).toEqual("23");
