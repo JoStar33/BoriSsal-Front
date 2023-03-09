@@ -43,5 +43,16 @@ export const handlers = [
     return res(
       ctx.status(200)
     );
+  }),
+  rest.get(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/user/23`, (req, res, ctx) => {
+    return res
+    (
+      ctx.status(200),
+      ctx.json({
+        _id: "23",
+        email: 'rhwdf@gmail.com',
+        nick: '우하하'
+      })
+    );
   })
 ]
