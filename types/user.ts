@@ -1,5 +1,4 @@
 export type userType = {
-  data: any;
   id: string;
   email: string;
   nick: string;

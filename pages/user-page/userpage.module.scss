@@ -1,0 +1,61 @@
+@mixin center {
+  display: flex;
+  justify-content: center;
+}
+
+.userpage_container {
+  @include center;
+  flex-direction: row;
+  .user_image__deliver_info {
+    display: flex;
+    flex-direction: column;
+    .user_image {
+      @include center;
+      align-items: center;
+      flex-direction: column;
+      margin-right: 5vw;
+      h1 {
+        display: inline-block;
+      }
+    }
+    .user_deliver_address {
+      div {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        p {
+          width: 7rem;
+          font-size: 1.3rem;
+          font-weight: 800;
+        }
+        input {
+          height: 1.5rem;
+        }
+      }
+    }
+  }
+  .user_info_part {
+    flex-direction: column;
+    margin-top: 2.6rem;
+    margin-left: 3vw;
+    p {
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+    button {
+      background-color: #CCCCFF;
+      font-size: 1.3rem;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      border-radius: 20px;
+    }
+  }
+}
+
+.none_image {
+  width: 200px;
+  height: 200px;
+  background-color: #D9D9D9;
+  border-radius: 100px;
+}
