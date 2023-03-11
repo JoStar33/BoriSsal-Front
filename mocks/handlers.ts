@@ -46,5 +46,13 @@ export const handlers = [
     return res(
       ctx.status(200)
     );
-  })
+  }),
+  rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/password`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        message: '성공적으로 변경되었습니다!'
+      })
+    );
+  }),
 ]

@@ -11,7 +11,7 @@ import styles from './main_viewer.module.scss';
 
 const MainViewer = () => {
   const [position, setPosition] = useState(0);
-  function onScroll() {
+  const onScroll = () => {
     setPosition(window.scrollY);
   }
   useEffect(() => {
