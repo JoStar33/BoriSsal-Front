@@ -8,19 +8,22 @@ import { AiFillCheckCircle } from 'react-icons/ai';
 import { validatePassword, validatePasswordCheck } from '@/utils/validate';
 import { usePassWordChangeMutation } from '@/hooks/auth/usePassWordChangeMutation';
 import Loading from '@/components/loading/Loading';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 type propsType = {
   setDialog: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const PassWordChangeDialog = ({setDialog}: propsType) => {
+  const { user } = useSelector((state: RootState) => state.userStore);
   const [account, setAccount] = useState({
     password: "",
     passwordCheck: "",
     newPassword: "",
     newPasswordCheck: "",
   });
-  const { mutate, isLoading, isError, error, isSuccess  } = usePassWordChangeMutation({password: account.password, newPassword: account.newPassword});
+  const { mutate, isLoading, isError, error, isSuccess  } = usePassWordChangeMutation({id: user.id, password: account.password, newPassword: account.newPassword});
   const onChangeAccount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAccount({
       ...account,
@@ -42,6 +45,9 @@ const PassWordChangeDialog = ({setDialog}: propsType) => {
     }
     if (validatePasswordCheck(account.newPassword, account.newPasswordCheck)) {
       return;
+    }
+    if (account.password === account.newPassword) {
+      return
     }
     mutate();
   }
@@ -72,6 +78,7 @@ const PassWordChangeDialog = ({setDialog}: propsType) => {
           <div className={styles.input_container}>{/*현재 비밀번호*/}
             <p>현재 비밀번호: </p>
             <input 
+              role="password"
               onChange={onChangeAccount}
               name="password"
               type="password" /> 
@@ -80,6 +87,7 @@ const PassWordChangeDialog = ({setDialog}: propsType) => {
           <div className={styles.input_container}>{/*현재 비밀번호 확인*/}
             <p>현재 비밀번호 확인: </p>
             <input 
+              role="passwordCheck"
               onChange={onChangeAccount}
               name="passwordCheck"
               type="password" /> 
@@ -88,6 +96,7 @@ const PassWordChangeDialog = ({setDialog}: propsType) => {
           <div className={styles.input_container}>{/*바꾸고 싶은 비밀번호*/}
             <p>새 비밀번호: </p>
             <input 
+              role="newPassword"
               onChange={onChangeAccount}
               name="newPassword"
               type="password" />   
@@ -96,17 +105,25 @@ const PassWordChangeDialog = ({setDialog}: propsType) => {
           <div className={styles.input_container}>{/*바꾸고 싶은 비밀번호*/}
             <p>새 비밀번호 확인: </p>
             <input 
+              role="newPasswordCheck"
               onChange={onChangeAccount}
               name="newPasswordCheck"
               type="password" />   
           </div>
           <div className={styles.validate_text}>{validatePasswordCheck(account.newPassword, account.newPasswordCheck)}</div>
-          <button onClick={handlePassWordChange}>비밀번호 변경</button>{/*비밀번호 변경*/}
+          <button
+            role='password_change'
+            onClick={handlePassWordChange}>
+            비밀번호 변경
+          </button>
           {
             (!account.password &&
             !account.passwordCheck &&
             !account.newPassword &&
             !account.newPasswordCheck) && <div className={styles.mutation_handle_message}>입력바랍니다!🐶</div>
+          }
+          {
+            account.newPassword === account.password && <div className={styles.mutation_handle_message}>이런 이전 비밀번호와 동일해요!🐶</div>
           }
           {
             isError && 

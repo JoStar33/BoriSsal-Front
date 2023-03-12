@@ -3,13 +3,15 @@ import { passwordChange } from "@/apis/user/auth";
 
 type propsType = {
   password: string,
-  newPassword: string
+  newPassword: string,
+  id: string
 }
 
 export const usePassWordChangeMutation = ({
   password,
-  newPassword
+  newPassword,
+  id
 }: propsType) => {
-  return useMutation(() => passwordChange(password, newPassword));
+  return useMutation(() => passwordChange(id, password, newPassword));
 };
 
