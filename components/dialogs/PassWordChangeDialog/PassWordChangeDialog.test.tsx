@@ -14,6 +14,8 @@ const user = userEvent.setup();
 
 
 const setState = jest.fn() as any
+
+//이런형태로 중복되는 코드를 위로 빼낼 수 있음.
 const initRender = () => {
   render(
     <QueryClientProvider client={queryClient}>
@@ -29,7 +31,7 @@ const initRender = () => {
     password, passwordCheck, newPassword, newPasswordCheck
   };
 };
-//이런형태로 중복되는 코드를 위로 빼낼 수 있음.
+
 test("화면내에 input 이벤트 테스트(동일한 비밀번호)", () => {
   const {password, passwordCheck, newPassword, newPasswordCheck} = initRender();
   fireEvent.change(password, { target: {value: "test123412^^"}});

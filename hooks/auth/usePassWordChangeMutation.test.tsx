@@ -13,7 +13,7 @@ const Wrapper = ({ children }: any) => {
 
 test('usePassWordChangeMutation 정상동작 확인 테스트', async () => {
   const setState = jest.fn() as any
-  const { result } = renderHook(() => usePassWordChangeMutation({password: '', newPassword: ''}), {
+  const { result } = renderHook(() => usePassWordChangeMutation({id:'', password: '', newPassword: ''}), {
     wrapper: Wrapper,
   });
   await waitFor(() => {
