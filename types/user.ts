@@ -1,5 +1,4 @@
 export type userType = {
-  data: any;
   id: string;
   email: string;
   nick: string;
@@ -10,6 +9,11 @@ export type userType = {
   user_product_like: [];
   user_bori_gallery_like: [];
 };
+
+export type userProfileUpload = {
+  user_id: string;
+  image: FormData;
+}
 
 export type userProductLikeType = {
 

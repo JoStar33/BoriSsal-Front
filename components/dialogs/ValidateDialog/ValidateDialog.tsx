@@ -8,7 +8,7 @@ import question from '/public/dialog/question.png'
 
 type propsType = {
   text: string;
-  setDialog: React.Dispatch<React.SetStateAction<boolean>>
+  setDialog?: React.Dispatch<React.SetStateAction<boolean>> | any
 }
 
 const ValidateDialog = ({text, setDialog}: propsType) => {

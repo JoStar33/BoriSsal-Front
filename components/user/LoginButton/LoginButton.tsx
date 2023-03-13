@@ -1,9 +1,14 @@
+import Link from 'next/link';
 import React from 'react';
+import styles from './login_button.module.scss';
 
 const LoginButton = () => {
   return (
-    <div>
-      <button>Login</button>
+    <div className={styles.login_button_container}>
+      <Link
+        href="/login">
+        <button className={styles.login_button}>Login</button>
+      </Link>
     </div>
   );
 };

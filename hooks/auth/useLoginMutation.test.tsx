@@ -7,7 +7,6 @@ const queryClient = new QueryClient();
 
 const Wrapper = ({ children }: any) => {
   return (
-    /** Recoil의 훅 사용을 위해 RecoilRoot로 컴포넌트를 래핑한다  */
     <Provider store={store}><QueryClientProvider client={queryClient}>{children}</QueryClientProvider></Provider>
   );
 };

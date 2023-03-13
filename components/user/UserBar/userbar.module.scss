@@ -1,0 +1,15 @@
+.userbar_container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  .non_profile {
+    background-color: #D9D9D9;
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+  }
+  .user_profile_container {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+}

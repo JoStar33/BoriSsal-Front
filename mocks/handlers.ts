@@ -4,31 +4,6 @@ import { rest } from 'msw';
 //아래와 같이 확인할 수 있다.
 export const handlers = [
   // Match a GET request to a third-party server.
-  /*
-  example)
-  
-  rest.get('https://jsonplaceholder.typicode.com/todos', (req, res, ctx) => {
-    return res(
-      ctx.status(200), 
-      ctx.json([{
-        userId: 0,
-        id: 3,
-        title: "안녕",
-        completed: true
-      }, {
-        userId: 0,
-        id: 2,
-        title: "뭘까",
-        completed: true
-      }, {
-        userId: 0,
-        id: 4,
-        title: "히히",
-        completed: true
-      }])
-    )
-  }),
-  */
   rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/login`, (req, res, ctx) => {
     return res(
       ctx.status(200),
@@ -54,5 +29,35 @@ export const handlers = [
         nick: '우하하'
       })
     );
-  })
+  }),
+  rest.get(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/deliver-address/23`, (req, res, ctx) => {
+    return res
+    (
+      ctx.status(200),
+      ctx.json({
+        user_id: "23",
+        phone_number: "01033332222",
+        address: '경기도 안양시 동안구 호랑이아파트',
+        address_detail: '102동 304호'
+      })
+    );
+  }),
+  rest.patch(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/deliver-address`, (req, res, ctx) => {
+    return res(
+      ctx.status(200)
+    );
+  }),
+  rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/password`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        message: '성공적으로 변경되었습니다!'
+      })
+    );
+  }),
+  rest.get(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/is-login`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+    );
+  }),
 ]

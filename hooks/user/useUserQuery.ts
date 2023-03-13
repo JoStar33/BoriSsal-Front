@@ -17,9 +17,7 @@ export const useUserQuery = ({setDialog, setDialogText}: propsType) => {
   const id = params.get("id") as string;
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
-  return useQuery(['user'], () => {
-    return getUser(id)
-  }, {
+  return useQuery(['user'], () => getUser(id), {
     onSuccess: (res) => {
       dispatch(setUserState({
         id: res.data._id,

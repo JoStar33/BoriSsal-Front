@@ -23,4 +23,12 @@ const logout = () => {
   return customAxios.get('/auth/logout');
 };
 
-export {login, join, logout, isLoggedIn}
+const passwordChange = (id: string, password: string, newPassword: string) => {
+  return customAxios.post('/auth/password', {
+    id: id,
+    password: password,
+    newPassword: newPassword
+  });
+}
+
+export {login, join, logout, isLoggedIn, passwordChange}
