@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { RootState } from "@/store";
 import { useSelector } from 'react-redux';
@@ -9,6 +9,7 @@ import PassWordChangeDialog from '@/components/dialogs/PassWordChangeDialog/Pass
 import { useLoginCheckQuery } from '@/hooks/auth/useLoginCheckQuery';
 import Loading from '@/components/loading/Loading';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
+import { BsFillPencilFill } from 'react-icons/bs';
 
 const UserPage = () => {
   const { user } = useSelector((state: RootState) => state.userStore);
@@ -30,16 +31,31 @@ const UserPage = () => {
         <div className={styles.user_image__deliver_info}>
           <div className={styles.user_image}>
             <h1>회원정보</h1>
-            {
-              user.profile_image 
-              ? <Image
-                  alt=''
-                  width={200}
-                  height={200}
-                  src={user.profile_image}>
-                </Image>
-              : <div className={styles.none_image}></div>
-            }
+            <div style={{position: 'relative'}}>
+              {
+                user.profile_image
+                ? <div>
+                    <Image
+                      style={{borderRadius: '100px'}}
+                      alt=''
+                      width={200}
+                      height={200}
+                      src={user.profile_image}>
+                    </Image>
+                  </div>
+                : <div className={styles.none_image}></div>
+              }
+              <label style={{cursor: 'pointer', position: 'absolute', top: '150px', left: '150px'}} className="input-file-button" htmlFor="input-file">
+                <BsFillPencilFill
+                  size={20}>
+                </BsFillPencilFill>
+              </label>
+              <input
+                id="input-file" 
+                type="file"
+                style={{display:"none"}}
+                accept="image/png, image/jpeg" />
+            </div>
           </div>
           <div className={styles.user_deliver_address}>
             <h1>배송정보 변경</h1>

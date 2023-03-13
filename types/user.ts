@@ -10,6 +10,11 @@ export type userType = {
   user_bori_gallery_like: [];
 };
 
+export type userProfileUpload = {
+  user_id: string;
+  image: FormData;
+}
+
 export type userProductLikeType = {
 
 }
