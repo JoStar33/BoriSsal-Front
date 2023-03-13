@@ -27,9 +27,9 @@ const UserPage = () => {
         </div>
         <div className={styles.user_deliver_address}>
           <h1>배송정보 변경</h1>
-          <UserDeliverAddressPart addressInfo={data?.data.phone_number} labelInfo='전화번호: '></UserDeliverAddressPart>
-          <UserDeliverAddressPart addressInfo={data?.data.address} labelInfo='주소: '></UserDeliverAddressPart>
-          <UserDeliverAddressPart addressInfo={data?.data.address_detail} labelInfo='상세주소: '></UserDeliverAddressPart>
+          <UserDeliverAddressPart user_id={user.id} addressInfo={data?.data.phone_number} addressType='phone_number' labelInfo='전화번호: '></UserDeliverAddressPart>
+          <UserDeliverAddressPart user_id={user.id} addressInfo={data?.data.address} addressType='address' labelInfo='주소: '></UserDeliverAddressPart>
+          <UserDeliverAddressPart user_id={user.id} addressInfo={data?.data.address_detail} addressType='address_detail' labelInfo='상세주소: '></UserDeliverAddressPart>
         </div>
       </div>
       <div className={styles.user_info_part}>

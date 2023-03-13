@@ -11,7 +11,7 @@ const Wrapper = ({ children }: any) => {
 };
 
 test('useDeliverAddressMutation 훅 테스트', async () => {
-  const { result } = renderHook(() => useDeliverAddressMutation({user_id: '213143', phone_number: '01033334444', address: '경기도 안산시 안산동', address_detail: "104번지"}), {
+  const { result } = renderHook(() => useDeliverAddressMutation({user_id: '213143', address_info: '01033334444', address_type: 'phone_number'}), {
     wrapper: Wrapper,
   });
   result.current.mutate();
