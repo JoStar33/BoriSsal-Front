@@ -123,7 +123,7 @@ const PassWordChangeDialog = ({setDialog}: propsType) => {
             !account.newPasswordCheck) && <div className={styles.mutation_handle_message}>입력바랍니다!🐶</div>
           }
           {
-            account.newPassword === account.password && <div className={styles.mutation_handle_message}>이런 이전 비밀번호와 동일해요!🐶</div>
+            (account.password && (account.newPassword === account.password)) && <div className={styles.mutation_handle_message}>이런 이전 비밀번호와 동일해요!🐶</div>
           }
           {
             isError && 
