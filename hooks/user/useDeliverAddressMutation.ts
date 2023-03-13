@@ -6,7 +6,6 @@ import { patchDeliverAddressType } from "@/types/deliverAddress";
 export const useDeliverAddressMutation = (deliverAddress: patchDeliverAddressType) => {
   const queryClient = useQueryClient();
   return useMutation(() => {
-    console.log(deliverAddress);
     return patchDeliverAddress(deliverAddress)
   }, {
     onSuccess: () => {

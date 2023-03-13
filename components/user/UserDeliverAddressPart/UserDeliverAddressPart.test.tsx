@@ -2,8 +2,6 @@ import { store } from "@/store";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { server } from "@/mocks/server";
-import { rest } from "msw";
 import UserDeliverAddressPart from "./UserDeliverAddressPart";
 import userEvent from "@testing-library/user-event";
 
@@ -11,8 +9,6 @@ import userEvent from "@testing-library/user-event";
 const queryClient = new QueryClient();
 
 const user = userEvent.setup();
-
-const setState = jest.fn() as any
 
 type propsType = {
   user_id: string,
@@ -54,6 +50,4 @@ test("주소 변경 시도시에", async () => {
   await user.click(modifyButton);
   const successText = await screen.findByText("변경 성공!");
   expect(successText).toBeInTheDocument();
-  // const modifyText = screen.getByDisplayValue('102동 555호');
-  // expect(modifyText).toBeInTheDocument();
 });
