@@ -37,25 +37,21 @@ const UserDeliverAddressPart = ({addressInfo, labelInfo, addressType, user_id}: 
   }; // onCompletePost 함수
   return (
     <>
-      {
-        dialog && 
-        <div className={styles.dialog_background}>
-          <div style={{
-            width: '400px'
-          }}>
-            <button type='button' onClick={() => setDialog(false)} className={styles.postcode_button}>닫기</button>
-          </div>
-          <DaumPostcode
-            onClose={() => setDialog(false)}
-            style={{
-              width: '400px',
-              height: '400px',
-            }}
-            onComplete={onCompletePost}
-          ></DaumPostcode>
-        </div>
-      }
       <div className={styles.user_deliver_address_container}>
+        {
+          dialog && 
+          <div className={styles.address_dialog_background}>
+            <button type='button' onClick={() => setDialog(false)} className={styles.postcode_button}>닫기</button>
+            <DaumPostcode
+              onClose={() => setDialog(false)}
+              style={{
+                width: '400px',
+                height: '400px',
+              }}
+              onComplete={onCompletePost}
+            ></DaumPostcode>
+          </div>
+        }
         <p className={styles.deliver_address_label}>
           {
             labelInfo
