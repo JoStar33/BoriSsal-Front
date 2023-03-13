@@ -3,7 +3,7 @@ import { BsFillPencilFill, BsCheckLg } from 'react-icons/bs';
 import styles from './user_deliver_address_part.module.scss';
 import DaumPostcode from 'react-daum-postcode';
 import { useDeliverAddressMutation } from '@/hooks/user/useDeliverAddressMutation';
-import { putDeliverAddressType } from "@/types/deliverAddress";
+import { patchDeliverAddressType } from "@/types/deliverAddress";
 import { AiFillCheckCircle } from 'react-icons/ai';
 import { RiAlarmWarningFill } from 'react-icons/ri';
 
@@ -21,23 +21,20 @@ const UserDeliverAddressPart = ({addressInfo, labelInfo, addressType, user_id}: 
   const { isLoading, isError, isSuccess, error, mutate} = useDeliverAddressMutation({
     user_id: user_id, 
     address_info: address, 
-    address_type: addressType} as putDeliverAddressType);
+    address_type: addressType} as patchDeliverAddressType);
   useEffect(() => {
     if (!inputRef.current)
       return;
     inputRef.current.value = addressInfo;
-  });
+  }, [addressInfo]);
+  const handleChangeAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAddress(e.target.value);
+  }
   const onCompletePost = (data: any) => {
     setAddress(data.address);
     setDialog(false);
     mutate();
   }; // onCompletePost 함수
-  const modifyAddressInfo = () => {
-    if (!inputRef.current)
-      return;
-    setAddress(inputRef.current.value);
-    mutate();
-  }
   return (
     <>
       {
@@ -67,6 +64,7 @@ const UserDeliverAddressPart = ({addressInfo, labelInfo, addressType, user_id}: 
         {
           !(addressType === 'address')
           ? <input 
+              onChange={handleChangeAddress}
               ref={inputRef}
               type="text"
               role={addressType}/>
@@ -74,7 +72,10 @@ const UserDeliverAddressPart = ({addressInfo, labelInfo, addressType, user_id}: 
         }
         {
           !(addressType === 'address') 
-          ? <button className={styles.modify_button} onClick={() => modifyAddressInfo()}>
+          ? <button 
+              className={styles.modify_button} 
+              onClick={() => mutate()}
+              role='modify_address_button'>
               <BsFillPencilFill size={30}></BsFillPencilFill>
             </button>
           : <button 

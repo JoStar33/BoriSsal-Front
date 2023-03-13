@@ -1,11 +1,14 @@
 import { useMutation, useQueryClient } from "react-query";
-import { putDeliverAddress } from "@/apis/user/deliverAddress";
-import { putDeliverAddressType } from "@/types/deliverAddress";
+import { patchDeliverAddress } from "@/apis/user/deliverAddress";
+import { patchDeliverAddressType } from "@/types/deliverAddress";
 
 
-export const useDeliverAddressMutation = (deliverAddress: putDeliverAddressType) => {
+export const useDeliverAddressMutation = (deliverAddress: patchDeliverAddressType) => {
   const queryClient = useQueryClient();
-  return useMutation(() => putDeliverAddress(deliverAddress), {
+  return useMutation(() => {
+    console.log(deliverAddress);
+    return patchDeliverAddress(deliverAddress)
+  }, {
     onSuccess: () => {
       queryClient.invalidateQueries("deliver-address");
     }

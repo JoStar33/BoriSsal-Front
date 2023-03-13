@@ -45,3 +45,15 @@ test("화면내에 인풋 반영 테스트", () => {
   const address = screen.getByDisplayValue('102동 302호');
   expect(address).toBeInTheDocument();
 });
+
+test("주소 변경 시도시에", async () => {
+  const { addressValue } = initRender({addressInfo: '102동 302호', labelInfo: '상세주소: ', addressType: 'address_detail', user_id: '23'});
+  fireEvent.change(addressValue, { target: {value: "102동 555호"}});
+  expect(await screen.findByDisplayValue("102동 555호")).toBeInTheDocument();
+  const modifyButton = screen.getByRole("modify_address_button");
+  await user.click(modifyButton);
+  const successText = await screen.findByText("변경 성공!");
+  expect(successText).toBeInTheDocument();
+  // const modifyText = screen.getByDisplayValue('102동 555호');
+  // expect(modifyText).toBeInTheDocument();
+});
