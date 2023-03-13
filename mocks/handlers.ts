@@ -55,4 +55,9 @@ export const handlers = [
       })
     );
   }),
+  rest.get(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/is-login`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+    );
+  }),
 ]

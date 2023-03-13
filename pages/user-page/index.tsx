@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import Image from 'next/image';
 import { RootState } from "@/store";
 import { useSelector } from 'react-redux';
@@ -6,14 +6,26 @@ import { useDeliverAddressQuery } from '@/hooks/user/useDeliverAddressQuery';
 import UserDeliverAddressPart from '@/components/user/UserDeliverAddressPart/UserDeliverAddressPart';
 import styles from './userpage.module.scss';
 import PassWordChangeDialog from '@/components/dialogs/PassWordChangeDialog/PassWordChangeDialog';
+import { useLoginCheckQuery } from '@/hooks/auth/useLoginCheckQuery';
+import Loading from '@/components/loading/Loading';
+import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 
 const UserPage = () => {
   const { user } = useSelector((state: RootState) => state.userStore);
   const { data } = useDeliverAddressQuery({user_id: user.id});
   const [dialog, setDialog] = useState(false);
+  const { isLoading, isError } = useLoginCheckQuery();
   return (
     <>
-      {dialog && <PassWordChangeDialog setDialog={setDialog}></PassWordChangeDialog>}
+      {
+        isLoading && <Loading></Loading>
+      }
+      {
+        isError && <ValidateDialog text='로그인상태가 아닙니다!'></ValidateDialog>
+      }
+      { 
+        dialog && <PassWordChangeDialog setDialog={setDialog}></PassWordChangeDialog> 
+      }
       <div className={styles.userpage_container}>
         <div className={styles.user_image__deliver_info}>
           <div className={styles.user_image}>
