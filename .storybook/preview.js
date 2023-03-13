@@ -1,5 +1,15 @@
 import * as NextImage from "next/image";
 import { RouterContext } from "next/dist/shared/lib/router-context"; // next 12
+import { handlers } from '@/mocks/handlers';
+import { setupWorker } from "msw";
+
+if (typeof global.process === "undefined") {//checks to make sure that this is not a node process
+  const worker = setupWorker(//create service worker
+    ...handlers
+  );
+  worker.start();// worker starts!
+}
+
 
 NextImage.defaultProps = {
   unoptimized: true,
