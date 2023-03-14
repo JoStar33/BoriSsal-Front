@@ -1,5 +1,4 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import PassWordChangeDialog from './PassWordChangeDialog';
 
 export default {
@@ -7,8 +6,6 @@ export default {
   component: PassWordChangeDialog,
 } as ComponentMeta<typeof PassWordChangeDialog>;
 
-const queryClient = new QueryClient();
-
-const Template: ComponentStory<typeof PassWordChangeDialog> = (args) => <QueryClientProvider client={queryClient}><PassWordChangeDialog {...args} /></QueryClientProvider>;
+const Template: ComponentStory<typeof PassWordChangeDialog> = (args) => <PassWordChangeDialog {...args} />;
 
 export const PassWordChangeDialogTest = Template.bind({});

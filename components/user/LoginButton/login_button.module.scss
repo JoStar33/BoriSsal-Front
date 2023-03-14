@@ -1,7 +1,10 @@
 .login_button_container {
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .login_button {
-    height: 2rem;
+    height: 3rem;
     width: 10rem;
     background-color: #fff;
     font-size: 1.4rem;

@@ -24,7 +24,10 @@ const UserBar = () => {
             : <div className={styles.non_profile}></div>
         }
       </Link>
-      <h1>Welcome {user.nick}</h1>
+      <div className={styles.name_space}>
+        <p>Welcome</p>
+        <p>{user.nick}</p>
+      </div>
     </div>
   );
 };

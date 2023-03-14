@@ -13,3 +13,17 @@
     margin-right: 2rem;
   }
 }
+
+.name_space {
+  width: 9rem;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  justify-content: flex-start;
+  p {
+    margin: 0;
+    height: 1.3rem;
+    font-weight: 800;
+  }
+}
