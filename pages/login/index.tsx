@@ -8,6 +8,7 @@ import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import { useLoginMutation } from '@/hooks/auth/useLoginMutation';
 import { loginType } from "@/types/auth";
 import Loading from '@/components/loading/Loading';
+import Link from 'next/link';
 
 const Login = () => {
   const [dialog, setDialog] = useState(false);
@@ -82,7 +83,9 @@ const Login = () => {
             >
                 로그인
             </button>
-            <button className={styles.join_button}>회원가입</button>
+            <Link href='/join'>
+              <button className={styles.join_button}>회원가입</button>
+            </Link>
           </div>
         </div>
         <button className={styles.kakao_login_button}>

@@ -23,6 +23,7 @@ const UserDeliverAddressPart = ({addressInfo, labelInfo, addressType, user_id}: 
     address_info: address, 
     address_type: addressType} as patchDeliverAddressType);
   useEffect(() => {
+    setAddress(addressInfo);
     if (!inputRef.current)
       return;
     inputRef.current.value = addressInfo;
@@ -31,9 +32,11 @@ const UserDeliverAddressPart = ({addressInfo, labelInfo, addressType, user_id}: 
     setAddress(e.target.value);
   }
   const onCompletePost = (data: any) => {
-    setAddress(data.address);
+    setAddress(() => data.address);
     setDialog(false);
-    mutate();
+    setTimeout(() => {
+      mutate();
+    }, 1000);
   }; // onCompletePost 함수
   return (
     <>
@@ -64,7 +67,7 @@ const UserDeliverAddressPart = ({addressInfo, labelInfo, addressType, user_id}: 
               ref={inputRef}
               type="text"
               role={addressType}/>
-          : <p role='address'>{addressInfo}</p>
+          : <p role='address'>{address}</p>
         }
         {
           !(addressType === 'address') 
