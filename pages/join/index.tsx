@@ -22,8 +22,8 @@ const Join = () => {
   const joinMutation = useJoinMutation({
     joinInfo: {
       email: account.email,
-      nick: account.email,
-      password: account.email,
+      nick: account.nick,
+      password: account.password,
     }, 
     setDialogText, 
     setDialog});
