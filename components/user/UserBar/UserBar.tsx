@@ -17,10 +17,11 @@ const UserBar = () => {
         {
           user.profile_image 
             ? <Image
+                style={{borderRadius: '100px'}}
                 width={40}
                 height={40}
                 alt=''
-                src={user.profile_image}></Image>
+                src={process.env.NEXT_PUBLIC_BORI_SSAL_API_URL + user.profile_image}></Image>
             : <div className={styles.non_profile}></div>
         }
       </Link>
