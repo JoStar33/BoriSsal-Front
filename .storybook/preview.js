@@ -2,6 +2,9 @@ import * as NextImage from "next/image";
 import { RouterContext } from "next/dist/shared/lib/router-context"; // next 12
 import { handlers } from '@/mocks/handlers';
 import { setupWorker } from "msw";
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { Provider } from "react-redux";
+import { store }from '@/store';
 
 if (typeof global.process === "undefined") {//checks to make sure that this is not a node process
   const worker = setupWorker(//create service worker
@@ -10,6 +13,15 @@ if (typeof global.process === "undefined") {//checks to make sure that this is n
   worker.start();// worker starts!
 }
 
+export const decorators = [
+  (Story) => (
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <Story />
+      </Provider>
+    </QueryClientProvider>
+  ),
+]
 
 NextImage.defaultProps = {
   unoptimized: true,
