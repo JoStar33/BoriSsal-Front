@@ -6,6 +6,8 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from "react-redux";
 import { store }from '@/store';
 
+const queryClient = new QueryClient();
+
 if (typeof global.process === "undefined") {//checks to make sure that this is not a node process
   const worker = setupWorker(//create service worker
     ...handlers

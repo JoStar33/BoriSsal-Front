@@ -3,11 +3,16 @@ import Link from 'next/link';
 import styles from './header.module.scss';
 import Image from 'next/image';
 import logo from '/public/images/logo.jpg';
-import { AiOutlineMenu } from 'react-icons/ai';
 import SideBar from '../SideBar/SideBar';
+import { AiOutlineMenu } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
+import UserBar from '@/components/user/UserBar/UserBar';
+import LoginButton from '@/components/user/LoginButton/LoginButton';
 
 const Header = () => {
   const [showSideBar, setShowSideBar] = useState(false);
+  const { user } = useSelector((state: RootState) => state.userStore);
   return (
     <>
       <div className={styles.header}>
@@ -28,6 +33,13 @@ const Header = () => {
               height={50}
             ></Image>
           </Link>
+        </div>
+        <div>
+          {
+            user.id.length > 3 
+            ? <UserBar></UserBar>
+            : <LoginButton></LoginButton>
+          }
         </div>
       </div>
       {
