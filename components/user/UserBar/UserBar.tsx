@@ -29,6 +29,7 @@ const UserBar = () => {
         <p>Welcome</p>
         <p>{user.nick}</p>
       </div>
+      <button className={styles.logout_button}>Logout</button>
     </div>
   );
 };
