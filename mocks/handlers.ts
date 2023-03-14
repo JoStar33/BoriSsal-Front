@@ -60,4 +60,9 @@ export const handlers = [
       ctx.status(200),
     );
   }),
+  rest.get(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/is-not-login`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+    );
+  }),
 ]

@@ -17,7 +17,11 @@ const join = (email: string, nick: string, password: string) => {
 
 const isLoggedIn = () => {
   return customAxios.get('/auth/is-login');
-}
+};
+
+const isNotLoggedIn = () => {
+  return customAxios.get('/auth/is-not-login');
+};
 
 const logout = () => {
   return customAxios.get('/auth/logout');
@@ -31,4 +35,4 @@ const passwordChange = (id: string, password: string, newPassword: string) => {
   });
 }
 
-export {login, join, logout, isLoggedIn, passwordChange}
+export {login, join, logout, isLoggedIn, isNotLoggedIn, passwordChange}
