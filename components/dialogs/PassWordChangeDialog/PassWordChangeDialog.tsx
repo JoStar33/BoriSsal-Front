@@ -1,9 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import password_bori from "/public/dialog/password_bori.png";
-import styles from "./password_change_dialog.module.scss";
-import PasswordChangeInputPart from "@/components/user/PasswordChangeInputPart/PasswordChangeInputPart";
-import Loading from "@/components/loading/Loading/Loading";
 import { GrClose } from "react-icons/gr";
 import { RiAlarmWarningFill } from "react-icons/ri";
 import { AiFillCheckCircle } from "react-icons/ai";
@@ -11,6 +6,11 @@ import { validatePassword, validatePasswordCheck } from "@/utils/validate";
 import { usePassWordChangeMutation } from "@/hooks/auth/usePassWordChangeMutation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
+import Image from "next/image";
+import password_bori from "/public/dialog/password_bori.png";
+import styles from "./password_change_dialog.module.scss";
+import PasswordChangeInputPart from "@/components/user/PasswordChangeInputPart/PasswordChangeInputPart";
+import Loading from "@/components/loading/Loading/Loading";
 
 type propsType = {
   setDialog: React.Dispatch<React.SetStateAction<boolean>>;

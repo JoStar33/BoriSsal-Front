@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './success_dialog.module.scss'
-import { GrClose } from 'react-icons/gr';
 import Image from 'next/image';
 import success_bori from '/public/dialog/success_bori.png'
 import success from '/public/dialog/success.png'
+import { GrClose } from 'react-icons/gr';
 
 
 type propsType = {

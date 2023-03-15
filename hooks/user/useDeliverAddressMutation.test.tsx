@@ -1,7 +1,6 @@
 import { QueryClientProvider, QueryClient } from "react-query";
 import { renderHook, waitFor } from "@testing-library/react";
 import { useDeliverAddressMutation } from "./useDeliverAddressMutation";
-import { useDeliverAddressQuery } from "./useDeliverAddressQuery";
 const queryClient = new QueryClient();
 
 const Wrapper = ({ children }: any) => {

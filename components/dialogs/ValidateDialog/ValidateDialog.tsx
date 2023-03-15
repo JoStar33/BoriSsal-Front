@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./validate_dialog.module.scss";
-import { GrClose } from "react-icons/gr";
 import Image from "next/image";
 import question_bori from "/public/dialog/question_bori.png";
 import question from "/public/dialog/question.png";
+import { GrClose } from "react-icons/gr";
 
 type propsType = {
   text: string;
