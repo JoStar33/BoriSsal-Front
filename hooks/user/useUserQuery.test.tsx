@@ -31,7 +31,6 @@ test("useUserQuery 정상동작 확인 테스트", async () => {
   );
   await waitFor(() => expect(result.current.isSuccess).toBe(true)).then(() => {
     const state = store.getState().userStore;
-    console.log(state.user);
     expect(state.user.id).toEqual("23");
     expect(state.user.email).toEqual("rhwdf@gmail.com");
     expect(state.user.nick).toEqual("우하하");

@@ -18,7 +18,6 @@ test("useProfileUpdateMutation 정상동작 확인 테스트", async () => {
     }
   );
   await waitFor(() => expect(result.current.isSuccess).toBe(true)).then(() => {
-    console.log(result.current);
     expect(result.current.data?.data.address).toEqual(
       "경기도 안양시 동안구 호랑이아파트"
     );

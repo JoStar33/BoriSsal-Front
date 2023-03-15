@@ -63,7 +63,6 @@ test("useJoinMutation 훅 테스트 실패 케이스", async () => {
   await waitFor(() => {
     result.current.mutate();
   }).then(() => {
-    //console.log(result.current);
     expect(result.current.isError).toBeTruthy();
   });
 });
