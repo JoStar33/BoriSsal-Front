@@ -10,4 +10,4 @@ export default {
 
 const Template: ComponentStory<typeof SideBar> = (args) => <SideBar {...args}/>;
 
-export const MainViewerTest = Template.bind({});
+export const SideBarTest = Template.bind({});

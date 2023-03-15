@@ -1,7 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Header from './Header';
-import { store }from '@/store';
-import { Provider, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUserState, resetUserState } from "@/store/user";
 import { useEffect } from 'react';
 
