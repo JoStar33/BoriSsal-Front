@@ -35,7 +35,7 @@ export const useUserQuery = ({ setDialog, setDialogText }: propsType) => {
       router.push("/");
     },
     onError: (error: AxiosError) => {
-      setDialogText(error.message);
+      setDialogText((error.response?.data as any).message);
       setDialog(true);
     },
   });

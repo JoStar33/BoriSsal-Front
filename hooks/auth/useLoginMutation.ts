@@ -39,7 +39,7 @@ export const useLoginMutation = ({
       router.push("/");
     },
     onError: (error: AxiosError) => {
-      setDialogText(error.message);
+      setDialogText((error.response?.data as any).message);
       setDialog(true);
     },
   });

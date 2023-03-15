@@ -6,9 +6,11 @@ import googleImage from "/public/login/google.png";
 import { validateEmail, validatePassword } from "@/utils/validate";
 import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
 import { useLoginMutation } from "@/hooks/auth/useLoginMutation";
+import { useNotLoginCheckQuery } from "@/hooks/auth/useNotLoginCheckQuery";
 import { loginType } from "@/types/auth";
 import Loading from "@/components/loading/Loading/Loading";
 import Link from "next/link";
+import { AxiosError } from "axios";
 
 const Login = () => {
   const [dialog, setDialog] = useState(false);
@@ -17,6 +19,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const { isError, isLoading, error } = useNotLoginCheckQuery();
   const loginMutation = useLoginMutation({
     loginInfo: account,
     setDialogText,
@@ -49,7 +52,13 @@ const Login = () => {
   };
   return (
     <>
-      {loginMutation.isLoading && <Loading></Loading>}
+      {isError && (
+        <ValidateDialog
+          text={((error as AxiosError).response?.data as any).message}
+          setDialog={setDialog}
+        ></ValidateDialog>
+      )}
+      {(loginMutation.isLoading || isLoading) && <Loading></Loading>}
       {dialog && (
         <ValidateDialog
           text={dialogText}
