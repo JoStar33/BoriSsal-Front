@@ -24,7 +24,7 @@ const isNotLoggedIn = () => {
 };
 
 const logout = () => {
-  return customAxios.get('/auth/logout');
+  return customAxios.post('/auth/logout');
 };
 
 const passwordChange = (id: string, password: string, newPassword: string) => {
