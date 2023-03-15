@@ -10,7 +10,7 @@ const Wrapper = ({ children }: any) => {
   );
 };
 
-test('useDeliverAddressQuery 정상동작 확인 테스트', async () => {
+test('useProfileUpdateMutation 정상동작 확인 테스트', async () => {
   const { result } = renderHook(() => useProfileUpdateMutation({user_id: "23", image: new FormData}), {
     wrapper: Wrapper,
   });
