@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
-import { IoIosExit } from "react-icons/io";
 import styles from "./side_bar.module.scss";
+import { IoIosExit } from "react-icons/io";
 
 type propsType = {
   setShowSideBar: React.Dispatch<React.SetStateAction<boolean>>;
