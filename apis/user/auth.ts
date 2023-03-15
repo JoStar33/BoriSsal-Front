@@ -15,6 +15,18 @@ const join = (email: string, nick: string, password: string) => {
   });
 };
 
+const emailDuplicate = (email: string) => {
+  return customAxios.post('/auth/join/email', {
+    email: email,
+  });
+}
+
+const nickDuplicate = (nick: string) => {
+  return customAxios.post('/auth/join/nick', {
+    nick: nick,
+  });
+}
+
 const isLoggedIn = () => {
   return customAxios.get('/auth/is-login');
 };
@@ -35,4 +47,4 @@ const passwordChange = (id: string, password: string, newPassword: string) => {
   });
 }
 
-export {login, join, logout, isLoggedIn, isNotLoggedIn, passwordChange}
+export {login, join, logout, isLoggedIn, isNotLoggedIn, passwordChange, emailDuplicate, nickDuplicate}
