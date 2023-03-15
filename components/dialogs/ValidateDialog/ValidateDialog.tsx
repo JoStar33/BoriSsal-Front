@@ -30,7 +30,7 @@ const ValidateDialog = ({text, setDialog}: propsType) => {
           height={40}
           src={question}
           alt=''></Image>
-        <h2 className={styles.default_close_button}>{text}</h2>
+        <h2>{text}</h2>
       </div>
     </div>
   );

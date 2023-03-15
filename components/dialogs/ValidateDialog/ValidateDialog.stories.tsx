@@ -8,12 +8,12 @@ export default {
 
 const Template: ComponentStory<typeof ValidateDialog> = (args) => <ValidateDialog {...args} />;
 
-export const DialogTest = Template.bind({});
-DialogTest.args = {
+export const ValidateDialogTest = Template.bind({});
+ValidateDialogTest.args = {
   text: "ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"
 };
 
-export const NiceTest = Template.bind({});
-DialogTest.args = {
+export const ValidateNiceTest = Template.bind({});
+ValidateNiceTest.args = {
   text: "제대로된 텍스트입니다."
 };
