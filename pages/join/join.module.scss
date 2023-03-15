@@ -11,23 +11,12 @@
     font-size: 4vw;
     margin: 6vh;
   }
-  button {
-    @include center;
-    width: 40vw;
-    height: 15vh;
-    border: none;
-    font-weight: 800;
-    border-radius: 20px;
-    font-size: 2rem;
-    cursor: pointer;
-    background-color: #CCCCFF;
-  }
 }
 
 .join_container__part {
   @include center;
   position: relative;
-  flex-direction: column;
+  flex-direction: row;
   width: 50vw;
   height: 15vh;
   margin: 2vw;
