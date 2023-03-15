@@ -7,7 +7,8 @@ import { RiAlarmWarningFill } from 'react-icons/ri';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import { validatePassword, validatePasswordCheck } from '@/utils/validate';
 import { usePassWordChangeMutation } from '@/hooks/auth/usePassWordChangeMutation';
-import Loading from '@/components/loading/Loading';
+import PasswordChangeInputPart from '@/components/user/PasswordChangeInputPart/PasswordChangeInputPart';
+import Loading from '@/components/loading/Loading/Loading';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 
@@ -75,67 +76,49 @@ const PassWordChangeDialog = ({setDialog}: propsType) => {
             className={styles.dialog_bori}
             src={password_bori}></Image>
           <h2>비밀번호 변경</h2>{/*비밀번호 변경 안내 타이틀*/}
-          <div className={styles.input_container}>{/*현재 비밀번호*/}
-            <p>현재 비밀번호: </p>
-            <input 
-              role="password"
-              onChange={onChangeAccount}
-              name="password"
-              type="password" /> 
-          </div>
-          <div className={styles.validate_text}>{validatePassword(account.password)}</div>
-          <div className={styles.input_container}>{/*현재 비밀번호 확인*/}
-            <p>현재 비밀번호 확인: </p>
-            <input 
-              role="passwordCheck"
-              onChange={onChangeAccount}
-              name="passwordCheck"
-              type="password" /> 
-          </div>
-          <div className={styles.validate_text}>{validatePasswordCheck(account.password, account.passwordCheck)}</div>
-          <div className={styles.input_container}>{/*바꾸고 싶은 비밀번호*/}
-            <p>새 비밀번호: </p>
-            <input 
-              role="newPassword"
-              onChange={onChangeAccount}
-              name="newPassword"
-              type="password" />   
-          </div>
-          <div className={styles.validate_text}>{validatePassword(account.newPassword)}</div>
-          <div className={styles.input_container}>{/*바꾸고 싶은 비밀번호*/}
-            <p>새 비밀번호 확인: </p>
-            <input 
-              role="newPasswordCheck"
-              onChange={onChangeAccount}
-              name="newPasswordCheck"
-              type="password" />   
-          </div>
-          <div className={styles.validate_text}>{validatePasswordCheck(account.newPassword, account.newPasswordCheck)}</div>
+          <PasswordChangeInputPart 
+            passInfo='현재 비밀번호: '
+            passType='password' 
+            onChangeAccount={onChangeAccount} 
+            validatePassword={validatePassword(account.password)}></PasswordChangeInputPart>
+          <PasswordChangeInputPart 
+            passInfo='현재 비밀번호 확인: '
+            passType='passwordCheck' 
+            onChangeAccount={onChangeAccount} 
+            validatePassword={validatePasswordCheck(account.password, account.passwordCheck)}></PasswordChangeInputPart>
+          <PasswordChangeInputPart 
+            passInfo='새 비밀번호: '
+            passType='newPassword' 
+            onChangeAccount={onChangeAccount} 
+            validatePassword={validatePassword(account.newPassword)}></PasswordChangeInputPart>
+          <PasswordChangeInputPart 
+            passInfo='새 비밀번호 확인: '
+            passType='newPasswordCheck' 
+            onChangeAccount={onChangeAccount} 
+            validatePassword={validatePasswordCheck(account.newPassword, account.newPasswordCheck)}></PasswordChangeInputPart>
           <button
             role='password_change'
             onClick={handlePassWordChange}>
             비밀번호 변경
           </button>
           {
-            (!account.password &&
-            !account.passwordCheck &&
-            !account.newPassword &&
-            !account.newPasswordCheck) && <div className={styles.mutation_handle_message}>입력바랍니다!🐶</div>
+            (!account.password && !account.passwordCheck && !account.newPassword && !account.newPasswordCheck) 
+            && <div className={styles.mutation_handle_message}>입력바랍니다!🐶</div>
           }
           {
             (account.password && (account.newPassword === account.password)) && <div className={styles.mutation_handle_message}>이런 이전 비밀번호와 동일해요!🐶</div>
           }
           {
             isError && 
-              <div className={styles.mutation_handle_message}>
-                <RiAlarmWarningFill size={25} color='red'></RiAlarmWarningFill>{(error as Error)?.message}
-              </div>
+            <div className={styles.mutation_handle_message}>
+              <RiAlarmWarningFill size={25} color='red'></RiAlarmWarningFill>{(error as Error)?.message}
+            </div>
           }
           {
             isSuccess && 
-              <div className={styles.mutation_handle_message}>
-                <AiFillCheckCircle size={25} color='green'></AiFillCheckCircle>비밀번호 변경 성공!
-              </div>
+            <div className={styles.mutation_handle_message}>
+              <AiFillCheckCircle size={25} color='green'></AiFillCheckCircle>비밀번호 변경 성공!
+            </div>
           }
         </div>
       </div>
