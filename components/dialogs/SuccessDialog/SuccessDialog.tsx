@@ -15,9 +15,12 @@ const SuccessDialog = ({text, setDialog}: propsType) => {
   return (
     <div className={styles.dialog_background}>
       <div className={styles.dialog_container}>
-        <div className={styles.default_close_button} onClick={() => setDialog(false)}>
-          <GrClose size={30}></GrClose>
-        </div>
+        {
+          setDialog && 
+          <div className={styles.default_close_button} onClick={() => setDialog(false)}>
+            <GrClose size={30}></GrClose>
+          </div>
+        }
         <Image
           alt=''
           className={styles.dialog_success}
