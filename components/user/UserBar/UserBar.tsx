@@ -17,7 +17,7 @@ const UserBar = () => {
   return (
     <>
       {
-        isError && <ValidateDialog text={(error as AxiosError).message} ></ValidateDialog>
+        isError && <ValidateDialog text={((error as AxiosError).response?.data as any).message} ></ValidateDialog>
       }
       {
         isLoading && <Loading></Loading>

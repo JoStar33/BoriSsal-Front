@@ -27,13 +27,11 @@ const Header = () => {
             <Image src={logo} alt="logo image" width={50} height={50}></Image>
           </Link>
         </div>
-        <div>
-          {user.id.length > 3 ? (
-            <UserBar></UserBar>
-          ) : (
-            <LoginButton></LoginButton>
-          )}
-        </div>
+        {user.id.length > 3 ? (
+          <UserBar></UserBar>
+        ) : (
+          <LoginButton></LoginButton>
+        )}
       </div>
       {showSideBar && <SideBar setShowSideBar={setShowSideBar}></SideBar>}
     </>
