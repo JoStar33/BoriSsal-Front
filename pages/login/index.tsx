@@ -7,7 +7,7 @@ import { validateEmail, validatePassword } from '@/utils/validate';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import { useLoginMutation } from '@/hooks/auth/useLoginMutation';
 import { loginType } from "@/types/auth";
-import Loading from '@/components/loading/Loading';
+import Loading from '@/components/loading/Loading/Loading';
 import Link from 'next/link';
 
 const Login = () => {

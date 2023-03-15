@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Loading from '@/components/loading/Loading';
+import Loading from '@/components/loading/Loading/Loading';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import styles from './join.module.scss';
 import Image from 'next/image';
