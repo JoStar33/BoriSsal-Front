@@ -69,7 +69,9 @@ const Join = () => {
           setDialog={setDialog}
         ></ValidateDialog>
       )}
-      {isLoading && <Loading></Loading>}
+      {
+        isLoading && <Loading></Loading>
+      }
       {
         isSuccess && <SuccessDialog text="회원가입에 성공했어요!"></SuccessDialog>
       }

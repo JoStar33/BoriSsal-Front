@@ -11,6 +11,7 @@ import password_bori from "/public/dialog/password_bori.png";
 import styles from "./password_change_dialog.module.scss";
 import InputPart from "@/components/user/InputPart/InputPart";
 import Loading from "@/components/loading/Loading/Loading";
+import { AxiosError } from "axios";
 
 type propsType = {
   setDialog: React.Dispatch<React.SetStateAction<boolean>>;
@@ -94,35 +95,38 @@ const PassWordChangeDialog = ({ setDialog }: propsType) => {
           <h2>비밀번호 변경</h2>
           {/*비밀번호 변경 안내 타이틀*/}
           <InputPart
-            passInfo="현재 비밀번호: "
-            passType="password"
+            textOrPass="pass" 
+            info="현재 비밀번호: "
+            type="password"
             onChangeAccount={onChangeAccount}
-            validatePassword={validatePassword(account.password)}
+            validate={validatePassword(account.password)}
           ></InputPart>
           <InputPart
-            passInfo="현재 비밀번호 확인: "
-            passType="passwordCheck"
+            textOrPass="pass" 
+            info="현재 비밀번호 확인: "
+            type="passwordCheck"
             onChangeAccount={onChangeAccount}
-            validatePassword={validatePasswordCheck(
+            validate={validatePasswordCheck(
               account.password,
               account.passwordCheck
             )}
           ></InputPart>
           <InputPart
-            passInfo="새 비밀번호: "
-            passType="newPassword"
+            textOrPass="pass" 
+            info="새 비밀번호: "
+            type="newPassword"
             onChangeAccount={onChangeAccount}
-            validatePassword={validatePassword(account.newPassword)}
+            validate={validatePassword(account.newPassword)}
           ></InputPart>
           <InputPart
-            passInfo="새 비밀번호 확인: "
-            passType="newPasswordCheck"
+            textOrPass="pass"  
+            info="새 비밀번호 확인: "
+            type="newPasswordCheck"
             onChangeAccount={onChangeAccount}
-            validatePassword={validatePasswordCheck(
+            validate={validatePasswordCheck(
               account.newPassword,
               account.newPasswordCheck
-            )}
-          ></InputPart>
+            )}></InputPart>
           <button role="password_change" onClick={handlePassWordChange}>
             비밀번호 변경
           </button>
@@ -142,7 +146,7 @@ const PassWordChangeDialog = ({ setDialog }: propsType) => {
           {isError && (
             <div className={styles.mutation_handle_message}>
               <RiAlarmWarningFill size={25} color="red"></RiAlarmWarningFill>
-              {(error as Error)?.message}
+              {((error as AxiosError).response?.data as any).message}
             </div>
           )}
           {isSuccess && (
