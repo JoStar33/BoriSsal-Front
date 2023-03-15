@@ -52,7 +52,9 @@ test("이메일과 비밀번호를 입력후 테스트를 시도했을 경우(�
     rest.post(
       `${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/login`,
       (req, res, ctx) => {
-        return res(ctx.status(500));
+        return res(
+          ctx.status(500), 
+          ctx.json({message: '비밀번호를 잘못 입력했습니다.'}));
       }
     )
   );
@@ -70,6 +72,6 @@ test("이메일과 비밀번호를 입력후 테스트를 시도했을 경우(�
   expect(password).toHaveValue("test123412^^");
   const loginButton = screen.getByRole("login");
   await user.click(loginButton);
-  const error = await screen.findByText("Request failed with status code 500");
+  const error = await screen.findByText("비밀번호를 잘못 입력했습니다.");
   expect(error).toBeInTheDocument();
 });
