@@ -10,8 +10,7 @@ const Wrapper = ({ children }: any) => {
   );
 };
 
-
-test('useNotLoginCheckQuery 훅 테스트(성공)', async () => {
+test("useNotLoginCheckQuery 훅 테스트(성공)", async () => {
   const { result } = renderHook(() => useNotLoginCheckQuery(), {
     wrapper: Wrapper,
   });

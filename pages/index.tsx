@@ -1,8 +1,8 @@
-import Head from 'next/head'
-import { Inter } from 'next/font/google'
-import MainViewer from '@/components/common/MainViewer/MainViewer'
+import Head from "next/head";
+import { Inter } from "next/font/google";
+import MainViewer from "@/components/common/MainViewer/MainViewer";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
@@ -17,5 +17,5 @@ export default function Home() {
         <MainViewer></MainViewer>
       </main>
     </>
-  )
+  );
 }

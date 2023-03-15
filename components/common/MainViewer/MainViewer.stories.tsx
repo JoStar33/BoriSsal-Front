@@ -1,11 +1,10 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import MainViewer from './MainViewer';
+import { ComponentStory, ComponentMeta } from "@storybook/react";
+import MainViewer from "./MainViewer";
 
 export default {
-  title: '메인뷰 테스트',
+  title: "메인뷰 테스트",
   component: MainViewer,
-  argTypes: {
-  },
+  argTypes: {},
 } as ComponentMeta<typeof MainViewer>;
 
 const Template: ComponentStory<typeof MainViewer> = () => <MainViewer />;

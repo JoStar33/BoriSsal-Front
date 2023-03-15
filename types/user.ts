@@ -13,8 +13,6 @@ export type userType = {
 export type userProfileUpload = {
   user_id: string;
   image: FormData;
-}
+};
 
-export type userProductLikeType = {
-
-}
+export type userProductLikeType = {};

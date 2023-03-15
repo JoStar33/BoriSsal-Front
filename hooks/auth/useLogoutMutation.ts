@@ -9,6 +9,6 @@ export const useLogoutMutation = () => {
   return useMutation(() => logout(), {
     onSuccess() {
       dispatch(resetUserState());
-    }
+    },
   });
 };

@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
-import Loading from '@/components/loading/Loading/Loading';
-import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
-import styles from './join.module.scss';
-import Image from 'next/image';
-import { useJoinMutation } from '@/hooks/auth/useJoinMutation';
-import { validateEmail, validateNick, validatePassword, validatePasswordCheck } from '@/utils/validate';
-import join1 from '/public/login/join1.png';
-import join2 from '/public/login/join2.png';
-import join3 from '/public/login/join3.png';
-import join4 from '/public/login/join4.png';
+import React, { useState } from "react";
+import Loading from "@/components/loading/Loading/Loading";
+import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
+import styles from "./join.module.scss";
+import Image from "next/image";
+import { useJoinMutation } from "@/hooks/auth/useJoinMutation";
+import {
+  validateEmail,
+  validateNick,
+  validatePassword,
+  validatePasswordCheck,
+} from "@/utils/validate";
+import join1 from "/public/login/join1.png";
+import join2 from "/public/login/join2.png";
+import join3 from "/public/login/join3.png";
+import join4 from "/public/login/join4.png";
 
 const Join = () => {
   const [account, setAccount] = useState({
@@ -17,16 +22,17 @@ const Join = () => {
     password: "",
     passwordCheck: "",
   });
-  const [dialogText, setDialogText] = useState<string>('');
+  const [dialogText, setDialogText] = useState<string>("");
   const [dialog, setDialog] = useState(false);
   const joinMutation = useJoinMutation({
     joinInfo: {
       email: account.email,
       nick: account.nick,
       password: account.password,
-    }, 
-    setDialogText, 
-    setDialog});
+    },
+    setDialogText,
+    setDialog,
+  });
   const join = async () => {
     if (!(account.email && account.nick && account.password)) {
       setDialogText("닉네임 이메일 비밀번호를 입력해주세요.");
@@ -55,84 +61,81 @@ const Join = () => {
   };
   return (
     <>
-      {
-        dialog && <ValidateDialog text={dialogText} setDialog={setDialog}></ValidateDialog>
-      }
-      {
-        joinMutation.isLoading && <Loading></Loading>
-      }
+      {dialog && (
+        <ValidateDialog
+          text={dialogText}
+          setDialog={setDialog}
+        ></ValidateDialog>
+      )}
+      {joinMutation.isLoading && <Loading></Loading>}
       <div className={styles.join_container}>
         <h1>회원가입</h1>
         <div className={styles.join_container__part}>
-          <Image
-            width={80}
-            height={110}
-            alt=''
-            src={join1}></Image>
+          <Image width={80} height={110} alt="" src={join1}></Image>
           <div className={styles.input_container}>
             <p>이메일: </p>
             <input
               role="email"
               name="email"
               type="text"
-              onChange={onChangeAccount} />
+              onChange={onChangeAccount}
+            />
           </div>
-          <div className={styles.validate_text}>{validateEmail(account.email)}</div>
+          <div className={styles.validate_text}>
+            {validateEmail(account.email)}
+          </div>
         </div>
         <div className={styles.join_container__part}>
-          <Image
-            width={120}
-            height={120}
-            alt=''
-            src={join2}></Image>
+          <Image width={120} height={120} alt="" src={join2}></Image>
           <div className={styles.input_container}>
             <p>닉네임: </p>
-            <input               
+            <input
               role="nick"
               name="nick"
               type="text"
-              onChange={onChangeAccount} />
+              onChange={onChangeAccount}
+            />
           </div>
-          <div className={styles.validate_text}>{validateNick(account.nick)}</div>
+          <div className={styles.validate_text}>
+            {validateNick(account.nick)}
+          </div>
         </div>
         <div className={styles.join_container__part}>
-          <Image
-            width={100}
-            height={150}
-            alt=''
-            src={join3}></Image>
+          <Image width={100} height={150} alt="" src={join3}></Image>
           <div className={styles.input_container}>
             <p>비밀번호: </p>
-            <input               
+            <input
               role="password"
               name="password"
               type="password"
-              onChange={onChangeAccount} />
+              onChange={onChangeAccount}
+            />
           </div>
-          <div className={styles.validate_text}>{validatePassword(account.password)}</div>
+          <div className={styles.validate_text}>
+            {validatePassword(account.password)}
+          </div>
         </div>
         <div className={styles.join_container__part}>
-          <Image
-            width={100}
-            height={100}
-            alt=''
-            src={join4}></Image>
+          <Image width={100} height={100} alt="" src={join4}></Image>
           <div className={styles.input_container}>
             <div>
               <p>비밀번호 </p>
               <p>확인: </p>
             </div>
-            <input               
+            <input
               role="passwordCheck"
               name="passwordCheck"
               type="password"
-              onChange={onChangeAccount} />
+              onChange={onChangeAccount}
+            />
           </div>
-          <div className={styles.validate_text}>{validatePasswordCheck(account.password, account.passwordCheck)}</div>
+          <div className={styles.validate_text}>
+            {validatePasswordCheck(account.password, account.passwordCheck)}
+          </div>
         </div>
-        <button 
-          role="join"
-          onClick={() => join()}>회원가입</button>
+        <button role="join" onClick={() => join()}>
+          회원가입
+        </button>
       </div>
     </>
   );

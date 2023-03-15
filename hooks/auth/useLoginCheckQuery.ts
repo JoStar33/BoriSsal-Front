@@ -8,10 +8,10 @@ import { AppDispatch } from "@/store";
 export const useLoginCheckQuery = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
-  return useQuery(['is-login'], () => isLoggedIn(), {
+  return useQuery(["is-login"], () => isLoggedIn(), {
     onError: () => {
       dispatch(resetUserState());
       router.push("/login");
-    }
+    },
   });
 };
