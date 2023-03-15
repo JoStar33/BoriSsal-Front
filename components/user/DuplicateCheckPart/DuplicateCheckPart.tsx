@@ -9,51 +9,19 @@ type propsType = {
   validate: string | null,
   type: boolean;
   info: string;
-  duplicateState: {
-    email: boolean;
-    nick: boolean;
-  }
-  setDuplicateState: React.Dispatch<React.SetStateAction<{
-    email: boolean;
-    nick: boolean;
-  }>>
 }
 
 const DuplicateCheckPart = ({
   type,
   info,
-  validate,
-  setDuplicateState,
-  duplicateState
+  validate
 }: propsType) => {
-  const {mutate, isSuccess, isError, isLoading, error} = useDuplicateCheckMutation({type, info});
+  const {mutate, isSuccess, isError, isLoading, isIdle, error} = useDuplicateCheckMutation({type, info});
   const handleOnClick = () => {
     if (validate) return;
     if (!info) return;
     mutate()
   }
-  useCallback(() => {
-    if(isSuccess) {
-      info 
-      ? setDuplicateState({...duplicateState, 
-        nick: true,
-      })
-      : setDuplicateState({...duplicateState, 
-        email: true,
-      })
-    };
-  }, [isSuccess]);
-  useCallback(() => {
-    if(isError) {
-      info 
-      ? setDuplicateState({...duplicateState, 
-        nick: false,
-      })
-      : setDuplicateState({...duplicateState, 
-        email: false,
-      })
-    };
-  }, [isError]);
   return (
     <div className={styles.duplicate_container}>
       <button 

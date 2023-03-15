@@ -17,13 +17,10 @@ const initRender = ({
   type,
   info
 }: propsType) => {
-  const setState = jest.fn() as any;
   render(
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <DuplicateCheckPart
-          duplicateState={setState}
-          setDuplicateState={setState}
           type={type}
           info={info} 
           validate={null}/>
@@ -34,7 +31,7 @@ const initRender = ({
 
 test("중복 체크가 정상적으로 이루어진 경우 테스트(이메일)", async () => {
   initRender({type: true, info: 'jesttest@naver.com'});
-  const duplicateCheckButton = screen.getByRole('button');
+  const duplicateCheckButton = screen.getByRole('duplicate_button');
   await user.click(duplicateCheckButton);
   const successText = await screen.findByText("사용해도 괜찮은 이메일이네요!");
   expect(successText).toBeInTheDocument();
@@ -43,7 +40,7 @@ test("중복 체크가 정상적으로 이루어진 경우 테스트(이메일)"
 
 test("중복 체크가 정상적으로 이루어진 경우 테스트(닉네임)", async () => {
   initRender({type: false, info: '호스스'});
-  const duplicateCheckButton = screen.getByRole('button');
+  const duplicateCheckButton = screen.getByRole('duplicate_button');
   await user.click(duplicateCheckButton);
   const successText = await screen.findByText("사용해도 괜찮은 닉네임이네요!");
   expect(successText).toBeInTheDocument();
