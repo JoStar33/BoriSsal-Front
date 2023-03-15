@@ -13,5 +13,6 @@ export const useLoginCheckQuery = () => {
       dispatch(resetUserState());
       router.push("/login");
     },
+    retry: 1,
   });
 };
