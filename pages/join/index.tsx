@@ -14,6 +14,8 @@ import join1 from "/public/login/join1.png";
 import join2 from "/public/login/join2.png";
 import join3 from "/public/login/join3.png";
 import join4 from "/public/login/join4.png";
+import InputPart from "@/components/user/InputPart/InputPart";
+import SuccessDialog from "@/components/dialogs/SuccessDialog/SuccessDialog";
 
 const Join = () => {
   const [account, setAccount] = useState({
@@ -24,7 +26,7 @@ const Join = () => {
   });
   const [dialogText, setDialogText] = useState<string>("");
   const [dialog, setDialog] = useState(false);
-  const joinMutation = useJoinMutation({
+  const { mutate, isLoading, isSuccess } = useJoinMutation({
     joinInfo: {
       email: account.email,
       nick: account.nick,
@@ -51,7 +53,7 @@ const Join = () => {
     if (validatePasswordCheck(account.password, account.passwordCheck)) {
       return;
     }
-    joinMutation.mutate();
+    mutate();
   };
   const onChangeAccount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAccount({
@@ -67,71 +69,27 @@ const Join = () => {
           setDialog={setDialog}
         ></ValidateDialog>
       )}
-      {joinMutation.isLoading && <Loading></Loading>}
+      {isLoading && <Loading></Loading>}
+      {
+        isSuccess && <SuccessDialog text="회원가입에 성공했어요!"></SuccessDialog>
+      }
       <div className={styles.join_container}>
         <h1>회원가입</h1>
         <div className={styles.join_container__part}>
           <Image width={80} height={110} alt="" src={join1}></Image>
-          <div className={styles.input_container}>
-            <p>이메일: </p>
-            <input
-              role="email"
-              name="email"
-              type="text"
-              onChange={onChangeAccount}
-            />
-          </div>
-          <div className={styles.validate_text}>
-            {validateEmail(account.email)}
-          </div>
+          <InputPart validate={validateEmail(account.email)} info="🐶이메일:" type="email" textOrPass="text" onChangeAccount={onChangeAccount}></InputPart>
         </div>
         <div className={styles.join_container__part}>
-          <Image width={120} height={120} alt="" src={join2}></Image>
-          <div className={styles.input_container}>
-            <p>닉네임: </p>
-            <input
-              role="nick"
-              name="nick"
-              type="text"
-              onChange={onChangeAccount}
-            />
-          </div>
-          <div className={styles.validate_text}>
-            {validateNick(account.nick)}
-          </div>
+          <Image width={110} height={110} alt="" src={join2}></Image>
+          <InputPart validate={validateNick(account.nick)} info="🐶닉네임:" type="nick" textOrPass="text" onChangeAccount={onChangeAccount}></InputPart>
         </div>
         <div className={styles.join_container__part}>
-          <Image width={100} height={150} alt="" src={join3}></Image>
-          <div className={styles.input_container}>
-            <p>비밀번호: </p>
-            <input
-              role="password"
-              name="password"
-              type="password"
-              onChange={onChangeAccount}
-            />
-          </div>
-          <div className={styles.validate_text}>
-            {validatePassword(account.password)}
-          </div>
+          <Image width={80} height={127} alt="" src={join3}></Image>
+          <InputPart validate={validatePassword(account.password)} info="🐶비밀번호:" type="password" textOrPass="password" onChangeAccount={onChangeAccount}></InputPart>
         </div>
         <div className={styles.join_container__part}>
-          <Image width={100} height={100} alt="" src={join4}></Image>
-          <div className={styles.input_container}>
-            <div>
-              <p>비밀번호 </p>
-              <p>확인: </p>
-            </div>
-            <input
-              role="passwordCheck"
-              name="passwordCheck"
-              type="password"
-              onChange={onChangeAccount}
-            />
-          </div>
-          <div className={styles.validate_text}>
-            {validatePasswordCheck(account.password, account.passwordCheck)}
-          </div>
+          <Image width={100} height={110} alt="" src={join4}></Image>
+          <InputPart validate={validatePasswordCheck(account.password, account.passwordCheck)} info="🐶비밀번호 확인:" type="passwordCheck" textOrPass="password" onChangeAccount={onChangeAccount}></InputPart>
         </div>
         <button role="join" onClick={() => join()}>
           회원가입

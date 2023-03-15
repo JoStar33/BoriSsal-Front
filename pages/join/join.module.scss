@@ -29,12 +29,12 @@
   position: relative;
   flex-direction: column;
   width: 50vw;
-  height: 30vh;
+  height: 15vh;
   margin: 2vw;
   border: 6px solid black;
   border-radius: 20px;
   img {
-    top: 8vh;
+    top: 0.3vw;
     left: 6vh;
     position: absolute;
   }
@@ -47,7 +47,7 @@
   p {
     font-weight: 800;
     font-size: 1.5rem;
-    width: 8rem;
+    width: 9rem;
     margin: 0;
   }
   input {

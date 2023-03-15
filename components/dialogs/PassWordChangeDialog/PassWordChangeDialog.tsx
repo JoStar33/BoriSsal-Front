@@ -9,7 +9,7 @@ import { RootState } from "@/store";
 import Image from "next/image";
 import password_bori from "/public/dialog/password_bori.png";
 import styles from "./password_change_dialog.module.scss";
-import PasswordChangeInputPart from "@/components/user/PasswordChangeInputPart/PasswordChangeInputPart";
+import InputPart from "@/components/user/InputPart/InputPart";
 import Loading from "@/components/loading/Loading/Loading";
 
 type propsType = {
@@ -93,13 +93,13 @@ const PassWordChangeDialog = ({ setDialog }: propsType) => {
           ></Image>
           <h2>비밀번호 변경</h2>
           {/*비밀번호 변경 안내 타이틀*/}
-          <PasswordChangeInputPart
+          <InputPart
             passInfo="현재 비밀번호: "
             passType="password"
             onChangeAccount={onChangeAccount}
             validatePassword={validatePassword(account.password)}
-          ></PasswordChangeInputPart>
-          <PasswordChangeInputPart
+          ></InputPart>
+          <InputPart
             passInfo="현재 비밀번호 확인: "
             passType="passwordCheck"
             onChangeAccount={onChangeAccount}
@@ -107,14 +107,14 @@ const PassWordChangeDialog = ({ setDialog }: propsType) => {
               account.password,
               account.passwordCheck
             )}
-          ></PasswordChangeInputPart>
-          <PasswordChangeInputPart
+          ></InputPart>
+          <InputPart
             passInfo="새 비밀번호: "
             passType="newPassword"
             onChangeAccount={onChangeAccount}
             validatePassword={validatePassword(account.newPassword)}
-          ></PasswordChangeInputPart>
-          <PasswordChangeInputPart
+          ></InputPart>
+          <InputPart
             passInfo="새 비밀번호 확인: "
             passType="newPasswordCheck"
             onChangeAccount={onChangeAccount}
@@ -122,7 +122,7 @@ const PassWordChangeDialog = ({ setDialog }: propsType) => {
               account.newPassword,
               account.newPasswordCheck
             )}
-          ></PasswordChangeInputPart>
+          ></InputPart>
           <button role="password_change" onClick={handlePassWordChange}>
             비밀번호 변경
           </button>
