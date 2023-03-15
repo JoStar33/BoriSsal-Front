@@ -27,7 +27,10 @@ test("회원가입에서 정상적으로 모든 input을 입력후 테스트를 
     rest.post(
       `${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/join`,
       (req, res, ctx) => {
-        return res(ctx.status(500));
+        return res(
+          ctx.status(500),
+          ctx.json({message: '회원가입 실패'})
+        );
       }
     )
   );
@@ -46,6 +49,6 @@ test("회원가입에서 정상적으로 모든 input을 입력후 테스트를 
   fireEvent.change(passwordCheck, { target: { value: "test123412^^" } });
   const loginButton = screen.getByRole("join");
   await user.click(loginButton);
-  const error = await screen.findByText("Request failed with status code 500");
+  const error = await screen.findByText("회원가입 실패");
   expect(error).toBeInTheDocument();
 });

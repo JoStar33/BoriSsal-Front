@@ -27,10 +27,6 @@ const Join = () => {
   });
   const [dialogText, setDialogText] = useState<string>("");
   const [dialog, setDialog] = useState(false);
-  const [duplicateState, setDuplicateState] = useState({
-    email: false,
-    nick: false
-  });
   const { mutate, isLoading, isSuccess } = useJoinMutation({
     joinInfo: {
       email: account.email,
@@ -85,12 +81,12 @@ const Join = () => {
         <div className={styles.join_container__part}>
           <Image width={80} height={110} alt="" src={join1}></Image>
           <InputPart validate={validateEmail(account.email)} info="🐶이메일:" type="email" textOrPass="text" onChangeAccount={onChangeAccount}></InputPart>
-          <DuplicateCheckPart duplicateState={duplicateState} setDuplicateState={setDuplicateState} validate={validateEmail(account.email)} info={account.email} type={true}></DuplicateCheckPart>
+          <DuplicateCheckPart validate={validateEmail(account.email)} info={account.email} type={true}></DuplicateCheckPart>
         </div>
         <div className={styles.join_container__part}>
           <Image width={110} height={110} alt="" src={join2}></Image>
           <InputPart validate={validateNick(account.nick)} info="🐶닉네임:" type="nick" textOrPass="text" onChangeAccount={onChangeAccount}></InputPart>
-          <DuplicateCheckPart duplicateState={duplicateState} setDuplicateState={setDuplicateState} validate={validateNick(account.nick)} info={account.nick} type={false}></DuplicateCheckPart>
+          <DuplicateCheckPart validate={validateNick(account.nick)} info={account.nick} type={false}></DuplicateCheckPart>
         </div>
         <div className={styles.join_container__part}>
           <Image width={80} height={127} alt="" src={join3}></Image>
@@ -100,7 +96,7 @@ const Join = () => {
           <Image width={100} height={110} alt="" src={join4}></Image>
           <InputPart validate={validatePasswordCheck(account.password, account.passwordCheck)} info="🐶비밀번호 확인:" type="passwordCheck" textOrPass="password" onChangeAccount={onChangeAccount}></InputPart>
         </div>
-        <button role="join" onClick={() => join()}>
+        <button className={styles.join_button} role="join" onClick={() => join()}>
           회원가입
         </button>
       </div>
