@@ -1,7 +1,12 @@
-.same_email_container {
+@mixin center {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+.same_email_container {
+  @include center;
   flex-direction: column;
   div {
     display: flex;

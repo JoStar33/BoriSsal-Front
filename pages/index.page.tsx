@@ -1,15 +1,8 @@
 import Head from "next/head";
-import { Inter } from "next/font/google";
 import MainViewer from "@/components/common/MainViewer/MainViewer";
 import { NextPage } from "next";
 
-const inter = Inter({ subsets: ["latin"] });
-
-interface Props {
-  data: number;
-}
-
-const Home: NextPage<Props> = ({data}) => {
+const Home: NextPage = () => {
   return (
     <>
       <Head>
@@ -25,15 +18,3 @@ const Home: NextPage<Props> = ({data}) => {
   );
 }
 export default Home;
-
-export async function getStaticProps() {
-  const delayInSeconds = 2;
-  const data = await new Promise((resolve) =>
-    setTimeout(() => resolve(Math.random()), delayInSeconds * 1000)
-  );
-
-  return {
-    props: { data },
-    revalidate: 5 /** https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration */,
-  };
-}
