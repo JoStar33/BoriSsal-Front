@@ -19,7 +19,6 @@ const InputPart = ({
   return (
     <div className={styles.input_box}>
       <div className={styles.input_container}>
-        {/*바꾸고 싶은 비밀번호*/}
         <p>{info}</p>
         <input
           name={type}

@@ -12,6 +12,7 @@ import styles from "./password_change_dialog.module.scss";
 import InputPart from "@/components/user/InputPart/InputPart";
 import Loading from "@/components/loading/Loading/Loading";
 import { AxiosError } from "axios";
+import SuccessDialog from "../SuccessDialog/SuccessDialog";
 
 type propsType = {
   setDialog: React.Dispatch<React.SetStateAction<boolean>>;
@@ -74,7 +75,8 @@ const PassWordChangeDialog = ({ setDialog }: propsType) => {
   }, [isSuccess]);
   return (
     <>
-      {isLoading && <Loading></Loading>}
+      { isSuccess && <SuccessDialog text="비밀번호 변경 성공!"></SuccessDialog>}
+      { isLoading && <Loading></Loading> }
       <div className={styles.dialog_background}>
         {/*비밀번호 다이얼로그 배경*/}
         <div className={styles.dialog_container}>
