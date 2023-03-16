@@ -15,6 +15,6 @@ export const useNotLoginCheckQuery = () => {
     onError: () => {
       router.push("/");
     },
-    retry: 1,
+    retry: 0,
   });
 };

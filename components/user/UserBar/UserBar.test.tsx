@@ -1,11 +1,9 @@
 import { store } from "@/store";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import UserBar from "./UserBar";
-import userEvent from "@testing-library/user-event";
 import { setUserState } from "@/store/user";
 
-const setState = jest.fn() as any;
 
 //이런형태로 중복되는 코드를 위로 빼낼 수 있음.
 const initRender = () => {
@@ -15,6 +13,7 @@ const initRender = () => {
     </Provider>
   );
 };
+
 test("유저의 프로필 사진이 없을 경우", () => {
   initRender();
   store.dispatch(
