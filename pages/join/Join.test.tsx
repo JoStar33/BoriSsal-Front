@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import Join from ".";
+import Join from "./index.page";
 import { server } from "../../mocks/server";
 import { rest } from "msw";
 import { QueryClientProvider, QueryClient } from "react-query";

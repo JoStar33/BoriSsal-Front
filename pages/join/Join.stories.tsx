@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Join from "./index";
+import Join from "./index.page";
 import { QueryClientProvider, QueryClient } from "react-query";
 const queryClient = new QueryClient();
 

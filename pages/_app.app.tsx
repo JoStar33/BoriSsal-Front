@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { store } from "../store";
 import { QueryClientProvider, QueryClient } from "react-query";
 import DefaultHeader from "@/components/common/Header/Header";
+import React from "react";
 
 const queryClient = new QueryClient();
 export let persistor = persistStore(store);

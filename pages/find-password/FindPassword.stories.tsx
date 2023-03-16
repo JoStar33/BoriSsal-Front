@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import FindPassWord from ".";
+import FindPassWord from "./index.page";
 import { QueryClient, QueryClientProvider } from "react-query";
 const queryClient = new QueryClient();
 

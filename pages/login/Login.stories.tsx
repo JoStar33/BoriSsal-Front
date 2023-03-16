@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Login from "./index";
+import Login from "./index.page";
 import { Provider } from "react-redux";
 import { store } from "@/store";
 import { QueryClientProvider, QueryClient } from "react-query";

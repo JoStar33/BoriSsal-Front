@@ -18,6 +18,9 @@ const customJestConfig = {
     "<rootDir>/.next/",
     '^.+\\.module\\.(css|sass|scss)$',
   ],  
+  testMatch: [
+    "*.(ts/tsx)"
+  ],
   testPathIgnorePatterns: ['<rootDir>/src/next-auth'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'mjs', 'cjs', 'jsx', 'json', 'node'],
   moduleNameMapper: {

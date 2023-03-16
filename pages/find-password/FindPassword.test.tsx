@@ -3,7 +3,7 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import { server } from "@/mocks/server";
 import { rest } from "msw";
 import userEvent from "@testing-library/user-event";
-import FindPassWord from ".";
+import FindPassWord from "./index.page";
 
 const user = userEvent.setup();
 

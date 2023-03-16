@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import Login from ".";
+import Login from "./index.page";
 import { server } from "../../mocks/server";
 import { rest } from "msw";
 import { Provider } from "react-redux";
