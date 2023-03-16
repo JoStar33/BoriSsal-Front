@@ -45,6 +45,12 @@ const passwordChange = (id: string, password: string, newPassword: string) => {
     password: password,
     newPassword: newPassword
   });
+};
+
+const findPassword = (email: string) => {
+  return customAxios.post('/auth/find/password', {
+    email: email,
+  });
 }
 
-export {login, join, logout, isLoggedIn, isNotLoggedIn, passwordChange, emailDuplicate, nickDuplicate}
+export {login, join, logout, isLoggedIn, isNotLoggedIn, passwordChange, findPassword, emailDuplicate, nickDuplicate}

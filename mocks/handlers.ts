@@ -80,4 +80,9 @@ export const handlers = [
       ctx.status(200),
     );
   }),
+  rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/find/password`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+    );
+  }),
 ]

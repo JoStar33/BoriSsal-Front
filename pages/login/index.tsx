@@ -106,6 +106,9 @@ const Login = () => {
               <button className={styles.join_button}>회원가입</button>
             </Link>
           </div>
+          <div style={{fontSize: '0.8rem', marginBottom: '1rem', fontWeight: 800}}>
+            <Link href="/find-password">😲비밀번호를 까먹었어요!</Link>
+          </div>
         </div>
         <button className={styles.kakao_login_button}>
           <Image width={35} height={35} src={kakaoImage} alt="" />
