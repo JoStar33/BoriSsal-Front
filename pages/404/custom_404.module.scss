@@ -1,0 +1,23 @@
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom_404_container {
+  margin-top: 15rem;
+  @include center;
+  flex-direction: row;
+  .text_container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    user-select: none;
+  }
+  h1 {
+    color: #50c6a3;
+    user-select: none;
+    font-size: 4vw;
+    margin: 6vh;
+  }
+}
