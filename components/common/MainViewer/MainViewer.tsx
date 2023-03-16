@@ -8,6 +8,7 @@ import mainImage6 from "/public/images/main_image6.png";
 import mainImage7 from "/public/images/main_image7.png";
 import mainImage8 from "/public/images/main_image8.png";
 import styles from "./main_viewer.module.scss";
+import { NextPage } from "next";
 
 const MainViewer = () => {
   const [position, setPosition] = useState(0);
@@ -28,7 +29,7 @@ const MainViewer = () => {
         className={styles.bori_img1}
         style={{ width: "25vw", height: "35vw" }}
       >
-        <Image className={styles.bori_img1} fill src={mainImage7} alt="" />
+        <Image className={styles.bori_img1} fill src={mainImage7} alt="웃는 보리" />
       </figure>
       <div
         className={styles.bg}
@@ -55,7 +56,7 @@ const MainViewer = () => {
           transform: `translateX(${-position}px)`,
         }}
       >
-        <Image src={mainImage5} fill alt="" />
+        <Image src={mainImage5} fill alt="움직이는 보리1" />
       </figure>
       <figure
         className={styles.bori_img3}
@@ -65,7 +66,7 @@ const MainViewer = () => {
           transform: `translateX(${position}px)`,
         }}
       >
-        <Image role="image_test3" src={mainImage4} fill alt="" />
+        <Image role="image_test3" src={mainImage4} fill alt="움직이는 보리2" />
       </figure>
       <p
         className={styles.desc3}
@@ -108,7 +109,7 @@ const MainViewer = () => {
           transform: `translateY(${position / 2}px)`,
         }}
       >
-        <Image src={mainImage1} fill alt="" />
+        <Image src={mainImage1} fill alt="멍보리" />
       </figure>
       <figure
         className={styles.bori_img5}
@@ -118,7 +119,7 @@ const MainViewer = () => {
           transform: `translateY(${position / 4}px)`,
         }}
       >
-        <Image src={mainImage2} fill alt="" />
+        <Image src={mainImage2} fill alt="흐릿보리" />
       </figure>
       <figure
         className={styles.bori_img6}
@@ -128,10 +129,10 @@ const MainViewer = () => {
           transform: `translateX(${-position / 2 + 100}px)`,
         }}
       >
-        <Image src={mainImage6} fill alt="" />
+        <Image src={mainImage6} fill alt="눕는 보리" />
       </figure>
       <div className={styles.last_box}>
-        <Image src={mainImage8} width={300} height={300} alt="" />
+        <Image src={mainImage8} width={300} height={300} alt="애기보리" />
         <h1>어때 우리 귀여운 보리</h1>
         <h1>만나보지 않을래?</h1>
         <div className={styles.last_button_box}>

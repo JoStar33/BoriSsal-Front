@@ -37,7 +37,7 @@ const UserBar = () => {
                   style={{borderRadius: '100px'}}
                   width={40}
                   height={40}
-                  alt=''
+                  alt='프로필 이미지'
                   src={process.env.NEXT_PUBLIC_BORI_SSAL_API_URL + user.profile_image}></Image>
               : <div
                   role='non_profile'

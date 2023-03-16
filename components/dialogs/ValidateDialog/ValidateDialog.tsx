@@ -27,14 +27,14 @@ const ValidateDialog = ({ text, setDialog }: propsType) => {
           className={styles.dialog_bori}
           height={100}
           src={question_bori}
-          alt=""
+          alt="궁금한 보리"
         ></Image>
         <Image
           width={40}
           className={styles.dialog_question}
           height={40}
           src={question}
-          alt=""
+          alt="궁금해요"
         ></Image>
         <h2>{text}</h2>
       </div>

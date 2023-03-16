@@ -17,7 +17,7 @@ const SameEmail = () => {
         <Image
           width={230}
           height={400}
-          alt=''
+          alt='이미 존재하는 이메일 보리'
           src={same_bori}></Image>
         <div className={styles.text_container}>
           <h2>이런! 지금 입력하신 이메일은 이미 존재하는 이메일이에요.</h2>

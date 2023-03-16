@@ -79,21 +79,21 @@ const Join = () => {
       <div className={styles.join_container}>
         <h1>회원가입</h1>
         <div className={styles.join_container__part}>
-          <Image width={80} height={110} alt="" src={join1}></Image>
+          <Image width={80} height={110} alt="이메일 보리" src={join1}></Image>
           <InputPart validate={validateEmail(account.email)} info="🐶이메일:" type="email" textOrPass="text" onChangeAccount={onChangeAccount}></InputPart>
           <DuplicateCheckPart validate={validateEmail(account.email)} info={account.email} type={true}></DuplicateCheckPart>
         </div>
         <div className={styles.join_container__part}>
-          <Image width={110} height={110} alt="" src={join2}></Image>
+          <Image width={110} height={110} alt="닉네임 보리" src={join2}></Image>
           <InputPart validate={validateNick(account.nick)} info="🐶닉네임:" type="nick" textOrPass="text" onChangeAccount={onChangeAccount}></InputPart>
           <DuplicateCheckPart validate={validateNick(account.nick)} info={account.nick} type={false}></DuplicateCheckPart>
         </div>
         <div className={styles.join_container__part}>
-          <Image width={80} height={127} alt="" src={join3}></Image>
+          <Image width={80} height={127} alt="비밀번호 보리" src={join3}></Image>
           <InputPart validate={validatePassword(account.password)} info="🐶비밀번호:" type="password" textOrPass="password" onChangeAccount={onChangeAccount}></InputPart>
         </div>
         <div className={styles.join_container__part}>
-          <Image width={100} height={110} alt="" src={join4}></Image>
+          <Image width={100} height={110} alt="비밀번호 확인 보리" src={join4}></Image>
           <InputPart validate={validatePasswordCheck(account.password, account.passwordCheck)} info="🐶비밀번호 확인:" type="passwordCheck" textOrPass="password" onChangeAccount={onChangeAccount}></InputPart>
         </div>
         <button className={styles.join_button} role="join" onClick={() => join()}>

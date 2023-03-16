@@ -111,11 +111,11 @@ const Login = () => {
           </div>
         </div>
         <button className={styles.kakao_login_button}>
-          <Image width={35} height={35} src={kakaoImage} alt="" />
+          <Image width={35} height={35} src={kakaoImage} alt="카카오 로그인" />
           카카오 로그인
         </button>
         <button className={styles.google_login_button}>
-          <Image width={35} height={35} src={googleImage} alt="" />
+          <Image width={35} height={35} src={googleImage} alt="구글 로그인" />
           구글 로그인
         </button>
       </div>

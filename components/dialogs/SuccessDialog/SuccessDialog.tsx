@@ -22,7 +22,7 @@ const SuccessDialog = ({text, setDialog}: propsType) => {
           </div>
         }
         <Image
-          alt=''
+          alt='성공 빵빠레'
           className={styles.dialog_success}
           src={success}
           width={60}
@@ -32,7 +32,7 @@ const SuccessDialog = ({text, setDialog}: propsType) => {
           className={styles.dialog_bori}
           height={100}
           src={success_bori}
-          alt=''></Image>
+          alt='성공 보리'></Image>
         <h2>{text}</h2>
       </div>
     </div>

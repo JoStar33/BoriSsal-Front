@@ -24,7 +24,7 @@ const Header = () => {
         </div>
         <div className={styles.logo_box}>
           <Link href="/" aria-label="메인페이지로 이동">
-            <Image src={logo} alt="logo image" width={50} height={50}></Image>
+            <Image src={logo} alt="보리쌀 로고" width={50} height={50}></Image>
           </Link>
         </div>
         {user.id.length > 3 ? (

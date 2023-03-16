@@ -48,7 +48,7 @@ const UserPage = () => {
                 <div>
                   <Image
                     style={{ borderRadius: "100px" }}
-                    alt=""
+                    alt="프로필 이미지"
                     width={200}
                     height={200}
                     src={

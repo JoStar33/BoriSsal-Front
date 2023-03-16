@@ -18,7 +18,7 @@ const Oauth = () => {
         ></ValidateDialog>
       )}
       <div className={styles.oauth_container}>
-        <Image width={200} height={400} src={oauth_bori_ssuang} alt=""></Image>
+        <Image width={200} height={400} src={oauth_bori_ssuang} alt="열일중인 보리"></Image>
         <div>
           <h1>잠시 기다려주세요!</h1>
           <h1>우리 보리가 열일 중이에요...</h1>
