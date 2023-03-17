@@ -20,7 +20,7 @@ test("Oauth 화면 테스트", () => {
 
 test("Oauth 데이터 정상 처리 테스트", async () => {
   global.window = Object.create(window);
-  const url = "http://example.com/?id=23";
+  const url = "http://example.com/?user_id=23";
   Object.defineProperty(window, "location", {
     value: {
       href: url,
