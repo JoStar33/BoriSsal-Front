@@ -1,0 +1,68 @@
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bori_goods_page_container {
+  @include center;
+  flex-direction: column;
+  h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 2vw;
+  }
+  .bori_goods_container {
+    margin-top: 1vw;
+    border-top: 3px solid black;
+    width: 96vw;
+    display: flex;
+    flex-wrap: wrap; 
+  }
+  .user_place {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    .show_count {
+      width: calc(90vw - 240px - 7rem);
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+    .category_label {
+      width: 7rem;
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+  }
+}
+
+
+.styled_select {
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+.styled_select, .styled_select select { width: 240px; }
+
+.styled_select:focus { outline: none; }
+
+.styled_select select {
+  height: 34px;
+  padding: 5px 0 5px 5px;
+  background: transparent;
+  border: none;
+  appearance: none; 
+}
+
+@-moz-document url-prefix(){
+  .styled_select select { width: 110%; }
+}
+
+.styled_select::-ms-expand { display: none; } 
+
+_:-o-prefocus, .selector {
+  .styled_select { background: none; }
+  }
