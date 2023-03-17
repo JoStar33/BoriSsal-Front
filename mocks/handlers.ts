@@ -60,4 +60,55 @@ export const handlers = [
       ctx.status(200),
     );
   }),
+  rest.get(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/is-not-login`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+    );
+  }),
+  rest.get(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/logout`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+    );
+  }),
+  rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/join/nick`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+    );
+  }),
+  rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/join/email`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+    );
+  }),
+  rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/password`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+    );
+  }),
+  rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/find/password`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+    );
+  }),
+  rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/user/profile-image/23`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        user_id: "23",
+        phone_number: "01033332222",
+        address: '경기도 안양시 동안구 호랑이아파트',
+        address_detail: '102동 304호'
+      })
+    );
+  }),
+  rest.get(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/user/23`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        _id: "23",
+        email: 'rhwdf@gmail.com',
+        nick: '우하하'
+      })
+    );
+  }),
 ]

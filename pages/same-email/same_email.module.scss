@@ -1,0 +1,25 @@
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.same_email_container {
+  @include center;
+  flex-direction: column;
+  div {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    user-select: none;
+    .text_container {
+      flex-direction: column;
+    }
+  }
+  h1 {
+    user-select: none;
+    font-size: 4vw;
+    margin: 6vh;
+  }
+}

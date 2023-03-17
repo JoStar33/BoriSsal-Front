@@ -23,7 +23,7 @@
   border-radius: 20px;
   width: 400px;
   height: 300px;
-  div {
+  .default_close_button {
     @include center;
     cursor: pointer;
     border: 5px solid black;

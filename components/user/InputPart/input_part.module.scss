@@ -1,0 +1,26 @@
+.input_box {
+  margin-right: 3rem;
+}
+
+.input_container {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  p {
+    width: 13rem;
+    font-size: 1.3rem;
+    font-weight: 800;
+  }
+  input {
+    height: 1.3rem;
+  }
+}
+
+.validate_text {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  color: red;
+  font-size: 0.7rem;
+}

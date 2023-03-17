@@ -1,15 +1,21 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Oauth from './index';
-import { Provider } from 'react-redux';
-import { store }from '@/store';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { ComponentStory, ComponentMeta } from "@storybook/react";
+import Oauth from "./index.page";
+import { Provider } from "react-redux";
+import { store } from "@/store";
+import { QueryClient, QueryClientProvider } from "react-query";
 const queryClient = new QueryClient();
 
 export default {
-  title: 'SNS 로그인 이후 화면 테스트',
+  title: "SNS 로그인 이후 화면 테스트",
   component: Oauth,
 } as ComponentMeta<typeof Oauth>;
 
-const Template: ComponentStory<typeof Oauth> = () => <QueryClientProvider client={queryClient}><Provider store={store}><Oauth/></Provider></QueryClientProvider>;
+const Template: ComponentStory<typeof Oauth> = () => (
+  <QueryClientProvider client={queryClient}>
+    <Provider store={store}>
+      <Oauth />
+    </Provider>
+  </QueryClientProvider>
+);
 
 export const OauthTest = Template.bind({});

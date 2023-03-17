@@ -3,11 +3,11 @@ import { userType } from "../types/user";
 
 const initialState = {
   user: {
-    id: '',
+    id: "",
     email: ``,
     nick: ``,
-    sns_id: '',
-    profile_image: '',
+    sns_id: "",
+    profile_image: "",
     user_role: 0,
     created_at: new Date(),
     user_product_like: [],
@@ -24,13 +24,13 @@ export const userSlice = createSlice({
     },
     setUserState: (state, action: PayloadAction<userType>) => {
       Object.assign(state.user, action.payload);
-    }
+    },
+    setUserProfileState: (state, action: PayloadAction<string>) => {
+      state.user = {...state.user, profile_image: action.payload}
+    },
   },
 });
 
-export const {
-  resetUserState,
-  setUserState
-} = userSlice.actions;
+export const { resetUserState, setUserState, setUserProfileState } = userSlice.actions;
 
 export default userSlice.reducer;
