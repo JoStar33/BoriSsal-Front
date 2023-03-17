@@ -14,7 +14,7 @@ type propsType = {
 
 export const useUserQuery = ({ setDialog, setDialogText }: propsType) => {
   const params = new URL(window.location.href.toString()).searchParams;
-  const id = params.get("id") as string;
+  const id = params.get("user_id") as string;
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
   return useQuery(["user"], () => getUser(id), {
