@@ -65,7 +65,7 @@ test("비밀번호 변경이 성공적으로 이루어졌을 경우", async () =
   fireEvent.change(newPasswordCheck, { target: { value: "tt12341212^^" } });
   const passwordChange = screen.getByRole("password_change");
   await user.click(passwordChange);
-  const success = await screen.findByText("비밀번호 변경 성공!");
+  const success = await screen.findByRole('success');
   expect(success).toBeInTheDocument();
 });
 test("비밀번호 변경이 실패했을 경우", async () => {
@@ -75,7 +75,11 @@ test("비밀번호 변경이 실패했을 경우", async () => {
     rest.post(
       `${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/password`,
       (req, res, ctx) => {
-        return res(ctx.status(500));
+        return res(
+          ctx.status(500),
+          ctx.json({
+            message: "내부오류"
+          }));
       }
     )
   );
@@ -86,7 +90,7 @@ test("비밀번호 변경이 실패했을 경우", async () => {
   const passwordChange = screen.getByRole("password_change");
   await user.click(passwordChange);
   const success = await screen.findByText(
-    "Request failed with status code 500"
+    "내부오류"
   );
   expect(success).toBeInTheDocument();
 });

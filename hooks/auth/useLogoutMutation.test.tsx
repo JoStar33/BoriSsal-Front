@@ -55,10 +55,10 @@ test("useLogoutMutation 훅을 통해 store에 정상적으로 유저의 정보�
 
 test("useLogoutMutation 훅이 실패했을 경우.", async () => {
   server.use(
-    rest.post(
+    rest.get(
       `${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/logout`,
       (req, res, ctx) => {
-        return res(ctx.status(400));
+        return res(ctx.status(500));
       }
     )
   );

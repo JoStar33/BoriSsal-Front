@@ -65,7 +65,7 @@ export const handlers = [
       ctx.status(200),
     );
   }),
-  rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/logout`, (req, res, ctx) => {
+  rest.get(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/logout`, (req, res, ctx) => {
     return res(
       ctx.status(200),
     );
@@ -76,6 +76,11 @@ export const handlers = [
     );
   }),
   rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/join/email`, (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+    );
+  }),
+  rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/password`, (req, res, ctx) => {
     return res(
       ctx.status(200),
     );

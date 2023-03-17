@@ -97,14 +97,14 @@ const PassWordChangeDialog = ({ setDialog }: propsType) => {
           <h2>비밀번호 변경</h2>
           {/*비밀번호 변경 안내 타이틀*/}
           <InputPart
-            textOrPass="pass" 
+            textOrPass="password" 
             info="현재 비밀번호: "
             type="password"
             onChangeAccount={onChangeAccount}
             validate={validatePassword(account.password)}
           ></InputPart>
           <InputPart
-            textOrPass="pass" 
+            textOrPass="password" 
             info="현재 비밀번호 확인: "
             type="passwordCheck"
             onChangeAccount={onChangeAccount}
@@ -114,14 +114,14 @@ const PassWordChangeDialog = ({ setDialog }: propsType) => {
             )}
           ></InputPart>
           <InputPart
-            textOrPass="pass" 
+            textOrPass="password" 
             info="새 비밀번호: "
             type="newPassword"
             onChangeAccount={onChangeAccount}
             validate={validatePassword(account.newPassword)}
           ></InputPart>
           <InputPart
-            textOrPass="pass"  
+            textOrPass="password"  
             info="새 비밀번호 확인: "
             type="newPasswordCheck"
             onChangeAccount={onChangeAccount}

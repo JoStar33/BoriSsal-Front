@@ -3,14 +3,19 @@ import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import UserBar from "./UserBar";
 import { setUserState } from "@/store/user";
+import { QueryClientProvider, QueryClient } from "react-query";
+
+const queryClient = new QueryClient();
 
 
 //이런형태로 중복되는 코드를 위로 빼낼 수 있음.
 const initRender = () => {
   render(
-    <Provider store={store}>
-      <UserBar />
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <UserBar />
+      </Provider>
+    </QueryClientProvider>
   );
 };
 

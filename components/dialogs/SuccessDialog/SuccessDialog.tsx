@@ -14,7 +14,7 @@ type propsType = {
 const SuccessDialog = ({text, setDialog}: propsType) => {
   return (
     <div className={styles.dialog_background}>
-      <div className={styles.dialog_container}>
+      <div role='success' className={styles.dialog_container}>
         {
           setDialog && 
           <div className={styles.default_close_button} onClick={() => setDialog(false)}>

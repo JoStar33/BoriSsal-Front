@@ -15,7 +15,7 @@ const Wrapper = ({ children }: any) => {
 
 test("useUserQuery 정상동작 확인 테스트", async () => {
   global.window = Object.create(window);
-  const url = "http://example.com/?id=23";
+  const url = "http://example.com/?user_id=23";
   Object.defineProperty(window, "location", {
     value: {
       href: url,
