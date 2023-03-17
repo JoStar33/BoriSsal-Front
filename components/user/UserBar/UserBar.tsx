@@ -26,10 +26,10 @@ const UserBar = () => {
         isSuccess && <SuccessDialog text='로그아웃 성공!'></SuccessDialog>
       }
       <div className={styles.userbar_container}>
-        <Link href='/cart-page'>
+        <Link href='/cart-page' aria-label="장바구니 페이지로 이동">
           <BsFillCartFill size={40}></BsFillCartFill>
         </Link>
-        <Link className={styles.user_profile_container} href='/user-page'>
+        <Link className={styles.user_profile_container} href='/user-page' aria-label="사용자 페이지로 이동">
           {
             user.profile_image 
               ? <Image
