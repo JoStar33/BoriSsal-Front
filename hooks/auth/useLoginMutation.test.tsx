@@ -26,11 +26,10 @@ test("useLoginMutation 정상동작 확인 테스트", async () => {
       wrapper: Wrapper,
     }
   );
-  await waitFor(() => {
-    result.current.mutate();
-  }).then(() => {
-    expect(result.current.isSuccess).toBeTruthy();
-  });
+  result.current.mutate();
+  await waitFor(() => 
+    expect(result.current.isSuccess).toBeTruthy()
+  );
 });
 
 test("useLoginMutation 훅을 통해 store에 정상적으로 유저의 정보가 담겨있는지 확인해보도록 하겠습니다.", async () => {

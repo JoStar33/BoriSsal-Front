@@ -20,11 +20,8 @@ test("useLogoutMutation 정상동작 확인 테스트", async () => {
   const { result } = renderHook(() => useLogoutMutation(), {
     wrapper: Wrapper,
   });
-  await waitFor(() => {
-    result.current.mutate();
-  }).then(() => {
-    expect(result.current.isSuccess).toBeTruthy();
-  });
+  result.current.mutate()
+  await waitFor(() => expect(result.current.isSuccess).toBeTruthy());
 });
 
 test("useLogoutMutation 훅을 통해 store에 정상적으로 유저의 정보를 리셋시키는지 확인.", async () => {
