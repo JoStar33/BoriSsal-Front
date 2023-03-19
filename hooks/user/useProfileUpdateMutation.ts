@@ -7,7 +7,7 @@ import { setUserProfileState } from "@/store/user";
 
 export const useProfileUpdateMutation = (userProfile: IUserProfileUpload) => {
   const dispatch = useDispatch<AppDispatch>();
-  return useMutation(() => postProfileImage(userProfile.image, userProfile.user_id), {
+  return useMutation(() => postProfileImage(userProfile), {
     onSuccess(data) {
       dispatch(setUserProfileState(data.data.profile_image))
     },

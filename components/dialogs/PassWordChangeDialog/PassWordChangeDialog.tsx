@@ -29,15 +29,12 @@ const PassWordChangeDialog = ({ setDialog }: IProps) => {
     newPassword: "",
     newPasswordCheck: "",
   });
-  const changePassword = useMemo<IPostPasswordInfo>(() => {
-    return {
+  const { mutate, isLoading, isError, error, isSuccess } =
+    usePassWordChangeMutation({
       id: user.id,
       password: account.password,
       newPassword: account.newPassword,
-    }
-  },[account, user]);
-  const { mutate, isLoading, isError, error, isSuccess } =
-    usePassWordChangeMutation(changePassword);
+    });
   const onChangeAccount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAccount({
       ...account,
