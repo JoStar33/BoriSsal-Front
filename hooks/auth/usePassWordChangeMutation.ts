@@ -1,7 +1,7 @@
 import { useMutation } from "react-query";
 import { passwordChange } from "@/apis/user/auth";
 
-type propsType = {
+interface propsType {
   password: string;
   newPassword: string;
   id: string;

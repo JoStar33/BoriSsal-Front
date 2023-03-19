@@ -1,10 +1,10 @@
-export type joinType = {
+export interface joinType {
   email: string;
   nick: string;
   password: string;
 };
 
-export type loginType = {
+export interface loginType {
   email: string;
   password: string;
 };

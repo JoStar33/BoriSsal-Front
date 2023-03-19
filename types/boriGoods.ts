@@ -1,4 +1,4 @@
-export type boriGoodsType = {
+export interface boriGoodsType {
   _id: string;
   category_id: string;
   product_name: string;
@@ -10,7 +10,7 @@ export type boriGoodsType = {
   created_at: Date;
 };
 
-export type categoryType = {
+export interface categoryType {
   _id: string;
   category_name: string;
 }

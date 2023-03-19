@@ -9,7 +9,7 @@ import { setUserState } from "@/store/user";
 import { getParam } from "@/utils/getParam";
 import { errorMessage } from "@/apis/error/customError";
 
-type propsType = {
+interface propsType {
   setDialog: React.Dispatch<React.SetStateAction<boolean>>;
   setDialogText: React.Dispatch<React.SetStateAction<string>>;
 };

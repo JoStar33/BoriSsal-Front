@@ -6,7 +6,7 @@ import { boriGoodsType, categoryType } from '@/types/boriGoods';
 import styles from './bori_goods_page.module.scss';
 import { errorMessage } from '@/apis/error/customError';
 
-type propsType = {
+interface propsType {
   goodsData: boriGoodsType[];
   errorMessage: string;
   categoryData: categoryType[];

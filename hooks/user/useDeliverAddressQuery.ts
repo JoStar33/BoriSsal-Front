@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { getDeliverAddress } from "@/apis/user/deliverAddress";
 
-type propsType = {
+interface propsType {
   user_id: string;
 };
 

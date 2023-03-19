@@ -1,4 +1,4 @@
-export type userType = {
+export interface userType {
   id: string;
   email: string;
   nick: string;
@@ -10,9 +10,9 @@ export type userType = {
   user_bori_gallery_like: [];
 };
 
-export type userProfileUpload = {
+export interface userProfileUpload {
   user_id: string;
   image: FormData;
 };
 
-export type userProductLikeType = {};
+export interface userProductLikeType {};
