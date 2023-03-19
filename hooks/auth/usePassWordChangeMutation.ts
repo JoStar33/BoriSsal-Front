@@ -1,16 +1,11 @@
 import { useMutation } from "react-query";
 import { passwordChange } from "@/apis/user/auth";
-
-interface IProps {
-  password: string;
-  newPassword: string;
-  id: string;
-};
+import { IPostPasswordInfo } from "@/types/auth";
 
 export const usePassWordChangeMutation = ({
   password,
   newPassword,
   id,
-}: IProps) => {
+}: IPostPasswordInfo) => {
   return useMutation(() => passwordChange(id, password, newPassword));
 };

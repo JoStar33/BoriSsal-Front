@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { GrClose } from "react-icons/gr";
 import { RiAlarmWarningFill } from "react-icons/ri";
 import { AiFillCheckCircle } from "react-icons/ai";
@@ -14,32 +14,30 @@ import Loading from "@/components/loading/Loading/Loading";
 import { AxiosError } from "axios";
 import SuccessDialog from "../SuccessDialog/SuccessDialog";
 import { errorMessage } from "@/apis/error/customError";
+import { IPostPasswordInfo, IPasswordInfo } from "@/types/auth";
 
 interface IProps {
   setDialog: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-interface IPassword {
-  password: string;
-  passwordCheck: string;
-  newPassword: string;
-  newPasswordCheck: string;
-}
 
 const PassWordChangeDialog = ({ setDialog }: IProps) => {
   const { user } = useSelector((state: RootState) => state.userStore);
-  const [account, setAccount] = useState<IPassword>({
+  const [account, setAccount] = useState<IPasswordInfo>({
     password: "",
     passwordCheck: "",
     newPassword: "",
     newPasswordCheck: "",
   });
-  const { mutate, isLoading, isError, error, isSuccess } =
-    usePassWordChangeMutation({
+  const changePassword = useMemo<IPostPasswordInfo>(() => {
+    return {
       id: user.id,
       password: account.password,
       newPassword: account.newPassword,
-    });
+    }
+  },[account, user]);
+  const { mutate, isLoading, isError, error, isSuccess } =
+    usePassWordChangeMutation(changePassword);
   const onChangeAccount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAccount({
       ...account,
