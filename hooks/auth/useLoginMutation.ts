@@ -1,30 +1,30 @@
 import { useMutation } from "react-query";
 import { login } from "@/apis/user/auth";
 import { useRouter } from "next/router";
-import { loginType } from "@/types/auth";
+import { ILogin } from "@/types/auth";
 import { setUserState } from "@/store/user";
-import { userType } from "@/types/user";
+import { IUser } from "@/types/user";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
 import { AxiosError } from "axios";
 import { errorMessage } from "@/apis/error/customError";
 
-interface propsType {
+interface IProps {
   setDialog: React.Dispatch<React.SetStateAction<boolean>>;
   setDialogText: React.Dispatch<React.SetStateAction<string>>;
-  loginInfo: loginType;
+  loginInfo: ILogin;
 };
 
 export const useLoginMutation = ({
   loginInfo,
   setDialog,
   setDialogText,
-}: propsType) => {
+}: IProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
   return useMutation(() => login(loginInfo.email, loginInfo.password), {
     onSuccess: (res) => {
-      const loginUser: userType = {
+      const loginUser: IUser = {
         id: res.data._id,
         email: res.data.email,
         nick: res.data.nick,

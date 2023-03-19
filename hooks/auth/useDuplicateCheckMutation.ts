@@ -1,7 +1,7 @@
 import { useMutation } from "react-query";
 import { emailDuplicate, nickDuplicate } from "@/apis/user/auth";
 
-interface propsType {
+interface IProps {
   type: boolean;
   info: string;
 }
@@ -9,6 +9,6 @@ interface propsType {
 export const useDuplicateCheckMutation = ({
   type,
   info
-}: propsType) => {
+}: IProps) => {
   return useMutation(() => type ? emailDuplicate(info) : nickDuplicate(info));
 }

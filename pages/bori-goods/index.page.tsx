@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 import BoriGoodsItem from '@/components/bori-goods/BoriGoodsItem';
 import { getGoods, getCategory } from '@/apis/bori-goods/boriGoods';
 import { AxiosError } from 'axios';
-import { boriGoodsType, categoryType } from '@/types/boriGoods';
+import { IBoriGoods, ICategory } from '@/types/boriGoods';
 import styles from './bori_goods_page.module.scss';
 import { errorMessage } from '@/apis/error/customError';
 
-interface propsType {
-  goodsData: boriGoodsType[];
+interface IProps {
+  goodsData: IBoriGoods[];
   errorMessage: string;
-  categoryData: categoryType[];
+  categoryData: ICategory[];
 }
 
-const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: propsType) => {
-  const [categoryType, setCategoryType] = useState('0');
+const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
+  const [categoryInfo, setCategoryInfo] = useState<string>('0');
   const handleSelectLayout = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCategoryType(e.target.value)
+    setCategoryInfo(e.target.value)
   }
   return (
     <div className={styles.bori_goods_page_container}>
@@ -42,9 +42,9 @@ const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: propsType) => {
       <div className={styles.bori_goods_container}>
         {
           goodsData.filter((cateGoods) => {
-            if (categoryType === '0')
+            if (categoryInfo === '0')
               return cateGoods;
-            if(cateGoods.category_id === categoryType)
+            if(cateGoods.category_id === categoryInfo)
               return cateGoods;
           }).map((goods) =>           
             <BoriGoodsItem 
@@ -64,8 +64,8 @@ const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: propsType) => {
 export default BoriGoodsPage;
 
 export async function getStaticProps() {
-  let goodsData: boriGoodsType[] = [];
-  let categoryData: categoryType[] = [];
+  let goodsData: IBoriGoods[] = [];
+  let categoryData: ICategory[] = [];
   let goodsErrorMessage = null;
   let categoryErrorMessage = null;
   await getGoods()

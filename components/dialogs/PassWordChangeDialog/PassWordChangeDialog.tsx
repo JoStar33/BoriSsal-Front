@@ -11,18 +11,24 @@ import password_bori from "/public/dialog/password_bori.png";
 import styles from "./password_change_dialog.module.scss";
 import InputPart from "@/components/user/InputPart/InputPart";
 import Loading from "@/components/loading/Loading/Loading";
-import { AxiosError, AxiosResponse } from "axios";
+import { AxiosError } from "axios";
 import SuccessDialog from "../SuccessDialog/SuccessDialog";
 import { errorMessage } from "@/apis/error/customError";
-import { UseMutateFunction } from "react-query";
 
-interface propsType {
+interface IProps {
   setDialog: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const PassWordChangeDialog = ({ setDialog }: propsType) => {
+interface IPassword {
+  password: string;
+  passwordCheck: string;
+  newPassword: string;
+  newPasswordCheck: string;
+}
+
+const PassWordChangeDialog = ({ setDialog }: IProps) => {
   const { user } = useSelector((state: RootState) => state.userStore);
-  const [account, setAccount] = useState({
+  const [account, setAccount] = useState<IPassword>({
     password: "",
     passwordCheck: "",
     newPassword: "",

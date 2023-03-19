@@ -3,13 +3,13 @@ import { BsFillPencilFill, BsCheckLg } from "react-icons/bs";
 import styles from "./user_deliver_address_part.module.scss";
 import DaumPostcode from "react-daum-postcode";
 import { useDeliverAddressMutation } from "@/hooks/user/useDeliverAddressMutation";
-import { patchDeliverAddressType } from "@/types/deliverAddress";
+import { IPatchDeliverAddress } from "@/types/deliverAddress";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { RiAlarmWarningFill } from "react-icons/ri";
 import { errorMessage } from "@/apis/error/customError";
 import { AxiosError } from "axios";
 
-interface propsType {
+interface IProps {
   user_id: string;
   addressInfo: string;
   labelInfo: string;
@@ -21,16 +21,17 @@ const UserDeliverAddressPart = ({
   labelInfo,
   addressType,
   user_id,
-}: propsType) => {
-  const [dialog, setDialog] = useState(false);
-  const [address, setAddress] = useState(addressInfo);
+}: IProps) => {
+  const [dialog, setDialog] = useState<boolean>(false);
+  const [address, setAddress] = useState<string>(addressInfo);
   const inputRef = useRef<HTMLInputElement>(null);
+  const userAddressInfo: IPatchDeliverAddress = {
+    user_id: user_id,
+    address_info: address,
+    address_type: addressType,
+  }
   const { isLoading, isError, isSuccess, error, mutate } =
-    useDeliverAddressMutation({
-      user_id: user_id,
-      address_info: address,
-      address_type: addressType,
-    } as patchDeliverAddressType);
+    useDeliverAddressMutation(userAddressInfo);
   useEffect(() => {
     setAddress(addressInfo);
     if (!inputRef.current) return;

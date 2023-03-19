@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { userType } from "../types/user";
+import { IUser } from "../types/user";
 
-interface stateType {
-  user: userType;
+interface IState {
+  user: IUser;
 }
 
-const initialState: stateType = {
+const initialState: IState = {
   user: {
     id: "",
     email: ``,
@@ -26,7 +26,7 @@ export const userSlice = createSlice({
     resetUserState: (state) => {
       Object.assign(state, initialState);
     },
-    setUserState: (state, action: PayloadAction<userType>) => {
+    setUserState: (state, action: PayloadAction<IUser>) => {
       Object.assign(state.user, action.payload);
     },
     setUserProfileState: (state, action: PayloadAction<string>) => {

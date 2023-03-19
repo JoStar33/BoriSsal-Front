@@ -1,4 +1,4 @@
-export interface userType {
+export interface IUser {
   id: string;
   email: string;
   nick: string;
@@ -10,9 +10,9 @@ export interface userType {
   user_bori_gallery_like: [];
 };
 
-export interface userProfileUpload {
+export interface IUserProfileUpload {
   user_id: string;
   image: FormData;
 };
 
-export interface userProductLikeType {};
+export interface IUserProductLike {};

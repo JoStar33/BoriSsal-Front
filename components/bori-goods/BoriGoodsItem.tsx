@@ -3,7 +3,7 @@ import React from 'react';
 import { AiFillHeart } from 'react-icons/ai';
 import styles from './bori_goods_item.module.scss';
 
-interface propsType {
+interface IProps {
   bori_goods_image: string;
   goods_like: number;
   goods_name: string;
@@ -11,7 +11,7 @@ interface propsType {
   category_name?: string
 }
 
-const BoriGoodsItem = ({goods_name, bori_goods_image, goods_like, product_price, category_name}: propsType) => {
+const BoriGoodsItem = ({goods_name, bori_goods_image, goods_like, product_price, category_name}: IProps) => {
   return (
     <div className={styles.bori_goods_item}>
       <div>

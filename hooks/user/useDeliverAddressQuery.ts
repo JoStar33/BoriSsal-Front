@@ -1,10 +1,10 @@
 import { useQuery } from "react-query";
 import { getDeliverAddress } from "@/apis/user/deliverAddress";
 
-interface propsType {
+interface IProps {
   user_id: string;
 };
 
-export const useDeliverAddressQuery = ({ user_id }: propsType) => {
+export const useDeliverAddressQuery = ({ user_id }: IProps) => {
   return useQuery(["deliver-address"], () => getDeliverAddress(user_id));
 };

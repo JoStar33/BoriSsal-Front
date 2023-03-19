@@ -14,7 +14,7 @@ import { useProfileUpdateMutation } from "@/hooks/user/useProfileUpdateMutation"
 
 const UserPage = () => {
   const { user } = useSelector((state: RootState) => state.userStore);
-  const [dialog, setDialog] = useState(false);
+  const [dialog, setDialog] = useState<boolean>(false);
   const { data } = useDeliverAddressQuery({ user_id: user.id });
   const { isLoading, isError } = useLoginCheckQuery();
   const formData = new FormData();

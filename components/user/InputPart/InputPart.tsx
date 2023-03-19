@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./input_part.module.scss";
 
-interface propsType {
+interface IProps {
   onChangeAccount: (e: React.ChangeEvent<HTMLInputElement>) => void;
   validate: string | null;
   type: string;
@@ -15,7 +15,7 @@ const InputPart = ({
   type,
   info,
   textOrPass
-}: propsType) => {
+}: IProps) => {
   return (
     <div className={styles.input_box}>
       <div className={styles.input_container}>

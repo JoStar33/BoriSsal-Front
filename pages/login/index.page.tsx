@@ -7,16 +7,16 @@ import { validateEmail, validatePassword } from "@/utils/validate";
 import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
 import { useLoginMutation } from "@/hooks/auth/useLoginMutation";
 import { useNotLoginCheckQuery } from "@/hooks/auth/useNotLoginCheckQuery";
-import { loginType } from "@/types/auth";
+import { ILogin } from "@/types/auth";
 import Loading from "@/components/loading/Loading/Loading";
 import Link from "next/link";
 import { AxiosError } from "axios";
 import { errorMessage } from "@/apis/error/customError";
 
 const Login = () => {
-  const [dialog, setDialog] = useState(false);
-  const [dialogText, setDialogText] = useState("");
-  const [account, setAccount] = useState<loginType>({
+  const [dialog, setDialog] = useState<boolean>(false);
+  const [dialogText, setDialogText] = useState<string>("");
+  const [account, setAccount] = useState<ILogin>({
     email: "",
     password: "",
   });

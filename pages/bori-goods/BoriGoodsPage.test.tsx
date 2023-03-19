@@ -1,4 +1,4 @@
-import { boriGoodsType } from "@/types/boriGoods";
+import { IBoriGoods } from "@/types/boriGoods";
 import { render, screen } from "@testing-library/react";
 import BoriGoodsPage, { getStaticProps } from "./index.page";
 
@@ -54,7 +54,7 @@ test("보리 굿즈 페이지 카테고리 반영 테스트", () => {
 });
 
 test("getStaticProps 동작 테스트", () => {
-  let testData: boriGoodsType[];
+  let testData: IBoriGoods[];
   getStaticProps().then(res => {
     testData = res.props.goodsData as any;
     expect(testData[0]._id).toBe("23");

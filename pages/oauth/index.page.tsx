@@ -6,8 +6,8 @@ import { useUserQuery } from "@/hooks/user/useUserQuery";
 import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
 
 const Oauth = () => {
-  const [dialog, setDialog] = useState(false);
-  const [dialogText, setDialogText] = useState("");
+  const [dialog, setDialog] = useState<boolean>(false);
+  const [dialogText, setDialogText] = useState<string>("");
   useUserQuery({ setDialogText, setDialog });
   return (
     <>

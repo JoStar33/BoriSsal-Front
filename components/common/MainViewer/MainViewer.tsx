@@ -12,7 +12,7 @@ import { NextPage } from "next";
 import Link from "next/link";
 
 const MainViewer = () => {
-  const [position, setPosition] = useState(0);
+  const [position, setPosition] = useState<number>(0);
   const onScroll = () => {
     setPosition(window.scrollY);
   };

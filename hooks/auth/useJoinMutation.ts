@@ -1,20 +1,21 @@
 import { useMutation } from "react-query";
 import { join } from "@/apis/user/auth";
 import { useRouter } from "next/router";
-import { joinType } from "@/types/auth";
+import { IJoin } from "@/types/auth";
 import { AxiosError } from "axios";
+import { errorMessage } from "@/apis/error/customError";
 
-interface propsType {
+interface IProps {
   setDialog: React.Dispatch<React.SetStateAction<boolean>>;
   setDialogText: React.Dispatch<React.SetStateAction<string>>;
-  joinInfo: joinType;
+  joinInfo: IJoin;
 };
 
 export const useJoinMutation = ({
   joinInfo,
   setDialog,
   setDialogText,
-}: propsType) => {
+}: IProps) => {
   const router = useRouter();
   return useMutation(
     () => join(joinInfo.email, joinInfo.nick, joinInfo.password),
@@ -23,7 +24,7 @@ export const useJoinMutation = ({
         router.push("/");
       },
       onError: (error: AxiosError) => {
-        setDialogText((error.response?.data as any).message);
+        setDialogText(errorMessage(error));
         setDialog(true);
       },
     }

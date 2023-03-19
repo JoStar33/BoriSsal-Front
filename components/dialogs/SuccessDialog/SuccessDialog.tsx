@@ -6,12 +6,12 @@ import success from '/public/dialog/success.png'
 import { GrClose } from 'react-icons/gr';
 
 
-interface propsType {
+interface IProps {
   text: string;
   setDialog?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SuccessDialog = ({text, setDialog}: propsType) => {
+const SuccessDialog = ({text, setDialog}: IProps) => {
   return (
     <div className={styles.dialog_background}>
       <div role='success' className={styles.dialog_container}>

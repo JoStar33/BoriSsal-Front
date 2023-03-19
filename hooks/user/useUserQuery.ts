@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { userType } from "@/types/user";
+import { IUser } from "@/types/user";
 import { getUser } from "@/apis/user/user";
 import { AxiosError } from "axios";
 import { useRouter } from "next/router";
@@ -9,12 +9,12 @@ import { setUserState } from "@/store/user";
 import { getParam } from "@/utils/getParam";
 import { errorMessage } from "@/apis/error/customError";
 
-interface propsType {
+interface IProps {
   setDialog: React.Dispatch<React.SetStateAction<boolean>>;
   setDialogText: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const useUserQuery = ({ setDialog, setDialogText }: propsType) => {
+export const useUserQuery = ({ setDialog, setDialogText }: IProps) => {
   const router = useRouter();
   const id = getParam();
   if(id === '비어있음.') {
@@ -23,7 +23,7 @@ export const useUserQuery = ({ setDialog, setDialogText }: propsType) => {
   const dispatch = useDispatch<AppDispatch>();
   return useQuery(["user"], () => getUser(id), {
     onSuccess: (res) => {
-      const loginUser: userType = {
+      const loginUser: IUser = {
         id: res.data._id,
         email: res.data.email,
         nick: res.data.nick,

@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "react-query";
 import { patchDeliverAddress } from "@/apis/user/deliverAddress";
-import { patchDeliverAddressType } from "@/types/deliverAddress";
+import { IPatchDeliverAddress } from "@/types/deliverAddress";
 
 export const useDeliverAddressMutation = (
-  deliverAddress: patchDeliverAddressType
+  deliverAddress: IPatchDeliverAddress
 ) => {
   const queryClient = useQueryClient();
   return useMutation(

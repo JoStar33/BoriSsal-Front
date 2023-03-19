@@ -3,10 +3,10 @@ import React from "react";
 import styles from "./side_bar.module.scss";
 import { IoIosExit } from "react-icons/io";
 
-interface propsType {
+interface IProps {
   setShowSideBar: React.Dispatch<React.SetStateAction<boolean>>;
 };
-const SideBar = ({ setShowSideBar }: propsType) => {
+const SideBar = ({ setShowSideBar }: IProps) => {
   return (
     <div className={styles.side_bar}>
       <div className={styles.exit_box} onClick={() => setShowSideBar(false)}>

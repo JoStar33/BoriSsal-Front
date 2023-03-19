@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Loading from "@/components/loading/Loading/Loading";
 import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
 import styles from "./join.module.scss";
 import Image from "next/image";
+import { IJoin } from "@/types/auth";
 import { useJoinMutation } from "@/hooks/auth/useJoinMutation";
 import {
   validateEmail,
@@ -18,21 +19,28 @@ import InputPart from "@/components/user/InputPart/InputPart";
 import SuccessDialog from "@/components/dialogs/SuccessDialog/SuccessDialog";
 import DuplicateCheckPart from "@/components/user/DuplicateCheckPart/DuplicateCheckPart";
 
+interface IJoinAccount extends IJoin{
+  passwordCheck: string;
+}
+
 const Join = () => {
-  const [account, setAccount] = useState({
+  const [account, setAccount] = useState<IJoinAccount>({
     email: "",
     nick: "",
     password: "",
     passwordCheck: "",
   });
   const [dialogText, setDialogText] = useState<string>("");
-  const [dialog, setDialog] = useState(false);
-  const { mutate, isLoading, isSuccess } = useJoinMutation({
-    joinInfo: {
+  const [dialog, setDialog] = useState<boolean>(false);
+  const joinInfo = useMemo<IJoin>(() => {
+    return {
       email: account.email,
       nick: account.nick,
       password: account.password,
-    },
+    }
+  }, [account]);
+  const { mutate, isLoading, isSuccess } = useJoinMutation({
+    joinInfo,
     setDialogText,
     setDialog,
   });
