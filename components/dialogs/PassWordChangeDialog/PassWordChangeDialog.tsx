@@ -11,10 +11,12 @@ import password_bori from "/public/dialog/password_bori.png";
 import styles from "./password_change_dialog.module.scss";
 import InputPart from "@/components/user/InputPart/InputPart";
 import Loading from "@/components/loading/Loading/Loading";
-import { AxiosError } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import SuccessDialog from "../SuccessDialog/SuccessDialog";
+import { errorMessage } from "@/apis/error/customError";
+import { UseMutateFunction } from "react-query";
 
-type propsType = {
+interface propsType {
   setDialog: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -148,7 +150,7 @@ const PassWordChangeDialog = ({ setDialog }: propsType) => {
           {isError && (
             <div className={styles.mutation_handle_message}>
               <RiAlarmWarningFill size={25} color="red"></RiAlarmWarningFill>
-              {((error as AxiosError).response?.data as any).message}
+              {errorMessage(error as AxiosError)}
             </div>
           )}
           {isSuccess && (

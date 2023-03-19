@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { joinType } from "@/types/auth";
 import { AxiosError } from "axios";
 
-type propsType = {
+interface propsType {
   setDialog: React.Dispatch<React.SetStateAction<boolean>>;
   setDialogText: React.Dispatch<React.SetStateAction<string>>;
   joinInfo: joinType;

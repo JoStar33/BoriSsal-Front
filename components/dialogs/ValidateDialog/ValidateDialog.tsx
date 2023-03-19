@@ -5,9 +5,9 @@ import question_bori from "/public/dialog/question_bori.png";
 import question from "/public/dialog/question.png";
 import { GrClose } from "react-icons/gr";
 
-type propsType = {
+interface propsType {
   text: string;
-  setDialog?: React.Dispatch<React.SetStateAction<boolean>> | any;
+  setDialog?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const ValidateDialog = ({ text, setDialog }: propsType) => {

@@ -1,7 +1,7 @@
 import { useMutation } from "react-query";
 import { emailDuplicate, nickDuplicate } from "@/apis/user/auth";
 
-type propsType = {
+interface propsType {
   type: boolean;
   info: string;
 }

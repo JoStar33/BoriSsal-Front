@@ -3,7 +3,7 @@ import React from 'react';
 import { AiFillHeart } from 'react-icons/ai';
 import styles from './bori_goods_item.module.scss';
 
-type propsType = {
+interface propsType {
   bori_goods_image: string;
   goods_like: number;
   goods_name: string;

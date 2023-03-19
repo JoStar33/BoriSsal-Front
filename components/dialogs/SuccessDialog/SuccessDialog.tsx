@@ -6,9 +6,9 @@ import success from '/public/dialog/success.png'
 import { GrClose } from 'react-icons/gr';
 
 
-type propsType = {
+interface propsType {
   text: string;
-  setDialog?: React.Dispatch<React.SetStateAction<boolean>> | any
+  setDialog?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SuccessDialog = ({text, setDialog}: propsType) => {

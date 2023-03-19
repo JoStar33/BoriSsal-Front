@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./side_bar.module.scss";
 import { IoIosExit } from "react-icons/io";
 
-type propsType = {
+interface propsType {
   setShowSideBar: React.Dispatch<React.SetStateAction<boolean>>;
 };
 const SideBar = ({ setShowSideBar }: propsType) => {

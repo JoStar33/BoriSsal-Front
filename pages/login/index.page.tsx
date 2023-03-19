@@ -11,6 +11,7 @@ import { loginType } from "@/types/auth";
 import Loading from "@/components/loading/Loading/Loading";
 import Link from "next/link";
 import { AxiosError } from "axios";
+import { errorMessage } from "@/apis/error/customError";
 
 const Login = () => {
   const [dialog, setDialog] = useState(false);
@@ -54,7 +55,7 @@ const Login = () => {
     <>
       {isError && (
         <ValidateDialog
-          text={((error as AxiosError).response?.data as any).message}
+          text={errorMessage(error as AxiosError)}
           setDialog={setDialog}
         ></ValidateDialog>
       )}

@@ -4,6 +4,7 @@ import { getGoods, getCategory } from '@/apis/bori-goods/boriGoods';
 import { AxiosError } from 'axios';
 import { boriGoodsType, categoryType } from '@/types/boriGoods';
 import styles from './bori_goods_page.module.scss';
+import { errorMessage } from '@/apis/error/customError';
 
 type propsType = {
   goodsData: boriGoodsType[];
@@ -63,26 +64,26 @@ const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: propsType) => {
 export default BoriGoodsPage;
 
 export async function getStaticProps() {
-  let goodsData = null;
-  let categoryData = null;
+  let goodsData: boriGoodsType[] = [];
+  let categoryData: categoryType[] = [];
   let goodsErrorMessage = null;
   let categoryErrorMessage = null;
   await getGoods()
     .then((res) => {
-      goodsData = res.data as boriGoodsType[];
+      goodsData = res.data;
     })
     .catch((error: AxiosError) => {
-      goodsErrorMessage = (error.response?.data as any).message
+      goodsErrorMessage = errorMessage(error)
     });
   await getCategory()
     .then((res) => { 
-      categoryData = res.data as categoryType[];
+      categoryData = res.data;
       categoryData.unshift({
         _id: '0',
         category_name: '전체'
       })
     }).catch((error: AxiosError) => {
-      categoryErrorMessage = (error.response?.data as any).message
+      categoryErrorMessage = errorMessage(error)
     });
   return {
     props: { goodsData, goodsErrorMessage, categoryErrorMessage, categoryData },

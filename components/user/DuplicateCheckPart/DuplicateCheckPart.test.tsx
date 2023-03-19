@@ -8,7 +8,7 @@ const queryClient = new QueryClient();
 
 const user = userEvent.setup();
 
-type propsType = {
+interface propsType {
   type: boolean;
   info: string;
 };

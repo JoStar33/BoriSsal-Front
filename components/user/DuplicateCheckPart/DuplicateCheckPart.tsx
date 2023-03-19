@@ -4,8 +4,9 @@ import styles from './duplicate_check_part.module.scss'
 import { AiFillCheckCircle } from "react-icons/ai";
 import { RiAlarmWarningFill } from "react-icons/ri";
 import { AxiosError } from 'axios';
+import { errorMessage } from '@/apis/error/customError';
 
-type propsType = {
+interface propsType {
   validate: string | null,
   type: boolean;
   info: string;
@@ -42,7 +43,7 @@ const DuplicateCheckPart = ({
               className={styles.state_cover}>
               <RiAlarmWarningFill size={25} color="red"></RiAlarmWarningFill>
             </div>
-            {((error as AxiosError).response?.data as any)?.message}
+            {errorMessage(error as AxiosError)}
           </div>
         }
         {

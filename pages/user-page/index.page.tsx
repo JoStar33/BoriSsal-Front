@@ -25,7 +25,10 @@ const UserPage = () => {
   const handleOnChangeProfileImage = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const file: any = (e?.target.files as any)[0];
+    if (!e.target.files) {
+      return
+    }
+    const file: File = (e.target.files)[0];
     formData.append("img", file);
     mutate();
   };

@@ -1,7 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { userType } from "../types/user";
 
-const initialState = {
+type stateType = {
+  user: userType;
+}
+
+const initialState: stateType = {
   user: {
     id: "",
     email: ``,
@@ -12,7 +16,7 @@ const initialState = {
     created_at: new Date(),
     user_product_like: [],
     user_bori_gallery_like: [],
-  } as userType,
+  },
 };
 
 export const userSlice = createSlice({

@@ -1,3 +1,4 @@
+import { errorMessage } from '@/apis/error/customError';
 import SuccessDialog from '@/components/dialogs/SuccessDialog/SuccessDialog';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import Loading from '@/components/loading/Loading/Loading';
@@ -17,7 +18,7 @@ const UserBar = () => {
   return (
     <>
       {
-        isError && <ValidateDialog text={((error as AxiosError).response?.data as any).message} ></ValidateDialog>
+        isError && <ValidateDialog text={errorMessage(error as AxiosError)} ></ValidateDialog>
       }
       {
         isLoading && <Loading></Loading>

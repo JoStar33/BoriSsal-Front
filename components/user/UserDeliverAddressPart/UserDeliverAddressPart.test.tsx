@@ -9,7 +9,7 @@ const queryClient = new QueryClient();
 
 const user = userEvent.setup();
 
-type propsType = {
+interface propsType {
   user_id: string;
   addressInfo: string;
   labelInfo: string;

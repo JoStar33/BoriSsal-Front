@@ -7,6 +7,7 @@ import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import { AxiosError } from 'axios';
 import SuccessDialog from '@/components/dialogs/SuccessDialog/SuccessDialog';
 import Loading from '@/components/loading/Loading/Loading';
+import { errorMessage } from '@/apis/error/customError';
 
 const FindPassWord = () => {
   const [email, setEmail] = useState<string>('');
@@ -17,7 +18,7 @@ const FindPassWord = () => {
   return (
     <>
       {
-        isError && <ValidateDialog text={((error as AxiosError).response?.data as any).message}></ValidateDialog>
+        isError && <ValidateDialog text={errorMessage(error as AxiosError)}></ValidateDialog>
       }
       {
         isSuccess && <SuccessDialog text='비밀번호 발급 성공! 메일을 확인해주세요.'></SuccessDialog>

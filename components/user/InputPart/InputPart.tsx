@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./input_part.module.scss";
 
-type propsType = {
+interface propsType {
   onChangeAccount: (e: React.ChangeEvent<HTMLInputElement>) => void;
   validate: string | null;
   type: string;

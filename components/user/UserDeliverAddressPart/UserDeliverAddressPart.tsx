@@ -6,8 +6,10 @@ import { useDeliverAddressMutation } from "@/hooks/user/useDeliverAddressMutatio
 import { patchDeliverAddressType } from "@/types/deliverAddress";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { RiAlarmWarningFill } from "react-icons/ri";
+import { errorMessage } from "@/apis/error/customError";
+import { AxiosError } from "axios";
 
-type propsType = {
+interface propsType {
   user_id: string;
   addressInfo: string;
   labelInfo: string;
@@ -104,7 +106,7 @@ const UserDeliverAddressPart = ({
               <div className={styles.state_cover}>
                 <RiAlarmWarningFill size={25} color="red"></RiAlarmWarningFill>
               </div>
-              {(error as Error)?.message}
+              {errorMessage(error as AxiosError)}
             </div>
           )}
           {isSuccess && (
