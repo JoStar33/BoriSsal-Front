@@ -1,0 +1,12 @@
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reply_container {
+  @include center;
+  border: 2px solid black;
+  position: relative;
+  flex-direction: row;
+}
