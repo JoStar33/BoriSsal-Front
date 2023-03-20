@@ -20,7 +20,8 @@ const ReplyPart = ({reply}: IProps) => {
         <p>{replyDate.current.toLocaleString()}</p>
         <p>{reply.content}</p>
         <button 
-          className={styles.child_reply_button} 
+          className={styles.child_reply_button}
+          role='child-reply' 
           onClick={handleOnChilk}>답글 {reply.reply_child.length}개</button>
       </div>
       {
