@@ -1,0 +1,56 @@
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reply_part_container {
+  width: 96vw;
+  border: 2px solid black;
+  position: relative;
+  p {
+    font-size: 0.9vw;
+    font-weight: 800;
+  }
+  .child_reply_button {
+    font-size: 0.9vw;
+    margin-left: 93%;
+    width: 6.5vw;
+    border-radius: 20px;
+    background-color: #9999CC;
+    font-weight: 800;
+  }
+}
+
+.reply_info_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.reply_input_container {
+  @include center;
+  flex-direction: row;
+  label {
+    font-size: 1.4rem;
+    font-weight: 800;
+    width: 4rem;
+  }
+  input {
+    padding-left: 1rem;
+    width: 240px;
+    height: 34px;
+    border-radius: 20px;
+    font-size: 1.3rem;
+  }
+  input:focus { outline: none; }
+  button {
+    font-size: 1.4rem;
+    font-weight: 800;
+    background-color: #9999CC;
+    cursor: pointer;
+    border-radius: 20px;
+    border: none;
+    width: 9rem;
+    height: 3rem;
+  }
+}
