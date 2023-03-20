@@ -14,8 +14,12 @@ interface IProps {
 
 const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
   const [categoryInfo, setCategoryInfo] = useState<string>('0');
+  const [searchInfo, setSearchInfo] = useState<string>('');
   const handleSelectLayout = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategoryInfo(e.target.value)
+  };
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInfo(e.target.value);
   }
   if (errorMessage) 
     return 
@@ -24,8 +28,9 @@ const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
       <h1>보리 굿즈</h1>
       <div className={styles.user_place}>
         <p className={styles.show_count}>전체 (수량: {goodsData.length})</p>
-        <div>
-          <input></input>
+        <div className={styles.search_part}>
+          <label htmlFor="search_goods">검색:</label>
+          <input id='search_goods' onChange={handleSearch}/>
         </div>
         <p className={styles.category_label}>카테고리: </p>
         <div className={styles.styled_select}>
@@ -46,12 +51,20 @@ const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
       </div>
       <div className={styles.bori_goods_container}>
         {
-          goodsData.filter((cateGoods) => {
+          goodsData
+          .filter((searchGoods) => {
+            if(searchInfo) 
+              return
+            if(searchGoods.product_name.includes(searchInfo))
+              return searchGoods;
+            }
+          ).filter((cateGoods) => {
             if (categoryInfo === '0')
               return cateGoods;
             if(cateGoods.category_id === categoryInfo)
               return cateGoods;
-          }).map((goods) =>           
+            }
+          ).map((goods) =>           
             <BoriGoodsItem 
               key={goods._id}
               bori_goods_image={goods.product_image} 
