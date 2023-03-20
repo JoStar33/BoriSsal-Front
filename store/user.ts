@@ -32,9 +32,14 @@ export const userSlice = createSlice({
     setUserProfileState: (state, action: PayloadAction<string>) => {
       state.user = {...state.user, profile_image: action.payload}
     },
+    setGoodsLike: (state, action: PayloadAction<string>) => {
+      state.user.user_product_like.find(likeGoods => likeGoods === action.payload) 
+      ? state.user.user_product_like = state.user.user_product_like.filter(likeGoods => likeGoods !== action.payload)
+      : state.user.user_product_like.push(action.payload);
+    }
   },
 });
 
-export const { resetUserState, setUserState, setUserProfileState } = userSlice.actions;
+export const { resetUserState, setUserState, setUserProfileState, setGoodsLike } = userSlice.actions;
 
 export default userSlice.reducer;
