@@ -1,7 +1,7 @@
 import { IReply } from "@/types/reply";
 import React, { useRef, useState } from "react";
 import { AiFillCaretDown } from "react-icons/ai";
-import { useBoriGoodsReplyMutation } from "@/hooks/bori-goods/useBoriGoodsReplyMutation";
+import { useBoriGoodsReplyMutation } from "@/hooks/bori-goods/useBoriGoodsReplyMutation/useBoriGoodsReplyMutation";
 import { RootState } from "@/store";
 import { useSelector } from "react-redux";
 import styles from "./reply_viewer.module.scss";

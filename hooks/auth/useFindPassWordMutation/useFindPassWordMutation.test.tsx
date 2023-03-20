@@ -1,6 +1,6 @@
 import { server } from "@/mocks/server";
 import { rest } from "msw";
-import { useFindPassWordMutation } from "./useFindPassWordMutation";
+import { useFindPassWordMutation } from "../useFindPassWordMutation/useFindPassWordMutation";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { renderHook, waitFor } from "@testing-library/react";
 const queryClient = new QueryClient();

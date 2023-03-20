@@ -3,7 +3,7 @@ import { GrClose } from "react-icons/gr";
 import { RiAlarmWarningFill } from "react-icons/ri";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { validatePassword, validatePasswordCheck } from "@/utils/validate";
-import { usePassWordChangeMutation } from "@/hooks/auth/usePassWordChangeMutation";
+import { usePassWordChangeMutation } from "@/hooks/auth/usePassWordChangeMutation/usePassWordChangeMutation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import Image from "next/image";

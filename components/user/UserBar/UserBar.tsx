@@ -2,7 +2,7 @@ import { errorMessage } from '@/apis/error/customError';
 import SuccessDialog from '@/components/dialogs/SuccessDialog/SuccessDialog';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import Loading from '@/components/loading/Loading/Loading';
-import { useLogoutMutation } from '@/hooks/auth/useLogoutMutation';
+import { useLogoutMutation } from '@/hooks/auth/useLogoutMutation/useLogoutMutation';
 import { RootState } from '@/store';
 import { AxiosError } from 'axios';
 import Image from 'next/image';

@@ -1,4 +1,4 @@
-import { useDuplicateCheckMutation } from "./useDuplicateCheckMutation";
+import { useDuplicateCheckMutation } from "../useDuplicateCheckMutation/useDuplicateCheckMutation";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { renderHook, waitFor } from "@testing-library/react";
 const queryClient = new QueryClient();

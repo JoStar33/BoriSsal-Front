@@ -4,7 +4,7 @@ import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
 import styles from "./join.module.scss";
 import Image from "next/image";
 import { IJoin } from "@/types/auth";
-import { useJoinMutation } from "@/hooks/auth/useJoinMutation";
+import { useJoinMutation } from "@/hooks/auth/useJoinMutation/useJoinMutation";
 import {
   validateEmail,
   validateNick,

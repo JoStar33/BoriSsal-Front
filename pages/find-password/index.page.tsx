@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { validateEmail } from '@/utils/validate';
-import { useFindPassWordMutation } from '@/hooks/auth/useFindPassWordMutation';
+import { useFindPassWordMutation } from '@/hooks/auth/useFindPassWordMutation/useFindPassWordMutation';
 import styles from './find_password.module.scss';
 import InputPart from '@/components/user/InputPart/InputPart';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';

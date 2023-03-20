@@ -1,4 +1,4 @@
-import { useDuplicateCheckMutation } from '@/hooks/auth/useDuplicateCheckMutation';
+import { useDuplicateCheckMutation } from '@/hooks/auth/useDuplicateCheckMutation/useDuplicateCheckMutation';
 import React from 'react';
 import styles from './duplicate_check_part.module.scss'
 import { AiFillCheckCircle } from "react-icons/ai";
