@@ -1,0 +1,48 @@
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reply_container {
+  @include center;
+  margin: 1vw;
+  width: 96vw;
+  flex-wrap: wrap;
+}
+
+.reply_input_container {
+  @include center;
+  flex-direction: row;
+  label {
+    font-size: 1.4rem;
+    font-weight: 800;
+    width: 4rem;
+  }
+  input {
+    padding-left: 1rem;
+    width: 240px;
+    height: 34px;
+    border-radius: 20px;
+    font-size: 1.3rem;
+  }
+  input:focus { outline: none; }
+  button {
+    font-size: 1.4rem;
+    font-weight: 800;
+    background-color: #9999CC;
+    cursor: pointer;
+    border-radius: 20px;
+    border: none;
+    width: 9rem;
+    height: 3rem;
+  }
+}
+
+.more_show_button {
+  cursor: pointer;
+  font-size: 1.4rem;
+  font-weight: 800;
+  border: none;
+  background-color: transparent;
+}
