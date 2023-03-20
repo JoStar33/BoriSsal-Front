@@ -12,7 +12,6 @@ import Loading from "@/components/loading/Loading/Loading";
 import Link from "next/link";
 import { AxiosError } from "axios";
 import { errorMessage } from "@/apis/error/customError";
-import InputPart from "@/components/user/InputPart/InputPart";
 
 const Login = () => {
   const [dialog, setDialog] = useState<boolean>(false);
@@ -70,18 +69,32 @@ const Login = () => {
       <div className={styles.login_container}>
         <h1>로그인</h1>
         <div className={styles.login_box}>
-          <InputPart 
-            onChangeAccount={onChangeAccount} 
-            validate={validateEmail(account.email)} 
-            inputName={"email"} 
-            inputLabel="이메일: "
-            textOrPassword="text"></InputPart>
-          <InputPart 
-            onChangeAccount={onChangeAccount} 
-            validate={validateEmail(account.password)} 
-            inputName="password" 
-            inputLabel="비밀번호: "
-            textOrPassword="password"></InputPart>
+          <div className={styles.input_container}>
+            <p>이메일:</p>
+            <input
+              role="email"
+              type="text"
+              name="email"
+              onKeyDown={handleOnKeyDown}
+              onChange={onChangeAccount}
+            />
+          </div>
+          <div className={styles.validate_text}>
+            {validateEmail(account.email)}
+          </div>
+          <div className={styles.input_container}>
+            <p>비밀번호:</p>
+            <input
+              role="password"
+              type="password"
+              name="password"
+              onKeyDown={handleOnKeyDown}
+              onChange={onChangeAccount}
+            />
+          </div>
+          <div className={styles.validate_text}>
+            {validatePassword(account.password)}
+          </div>
           <div>
             <button
               className={styles.login_button}
