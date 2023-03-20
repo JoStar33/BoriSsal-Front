@@ -100,16 +100,16 @@ const PassWordChangeDialog = ({ setDialog }: IProps) => {
           <h2>비밀번호 변경</h2>
           {/*비밀번호 변경 안내 타이틀*/}
           <InputPart
-            textOrPass="password" 
-            info="현재 비밀번호: "
-            type="password"
+            textOrPassword="password" 
+            inputLabel="현재 비밀번호: "
+            inputName="password"
             onChangeAccount={onChangeAccount}
             validate={validatePassword(account.password)}
           ></InputPart>
           <InputPart
-            textOrPass="password" 
-            info="현재 비밀번호 확인: "
-            type="passwordCheck"
+            textOrPassword="password" 
+            inputLabel="현재 비밀번호 확인: "
+            inputName="passwordCheck"
             onChangeAccount={onChangeAccount}
             validate={validatePasswordCheck(
               account.password,
@@ -117,16 +117,16 @@ const PassWordChangeDialog = ({ setDialog }: IProps) => {
             )}
           ></InputPart>
           <InputPart
-            textOrPass="password" 
-            info="새 비밀번호: "
-            type="newPassword"
+            textOrPassword="password" 
+            inputLabel="새 비밀번호: "
+            inputName="newPassword"
             onChangeAccount={onChangeAccount}
             validate={validatePassword(account.newPassword)}
           ></InputPart>
           <InputPart
-            textOrPass="password"  
-            info="새 비밀번호 확인: "
-            type="newPasswordCheck"
+            textOrPassword="password"  
+            inputLabel="새 비밀번호 확인: "
+            inputName="newPasswordCheck"
             onChangeAccount={onChangeAccount}
             validate={validatePasswordCheck(
               account.newPassword,

@@ -29,7 +29,7 @@ const FindPassWord = () => {
       <div className={styles.find_password_container}>
         <h1>임시 비밀번호 받기</h1>
         <div className={styles.input_box}>
-          <InputPart onChangeAccount={onChangeAccount} validate={validateEmail(email)} type='email' info='이메일 주소: ' textOrPass='text'></InputPart>
+          <InputPart onChangeAccount={onChangeAccount} validate={validateEmail(email)} inputName='email' inputLabel='이메일 주소: ' textOrPassword='text'></InputPart>
         </div>
         <button onClick={() => mutate()}>비밀번호 발급</button>
       </div>

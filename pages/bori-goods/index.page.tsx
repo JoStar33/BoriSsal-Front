@@ -17,11 +17,16 @@ const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
   const handleSelectLayout = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategoryInfo(e.target.value)
   }
+  if (errorMessage) 
+    return 
   return (
     <div className={styles.bori_goods_page_container}>
       <h1>보리 굿즈</h1>
       <div className={styles.user_place}>
         <p className={styles.show_count}>전체 (수량: {goodsData.length})</p>
+        <div>
+          <input></input>
+        </div>
         <p className={styles.category_label}>카테고리: </p>
         <div className={styles.styled_select}>
           <select onChange={handleSelectLayout}>
@@ -71,8 +76,7 @@ export async function getStaticProps() {
   await getGoods()
     .then((res) => {
       goodsData = res.data;
-    })
-    .catch((error: AxiosError) => {
+    }).catch((error: AxiosError) => {
       goodsErrorMessage = errorMessage(error)
     });
   await getCategory()

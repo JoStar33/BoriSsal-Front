@@ -14,6 +14,6 @@ InputPartTest.args = {
   validate: '테스트',
   type: 'password',
   info: '현재 비밀번호: ',
-  textOrPass: 'pass'
+  textOrPassword: 'pass'
 };
 
