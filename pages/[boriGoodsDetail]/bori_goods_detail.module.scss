@@ -1,0 +1,66 @@
+.bori_goods_info_container {
+  margin: 1vw;
+  display: flex;
+  flex-direction: row;
+  .goods_info {
+    margin-top: 1vw;
+    margin-left: 2vw;
+    p {
+      font-weight: 800;
+      font-size: 1.4rem;
+    }
+    .goods_category {
+      display: flex;
+      flex-direction: row;
+    }
+    .goods_like_container {
+      display: flex;
+      flex-direction: row;
+      button {
+        margin-left: 1vw;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+      }
+    }
+  }
+  .goods_image_container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .button_container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin: 1vw;
+    .cart_button {
+      margin-right: 10vw;
+      cursor: pointer;
+      border: none;
+      border-radius: 20px;
+      font-size: 1vw;
+      font-weight: 800;
+      width: 10vw;
+      height: 3vw;
+      background-color: #9999CC;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .order_button {
+      margin-left: 10vw;
+      cursor: pointer;
+      border-radius: 20px;
+      font-size: 1vw;
+      font-weight: 800;
+      width: 10vw;
+      height: 3vw;
+      background-color: #ffffff;
+      border: 2px solid black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
