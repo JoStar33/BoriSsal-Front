@@ -20,9 +20,7 @@ const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
   };
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInfo(e.target.value);
-  }
-  if (errorMessage) 
-    return 
+  } 
   return (
     <div className={styles.bori_goods_page_container}>
       <h1>보리 굿즈</h1>
@@ -52,12 +50,8 @@ const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
       <div className={styles.bori_goods_container}>
         {
           goodsData
-          .filter((searchGoods) => {
-            if(searchInfo) 
-              return
-            if(searchGoods.product_name.includes(searchInfo))
-              return searchGoods;
-            }
+          .filter((searchGoods) =>
+            searchGoods.product_name.includes(searchInfo)
           ).filter((cateGoods) => {
             if (categoryInfo === '0')
               return cateGoods;
