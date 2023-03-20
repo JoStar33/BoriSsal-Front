@@ -30,7 +30,7 @@ const UserBar = () => {
         <Link href='/cart-page' aria-label="장바구니 페이지로 이동">
           <BsFillCartFill size={40}></BsFillCartFill>
         </Link>
-        <Link className={styles.user_profile_container} href='/user-page' aria-label="사용자 페이지로 이동">
+        <Link className={styles.user_profile_container} href='/user' aria-label="사용자 페이지로 이동">
           {
             user.profile_image 
               ? <Image
