@@ -63,7 +63,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     goodsData = res.data;
   });
   const paths = goodsData.map((goods) => ({
-    params: { boriGoodsDetail: goods.product_name },
+    params: { boriGoodsDetail: goods.bori_goods_name },
   }));
 
   return { paths, fallback: false };
@@ -89,7 +89,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       categoryErrorMessage = errorMessage(error);
     });
   const goods = goodsData.find(
-    (goods) => goods.product_name === params?.boriGoodsDetail
+    (goods) => goods.bori_goods_name === params?.boriGoodsDetail
   );
   const category = categoryData.find(
     (category) => category._id === goods?.category_id

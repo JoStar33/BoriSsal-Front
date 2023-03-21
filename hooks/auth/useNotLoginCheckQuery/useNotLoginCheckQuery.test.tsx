@@ -37,7 +37,7 @@ test("useNotLoginCheckQuery훅 테스트(독특한 케이스로 만약 스토어
       profile_image: "hello",
       user_role: 0,
       created_at: new Date(),
-      user_product_like: [],
+      user_bori_goods_like: [],
       user_bori_gallery_like: [],
     })
   );

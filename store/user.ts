@@ -14,7 +14,7 @@ const initialState: IState = {
     profile_image: "",
     user_role: 0,
     created_at: new Date(),
-    user_product_like: [],
+    user_bori_goods_like: [],
     user_bori_gallery_like: [],
   },
 };
@@ -33,9 +33,9 @@ export const userSlice = createSlice({
       state.user = {...state.user, profile_image: action.payload}
     },
     setGoodsLike: (state, action: PayloadAction<string>) => {
-      state.user.user_product_like.find(likeGoods => likeGoods === action.payload) 
-      ? state.user.user_product_like = state.user.user_product_like.filter(likeGoods => likeGoods !== action.payload)
-      : state.user.user_product_like.push(action.payload);
+      state.user.user_bori_goods_like.find(likeGoods => likeGoods === action.payload) 
+      ? state.user.user_bori_goods_like = state.user.user_bori_goods_like.filter(likeGoods => likeGoods !== action.payload)
+      : state.user.user_bori_goods_like.push(action.payload);
     }
   },
 });

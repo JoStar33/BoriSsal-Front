@@ -34,7 +34,7 @@ test("UserPage 스토어 데이터 반영 테스트", async () => {
       profile_image: "",
       user_role: 0,
       created_at: new Date(),
-      user_product_like: [],
+      user_bori_goods_like: [],
       user_bori_gallery_like: [],
     })
   );

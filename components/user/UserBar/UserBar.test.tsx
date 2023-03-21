@@ -30,7 +30,7 @@ test("유저의 프로필 사진이 없을 경우", () => {
       profile_image: "",
       user_role: 0,
       created_at: new Date(),
-      user_product_like: [],
+      user_bori_goods_like: [],
       user_bori_gallery_like: [],
     })
   );
@@ -49,7 +49,7 @@ test("유저의 프로필 사진이 있을 경우", async () => {
       profile_image: "/isin",
       user_role: 0,
       created_at: new Date(),
-      user_product_like: [],
+      user_bori_goods_like: [],
       user_bori_gallery_like: [],
     })
   );

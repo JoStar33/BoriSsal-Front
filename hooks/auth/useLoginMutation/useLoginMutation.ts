@@ -32,7 +32,7 @@ export const useLoginMutation = ({
         profile_image: res.data.profile_image,
         user_role: res.data.user_role,
         created_at: res.data.created_at,
-        user_product_like: res.data.user_product_like,
+        user_bori_goods_like: res.data.user_bori_goods_like,
         user_bori_gallery_like: res.data.user_bori_gallery_like,
       } 
       dispatch(

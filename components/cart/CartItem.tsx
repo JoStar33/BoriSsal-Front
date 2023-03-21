@@ -13,13 +13,13 @@ const CartItem = ({cartGoods}: IProps) => {
       <figure style={{width: '14vw', height: '14vw', position: 'relative'}}>
         <Image
           fill
-          src={`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}${cartGoods.product_image}`}
-          alt={cartGoods.product_name}></Image>
+          src={`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}${cartGoods.bori_goods_image}`}
+          alt={cartGoods.bori_goods_name}></Image>
       </figure>
       <div>
-        <p>제품명: {cartGoods.product_name}</p>
-        <p>주문수량: {cartGoods.product_stock}개</p>
-        <p className={styles.reply_part_container}>{cartGoods.product_price}원</p>
+        <p>제품명: {cartGoods.bori_goods_name}</p>
+        <p>주문수량: {cartGoods.bori_goods_stock}개</p>
+        <p className={styles.reply_part_container}>{cartGoods.bori_goods_price}원</p>
       </div>
     </div>
   );

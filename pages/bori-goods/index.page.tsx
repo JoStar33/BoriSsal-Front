@@ -51,7 +51,7 @@ const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
         {
           goodsData
           .filter((searchGoods) =>
-            searchGoods.product_name.includes(searchInfo)
+            searchGoods.bori_goods_name.includes(searchInfo)
           ).filter((cateGoods) => {
             if (categoryInfo === '0')
               return cateGoods;
@@ -61,10 +61,10 @@ const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
           ).map((goods) =>           
             <BoriGoodsItem 
               key={goods._id}
-              bori_goods_image={goods.product_image} 
-              goods_like={goods.product_like} 
-              goods_name={goods.product_name} 
-              product_price={goods.product_price} 
+              bori_goods_image={goods.bori_goods_image} 
+              goods_like={goods.bori_goods_like} 
+              goods_name={goods.bori_goods_name} 
+              bori_goods_price={goods.bori_goods_price} 
               category_name={categoryData.find(category => category._id === goods.category_id)?.category_name}></BoriGoodsItem>
           )
         }

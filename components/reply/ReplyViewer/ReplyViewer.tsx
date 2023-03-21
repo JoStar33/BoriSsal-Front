@@ -53,7 +53,7 @@ const ReplyViewer = ({mutationData, goods_id, setLimit, limit}: IProps) => {
           goodsReplyMutation.isLoading && <ReplySkeleton></ReplySkeleton>
         }
         {
-          mutationData?.product_reply && mutationData?.product_reply.map((reply)=>{
+          mutationData?.bori_goods_reply && mutationData?.bori_goods_reply.map((reply)=>{
             return <ReplyPart key={reply._id} reply={reply} setDialog={setDialog} validateText={validateText}></ReplyPart>
           })
         }

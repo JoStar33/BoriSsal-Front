@@ -34,7 +34,7 @@ test("useLogoutMutation 훅을 통해 store에 정상적으로 유저의 정보�
       profile_image: "hello",
       user_role: 0,
       created_at: new Date(),
-      user_product_like: [],
+      user_bori_goods_like: [],
       user_bori_gallery_like: [],
     })
   );
@@ -68,7 +68,7 @@ test("useLogoutMutation 훅이 실패했을 경우.", async () => {
       profile_image: "hello",
       user_role: 0,
       created_at: new Date(),
-      user_product_like: [],
+      user_bori_goods_like: [],
       user_bori_gallery_like: [],
     })
   );

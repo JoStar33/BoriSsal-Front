@@ -37,7 +37,7 @@ test("useLoginCheckQuery 훅 테스트(실패 케이스)", async () => {
       profile_image: "",
       user_role: 0,
       created_at: new Date(),
-      user_product_like: [],
+      user_bori_goods_like: [],
       user_bori_gallery_like: [],
     })
   );

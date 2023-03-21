@@ -23,11 +23,11 @@ const BoriGoodsDetailController = ({goods, validateText, setValidateDialog, setS
   const { mutate, isError, isSuccess, error } = useCartMutation(
     user.id,
     {
-      product_id: goods._id,
-      product_name: goods.product_name,
-      product_image: goods.product_image,
-      product_stock: goods.product_stock,
-      product_price: goods.product_price
+      bori_goods_id: goods._id,
+      bori_goods_name: goods.bori_goods_name,
+      bori_goods_image: goods.bori_goods_image,
+      bori_goods_stock: goods.bori_goods_stock,
+      bori_goods_price: goods.bori_goods_price
     }
   )
   const dispatch = useDispatch();
@@ -57,11 +57,11 @@ const BoriGoodsDetailController = ({goods, validateText, setValidateDialog, setS
       return;
     }
     dispatch(setCartState([{
-      product_id: goods._id,
-      product_name: goods.product_name,
-      product_image: goods.product_image,
-      product_stock: goods.product_stock,
-      product_price: goods.product_price
+      bori_goods_id: goods._id,
+      bori_goods_name: goods.bori_goods_name,
+      bori_goods_image: goods.bori_goods_image,
+      bori_goods_stock: goods.bori_goods_stock,
+      bori_goods_price: goods.bori_goods_price
     }]));
     router.push('/order');
   }

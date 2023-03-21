@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { store } from "@/store";
 import { setUserState } from "@/store/user";
 const mutationInitData = {
-  product_reply: [{
+  bori_goods_reply: [{
     _id: 'string',
     user_id: 'string',
     email: 'string',
@@ -65,7 +65,7 @@ test("댓글 등록시에 (댓글의 글자가 없을경우)", async () => {
     profile_image: "",
     user_role: 0,
     created_at: new Date(),
-    user_product_like: [],
+    user_bori_goods_like: [],
     user_bori_gallery_like: []
   }))
   initRender();

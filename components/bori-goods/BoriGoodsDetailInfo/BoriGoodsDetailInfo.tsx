@@ -27,16 +27,16 @@ const BoriGoodsDetailInfo = ({
   const likeGoodsMutation = useLikeGoodsMutation(
     user.id,
     goods._id,
-    user.user_product_like.find((likeGoods) => likeGoods === goods._id)
+    user.user_bori_goods_like.find((likeGoods) => likeGoods === goods._id)
   );
   const handleLikeGoods = () => {
     if (!user.id) {
       validateText.current = "로그인 이후에 누를 수 있어요!";
       return setValidateDialog(true);
     }
-    user.user_product_like.find((likeGoods) => likeGoods === goods._id)
-      ? goods.product_like--
-      : goods.product_like++;
+    user.user_bori_goods_like.find((likeGoods) => likeGoods === goods._id)
+      ? goods.bori_goods_like--
+      : goods.bori_goods_like++;
     dispatch(setGoodsLike(goods._id));
     likeGoodsMutation.mutate();
   };
@@ -66,8 +66,8 @@ const BoriGoodsDetailInfo = ({
             <Image
               style={{border: '2px solid black'}}
               fill
-              src={`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}${goods.product_image}`}
-              alt={goods.product_name}
+              src={`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}${goods.bori_goods_image}`}
+              alt={goods.bori_goods_name}
             ></Image>
           </figure>
           <BoriGoodsDetailController 
@@ -77,7 +77,7 @@ const BoriGoodsDetailInfo = ({
             goods={goods}/>
         </div>
         <div className={styles.goods_info}>
-          <p>제품 정보: {goods.product_name}</p>
+          <p>제품 정보: {goods.bori_goods_name}</p>
           <p className={styles.goods_category}>
             카테고리: #{category.category_name}
           </p>
@@ -88,7 +88,7 @@ const BoriGoodsDetailInfo = ({
                 role='like'>
                 <AiFillHeart
                   color={
-                    user.user_product_like.find(
+                    user.user_bori_goods_like.find(
                       (likeGoods) => likeGoods === goods._id
                     )
                       ? "red"
@@ -97,10 +97,10 @@ const BoriGoodsDetailInfo = ({
                   size={25}
                 ></AiFillHeart>
               </button>
-              {goods.product_like}
+              {goods.bori_goods_like}
             </div>
           </p>
-          <p>상품가격: {goods.product_price}</p>
+          <p>상품가격: {goods.bori_goods_price}</p>
         </div>
       </div>
     </>
