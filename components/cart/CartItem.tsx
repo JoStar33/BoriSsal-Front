@@ -18,7 +18,7 @@ const CartItem = ({cartGoods}: IProps) => {
       </figure>
       <div>
         <p>제품명: {cartGoods.product_name}</p>
-        <p>주문수량: {cartGoods.product_count}개</p>
+        <p>주문수량: {cartGoods.product_stock}개</p>
         <p className={styles.reply_part_container}>{cartGoods.product_price}원</p>
       </div>
     </div>
