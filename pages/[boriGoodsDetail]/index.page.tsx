@@ -1,20 +1,22 @@
+import React, { useRef, useState } from "react";
 import { getCategory, getGoods } from "@/apis/bori-goods/boriGoods";
 import { errorMessage } from "@/apis/error/customError";
 import { IBoriGoods, ICategory } from "@/types/boriGoods";
 import { AxiosError } from "axios";
-import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import ReplyViewer from "@/components/reply/ReplyViewer/ReplyViewer";
-import React, { useRef, useState } from "react";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { useBoriGoodsReplyQuery } from "@/hooks/bori-goods/useBoriGoodsReplyQuery/useBoriGoodsReplyQuery";
-import Image from "next/image";
 import { AiFillHeart } from "react-icons/ai";
 import { setGoodsLike } from "@/store/user";
-import styles from "./bori_goods_detail.module.scss";
 import { RootState } from "@/store";
 import { useDispatch, useSelector } from "react-redux";
-import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
 import { useLikeGoodsMutation } from "@/hooks/bori-goods/useLikeGoodsMutation/useLikeGoodsMutation";
 import { BsFillCartFill } from "react-icons/bs";
+import error_bori from '/public/404/404_bori.png';
+import ReplyViewer from "@/components/reply/ReplyViewer/ReplyViewer";
+import styles from "./bori_goods_detail.module.scss";
+import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
+import Image from "next/image";
+import ReplyLoading from "@/components/loading/ReplyLoading/ReplyLoading";
 
 interface IProps {
   goods: IBoriGoods;
@@ -32,9 +34,9 @@ const BoriGoodsDetail = ({
   const dispatch = useDispatch();
   const [dialog, setDialog] = useState<boolean>(false);
   const [limit, setLimit] = useState<number>(1);
-  const validateText = useRef<string>("");
   const { user } = useSelector((state: RootState) => state.userStore);
-  const { data } = useBoriGoodsReplyQuery(goods._id, limit);
+  const { data, isLoading } = useBoriGoodsReplyQuery(goods._id, limit);
+  const validateText = useRef<string>("");
   const likeGoodsMutation = useLikeGoodsMutation(
     user.id,
     goods._id,
@@ -51,6 +53,38 @@ const BoriGoodsDetail = ({
     dispatch(setGoodsLike(goods._id));
     likeGoodsMutation.mutate();
   };
+  if(categoryErrorMessage) {
+    return (
+      <div className={styles.bori_goods_info_container}>
+        <Image
+          width={220}
+          height={400}
+          src={error_bori}
+          alt={categoryErrorMessage}></Image>
+        <h1>
+          {
+            categoryErrorMessage
+          }
+        </h1>
+      </div>
+    )
+  }
+  if(goodsErrorMessage) {
+    return (
+      <div className={styles.bori_goods_info_container}>
+        <Image
+          width={220}
+          height={400}
+          src={error_bori}
+          alt={categoryErrorMessage}></Image>
+        <h1>
+          {
+            goodsErrorMessage
+          }
+        </h1>
+      </div>
+    )
+  }
   return (
     <div>
       {dialog && (
@@ -103,12 +137,16 @@ const BoriGoodsDetail = ({
           <p>상품가격: {goods.product_price}</p>
         </div>
       </div>
-      <ReplyViewer
-        setLimit={setLimit}
-        limit={limit}
-        goods_id={goods._id}
-        mutationData={data?.data}
-      ></ReplyViewer>
+      {
+        isLoading 
+          ? <ReplyLoading></ReplyLoading>
+          : <ReplyViewer
+            setLimit={setLimit}
+            limit={limit}
+            goods_id={goods._id}
+            mutationData={data?.data}
+          ></ReplyViewer>
+      }
     </div>
   );
 };

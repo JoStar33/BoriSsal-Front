@@ -7,6 +7,7 @@ import { useBoriGoodsReplyMutation } from '@/hooks/bori-goods/useBoriGoodsReplyM
 import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
+import ReplySkeleton from '@/components/loading/ReplySkeleton/ReplySkeleton';
 
 interface IProps {
   goods_id: string;
@@ -48,6 +49,9 @@ const ReplyViewer = ({mutationData, goods_id, setLimit, limit}: IProps) => {
         <button role="regist" onClick={replyRegist}>댓글 등록</button>
       </div>
       <div className={styles.reply_container}>
+        {
+          goodsReplyMutation.isLoading && <ReplySkeleton></ReplySkeleton>
+        }
         {
           mutationData?.product_reply && mutationData?.product_reply.map((reply)=>{
             return <ReplyPart key={reply._id} reply={reply} setDialog={setDialog} validateText={validateText}></ReplyPart>
