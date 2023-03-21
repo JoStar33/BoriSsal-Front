@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import UserBar from "./UserBar";
 
 export default {
-  title: "유저바 테스트",
+  title: "컴포넌트/사용자/유저바 테스트",
   component: UserBar,
 } as ComponentMeta<typeof UserBar>;
 

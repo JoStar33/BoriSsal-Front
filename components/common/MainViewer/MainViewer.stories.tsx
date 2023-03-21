@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import MainViewer from "./MainViewer";
 
 export default {
-  title: "메인뷰 테스트",
+  title: "컴포넌트/일반/메인뷰 테스트",
   component: MainViewer,
   argTypes: {},
 } as ComponentMeta<typeof MainViewer>;

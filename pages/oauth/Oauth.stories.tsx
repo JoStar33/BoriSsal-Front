@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 const queryClient = new QueryClient();
 
 export default {
-  title: "SNS 로그인 이후 화면 테스트",
+  title: "페이지/SNS 로그인 이후 화면 테스트",
   component: Oauth,
 } as ComponentMeta<typeof Oauth>;
 

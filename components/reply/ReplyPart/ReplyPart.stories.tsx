@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ReplyPart from './ReplyPart';
 
 export default {
-  title: '댓글 영역',
+  title: '컴포넌트/댓글/댓글 영역',
   component: ReplyPart,
 } as ComponentMeta<typeof ReplyPart>;
 

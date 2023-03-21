@@ -5,30 +5,34 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import { Provider } from "react-redux";
 import { store } from "@/store";
 import { setUserState } from "@/store/user";
-const replyInit = [{
-  _id: 'string',
-  user_id: 'string',
-  email: 'string',
-  content: 'string',
-  reply_child: [],
-  created_at: String(new Date()),
-}, {
-  _id: 'string',
-  user_id: 'string',
-  email: 'string',
-  content: 'string',
-  reply_child: [],
-  created_at:  String(new Date())
-}];
+const mutationInitData = {
+  product_reply: [{
+    _id: 'string',
+    user_id: 'string',
+    email: 'string',
+    content: 'string',
+    reply_child: [],
+    created_at: String(new Date()),
+  }, {
+    _id: 'string',
+    user_id: 'string',
+    email: 'string',
+    content: 'string',
+    reply_child: [],
+    created_at:  String(new Date())
+  }],
+  overflow: false
+}
 const queryClient = new QueryClient();
 const user = userEvent.setup();
 
+const setState = jest.fn() as any;
 
 const initRender = () => {
   render(
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
-        <ReplyViewer goods_id={"23"} reply={replyInit}></ReplyViewer>
+        <ReplyViewer goods_id={"23"} mutationData={mutationInitData} limit={1} setLimit={setState}></ReplyViewer>
       </QueryClientProvider>
     </Provider>
   );

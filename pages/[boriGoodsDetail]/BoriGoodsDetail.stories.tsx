@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import BoriGoodsDetail from "./index.page";
 
 export default {
-  title: "보리 굿즈 상세페이지",
+  title: "페이지/보리 굿즈 상세페이지",
   component: BoriGoodsDetail,
 } as ComponentMeta<typeof BoriGoodsDetail>;
 

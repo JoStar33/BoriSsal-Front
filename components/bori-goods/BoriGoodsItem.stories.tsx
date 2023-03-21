@@ -3,7 +3,7 @@ import React from "react";
 import BoriGoodsItem from "./BoriGoodsItem";
 
 export default {
-  title: '보리 굿즈페이지 아이템 테스트',
+  title: '컴포넌트/보리굿즈/보리 굿즈페이지 아이템 테스트',
   component: BoriGoodsItem,
 } as ComponentMeta<typeof BoriGoodsItem>;
 

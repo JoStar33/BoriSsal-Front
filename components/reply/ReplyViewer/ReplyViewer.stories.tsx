@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ReplyViewer from './ReplyViewer';
 
 export default {
-  title: '댓글 뷰어',
+  title: '컴포넌트/댓글/댓글 뷰어',
   component: ReplyViewer,
 } as ComponentMeta<typeof ReplyViewer>;
 
@@ -11,7 +11,7 @@ const Template: ComponentStory<typeof ReplyViewer> = (args) => <ReplyViewer {...
 export const ReplyViewerTest = Template.bind({});
 ReplyViewerTest.args = {
   mutationData: {
-    reply: [{
+    product_reply: [{
       _id: 'string',
       user_id: 'string',
       email: 'string',
