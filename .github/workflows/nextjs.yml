@@ -90,6 +90,10 @@ jobs:
       - run: npm i
       - run: CI='false' 
       - run: npm test a
+        env:
+          NEXT_PUBLIC_ADDRESS_KEY: ${{ secrets.NEXT_PUBLIC_ADDRESS_KEY }}
+          NEXT_PUBLIC_AXIOS_TIMEOUT: ${{ secrets.NEXT_PUBLIC_AXIOS_TIMEOUT }}
+          NEXT_PUBLIC_BORI_SSAL_API_URL: ${{ secrets.NEXT_PUBLIC_BORI_SSAL_API_URL }}
   # Deployment job
   # deploy:
   #   environment:
