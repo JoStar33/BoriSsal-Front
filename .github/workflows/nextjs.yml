@@ -89,7 +89,7 @@ jobs:
           ref: "develop"
       - run: npm i
       - run: CI='false' 
-      - run: npm test
+      - run: npm test --watchAll
   # Deployment job
   # deploy:
   #   environment:
