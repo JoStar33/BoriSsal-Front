@@ -15,7 +15,7 @@ const Wrapper = ({ children }: any) => {
 
 const initRender = () => {
   const { result } = renderHook(
-    () => useBoriGoodsReplyQuery('23'),
+    () => useBoriGoodsReplyQuery('23', 1),
     {
       wrapper: Wrapper,
     }

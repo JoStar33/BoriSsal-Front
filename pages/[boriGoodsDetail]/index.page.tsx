@@ -1,20 +1,20 @@
-import React, { useRef, useState } from "react";
+import { getCategory, getGoods } from "@/apis/bori-goods/boriGoods";
 import { errorMessage } from "@/apis/error/customError";
 import { IBoriGoods, ICategory } from "@/types/boriGoods";
 import { AxiosError } from "axios";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import ReplyViewer from "@/components/reply/ReplyViewer/ReplyViewer";
+import React, { useRef, useState } from "react";
+import { useBoriGoodsReplyQuery } from "@/hooks/bori-goods/useBoriGoodsReplyQuery/useBoriGoodsReplyQuery";
+import Image from "next/image";
 import { AiFillHeart } from "react-icons/ai";
 import { setGoodsLike } from "@/store/user";
-import { RootState } from "@/store";
-import { BsFillCartFill } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
-import { getCategory, getGoods } from "@/apis/bori-goods/boriGoods";
-import { useLikeGoodsMutation } from "@/hooks/bori-goods/useLikeGoodsMutation/useLikeGoodsMutation";
-import { useBoriGoodsReplyQuery } from "@/hooks/bori-goods/useBoriGoodsReplyQuery/useBoriGoodsReplyQuery";
-import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
 import styles from "./bori_goods_detail.module.scss";
-import Image from "next/image";
-import ReplyViewer from "@/components/reply/ReplyViewer/ReplyViewer";
+import { RootState } from "@/store";
+import { useDispatch, useSelector } from "react-redux";
+import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
+import { useLikeGoodsMutation } from "@/hooks/bori-goods/useLikeGoodsMutation/useLikeGoodsMutation";
+import { BsFillCartFill } from "react-icons/bs";
 
 interface IProps {
   goods: IBoriGoods;
@@ -31,9 +31,10 @@ const BoriGoodsDetail = ({
 }: IProps) => {
   const dispatch = useDispatch();
   const [dialog, setDialog] = useState<boolean>(false);
-  const { user } = useSelector((state: RootState) => state.userStore);
-  const { data } = useBoriGoodsReplyQuery(goods._id);
+  const [limit, setLimit] = useState<number>(1);
   const validateText = useRef<string>("");
+  const { user } = useSelector((state: RootState) => state.userStore);
+  const { data } = useBoriGoodsReplyQuery(goods._id, limit);
   const likeGoodsMutation = useLikeGoodsMutation(
     user.id,
     goods._id,
@@ -42,8 +43,7 @@ const BoriGoodsDetail = ({
   const handleLikeGoods = () => {
     if (!user.id) {
       validateText.current = "로그인 이후에 누를 수 있어요!";
-      setDialog(true);
-      return;
+      return setDialog(true);
     }
     user.user_product_like.find((likeGoods) => likeGoods === goods._id)
       ? goods.product_like--
@@ -103,7 +103,12 @@ const BoriGoodsDetail = ({
           <p>상품가격: {goods.product_price}</p>
         </div>
       </div>
-      <ReplyViewer goods_id={goods._id} reply={data?.data}></ReplyViewer>
+      <ReplyViewer
+        setLimit={setLimit}
+        limit={limit}
+        goods_id={goods._id}
+        mutationData={data?.data}
+      ></ReplyViewer>
     </div>
   );
 };

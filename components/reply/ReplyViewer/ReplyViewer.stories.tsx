@@ -10,20 +10,24 @@ const Template: ComponentStory<typeof ReplyViewer> = (args) => <ReplyViewer {...
 
 export const ReplyViewerTest = Template.bind({});
 ReplyViewerTest.args = {
-  reply: [{
-    _id: 'string',
-    user_id: 'string',
-    email: 'string',
-    content: 'string',
-    reply_child: [],
-    created_at: String(new Date()),
-  }, {
-    _id: 'string',
-    user_id: 'string',
-    email: 'string',
-    content: 'string',
-    reply_child: [],
-    created_at:  String(new Date())
-  }], 
+  mutationData: {
+    reply: [{
+      _id: 'string',
+      user_id: 'string',
+      email: 'string',
+      content: 'string',
+      reply_child: [],
+      created_at: String(new Date()),
+    }, {
+      _id: 'string',
+      user_id: 'string',
+      email: 'string',
+      content: 'string',
+      reply_child: [],
+      created_at:  String(new Date())
+    }],
+    overflow: true
+  },
+  limit: 1,
   goods_id: '23'
 }
