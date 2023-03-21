@@ -87,8 +87,8 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: "develop"
-      - run: npm ci
-      - run: npm run test -- --watch
+      - run: npm install
+      - run: npm test
   # Deployment job
   deploy:
     environment:
