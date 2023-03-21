@@ -8,7 +8,7 @@ interface IProps {
 
 const ReplyChildPart = ({replyChild}: IProps) => {
   return (
-    <div className={styles.reply_container}>
+    <div className={styles.reply_child_part_container}>
       <p>{replyChild.email}</p>
       <p>{replyChild.created_at}</p>
       <p>{replyChild.content}</p>

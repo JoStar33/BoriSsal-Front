@@ -13,3 +13,8 @@ export interface IReplyChild {
   content: string;
   created_at: string;
 }
+
+export interface IReplyMutation {
+  product_reply?: IReply[];
+  overflow: boolean
+}

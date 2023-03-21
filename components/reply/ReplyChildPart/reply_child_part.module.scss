@@ -1,12 +1,13 @@
-@mixin center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.reply_container {
-  @include center;
+.reply_child_part_container {
+  width: 96vw;
+  padding-left: 4vw;
   border: 2px solid black;
   position: relative;
-  flex-direction: row;
+  display: flex;
+  flex-direction: column;
+  background-color: gray;
+  p {
+    font-size: 0.9vw;
+    font-weight: 800;
+  }
 }
