@@ -59,7 +59,7 @@ const ReplyPart = ({ reply, setDialog, validateText }: IProps) => {
               </button>
               ) 
             : (
-              <button className={styles.child_reply_button} onClick={handleOnChilk}>
+              <button role='child-reply' className={styles.child_reply_button} onClick={handleOnChilk}>
                 답글달기
               </button>
               )
