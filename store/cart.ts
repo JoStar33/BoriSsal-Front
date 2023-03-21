@@ -22,6 +22,6 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { resetCartState } = cartSlice.actions;
+export const { resetCartState, setCartState } = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -9,6 +9,7 @@ import Image from "next/image";
 import styles from './bori_goods_detail_info.module.scss';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import BoriGoodsDetailController from '../BoriGoodsDetailController/BoriGoodsDetailController';
+import SuccessDialog from '@/components/dialogs/SuccessDialog/SuccessDialog';
 interface IProps {
   goods: IBoriGoods;
   category: ICategory;
@@ -20,7 +21,8 @@ const BoriGoodsDetailInfo = ({
 }:IProps) => {
   const dispatch = useDispatch();
   const validateText = useRef<string>("");
-  const [dialog, setDialog] = useState<boolean>(false);
+  const [validateDialog, setValidateDialog] = useState<boolean>(false);
+  const [successDialog, setSuccessDialog] = useState<boolean>(false);
   const { user } = useSelector((state: RootState) => state.userStore);
   const likeGoodsMutation = useLikeGoodsMutation(
     user.id,
@@ -30,7 +32,7 @@ const BoriGoodsDetailInfo = ({
   const handleLikeGoods = () => {
     if (!user.id) {
       validateText.current = "로그인 이후에 누를 수 있어요!";
-      return setDialog(true);
+      return setValidateDialog(true);
     }
     user.user_product_like.find((likeGoods) => likeGoods === goods._id)
       ? goods.product_like--
@@ -41,11 +43,19 @@ const BoriGoodsDetailInfo = ({
   return (
     <>
       {
-        dialog && (
+        validateDialog && (
           <ValidateDialog
             text={validateText.current}
-            setDialog={setDialog}
+            setDialog={setValidateDialog}
           ></ValidateDialog>
+        )
+      }
+      {
+        successDialog && (
+          <SuccessDialog
+            text='장바구니에 굿즈를 담으셨어요!'
+            setDialog={setSuccessDialog}
+          ></SuccessDialog>
         )
       }
       <div className={styles.bori_goods_detail_info_container}>
@@ -54,12 +64,17 @@ const BoriGoodsDetailInfo = ({
             style={{ position: "relative", width: "48vw", height: "48vw" }}
           >
             <Image
+              style={{border: '2px solid black'}}
               fill
               src={`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}${goods.product_image}`}
               alt={goods.product_name}
             ></Image>
           </figure>
-          <BoriGoodsDetailController/>
+          <BoriGoodsDetailController 
+            validateText={validateText}
+            setValidateDialog={setValidateDialog}
+            setSuccessDialog={setSuccessDialog}
+            goods={goods}/>
         </div>
         <div className={styles.goods_info}>
           <p>제품 정보: {goods.product_name}</p>
