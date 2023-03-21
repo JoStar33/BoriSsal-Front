@@ -1,0 +1,32 @@
+.bori_goods_detail_info_container {
+  margin: 1vw;
+  display: flex;
+  flex-direction: row;
+  .goods_info {
+    margin-top: 1vw;
+    margin-left: 2vw;
+    p {
+      font-weight: 800;
+      font-size: 1.4rem;
+    }
+    .goods_category {
+      display: flex;
+      flex-direction: row;
+    }
+    .goods_like_container {
+      display: flex;
+      flex-direction: row;
+      button {
+        margin-left: 1vw;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+      }
+    }
+  }
+  .goods_image_container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+}

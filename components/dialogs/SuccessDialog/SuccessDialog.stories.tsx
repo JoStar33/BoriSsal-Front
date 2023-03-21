@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import SuccessDialog from './SuccessDialog';
 
 export default {
-  title: '성공 다이어그램 테스트',
+  title: '컴포넌트/다이얼로그/성공 다이어그램 테스트',
   component: SuccessDialog,
 } as ComponentMeta<typeof SuccessDialog>;
 

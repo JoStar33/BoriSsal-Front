@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import LoginButton from "./LoginButton";
 
 export default {
-  title: "로그인버튼 테스트",
+  title: "컴포넌트/사용자/로그인버튼 테스트",
   component: LoginButton,
 } as ComponentMeta<typeof LoginButton>;
 

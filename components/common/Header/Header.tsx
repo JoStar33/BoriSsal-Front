@@ -11,7 +11,7 @@ import UserBar from "@/components/user/UserBar/UserBar";
 import LoginButton from "@/components/user/LoginButton/LoginButton";
 
 const Header = () => {
-  const [showSideBar, setShowSideBar] = useState(false);
+  const [showSideBar, setShowSideBar] = useState<boolean>(false);
   const { user } = useSelector((state: RootState) => state.userStore);
   return (
     <>

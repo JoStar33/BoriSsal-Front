@@ -6,7 +6,7 @@ import { QueryClientProvider, QueryClient } from "react-query";
 const queryClient = new QueryClient();
 
 export default {
-  title: "로그인 화면 테스트",
+  title: "페이지/로그인 화면 테스트",
   component: Login,
 } as ComponentMeta<typeof Login>;
 

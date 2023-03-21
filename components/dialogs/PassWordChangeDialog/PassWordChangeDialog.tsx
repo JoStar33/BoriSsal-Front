@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { GrClose } from "react-icons/gr";
 import { RiAlarmWarningFill } from "react-icons/ri";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { validatePassword, validatePasswordCheck } from "@/utils/validate";
-import { usePassWordChangeMutation } from "@/hooks/auth/usePassWordChangeMutation";
+import { usePassWordChangeMutation } from "@/hooks/auth/usePassWordChangeMutation/usePassWordChangeMutation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import Image from "next/image";
@@ -13,14 +13,17 @@ import InputPart from "@/components/user/InputPart/InputPart";
 import Loading from "@/components/loading/Loading/Loading";
 import { AxiosError } from "axios";
 import SuccessDialog from "../SuccessDialog/SuccessDialog";
+import { errorMessage } from "@/apis/error/customError";
+import { IPostPasswordInfo, IPasswordInfo } from "@/types/auth";
 
-type propsType = {
+interface IProps {
   setDialog: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const PassWordChangeDialog = ({ setDialog }: propsType) => {
+
+const PassWordChangeDialog = ({ setDialog }: IProps) => {
   const { user } = useSelector((state: RootState) => state.userStore);
-  const [account, setAccount] = useState({
+  const [account, setAccount] = useState<IPasswordInfo>({
     password: "",
     passwordCheck: "",
     newPassword: "",
@@ -97,16 +100,16 @@ const PassWordChangeDialog = ({ setDialog }: propsType) => {
           <h2>비밀번호 변경</h2>
           {/*비밀번호 변경 안내 타이틀*/}
           <InputPart
-            textOrPass="password" 
-            info="현재 비밀번호: "
-            type="password"
+            textOrPassword="password" 
+            inputLabel="현재 비밀번호: "
+            inputName="password"
             onChangeAccount={onChangeAccount}
             validate={validatePassword(account.password)}
           ></InputPart>
           <InputPart
-            textOrPass="password" 
-            info="현재 비밀번호 확인: "
-            type="passwordCheck"
+            textOrPassword="password" 
+            inputLabel="현재 비밀번호 확인: "
+            inputName="passwordCheck"
             onChangeAccount={onChangeAccount}
             validate={validatePasswordCheck(
               account.password,
@@ -114,16 +117,16 @@ const PassWordChangeDialog = ({ setDialog }: propsType) => {
             )}
           ></InputPart>
           <InputPart
-            textOrPass="password" 
-            info="새 비밀번호: "
-            type="newPassword"
+            textOrPassword="password" 
+            inputLabel="새 비밀번호: "
+            inputName="newPassword"
             onChangeAccount={onChangeAccount}
             validate={validatePassword(account.newPassword)}
           ></InputPart>
           <InputPart
-            textOrPass="password"  
-            info="새 비밀번호 확인: "
-            type="newPasswordCheck"
+            textOrPassword="password"  
+            inputLabel="새 비밀번호 확인: "
+            inputName="newPasswordCheck"
             onChangeAccount={onChangeAccount}
             validate={validatePasswordCheck(
               account.newPassword,
@@ -148,7 +151,7 @@ const PassWordChangeDialog = ({ setDialog }: propsType) => {
           {isError && (
             <div className={styles.mutation_handle_message}>
               <RiAlarmWarningFill size={25} color="red"></RiAlarmWarningFill>
-              {((error as AxiosError).response?.data as any).message}
+              {errorMessage(error as AxiosError)}
             </div>
           )}
           {isSuccess && (

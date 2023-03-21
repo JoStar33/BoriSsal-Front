@@ -1,30 +1,30 @@
 import React from "react";
 import styles from "./input_part.module.scss";
 
-type propsType = {
+interface IProps {
   onChangeAccount: (e: React.ChangeEvent<HTMLInputElement>) => void;
   validate: string | null;
-  type: string;
-  info: string;
-  textOrPass: string;
+  inputName: string;
+  inputLabel: string;
+  textOrPassword: string;
 };
 
 const InputPart = ({
   onChangeAccount,
   validate,
-  type,
-  info,
-  textOrPass
-}: propsType) => {
+  inputName,
+  inputLabel,
+  textOrPassword
+}: IProps) => {
   return (
     <div className={styles.input_box}>
       <div className={styles.input_container}>
-        <p>{info}</p>
+        <p>{inputLabel}</p>
         <input
-          name={type}
-          role={type}
+          name={inputName}
+          role={inputName}
           onChange={onChangeAccount}
-          type={textOrPass}
+          type={textOrPassword}
         />
       </div>
       <div className={styles.validate_text}>{validate}</div>

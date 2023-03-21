@@ -5,7 +5,7 @@ import { setUserState, resetUserState } from "@/store/user";
 import { useEffect } from 'react';
 
 export default {
-  title: '헤드 테스트',
+  title: '컴포넌트/일반/헤드 테스트',
   component: Header,
 } as ComponentMeta<typeof Header>;
 

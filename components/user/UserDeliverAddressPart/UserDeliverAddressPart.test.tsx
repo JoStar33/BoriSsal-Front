@@ -9,7 +9,7 @@ const queryClient = new QueryClient();
 
 const user = userEvent.setup();
 
-type propsType = {
+interface IProps {
   user_id: string;
   addressInfo: string;
   labelInfo: string;
@@ -21,7 +21,7 @@ const initRender = ({
   labelInfo,
   addressType,
   user_id,
-}: propsType) => {
+}: IProps) => {
   render(
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>

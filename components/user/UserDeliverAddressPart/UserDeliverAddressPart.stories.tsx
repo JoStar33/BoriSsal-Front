@@ -6,7 +6,7 @@ import { QueryClientProvider, QueryClient } from "react-query";
 const queryClient = new QueryClient();
 
 export default {
-  title: "배송주소 컴포넌트 테스트",
+  title: "컴포넌트/사용자/배송주소 컴포넌트 테스트",
   component: UserDeliverAddressPart,
 } as ComponentMeta<typeof UserDeliverAddressPart>;
 

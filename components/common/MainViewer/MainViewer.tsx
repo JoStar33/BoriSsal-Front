@@ -9,9 +9,10 @@ import mainImage7 from "/public/images/main_image7.png";
 import mainImage8 from "/public/images/main_image8.png";
 import styles from "./main_viewer.module.scss";
 import { NextPage } from "next";
+import Link from "next/link";
 
 const MainViewer = () => {
-  const [position, setPosition] = useState(0);
+  const [position, setPosition] = useState<number>(0);
   const onScroll = () => {
     setPosition(window.scrollY);
   };
@@ -136,10 +137,16 @@ const MainViewer = () => {
         <h1>어때 우리 귀여운 보리</h1>
         <h1>만나보지 않을래?</h1>
         <div className={styles.last_button_box}>
-          <button className={styles.goods_button}>굿즈페이지 가기</button>
-          <button className={styles.bori_gallery_button}>
-            보리갤러리 가기
-          </button>
+          <Link href="/bori-goods" aria-label="굿즈페이지로 이동">
+            <button className={styles.goods_button}>
+              굿즈페이지 가기
+            </button>
+          </Link>
+          <Link href="/bori-gallery" aria-label="보리갤러리 페이지로 이동">
+            <button className={styles.bori_gallery_button}>
+              보리갤러리 가기
+            </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ import { QueryClientProvider, QueryClient } from "react-query";
 const queryClient = new QueryClient();
 
 export default {
-  title: "중복검사 컴포넌트 테스트",
+  title: "컴포넌트/사용자/중복검사 컴포넌트 테스트",
   component: DuplicateCheckPart,
 } as ComponentMeta<typeof DuplicateCheckPart>;
 

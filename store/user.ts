@@ -1,7 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { userType } from "../types/user";
+import { IUser } from "../types/user";
 
-const initialState = {
+interface IState {
+  user: IUser;
+}
+
+const initialState: IState = {
   user: {
     id: "",
     email: ``,
@@ -12,7 +16,7 @@ const initialState = {
     created_at: new Date(),
     user_product_like: [],
     user_bori_gallery_like: [],
-  } as userType,
+  },
 };
 
 export const userSlice = createSlice({
@@ -22,15 +26,20 @@ export const userSlice = createSlice({
     resetUserState: (state) => {
       Object.assign(state, initialState);
     },
-    setUserState: (state, action: PayloadAction<userType>) => {
+    setUserState: (state, action: PayloadAction<IUser>) => {
       Object.assign(state.user, action.payload);
     },
     setUserProfileState: (state, action: PayloadAction<string>) => {
       state.user = {...state.user, profile_image: action.payload}
     },
+    setGoodsLike: (state, action: PayloadAction<string>) => {
+      state.user.user_product_like.find(likeGoods => likeGoods === action.payload) 
+      ? state.user.user_product_like = state.user.user_product_like.filter(likeGoods => likeGoods !== action.payload)
+      : state.user.user_product_like.push(action.payload);
+    }
   },
 });
 
-export const { resetUserState, setUserState, setUserProfileState } = userSlice.actions;
+export const { resetUserState, setUserState, setUserProfileState, setGoodsLike } = userSlice.actions;
 
 export default userSlice.reducer;

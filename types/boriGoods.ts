@@ -1,0 +1,16 @@
+export interface IBoriGoods {
+  _id: string;
+  category_id: string;
+  product_name: string;
+  product_price: number;
+  product_stock: number;
+  product_desc: string;
+  product_like: number;
+  product_image: string;
+  created_at: Date;
+};
+
+export interface ICategory {
+  _id: string;
+  category_name: string;
+}
