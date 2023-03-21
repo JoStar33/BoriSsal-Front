@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import BoriGoodsItem from '@/components/bori-goods/BoriGoodsItem';
+import BoriGoodsItem from '@/components/bori-goods/BoriGoodsItem/BoriGoodsItem';
 import { getGoods, getCategory } from '@/apis/bori-goods/boriGoods';
 import { AxiosError } from 'axios';
 import { IBoriGoods, ICategory } from '@/types/boriGoods';
