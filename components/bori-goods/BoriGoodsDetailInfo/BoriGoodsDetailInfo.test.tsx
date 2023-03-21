@@ -43,9 +43,9 @@ test('BoriGoodsDetailInfo 화면 렌더링 반영 테스트', async () => {
 
 test('좋아요 버튼을 누를시 (로그인 없이)', async () => {
   initRender();
-  const loginButton = screen.getByRole("login");
+  const loginButton = screen.getByRole("like");
   await user.click(loginButton).then(() => {
-    const error = screen.getByText("이메일 비밀번호를 입력해주세요.");
+    const error = screen.getByText("로그인 이후에 누를 수 있어요!");
     expect(error).toBeInTheDocument();
   });
 })

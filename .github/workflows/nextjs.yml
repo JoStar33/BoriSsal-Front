@@ -88,7 +88,9 @@ jobs:
         with:
           ref: "develop"
       - run: npm install
-      - run: npm test
+      - run: npm test --watch
+      env:
+        CI: true
   # Deployment job
   deploy:
     environment:

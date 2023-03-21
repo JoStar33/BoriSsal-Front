@@ -69,7 +69,8 @@ const BoriGoodsDetailInfo = ({
           <p className={styles.goods_like_container}>
             좋아요:
             <div>
-              <button onClick={handleLikeGoods}>
+              <button onClick={handleLikeGoods}
+                role='like'>
                 <AiFillHeart
                   color={
                     user.user_product_like.find(
