@@ -3,9 +3,6 @@ import Image from 'next/image';
 import { ICartGoods } from '@/types/cart';
 import styles from './cart_item.module.scss';
 import { GrClose } from 'react-icons/gr';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/store';
-import { deleteCartState } from '@/store/cart';
 import { useDeleteCartMutation } from '@/hooks/user/useDeleteCartMutation/useDeleteCartMutation';
 import CartItemSkeleton from '../loading/CartItemSkeleton/CartItemSkeleton';
 
