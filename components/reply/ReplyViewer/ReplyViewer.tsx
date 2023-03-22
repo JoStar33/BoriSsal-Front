@@ -8,15 +8,18 @@ import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import ReplySkeleton from '@/components/loading/ReplySkeleton/ReplySkeleton';
+import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
+import { AxiosResponse } from 'axios';
 
 interface IProps {
   goods_id: string;
   mutationData?: IReplyMutation;
   limit: number;
   setLimit: React.Dispatch<React.SetStateAction<number>>;
+  refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) =>  Promise<QueryObserverResult<AxiosResponse<any, any>, unknown>>
 }
 
-const ReplyViewer = ({mutationData, goods_id, setLimit, limit}: IProps) => {
+const ReplyViewer = ({mutationData, goods_id, setLimit, limit, refetch}: IProps) => {
   const [dialog, setDialog] = useState<boolean>(false);
   const replyContent = useRef<HTMLInputElement>(null);
   const validateText = useRef<string>('');
@@ -38,6 +41,14 @@ const ReplyViewer = ({mutationData, goods_id, setLimit, limit}: IProps) => {
     setLimit(limit + 1);
     goodsReplyMutation.mutate(replyContent.current.value);
   };
+  const showMoreReply = async () => {
+    setLimit(() => {
+      return limit + 1;
+    });
+    setTimeout(() => {
+      refetch();
+    }, 300);
+  }
   return (
     <>
       {
@@ -59,7 +70,7 @@ const ReplyViewer = ({mutationData, goods_id, setLimit, limit}: IProps) => {
         }
         {
           !mutationData?.overflow && 
-          <button className={styles.more_show_button} onClick={() => setLimit(limit + 1)}>
+          <button className={styles.more_show_button} onClick={() => showMoreReply()}>
             더보기
             <AiFillCaretDown></AiFillCaretDown>
           </button>

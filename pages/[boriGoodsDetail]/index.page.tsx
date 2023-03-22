@@ -24,7 +24,7 @@ const BoriGoodsDetail = ({
   goodsErrorMessage,
 }: IProps) => {
   const [limit, setLimit] = useState<number>(1);
-  const { data, isLoading } = useBoriGoodsReplyQuery(goods._id, limit);
+  const { data, isLoading, refetch } = useBoriGoodsReplyQuery(goods._id, limit);
   if (categoryErrorMessage) {
     return (
       <ErrorPage errorMessage={categoryErrorMessage}></ErrorPage>
@@ -45,6 +45,7 @@ const BoriGoodsDetail = ({
         isLoading 
           ? <ReplyLoading></ReplyLoading>
           : <ReplyViewer
+            refetch={refetch}
             setLimit={setLimit}
             limit={limit}
             goods_id={goods._id}
