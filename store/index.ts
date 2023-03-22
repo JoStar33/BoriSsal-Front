@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from "./user";
 import cartReducer from './cart';
 import { persistReducer } from "redux-persist";
-import storageSession from "redux-persist/lib/storage/session";
+import storage from "redux-persist/lib/storage";
 
 const reducers = combineReducers({
   userStore: userReducer,
@@ -11,7 +11,7 @@ const reducers = combineReducers({
 
 const persistConfig: any = {
   key: "root",
-  storage: storageSession, // 사용할 스토리지를 정의해요.
+  storage: storage, // 사용할 스토리지를 정의해요.
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
