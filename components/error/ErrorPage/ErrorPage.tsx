@@ -10,17 +10,17 @@ interface IProps {
 const ErrorPage = ({errorMessage}: IProps) => {
   return (
     <div className={styles.error_page_container}>
-    <Image
-      width={220}
-      height={400}
-      src={error_bori}
-      alt={errorMessage}></Image>
-    <h1>
-      {
-        errorMessage
-      }
-    </h1>
-  </div>
+      <Image
+        width={220}
+        height={400}
+        src={error_bori}
+        alt={errorMessage}></Image>
+      <h1>
+        {
+          errorMessage
+        }
+      </h1>
+    </div>
   );
 };
 
