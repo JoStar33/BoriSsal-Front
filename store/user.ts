@@ -3,6 +3,7 @@ import { IUser } from "../types/user";
 
 interface IState {
   user: IUser;
+  pageState: string;
 }
 
 const initialState: IState = {
@@ -17,6 +18,7 @@ const initialState: IState = {
     user_bori_goods_like: [],
     user_bori_gallery_like: [],
   },
+  pageState: ''
 };
 
 export const userSlice = createSlice({
@@ -36,10 +38,13 @@ export const userSlice = createSlice({
       state.user.user_bori_goods_like.find(likeGoods => likeGoods === action.payload) 
       ? state.user.user_bori_goods_like = state.user.user_bori_goods_like.filter(likeGoods => likeGoods !== action.payload)
       : state.user.user_bori_goods_like.push(action.payload);
+    },
+    setPageState: (state, action: PayloadAction<string>) => {
+      state.pageState = action.payload;
     }
   },
 });
 
-export const { resetUserState, setUserState, setUserProfileState, setGoodsLike } = userSlice.actions;
+export const { resetUserState, setUserState, setUserProfileState, setGoodsLike, setPageState } = userSlice.actions;
 
 export default userSlice.reducer;
