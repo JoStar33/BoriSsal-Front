@@ -48,18 +48,4 @@ test('좋아요 버튼을 누를시 (로그인 없이)', async () => {
     const error = screen.getByText("로그인 이후에 누를 수 있어요!");
     expect(error).toBeInTheDocument();
   });
-})
-
-test('좋아요 버튼을 누를시 (로그인 이후)', () => {
-  store.dispatch(setUserState({
-    id: "",
-    email: "",
-    nick: "",
-    sns_id: "",
-    profile_image: "",
-    user_role: 0,
-    created_at: new Date(),
-    user_bori_goods_like: [],
-    user_bori_gallery_like: []
-  }))
-})
+});

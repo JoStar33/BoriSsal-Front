@@ -19,5 +19,4 @@ export interface IPasswordInfo {
 export interface IPostPasswordInfo {
   password: string;
   newPassword: string;
-  id: string;
 };

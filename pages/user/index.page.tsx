@@ -15,13 +15,10 @@ import { useProfileUpdateMutation } from "@/hooks/user/useProfileUpdateMutation/
 const UserPage = () => {
   const { user } = useSelector((state: RootState) => state.userStore);
   const [dialog, setDialog] = useState<boolean>(false);
-  const { data } = useDeliverAddressQuery({ user_id: user.id });
+  const { data } = useDeliverAddressQuery();
   const { isLoading, isError } = useLoginCheckQuery();
   const formData = new FormData();
-  const { mutate } = useProfileUpdateMutation({
-    user_id: user.id,
-    image: formData,
-  });
+  const { mutate } = useProfileUpdateMutation(formData);
   const handleOnChangeProfileImage = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {

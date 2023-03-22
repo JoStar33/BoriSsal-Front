@@ -14,7 +14,8 @@ import Loading from "@/components/loading/Loading/Loading";
 import { AxiosError } from "axios";
 import SuccessDialog from "../SuccessDialog/SuccessDialog";
 import { errorMessage } from "@/apis/error/customError";
-import { IPostPasswordInfo, IPasswordInfo } from "@/types/auth";
+import { IPasswordInfo } from "@/types/auth";
+import { IPostPasswordInfo } from "@/types/auth";
 
 interface IProps {
   setDialog: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,19 +23,20 @@ interface IProps {
 
 
 const PassWordChangeDialog = ({ setDialog }: IProps) => {
-  const { user } = useSelector((state: RootState) => state.userStore);
   const [account, setAccount] = useState<IPasswordInfo>({
     password: "",
     passwordCheck: "",
     newPassword: "",
     newPasswordCheck: "",
   });
-  const { mutate, isLoading, isError, error, isSuccess } =
-    usePassWordChangeMutation({
-      id: user.id,
+  const postPassWord = useMemo<IPostPasswordInfo>(() => {
+    return {
       password: account.password,
       newPassword: account.newPassword,
-    });
+    }
+  }, [account])
+  const { mutate, isLoading, isError, error, isSuccess } =
+    usePassWordChangeMutation(postPassWord);
   const onChangeAccount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAccount({
       ...account,
@@ -75,7 +77,7 @@ const PassWordChangeDialog = ({ setDialog }: IProps) => {
         setDialog(false);
       }, 2000);
     }
-  }, [isSuccess]);
+  }, [isSuccess, setDialog]);
   return (
     <>
       { isSuccess && <SuccessDialog text="비밀번호 변경 성공!"></SuccessDialog>}

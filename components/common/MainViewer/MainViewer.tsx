@@ -8,7 +8,6 @@ import mainImage6 from "/public/images/main_image6.png";
 import mainImage7 from "/public/images/main_image7.png";
 import mainImage8 from "/public/images/main_image8.png";
 import styles from "./main_viewer.module.scss";
-import { NextPage } from "next";
 import Link from "next/link";
 
 const MainViewer = () => {

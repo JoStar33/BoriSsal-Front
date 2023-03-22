@@ -21,7 +21,7 @@ const ReplyViewer = ({mutationData, goods_id, setLimit, limit}: IProps) => {
   const replyContent = useRef<HTMLInputElement>(null);
   const validateText = useRef<string>('');
   const { user } = useSelector((state: RootState) => state.userStore);
-  const goodsReplyMutation = useBoriGoodsReplyMutation(user.id, user.email, goods_id);
+  const goodsReplyMutation = useBoriGoodsReplyMutation(goods_id);
   const replyRegist = () => {
     if(!replyContent.current)
       return;

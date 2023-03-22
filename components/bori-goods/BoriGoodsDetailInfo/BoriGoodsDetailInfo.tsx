@@ -24,11 +24,7 @@ const BoriGoodsDetailInfo = ({
   const [validateDialog, setValidateDialog] = useState<boolean>(false);
   const [successDialog, setSuccessDialog] = useState<boolean>(false);
   const { user } = useSelector((state: RootState) => state.userStore);
-  const likeGoodsMutation = useLikeGoodsMutation(
-    user.id,
-    goods._id,
-    user.user_bori_goods_like.find((likeGoods) => likeGoods === goods._id)
-  );
+  const likeGoodsMutation = useLikeGoodsMutation(goods._id);
   const handleLikeGoods = () => {
     if (!user.id) {
       validateText.current = "로그인 이후에 누를 수 있어요!";

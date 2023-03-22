@@ -5,6 +5,7 @@ import { AxiosError } from 'axios';
 import { IBoriGoods, ICategory } from '@/types/boriGoods';
 import styles from './bori_goods_page.module.scss';
 import { errorMessage } from '@/apis/error/customError';
+import ErrorPage from '@/components/error/ErrorPage/ErrorPage';
 
 interface IProps {
   goodsData: IBoriGoods[];
@@ -20,7 +21,10 @@ const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
   };
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInfo(e.target.value);
-  } 
+  };
+  if (errorMessage) {
+    return <ErrorPage errorMessage={errorMessage}></ErrorPage>
+  }
   return (
     <div className={styles.bori_goods_page_container}>
       <h1>보리 굿즈</h1>

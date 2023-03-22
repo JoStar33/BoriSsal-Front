@@ -17,11 +17,7 @@ const ReplyPart = ({ reply, setDialog, validateText }: IProps) => {
   const { user } = useSelector((state: RootState) => state.userStore);
   const replyDate = useRef<Date>(new Date(reply.created_at));
   const replyInputRef = useRef<HTMLInputElement>(null);
-  const goodsReplyChildMutation = useBoriGoodsChildReplyMutation(
-    user.id,
-    user.email,
-    reply._id
-  );
+  const goodsReplyChildMutation = useBoriGoodsChildReplyMutation(reply._id);
   const handleOnChilk = () => {
     setShowChildReply(!showChildReply);
   };

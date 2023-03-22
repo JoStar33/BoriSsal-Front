@@ -1,10 +1,9 @@
 import { useQuery } from "react-query";
 import { getDeliverAddress } from "@/apis/user/deliverAddress";
+import { useSelector } from 'react-redux';
+import { RootState } from "@/store";
 
-interface IProps {
-  user_id: string;
-};
-
-export const useDeliverAddressQuery = ({ user_id }: IProps) => {
-  return useQuery(["deliver-address"], () => getDeliverAddress(user_id));
+export const useDeliverAddressQuery = () => {
+  const { user } = useSelector((state: RootState) => state.userStore);
+  return useQuery(["deliver-address"], () => getDeliverAddress(user.id));
 };
