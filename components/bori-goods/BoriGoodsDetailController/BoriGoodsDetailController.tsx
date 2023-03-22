@@ -26,7 +26,7 @@ const BoriGoodsDetailController = ({goods, validateText, setValidateDialog, setS
       bori_goods_id: goods._id,
       bori_goods_name: goods.bori_goods_name,
       bori_goods_image: goods.bori_goods_image,
-      bori_goods_stock: goods.bori_goods_stock,
+      bori_goods_count: 1,
       bori_goods_price: goods.bori_goods_price
     }
   )
@@ -60,7 +60,7 @@ const BoriGoodsDetailController = ({goods, validateText, setValidateDialog, setS
       bori_goods_id: goods._id,
       bori_goods_name: goods.bori_goods_name,
       bori_goods_image: goods.bori_goods_image,
-      bori_goods_stock: goods.bori_goods_stock,
+      bori_goods_count: 1,
       bori_goods_price: goods.bori_goods_price
     }]));
     router.push('/order');
