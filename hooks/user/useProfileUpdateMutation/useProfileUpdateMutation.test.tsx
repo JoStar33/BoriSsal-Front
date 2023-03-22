@@ -16,7 +16,7 @@ const Wrapper = ({ children }: any) => {
 
 test("useProfileUpdateMutation 정상동작 확인 테스트", async () => {
   const { result } = renderHook(
-    () => useProfileUpdateMutation({ user_id: "23", image: new FormData() }),
+    () => useProfileUpdateMutation(new FormData()),
     {
       wrapper: Wrapper,
     }
