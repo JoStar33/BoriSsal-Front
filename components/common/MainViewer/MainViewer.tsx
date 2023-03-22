@@ -9,13 +9,17 @@ import mainImage7 from "/public/images/main_image7.png";
 import mainImage8 from "/public/images/main_image8.png";
 import styles from "./main_viewer.module.scss";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { setPageState } from "@/store/user";
 
 const MainViewer = () => {
   const [position, setPosition] = useState<number>(0);
   const onScroll = () => {
     setPosition(window.scrollY);
   };
+  const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(setPageState(''));
     window.addEventListener("scroll", onScroll);
     return () => {
       window.removeEventListener("scroll", onScroll);

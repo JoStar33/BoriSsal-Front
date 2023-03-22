@@ -35,9 +35,14 @@
     height: 14vw;
     @include skeleton_default;
   }
-  .info_part {
-    width: 50vw;
-    @include skeleton_default;
-    height: 0.9vw;
-  };
+  .info_part_container {
+    margin-left: 5vw;
+    .info_part {
+      border-radius: 20px;
+      margin: 0.4vw;
+      width: 50vw;
+      @include skeleton_default;
+      height: 1.2vw;
+    };
+  }
 };

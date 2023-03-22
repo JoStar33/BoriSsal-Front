@@ -2,6 +2,7 @@ import { errorMessage } from '@/apis/error/customError';
 import { useCartMutation } from '@/hooks/user/useCartMutation/useCartMutation';
 import { RootState } from '@/store';
 import { setCartState } from '@/store/cart';
+import { setPageState } from '@/store/user';
 import { IBoriGoods } from '@/types/boriGoods';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
@@ -63,6 +64,7 @@ const BoriGoodsDetailController = ({goods, validateText, setValidateDialog, setS
       bori_goods_count: 1,
       bori_goods_price: goods.bori_goods_price
     }]));
+    dispatch(setPageState('order'));
     router.push('/order');
   }
   return (
