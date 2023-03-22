@@ -1,15 +1,31 @@
-.cart_item_container {
-  width: 96vw;
-  border: 2px solid black;
-  .goods_info_container {
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+};
 
-  }
+.cart_item_container {
+  position: relative;
+  width: 80vw;
+  border: 2px solid black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   p {
-    font-size: 0.9vw;
+    font-size: 2vh;
     font-weight: 800;
   }
-  .price_info {
-    font-size: 1.2vw;
-    font-weight: 800;
-  }
+}
+
+.default_close_button {
+  @include center;
+  cursor: pointer;
+  border: 0.2vw solid black;
+  position: absolute;
+  bottom: 82%;
+  left: 97%;
+  background-color: white;
+  border-radius: 100px;
+  width: 2vw;
+  height: 2vw;
 }
