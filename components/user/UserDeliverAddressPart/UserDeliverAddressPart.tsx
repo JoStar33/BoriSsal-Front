@@ -6,11 +6,12 @@ import { AiFillCheckCircle } from "react-icons/ai";
 import { RiAlarmWarningFill } from "react-icons/ri";
 import { errorMessage } from "@/apis/error/customError";
 import { AxiosError } from "axios";
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 import styles from "./user_deliver_address_part.module.scss";
 import DaumPostcode from "react-daum-postcode";
 
 interface IProps {
-  user_id: string;
   addressInfo: string;
   labelInfo: string;
   addressType: string;
@@ -19,14 +20,14 @@ interface IProps {
 const UserDeliverAddressPart = ({
   addressInfo,
   labelInfo,
-  addressType,
-  user_id,
+  addressType
 }: IProps) => {
+  const { user } = useSelector((state: RootState) => state.userStore);
   const [dialog, setDialog] = useState<boolean>(false);
   const [address, setAddress] = useState<string>(addressInfo);
   const inputRef = useRef<HTMLInputElement>(null);
   const userAddressInfo: IPatchDeliverAddress = {
-    user_id: user_id,
+    user_id: user.id,
     address_info: address,
     address_type: addressType,
   }
@@ -86,7 +87,7 @@ const UserDeliverAddressPart = ({
             onClick={() => mutate()}
             role="modify_address_button"
           >
-            <BsFillPencilFill size={30}></BsFillPencilFill>
+            <BsFillPencilFill style={{width: '1vw', height: '1vw'}}></BsFillPencilFill>
           </button>
         ) : (
           <button
