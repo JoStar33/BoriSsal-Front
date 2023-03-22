@@ -95,7 +95,7 @@ const OrderPage = () => {
             }원
           </p>
         </div>
-        <button onClick={handleOrder} className={styles.order_button}>주문하기</button>
+        <button role="order-button" onClick={handleOrder} className={styles.order_button}>주문하기</button>
       </div>
     </>
   );

@@ -15,7 +15,7 @@ const Wrapper = ({ children }: any) => {
 
 test("usePassWordChangeMutation 정상동작 확인 테스트", async () => {
   const { result } = renderHook(
-    () => usePassWordChangeMutation({ id: "", password: "", newPassword: "" }),
+    () => usePassWordChangeMutation({password: "", newPassword: "" }),
     {
       wrapper: Wrapper,
     }

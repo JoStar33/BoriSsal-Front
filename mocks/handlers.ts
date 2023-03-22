@@ -34,12 +34,12 @@ export const handlers = [
     return res
     (
       ctx.status(200),
-      ctx.json({
+      ctx.json([{
         user_id: "23",
         phone_number: "01033332222",
         address: '경기도 안양시 동안구 호랑이아파트',
         address_detail: '102동 304호'
-      })
+      }])
     );
   }),
   rest.patch(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/deliver-address`, (req, res, ctx) => {

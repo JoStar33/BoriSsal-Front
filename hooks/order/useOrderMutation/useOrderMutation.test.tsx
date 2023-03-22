@@ -3,12 +3,16 @@ import { rest } from "msw";
 import { useOrderMutation } from "./useOrderMutation";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { renderHook, waitFor } from "@testing-library/react";
+import { Provider } from "react-redux";
+import { store } from "@/store";
 
 const queryClient = new QueryClient();
 
 const Wrapper = ({ children }: any) => {
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    </Provider>
   );
 };
 
@@ -35,8 +39,6 @@ test("useOrderMutation 훅 테스트(성공)", async () => {
     wrapper: Wrapper,
   });
   result.current.mutate()
-  await waitFor(() => {
-    expect(result.current.isError).toBeTruthy();
-  });
+  await waitFor(() => expect(result.current.isError).toBeTruthy());
   expect(result.current.isError).toBeTruthy();
 });
