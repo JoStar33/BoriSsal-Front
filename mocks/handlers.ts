@@ -208,7 +208,7 @@ export const handlers = [
       ctx.status(200)
     );
   }),
-  rest.get(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/cart`, (req, res, ctx) => {
+  rest.get(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/cart/23`, (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json([{
