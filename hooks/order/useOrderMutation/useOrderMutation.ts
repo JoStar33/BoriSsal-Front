@@ -1,6 +1,5 @@
 import { useMutation } from "react-query";
 import { useRouter } from "next/router";
-import { ICartGoods } from "@/types/cart";
 import { postOrder } from "@/apis/order/order";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";

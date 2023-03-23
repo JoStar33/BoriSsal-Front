@@ -1,5 +1,3 @@
-import { server } from "@/mocks/server";
-import { rest } from "msw";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { renderHook, waitFor } from "@testing-library/react";
 import { useCartQuery } from "./useCartQuery";
