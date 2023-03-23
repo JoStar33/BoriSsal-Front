@@ -15,6 +15,6 @@ export interface IReplyChild {
 }
 
 export interface IReplyMutation {
-  bori_goods_reply?: IReply[];
+  bori_goods_reply: IReply[];
   overflow: boolean
 }

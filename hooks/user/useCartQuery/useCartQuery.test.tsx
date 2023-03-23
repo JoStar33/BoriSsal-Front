@@ -5,8 +5,6 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { useCartQuery } from "./useCartQuery";
 import { Provider } from "react-redux";
 import { store } from "@/store";
-import { errorMessage } from "@/apis/error/customError";
-import { AxiosError } from "axios";
 
 const queryClient = new QueryClient();
 
@@ -26,7 +24,8 @@ test("useCartQuery 정상동작 확인 테스트", async () => {
     }
   );
   await waitFor(() => expect(result.current.isSuccess).toBe(true)).then(() => {
-    expect(result.current.data?.data.bori_goods_name).toEqual(
+    const data =  result.current.data || [];
+    expect(data[0].bori_goods_name).toEqual(
       "보리 펜"
     );
   });
