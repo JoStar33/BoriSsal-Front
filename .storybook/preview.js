@@ -5,9 +5,10 @@ import { setupWorker } from "msw";
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from "react-redux";
 import { store }from '@/store';
+import { setPageState } from '@/store/user';
 
 const queryClient = new QueryClient();
-
+store.dispatch(setPageState('order'));
 if (typeof global.process === "undefined") {//checks to make sure that this is not a node process
   const worker = setupWorker(//create service worker
     ...handlers
