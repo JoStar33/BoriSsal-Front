@@ -4,10 +4,13 @@ import styles from './cart_page.module.scss';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setCartState } from '@/store/cart';
+import { useRouter } from 'next/router';
+import { setPageState } from '@/store/user';
 
 
 const CartPage = () => {
   let { data: cartData } = useCartQuery();
+  const router = useRouter();
   const dispatch = useDispatch();
   if (!cartData) {
     cartData = [];
@@ -16,7 +19,9 @@ const CartPage = () => {
     if (!cartData) {
       cartData = [];
     }
+    dispatch(setPageState('order'));
     dispatch(setCartState(cartData));
+    router.push('/order');
   };
   return (
     <div className={styles.order_container}>
