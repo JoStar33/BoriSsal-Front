@@ -26,7 +26,6 @@ const initRender = ({
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <UserDeliverAddressPart
-          user_id={user_id}
           addressInfo={addressInfo}
           labelInfo={labelInfo}
           addressType={addressType}
