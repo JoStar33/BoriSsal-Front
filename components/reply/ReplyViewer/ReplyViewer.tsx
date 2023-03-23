@@ -9,21 +9,20 @@ import { useSelector } from 'react-redux';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import ReplySkeleton from '@/components/loading/ReplySkeleton/ReplySkeleton';
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
-import { AxiosResponse } from 'axios';
 
 interface IProps {
   goods_id: string;
-  mutationData?: IReplyMutation;
+  mutationData: IReplyMutation;
   limit: number;
   setLimit: React.Dispatch<React.SetStateAction<number>>;
-  refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) =>  Promise<QueryObserverResult<AxiosResponse<any, any>, unknown>>
+  refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<IReplyMutation, unknown>>
 }
 
 const ReplyViewer = ({mutationData, goods_id, setLimit, limit, refetch}: IProps) => {
   const [dialog, setDialog] = useState<boolean>(false);
+  const { user } = useSelector((state: RootState) => state.userStore);
   const replyContent = useRef<HTMLInputElement>(null);
   const validateText = useRef<string>('');
-  const { user } = useSelector((state: RootState) => state.userStore);
   const goodsReplyMutation = useBoriGoodsReplyMutation(goods_id);
   const replyRegist = () => {
     if(!replyContent.current)
@@ -64,12 +63,12 @@ const ReplyViewer = ({mutationData, goods_id, setLimit, limit, refetch}: IProps)
           goodsReplyMutation.isLoading && <ReplySkeleton></ReplySkeleton>
         }
         {
-          mutationData?.bori_goods_reply && mutationData?.bori_goods_reply.map((reply)=>{
+          mutationData.bori_goods_reply && mutationData.bori_goods_reply.map((reply)=>{
             return <ReplyPart key={reply._id} reply={reply} setDialog={setDialog} validateText={validateText}></ReplyPart>
           })
         }
         {
-          !mutationData?.overflow && 
+          !mutationData.overflow && 
           <button className={styles.more_show_button} onClick={() => showMoreReply()}>
             더보기
             <AiFillCaretDown></AiFillCaretDown>
