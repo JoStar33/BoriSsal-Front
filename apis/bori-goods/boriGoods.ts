@@ -1,3 +1,4 @@
+import { IReplyMutation } from "@/types/reply";
 import { customAxios } from "../axios/customAxios";
 
 const getGoods = () => {
@@ -9,7 +10,11 @@ const getCategory = () => {
 };
 
 const getBoriGoodsReply = (goods_id: string, limit: number) => {
-  return customAxios.get(`/bori-goods-reply/${goods_id}/${limit}`)
+  const boriGoodsReply = customAxios.get(`/bori-goods-reply/${goods_id}/${limit}`)    
+    .then(res => res)
+    .then(res => res.data)
+    .then((data: IReplyMutation) => data)
+  return boriGoodsReply;
 };
 
 const postBoriGoodsReply = (user_id: string, email: string, bori_goods_id: string, content: string) => {

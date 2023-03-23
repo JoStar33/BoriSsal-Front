@@ -1,7 +1,8 @@
 import { AxiosError, AxiosResponse } from "axios";
 
-export const errorMessage = (error: AxiosError): string => {
-  const { response } = error;
+export const errorMessage = (error: AxiosError | any): string => {
+  const errorAxios: AxiosError = error;
+  const { response } = errorAxios;
   if (!response) {
     return '서버 내부오류 발생!';
   }
