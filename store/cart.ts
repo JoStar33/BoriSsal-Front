@@ -23,10 +23,24 @@ export const cartSlice = createSlice({
     },
     setCartState: (state, action: PayloadAction<ICartGoods[]>) => {
       state.cart = action.payload;
-    }
+    },
+    increaseCartState: (state, action: PayloadAction<ICartGoods>) => {
+      state.cart = state.cart.map(cart => {
+        if(cart.bori_goods_id === action.payload.bori_goods_id)
+          cart.bori_goods_count++;
+        return cart;
+      })
+    },
+    decreaseCartState: (state, action: PayloadAction<ICartGoods>) => {
+      state.cart = state.cart.map(cart => {
+        if((cart.bori_goods_id === action.payload.bori_goods_id) && cart.bori_goods_count >= 0)
+          cart.bori_goods_count--;
+        return cart;
+      })
+    },
   },
 });
 
-export const { resetCartState, setCartState, deleteCartState } = cartSlice.actions;
+export const { resetCartState, setCartState, deleteCartState, increaseCartState, decreaseCartState } = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -22,6 +22,16 @@ const validateEmail = (email: string) => {
   return null;
 };
 
+const validateCount = (count: number) => {
+  if (count) {
+    if (count < 0)
+      return "갯수가 0보다 작을 수 없습니다.";
+    if (count > 10)
+      return "10개이상 구매가 불가능합니다."
+  }
+  return null;
+}
+
 const validateNick = (nick: string) => {
   if (nick) {
     const patternCnt = [
@@ -42,4 +52,5 @@ const validatePasswordCheck = (password: string | undefined, passwordCheck: stri
     ? "비밀번호가 확인값과 다릅니다. 다시입력 해주세요."
     : null;
 
-export { validatePassword, validateEmail, validateNick, validatePasswordCheck };
+export { validatePassword, validateEmail, validateNick, validatePasswordCheck, validateCount };
+
