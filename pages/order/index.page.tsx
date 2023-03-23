@@ -1,17 +1,15 @@
 import CartItem from '@/components/cart/CartItem';
 import { useLoginCheckQuery } from '@/hooks/auth/useLoginCheckQuery/useLoginCheckQuery';
 import { useDeliverAddressQuery } from '@/hooks/user/useDeliverAddressQuery/useDeliverAddressQuery';
-import { useSelector, useDispatch } from 'react-redux';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import React, { useMemo, useRef, useState } from 'react';
 import { RootState } from '@/store';
-import UserDeliverAddressPart from '@/components/user/UserDeliverAddressPart/UserDeliverAddressPart';
 import styles from './orderpage.module.scss';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import { useOrderMutation } from '@/hooks/order/useOrderMutation/useOrderMutation';
-import { setPageState } from '@/store/user';
 import UserInfoViewer from '@/components/order/UserInfoViewer/UserInfoViewer';
 import ErrorPage from '@/components/error/ErrorPage/ErrorPage';
-import Loading from '@/components/loading/Loading/Loading';
+import UserDeliverAddressViewer from '@/components/user/UserDeliverAddressViewer/UserDeliverAddressViewer';
 
 //로그인 여부 확인 필요
 
@@ -28,7 +26,7 @@ const OrderPage = () => {
   const { pageState } = useSelector((state: RootState) => state.userStore);
   const [dialog, setDialog]= useState<boolean>(false);
   const validateText = useRef<string>('');
-  let { data } = useDeliverAddressQuery();
+  let { data, isError, isLoading } = useDeliverAddressQuery();
   const { cart } = useSelector((state: RootState) => state.cartStore);
   const { mutate } = useOrderMutation();
   const totalPrice = useMemo(() => {
@@ -64,21 +62,10 @@ const OrderPage = () => {
         ? <div className={styles.order_container}>
             <h1 className={styles.info_head}>회원정보</h1>
             <UserInfoViewer/>
-            <h1 className={styles.info_head}>배송지 정보</h1>
-            <div className={styles.info_container}>
-              <UserDeliverAddressPart 
-                addressInfo={data.phone_number}
-                addressType="phone_number"
-                labelInfo="전화번호: "></UserDeliverAddressPart>
-              <UserDeliverAddressPart               
-                addressInfo={data.address}
-                addressType="address"
-                labelInfo="주소: "></UserDeliverAddressPart>
-              <UserDeliverAddressPart 
-                addressInfo={data.address_detail}
-                addressType="address_detail"
-                labelInfo="상세주소: "></UserDeliverAddressPart>
-            </div>
+            <UserDeliverAddressViewer 
+              deliverAddress={data} 
+              isLoading={isLoading} 
+              isError={isError}/>
             <h1 className={styles.info_head}>주문 상품 정보</h1>
             <div className={styles.cart_container}>
               {

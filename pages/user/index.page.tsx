@@ -3,7 +3,6 @@ import Image from "next/image";
 import { RootState } from "@/store";
 import { useSelector } from "react-redux";
 import { useDeliverAddressQuery } from "@/hooks/user/useDeliverAddressQuery/useDeliverAddressQuery";
-import UserDeliverAddressPart from "@/components/user/UserDeliverAddressPart/UserDeliverAddressPart";
 import styles from "./userpage.module.scss";
 import Loading from "@/components/loading/Loading/Loading";
 import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
@@ -12,12 +11,13 @@ import { useLoginCheckQuery } from "@/hooks/auth/useLoginCheckQuery/useLoginChec
 import { BsFillPencilFill } from "react-icons/bs";
 import { useProfileUpdateMutation } from "@/hooks/user/useProfileUpdateMutation/useProfileUpdateMutation";
 import { initDeliver } from "@/utils/initData";
+import UserDeliverAddressViewer from "@/components/user/UserDeliverAddressViewer/UserDeliverAddressViewer";
 
 const UserPage = () => {
   const { user } = useSelector((state: RootState) => state.userStore);
   const [dialog, setDialog] = useState<boolean>(false);
-  let { data } = useDeliverAddressQuery();
-  const { isLoading, isError } = useLoginCheckQuery();
+  let { data, isError, isLoading } = useDeliverAddressQuery();
+  const loginCheck = useLoginCheckQuery();
   const formData = new FormData();
   const { mutate } = useProfileUpdateMutation(formData);
   const handleOnChangeProfileImage = (
@@ -35,8 +35,8 @@ const UserPage = () => {
   }
   return (
     <>
-      {isLoading && <Loading></Loading>}
-      {isError && (
+      {loginCheck.isLoading && <Loading></Loading>}
+      {loginCheck.isError && (
         <ValidateDialog text="로그인상태가 아닙니다!"></ValidateDialog>
       )}
       {dialog && (
@@ -84,24 +84,10 @@ const UserPage = () => {
               />
             </div>
           </div>
-          <div className={styles.user_deliver_address}>
-            <h1>배송정보 변경</h1>
-            <UserDeliverAddressPart
-              addressInfo={data.phone_number}
-              addressType="phone_number"
-              labelInfo="전화번호: "
-            ></UserDeliverAddressPart>
-            <UserDeliverAddressPart
-              addressInfo={data.address}
-              addressType="address"
-              labelInfo="주소: "
-            ></UserDeliverAddressPart>
-            <UserDeliverAddressPart
-              addressInfo={data.address_detail}
-              addressType="address_detail"
-              labelInfo="상세주소: "
-            ></UserDeliverAddressPart>
-          </div>
+          <UserDeliverAddressViewer 
+            deliverAddress={data} 
+            isLoading={isLoading} 
+            isError={isError}/>
         </div>
         <div className={styles.user_info_part}>
           <p>회원 이메일: {user.email}</p>

@@ -38,26 +38,6 @@ test("OrderPage 화면 반영 테스트", () => {
   expect(orderButtonCheck).toBeInTheDocument();
 });
 
-// test("OrderPage 화면 반영 테스트 (데이터 반영 테스트)", async () => {
-//   store.dispatch(setUserState({
-//     id: "23",
-//     email: "rhgfd@naver.com",
-//     nick: "호우호우",
-//     sns_id: "",
-//     profile_image: "",
-//     user_role: 0,
-//     created_at: new Date(),
-//     user_bori_goods_like: [],
-//     user_bori_gallery_like: []
-//   }))
-//   initRender();
-//   const addressCheck = await screen.findByText(/호랑이아파트/);
-//   const emailCheck = await screen.findByText("rhgfd@naver.com");
-//   const nickCheck = await screen.findByText("호우호우");
-//   expect(addressCheck).toBeInTheDocument();
-//   expect(emailCheck).toBeInTheDocument();
-//   expect(nickCheck).toBeInTheDocument();
-// });  
 
 test("OrderPage 화면 반영 테스트 (굿즈가 없는 상태일 경우)", async () => {
   store.dispatch(setUserState({
