@@ -1,8 +1,11 @@
-import { IGetCartGoods, IPostCartGoods } from "@/types/cart";
+import { ICartGoods, IGetCartGoods } from "@/types/cart";
 import { customAxios } from "../axios/customAxios";
 
-const postCart = (postCartGoods: IPostCartGoods) => {
-  return customAxios.post('/cart', postCartGoods);
+const postCart = (user_id: string, cartGoods: ICartGoods) => {
+  return customAxios.post('/cart', {
+    user_id: user_id,
+    ...cartGoods
+  });
 };
 const updateCart = (  cart_id: string, bori_goods_count: number) => {
   return customAxios.patch('/cart', {

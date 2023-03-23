@@ -6,10 +6,7 @@ export interface ICartGoods {
   bori_goods_price: number;
 }
 
-export interface IPostCartGoods extends ICartGoods {
+export interface IGetCartGoods extends ICartGoods {
   user_id: string;
-}
-
-export interface IGetCartGoods extends IPostCartGoods {
   _id: string;
 }
