@@ -32,9 +32,6 @@ test("useBoriGoodsReplyMutation 정상동작 확인 테스트", async () => {
       wrapper: Wrapper,
     }
   );
-  await waitFor(() => {
-    result.current.mutate('gogo_jose');
-  }).then(() => {
-    expect(result.current.isSuccess).toBeTruthy();
-  });
+  result.current.mutate('gogo_jose');
+  await waitFor(() => expect(result.current.isSuccess).toBeTruthy());
 });
