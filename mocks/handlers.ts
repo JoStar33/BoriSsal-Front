@@ -34,12 +34,12 @@ export const handlers = [
     return res
     (
       ctx.status(200),
-      ctx.json([{
+      ctx.json({
         user_id: "23",
         phone_number: "01033332222",
         address: '경기도 안양시 동안구 호랑이아파트',
         address_detail: '102동 304호'
-      }])
+      })
     );
   }),
   rest.patch(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/deliver-address`, (req, res, ctx) => {
@@ -166,14 +166,16 @@ export const handlers = [
   rest.get(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/bori-goods-reply/23/1`, (req, res, ctx) => {
     return res(
       ctx.status(200),
-      ctx.json([{
-        _id: '231',
-        user_id: '73246',
-        email: 'junho@naver.com',
-        bori_gallery_id: '23',
-        content: '테스트 댓글',
-        reply_child: []
-      }])
+      ctx.json({
+        bori_goods_reply: [{
+          _id: '231',
+          user_id: '73246',
+          email: 'junho@naver.com',
+          bori_gallery_id: '23',
+          content: '테스트 댓글',
+          reply_child: []
+        }]
+      })
     );
   }),
   rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/bori-goods-reply`, (req, res, ctx) => {
@@ -209,14 +211,14 @@ export const handlers = [
   rest.get(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/cart`, (req, res, ctx) => {
     return res(
       ctx.status(200),
-      ctx.json({
+      ctx.json([{
         _id: '214214',
         user_id: 'et6546',
         bori_goods_id: '3415dfgsd',
         bori_goods_name: '보리 펜',
         bori_goods_image: '/none',
         bori_goods_price: '30000'
-      })
+      }])
     );
   }),
   rest.delete(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/cart/23/23`, (req, res, ctx) => {
