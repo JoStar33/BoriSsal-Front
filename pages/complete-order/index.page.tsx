@@ -25,19 +25,22 @@ const CompleteOrderPage = () => {
     return cart.reduce((_total, cartElement) => {
       return _total + (cartElement.bori_goods_count * cartElement.bori_goods_price)}, 0);
   }, [cart]);
+  const orderShow = useMemo(() => {
+    return pageState === 'order' ? true : false;
+  }, [pageState]);
   useEffect(() => {
-    if (pageState === 'order') {
+    if (orderShow) {
       pop();
       render();
     }
     return () => {
       dispatch(setPageState(''));
     };
-  });
+  }, []);
   return (
     <>
       {
-        pageState === 'order' 
+        orderShow
         ? <div className={styles.order_container}>
             <div>
               <h1>결제가 완료됐습니다!</h1>

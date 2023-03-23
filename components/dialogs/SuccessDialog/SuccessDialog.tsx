@@ -8,7 +8,7 @@ import { GrClose } from 'react-icons/gr';
 
 interface IProps {
   text: string;
-  setDialog: React.Dispatch<React.SetStateAction<boolean>> | undefined;
+  setDialog?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SuccessDialog = ({text, setDialog}: IProps) => {

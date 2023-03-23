@@ -10,6 +10,7 @@ import { useOrderMutation } from '@/hooks/order/useOrderMutation/useOrderMutatio
 import UserInfoViewer from '@/components/order/UserInfoViewer/UserInfoViewer';
 import ErrorPage from '@/components/error/ErrorPage/ErrorPage';
 import UserDeliverAddressViewer from '@/components/user/UserDeliverAddressViewer/UserDeliverAddressViewer';
+import UserDeliverAddressPart from '@/components/user/UserDeliverAddressPart/UserDeliverAddressPart';
 
 //로그인 여부 확인 필요
 
@@ -26,26 +27,29 @@ const OrderPage = () => {
   const { pageState } = useSelector((state: RootState) => state.userStore);
   const [dialog, setDialog]= useState<boolean>(false);
   const validateText = useRef<string>('');
-  let { data, isError, isLoading } = useDeliverAddressQuery();
-  const { cart } = useSelector((state: RootState) => state.cartStore);
+  let { data: deliverAddressData } = useDeliverAddressQuery();
   const { mutate } = useOrderMutation();
+  const { cart } = useSelector((state: RootState) => state.cartStore);
   const totalPrice = useMemo(() => {
     return cart.reduce((_total, cartElement) => {
       return _total + (cartElement.bori_goods_count * cartElement.bori_goods_price)}, 0);
   }, [cart]);
-  if (!data) {
-    data = initData;
-  }
+  const orderShow = useMemo(() => {
+    return pageState === 'order' ? true : false;
+  }, [pageState]);
+  if (!deliverAddressData) {
+    deliverAddressData = initData;
+  };
   const handleOrder = () => {
-    if (!data) {
-      data = initData;
+    if (!deliverAddressData) {
+      deliverAddressData = initData;
     }
     if (cart.length === 0) {
       validateText.current = '최소 하나의 상품이 있어야합니다!';
       setDialog(true);
       return;
     };
-    if (!data.phone_number || !data.address || !data.address_detail) {
+    if (!deliverAddressData.phone_number || !deliverAddressData.address || !deliverAddressData.address_detail) {
       validateText.current = '배송지 정보 입력을 모두 마쳐야 해요!';
       setDialog(true);
       return;
@@ -58,14 +62,25 @@ const OrderPage = () => {
         dialog && <ValidateDialog text={validateText.current} setDialog={setDialog}></ValidateDialog>
       }
       {
-        pageState === 'order' 
+        orderShow
         ? <div className={styles.order_container}>
             <h1 className={styles.info_head}>회원정보</h1>
             <UserInfoViewer/>
-            <UserDeliverAddressViewer 
-              deliverAddress={data} 
-              isLoading={isLoading} 
-              isError={isError}/>
+            <h1 className={styles.info_head}>배송지 정보</h1>
+            <div className={styles.info_container}>
+              <UserDeliverAddressPart 
+                addressInfo={deliverAddressData.phone_number}
+                addressType="phone_number"
+                labelInfo="전화번호: "/>
+              <UserDeliverAddressPart               
+                addressInfo={deliverAddressData.address}
+                addressType="address"
+                labelInfo="주소: "/>
+              <UserDeliverAddressPart 
+                addressInfo={deliverAddressData.address_detail}
+                addressType="address_detail"
+                labelInfo="상세주소: "/>
+            </div>
             <h1 className={styles.info_head}>주문 상품 정보</h1>
             <div className={styles.cart_container}>
               {
