@@ -36,6 +36,10 @@ const UserDeliverAddressPart = ({
   useEffect(() => {
     setAddress(addressInfo);
     if (!inputRef.current) return;
+    if (!addressInfo) {
+      inputRef.current.value = "";
+      return;
+    }
     inputRef.current.value = addressInfo;
   }, [addressInfo]);
   const handleChangeAddress = (e: React.ChangeEvent<HTMLInputElement>) => {

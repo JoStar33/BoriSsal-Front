@@ -67,8 +67,8 @@ const CompleteOrderPage = () => {
               {
                 cart.map(cartElement => 
                   <CartItem 
-                    isOrder={true}
-                    key={cartElement.bori_goods_id} 
+                    key={cartElement.bori_goods_id}
+                    cart_id={''} 
                     cartGoods={cartElement}/>)
               }
             </div>

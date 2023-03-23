@@ -16,7 +16,7 @@ const initRender = () => {
     bori_goods_count: 2, 
     bori_goods_price: 3000
   }]));
-  store.dispatch(setPageState('none'));
+  store.dispatch(setPageState('order'));
   store.dispatch(setUserState({
     id: "23",
     email: "",
@@ -39,9 +39,12 @@ const initRender = () => {
 test('CompleteOrder store 반영 테스트', () => {
   initRender();
   expect(store.getState().userStore.pageState).toBe('order');
-})
-test('CompleteOrder store 미반영 테스트', async () => {
+});
+
+test('CompleteOrder 화면 반영 테스트', async () => {
   initRender();
-  const errorText = await screen.findByText(/잘못된 접근입니다!/);
-  expect(errorText).toBeInTheDocument();
-})
+  const orderText = await screen.findByText(/주문수량:/);
+  const addressText = await screen.findByText(/경기도 안양시 동안구 호랑이아파트/);
+  expect(orderText).toBeInTheDocument();
+  expect(addressText).toBeInTheDocument();
+});

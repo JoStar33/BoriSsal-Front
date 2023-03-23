@@ -1,9 +1,9 @@
 const initDeliver = {
   _id: '', 
   user_id: '', 
-  phone_number: '', 
-  address: '', 
-  address_detail: ''
+  phone_number: '-', 
+  address: '-', 
+  address_detail: '-'
 };
 
 const initReplyMutation = {

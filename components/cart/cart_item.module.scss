@@ -4,6 +4,12 @@
   align-items: center;
 };
 
+@keyframes loadingbar {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+};
+
 .cart_item_container {
   position: relative;
   width: 80vw;
@@ -73,4 +79,26 @@
   border-radius: 100px;
   width: 2vw;
   height: 2vw;
+}
+
+.mutation_handle_box {
+  margin-left: 1rem;
+  @include center;
+  flex-direction: row;
+  .state_cover {
+    @include center;
+    border-radius: 100px;
+  }
+  font-weight: 800;
+};
+
+.loading {
+  margin-left: 1rem;
+  display: inline-block;
+  width: 2vw;
+  height: 2vw;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: black;
+  animation: loadingbar 1s ease-in-out infinite;
 }
