@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { QueryClientProvider, QueryClient } from "react-query";
 import OrderPage from "./index.page";
 import userEvent from "@testing-library/user-event";
-import { setUserState } from "@/store/user";
+import { setPageState, setUserState } from "@/store/user";
 import { server } from "@/mocks/server";
 import { rest } from "msw";
 import { setCartState } from "@/store/cart";
@@ -14,6 +14,7 @@ const queryClient = new QueryClient();
 const user = userEvent.setup();
 
 const initRender = () => {
+  store.dispatch(setPageState('order'));
   render(
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>

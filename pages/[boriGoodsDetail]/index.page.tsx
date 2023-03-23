@@ -9,6 +9,7 @@ import ReplyViewer from "@/components/reply/ReplyViewer/ReplyViewer";
 import ReplyLoading from "@/components/loading/ReplyLoading/ReplyLoading";
 import BoriGoodsDetailInfo from "@/components/bori-goods/BoriGoodsDetailInfo/BoriGoodsDetailInfo";
 import ErrorPage from "@/components/error/ErrorPage/ErrorPage";
+import { initReplyMutation } from "@/utils/initData";
 
 interface IProps {
   goods: IBoriGoods;
@@ -24,15 +25,13 @@ const BoriGoodsDetail = ({
   goodsErrorMessage,
 }: IProps) => {
   const [limit, setLimit] = useState<number>(1);
-  const { data, isLoading, refetch } = useBoriGoodsReplyQuery(goods._id, limit);
-  if (categoryErrorMessage) {
-    return (
-      <ErrorPage errorMessage={categoryErrorMessage}></ErrorPage>
-    )
+  let { data, isLoading, refetch, error } = useBoriGoodsReplyQuery(goods._id, limit);
+  if (!data) {
+    data = initReplyMutation
   }
-  if (goodsErrorMessage) {
+  if (goodsErrorMessage || categoryErrorMessage) {
     return (
-      <ErrorPage errorMessage={goodsErrorMessage}></ErrorPage>
+      <ErrorPage error={error} errorText={goodsErrorMessage || categoryErrorMessage}></ErrorPage>
     )
   }
   return (
@@ -49,7 +48,7 @@ const BoriGoodsDetail = ({
             setLimit={setLimit}
             limit={limit}
             goods_id={goods._id}
-            mutationData={data?.data}
+            mutationData={data}
           ></ReplyViewer>
       }
     </div>
@@ -75,6 +74,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   let categoryData: ICategory[] = [];
   let categoryErrorMessage = null;
   let goodsErrorMessage = null;
+  if(!params) {
+    return{
+      props: {
+        goodsErrorMessage: "잘못된 정보입니다."
+      },
+    }
+  }
   await getGoods()
     .then((res) => {
       goodsData = res.data;
@@ -90,10 +96,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       categoryErrorMessage = errorMessage(error);
     });
   const goods = goodsData.find(
-    (goods) => goods.bori_goods_name === params?.boriGoodsDetail
+    (goods) => goods.bori_goods_name === params.boriGoodsDetail
   );
+  if (!goods){
+    return {
+      props: {
+        goodsErrorMessage: "굿즈 데이터가 존재하지 않습니다."
+      }
+    }
+  } 
   const category = categoryData.find(
-    (category) => category._id === goods?.category_id
+    (category) => category._id === goods.category_id
   );
   return {
     props: {

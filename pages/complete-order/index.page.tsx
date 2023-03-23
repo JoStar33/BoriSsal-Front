@@ -10,12 +10,15 @@ import { render, pop } from '@/utils/congratulate';
 import { setPageState } from '@/store/user';
 import ErrorPage from '@/components/error/ErrorPage/ErrorPage';
 import UserInfoViewer from '@/components/order/UserInfoViewer/UserInfoViewer';
-
+import { initDeliver } from '@/utils/initData';
 
 const CompleteOrderPage = () => {
   useLoginCheckQuery();
   const dispatch = useDispatch();
-  const { data } = useDeliverAddressQuery();
+  let { data } = useDeliverAddressQuery();
+  if(!data) {
+    data = initDeliver;
+  }
   const { pageState } = useSelector((state: RootState) => state.userStore);
   const { cart } = useSelector((state: RootState) => state.cartStore);
   const totalPrice = useMemo(() => {
@@ -45,15 +48,15 @@ const CompleteOrderPage = () => {
             <div className={styles.info_container}>
               <div className={styles.deliver_container}>
                 <p>전화번호:</p>
-                <p>{data?.data[0].phone_number}</p>
+                <p>{data.phone_number}</p>
               </div>
               <div className={styles.deliver_container}>
                 <p>주소:</p>
-                <p>{data?.data[0].address}</p>
+                <p>{data.address}</p>
               </div>
               <div className={styles.deliver_container}>
                 <p>상세주소:</p>
-                <p>{data?.data[0].address_detail}</p>
+                <p>{data.address_detail}</p>
               </div>
             </div>
             <h1 className={styles.info_head}>주문 상품 정보</h1>
@@ -78,7 +81,7 @@ const CompleteOrderPage = () => {
               <button className={styles.order_button}>홈으로 가기</button>
             </Link>
           </div>
-        : <ErrorPage errorMessage='잘못된 접근입니다!' ></ErrorPage>
+        : <ErrorPage errorText='잘못된 접근입니다!' ></ErrorPage>
       }
     </>
   );

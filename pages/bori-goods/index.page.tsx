@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import BoriGoodsItem from '@/components/bori-goods/BoriGoodsItem/BoriGoodsItem';
 import { getGoods, getCategory } from '@/apis/bori-goods/boriGoods';
 import { AxiosError } from 'axios';
@@ -11,11 +11,17 @@ interface IProps {
   goodsData: IBoriGoods[];
   errorMessage: string;
   categoryData: ICategory[];
-}
+};
 
 const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
   const [categoryInfo, setCategoryInfo] = useState<string>('0');
   const [searchInfo, setSearchInfo] = useState<string>('');
+  const categoryName = (goods: IBoriGoods) => {
+    const findCategoryData = categoryData.find(category => category._id === goods.category_id)
+    if(!findCategoryData)
+      return ''
+    return findCategoryData.category_name;
+  }
   const handleSelectLayout = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategoryInfo(e.target.value)
   };
@@ -23,7 +29,7 @@ const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
     setSearchInfo(e.target.value);
   };
   if (errorMessage) {
-    return <ErrorPage errorMessage={errorMessage}></ErrorPage>
+    return <ErrorPage errorText={errorMessage}></ErrorPage>
   }
   return (
     <div className={styles.bori_goods_page_container}>
@@ -69,7 +75,7 @@ const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
               goods_like={goods.bori_goods_like} 
               goods_name={goods.bori_goods_name} 
               bori_goods_price={goods.bori_goods_price} 
-              category_name={categoryData.find(category => category._id === goods.category_id)?.category_name}></BoriGoodsItem>
+              category_name={categoryName(goods)}></BoriGoodsItem>
           )
         }
       </div>

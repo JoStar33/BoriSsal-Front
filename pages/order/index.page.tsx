@@ -11,28 +11,43 @@ import { useOrderMutation } from '@/hooks/order/useOrderMutation/useOrderMutatio
 import { setPageState } from '@/store/user';
 import UserInfoViewer from '@/components/order/UserInfoViewer/UserInfoViewer';
 import ErrorPage from '@/components/error/ErrorPage/ErrorPage';
+import Loading from '@/components/loading/Loading/Loading';
 
 //로그인 여부 확인 필요
+
+const initData = {
+  _id: '', 
+  user_id: '', 
+  phone_number: '', 
+  address: '', 
+  address_detail: ''
+}
 
 const OrderPage = () => {
   useLoginCheckQuery();
   const { pageState } = useSelector((state: RootState) => state.userStore);
   const [dialog, setDialog]= useState<boolean>(false);
   const validateText = useRef<string>('');
-  const { data } = useDeliverAddressQuery();
+  let { data } = useDeliverAddressQuery();
   const { cart } = useSelector((state: RootState) => state.cartStore);
   const { mutate } = useOrderMutation();
   const totalPrice = useMemo(() => {
     return cart.reduce((_total, cartElement) => {
       return _total + (cartElement.bori_goods_count * cartElement.bori_goods_price)}, 0);
   }, [cart]);
+  if (!data) {
+    data = initData;
+  }
   const handleOrder = () => {
+    if (!data) {
+      data = initData;
+    }
     if (cart.length === 0) {
       validateText.current = '최소 하나의 상품이 있어야합니다!';
       setDialog(true);
       return;
     };
-    if (!data?.data[0].phone_number.length || !data?.data[0].address || !data?.data[0].address_detail) {
+    if (!data.phone_number || !data.address || !data.address_detail) {
       validateText.current = '배송지 정보 입력을 모두 마쳐야 해요!';
       setDialog(true);
       return;
@@ -52,15 +67,15 @@ const OrderPage = () => {
             <h1 className={styles.info_head}>배송지 정보</h1>
             <div className={styles.info_container}>
               <UserDeliverAddressPart 
-                addressInfo={data?.data[0].phone_number}
+                addressInfo={data.phone_number}
                 addressType="phone_number"
                 labelInfo="전화번호: "></UserDeliverAddressPart>
               <UserDeliverAddressPart               
-                addressInfo={data?.data[0].address}
+                addressInfo={data.address}
                 addressType="address"
                 labelInfo="주소: "></UserDeliverAddressPart>
               <UserDeliverAddressPart 
-                addressInfo={data?.data[0].address_detail}
+                addressInfo={data.address_detail}
                 addressType="address_detail"
                 labelInfo="상세주소: "></UserDeliverAddressPart>
             </div>
@@ -84,7 +99,7 @@ const OrderPage = () => {
             </div>
             <button role="order-button" onClick={handleOrder} className={styles.order_button}>주문하기</button>
           </div>
-        : <ErrorPage errorMessage='잘못된 접근입니다!'/>
+        : <ErrorPage errorText='잘못된 접근입니다!'/>
       }
     </>
   );

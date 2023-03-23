@@ -11,11 +11,12 @@ import PassWordChangeDialog from "@/components/dialogs/PassWordChangeDialog/Pass
 import { useLoginCheckQuery } from "@/hooks/auth/useLoginCheckQuery/useLoginCheckQuery";
 import { BsFillPencilFill } from "react-icons/bs";
 import { useProfileUpdateMutation } from "@/hooks/user/useProfileUpdateMutation/useProfileUpdateMutation";
+import { initDeliver } from "@/utils/initData";
 
 const UserPage = () => {
   const { user } = useSelector((state: RootState) => state.userStore);
   const [dialog, setDialog] = useState<boolean>(false);
-  const { data } = useDeliverAddressQuery();
+  let { data } = useDeliverAddressQuery();
   const { isLoading, isError } = useLoginCheckQuery();
   const formData = new FormData();
   const { mutate } = useProfileUpdateMutation(formData);
@@ -29,7 +30,9 @@ const UserPage = () => {
     formData.append("img", file);
     mutate();
   };
-
+  if(!data) {
+    data = initDeliver;
+  }
   return (
     <>
       {isLoading && <Loading></Loading>}
@@ -84,17 +87,17 @@ const UserPage = () => {
           <div className={styles.user_deliver_address}>
             <h1>배송정보 변경</h1>
             <UserDeliverAddressPart
-              addressInfo={data?.data[0].phone_number}
+              addressInfo={data.phone_number}
               addressType="phone_number"
               labelInfo="전화번호: "
             ></UserDeliverAddressPart>
             <UserDeliverAddressPart
-              addressInfo={data?.data[0].address}
+              addressInfo={data.address}
               addressType="address"
               labelInfo="주소: "
             ></UserDeliverAddressPart>
             <UserDeliverAddressPart
-              addressInfo={data?.data[0].address_detail}
+              addressInfo={data.address_detail}
               addressType="address_detail"
               labelInfo="상세주소: "
             ></UserDeliverAddressPart>
