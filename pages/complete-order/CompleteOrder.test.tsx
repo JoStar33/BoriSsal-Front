@@ -24,7 +24,7 @@ test('CompleteOrder store 반영 테스트', () => {
     bori_goods_count: 2, 
     bori_goods_price: 3000
   }]);
-  current.result.current.setPageState('order');
+  current.result.current.setPageState('complete-order');
   current.result.current.setUser({
     id: "23",
     email: "",
@@ -37,7 +37,7 @@ test('CompleteOrder store 반영 테스트', () => {
     user_bori_gallery_like: []
   });
   initRender();
-  expect(current.result.current.pageState).toBe('order');
+  expect(current.result.current.pageState).toBe('complete-order');
 });
 
 test('CompleteOrder 화면 반영 테스트', async () => {
@@ -50,7 +50,7 @@ test('CompleteOrder 화면 반영 테스트', async () => {
     bori_goods_count: 2, 
     bori_goods_price: 3000
   }]);
-  current.result.current.setPageState('order');
+  current.result.current.setPageState('complete-order');
   current.result.current.setUser({
     id: "23",
     email: "",
@@ -63,7 +63,7 @@ test('CompleteOrder 화면 반영 테스트', async () => {
     user_bori_gallery_like: []
   });
   initRender();
-  const orderText = await screen.findByText(/주문수량:/);
+  const orderText = await screen.findByText(/최종 결제금액:/);
   const addressText = await screen.findByText(/경기도 안양시 동안구 호랑이아파트/);
   expect(orderText).toBeInTheDocument();
   expect(addressText).toBeInTheDocument();
