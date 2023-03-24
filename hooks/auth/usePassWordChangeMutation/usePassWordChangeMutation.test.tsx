@@ -1,21 +1,18 @@
-import { waitFor, renderHook } from "@testing-library/react";
+
+import { renderHook, waitFor } from "@testing-library/react";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { usePassWordChangeMutation } from "./usePassWordChangeMutation";
-import { QueryClientProvider, QueryClient } from "react-query";
-import { Provider } from "react-redux";
-import { store } from "@/store";
 const queryClient = new QueryClient();
 
 const Wrapper = ({ children }: any) => {
   return (
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </Provider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
 
 test("usePassWordChangeMutation 정상동작 확인 테스트", async () => {
   const { result } = renderHook(
-    () => usePassWordChangeMutation({ id: "", password: "", newPassword: "" }),
+    () => usePassWordChangeMutation({password: "", newPassword: "" }),
     {
       wrapper: Wrapper,
     }

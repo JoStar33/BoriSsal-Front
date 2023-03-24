@@ -1,27 +1,24 @@
-import React, { useState } from "react";
-import Image from "next/image";
-import { RootState } from "@/store";
-import { useSelector } from "react-redux";
-import { useDeliverAddressQuery } from "@/hooks/user/useDeliverAddressQuery/useDeliverAddressQuery";
-import UserDeliverAddressPart from "@/components/user/UserDeliverAddressPart/UserDeliverAddressPart";
-import styles from "./userpage.module.scss";
-import Loading from "@/components/loading/Loading/Loading";
-import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
 import PassWordChangeDialog from "@/components/dialogs/PassWordChangeDialog/PassWordChangeDialog";
+import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
+import Loading from "@/components/loading/Loading/Loading";
+import UserDeliverAddressViewer from "@/components/user/UserDeliverAddressViewer/UserDeliverAddressViewer";
 import { useLoginCheckQuery } from "@/hooks/auth/useLoginCheckQuery/useLoginCheckQuery";
-import { BsFillPencilFill } from "react-icons/bs";
+import { useDeliverAddressQuery } from "@/hooks/user/useDeliverAddressQuery/useDeliverAddressQuery";
 import { useProfileUpdateMutation } from "@/hooks/user/useProfileUpdateMutation/useProfileUpdateMutation";
+import { useUserStore } from "@/store/user";
+import { initDeliver } from "@/utils/initData";
+import Image from "next/image";
+import React, { useState } from "react";
+import { BsFillPencilFill } from "react-icons/bs";
+import styles from "./userpage.module.scss";
 
 const UserPage = () => {
-  const { user } = useSelector((state: RootState) => state.userStore);
+  const { user } = useUserStore();
   const [dialog, setDialog] = useState<boolean>(false);
-  const { data } = useDeliverAddressQuery({ user_id: user.id });
-  const { isLoading, isError } = useLoginCheckQuery();
+  let { data, isError, isLoading } = useDeliverAddressQuery();
+  const loginCheck = useLoginCheckQuery();
   const formData = new FormData();
-  const { mutate } = useProfileUpdateMutation({
-    user_id: user.id,
-    image: formData,
-  });
+  const { mutate } = useProfileUpdateMutation(formData);
   const handleOnChangeProfileImage = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -32,11 +29,13 @@ const UserPage = () => {
     formData.append("img", file);
     mutate();
   };
-
+  if(!data) {
+    data = initDeliver;
+  }
   return (
     <>
-      {isLoading && <Loading></Loading>}
-      {isError && (
+      {loginCheck.isLoading && <Loading></Loading>}
+      {loginCheck.isError && (
         <ValidateDialog text="로그인상태가 아닙니다!"></ValidateDialog>
       )}
       {dialog && (
@@ -84,27 +83,10 @@ const UserPage = () => {
               />
             </div>
           </div>
-          <div className={styles.user_deliver_address}>
-            <h1>배송정보 변경</h1>
-            <UserDeliverAddressPart
-              user_id={user.id}
-              addressInfo={data?.data[0].phone_number}
-              addressType="phone_number"
-              labelInfo="전화번호: "
-            ></UserDeliverAddressPart>
-            <UserDeliverAddressPart
-              user_id={user.id}
-              addressInfo={data?.data[0].address}
-              addressType="address"
-              labelInfo="주소: "
-            ></UserDeliverAddressPart>
-            <UserDeliverAddressPart
-              user_id={user.id}
-              addressInfo={data?.data[0].address_detail}
-              addressType="address_detail"
-              labelInfo="상세주소: "
-            ></UserDeliverAddressPart>
-          </div>
+          <UserDeliverAddressViewer 
+            deliverAddress={data} 
+            isLoading={isLoading} 
+            isError={isError}/>
         </div>
         <div className={styles.user_info_part}>
           <p>회원 이메일: {user.email}</p>

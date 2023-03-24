@@ -1,26 +1,36 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import BoriGoodsItem from '@/components/bori-goods/BoriGoodsItem/BoriGoodsItem';
 import { getGoods, getCategory } from '@/apis/bori-goods/boriGoods';
 import { AxiosError } from 'axios';
 import { IBoriGoods, ICategory } from '@/types/boriGoods';
 import styles from './bori_goods_page.module.scss';
 import { errorMessage } from '@/apis/error/customError';
+import ErrorPage from '@/components/error/ErrorPage/ErrorPage';
 
 interface IProps {
   goodsData: IBoriGoods[];
   errorMessage: string;
   categoryData: ICategory[];
-}
+};
 
 const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
   const [categoryInfo, setCategoryInfo] = useState<string>('0');
   const [searchInfo, setSearchInfo] = useState<string>('');
+  const categoryName = (goods: IBoriGoods) => {
+    const findCategoryData = categoryData.find(category => category._id === goods.category_id)
+    if(!findCategoryData)
+      return ''
+    return findCategoryData.category_name;
+  }
   const handleSelectLayout = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategoryInfo(e.target.value)
   };
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInfo(e.target.value);
-  } 
+  };
+  if (errorMessage) {
+    return <ErrorPage errorText={errorMessage}></ErrorPage>
+  }
   return (
     <div className={styles.bori_goods_page_container}>
       <h1>보리 굿즈</h1>
@@ -51,7 +61,7 @@ const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
         {
           goodsData
           .filter((searchGoods) =>
-            searchGoods.product_name.includes(searchInfo)
+            searchGoods.bori_goods_name.includes(searchInfo)
           ).filter((cateGoods) => {
             if (categoryInfo === '0')
               return cateGoods;
@@ -61,11 +71,11 @@ const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
           ).map((goods) =>           
             <BoriGoodsItem 
               key={goods._id}
-              bori_goods_image={goods.product_image} 
-              goods_like={goods.product_like} 
-              goods_name={goods.product_name} 
-              product_price={goods.product_price} 
-              category_name={categoryData.find(category => category._id === goods.category_id)?.category_name}></BoriGoodsItem>
+              bori_goods_image={goods.bori_goods_image} 
+              goods_like={goods.bori_goods_like} 
+              goods_name={goods.bori_goods_name} 
+              bori_goods_price={goods.bori_goods_price} 
+              category_name={categoryName(goods)}></BoriGoodsItem>
           )
         }
       </div>

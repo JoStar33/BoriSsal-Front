@@ -1,7 +1,12 @@
-import { dislikeGoods, likeGoods } from '@/apis/bori-goods/boriGoods';
-import { useMutation } from 'react-query';
+import { dislikeGoods, likeGoods } from "@/apis/bori-goods/boriGoods";
+import { useUserStore } from "@/store/user";
+import { useMutation } from "react-query";
 
-
-export const useLikeGoodsMutation = (user_id: string, goods_id: string, isLike: string | undefined) => {
-  return useMutation(() => isLike ? dislikeGoods(user_id, goods_id) : likeGoods(user_id, goods_id))
-}
+export const useLikeGoodsMutation = (goods_id: string) => {
+  const { user } = useUserStore();
+  return useMutation(() =>
+    user.user_bori_goods_like.find((likeGoods) => likeGoods === goods_id)
+      ? dislikeGoods(user.id, goods_id)
+      : likeGoods(user.id, goods_id)
+  );
+};

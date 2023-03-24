@@ -1,9 +1,8 @@
-import { store } from "@/store";
-import { QueryClientProvider, QueryClient } from "react-query";
+
 import { render, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
-import DuplicateCheckPart from "./DuplicateCheckPart";
 import userEvent from "@testing-library/user-event";
+import { QueryClient, QueryClientProvider } from "react-query";
+import DuplicateCheckPart from "./DuplicateCheckPart";
 const queryClient = new QueryClient();
 
 const user = userEvent.setup();
@@ -19,12 +18,10 @@ const initRender = ({
 }: IProps) => {
   render(
     <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <DuplicateCheckPart
-          type={type}
-          info={info} 
-          validate={null}/>
-      </Provider>
+      <DuplicateCheckPart
+        type={type}
+        info={info} 
+        validate={null}/>
     </QueryClientProvider>
   );
 };

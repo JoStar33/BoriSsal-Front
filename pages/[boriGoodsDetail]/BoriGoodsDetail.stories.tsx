@@ -13,12 +13,12 @@ BoriGoodsDetailTest.args = {
   goods: {
     _id: '25235235',
     category_id: '23',
-    product_name: '상품명입니다.',
-    product_price: 30000,
-    product_stock: 23,
-    product_desc: '테스트 텍스트입니다.',
-    product_like: 23,
-    product_image: '/none',
+    bori_goods_name: '상품명입니다.',
+    bori_goods_price: 30000,
+    bori_goods_stock: 23,
+    bori_goods_desc: '테스트 텍스트입니다.',
+    bori_goods_like: 23,
+    bori_goods_image: '/none',
     created_at: new Date()
   },
   category: {

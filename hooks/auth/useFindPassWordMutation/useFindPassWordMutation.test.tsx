@@ -15,9 +15,6 @@ test("useFindPassWordMutation 훅 테스트", async () => {
   const { result } = renderHook(() => useFindPassWordMutation('jojo@naver.com'), {
     wrapper: Wrapper,
   });
-  await waitFor(() => {
-    result.current.mutate();
-  }).then(() => {
-    expect(result.current.isSuccess).toBeTruthy();
-  });
+  result.current.mutate()
+  await waitFor(() => expect(result.current.isSuccess).toBeTruthy());
 });

@@ -7,10 +7,6 @@ export const useCartMutation = (
   cartGoods: ICartGoods
 ) => {
   return useMutation(
-    () => postCart(
-      {
-        user_id: user_id,
-        ...cartGoods
-      }),
+    () => postCart(user_id, cartGoods),
   );
 };

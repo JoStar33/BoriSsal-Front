@@ -11,7 +11,7 @@ const Template: ComponentStory<typeof ReplyViewer> = (args) => <ReplyViewer {...
 export const ReplyViewerTest = Template.bind({});
 ReplyViewerTest.args = {
   mutationData: {
-    product_reply: [{
+    bori_goods_reply: [{
       _id: 'string',
       user_id: 'string',
       email: 'string',

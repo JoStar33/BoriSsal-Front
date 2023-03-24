@@ -1,6 +1,5 @@
-import { store } from "@/store";
-import { Provider } from "react-redux";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import LoginButton from "./LoginButton";
 
 export default {
@@ -9,9 +8,7 @@ export default {
 } as ComponentMeta<typeof LoginButton>;
 
 const Template: ComponentStory<typeof LoginButton> = () => (
-  <Provider store={store}>
-    <LoginButton />
-  </Provider>
+  <LoginButton />
 );
 
 export const LoginButtonTest = Template.bind({});

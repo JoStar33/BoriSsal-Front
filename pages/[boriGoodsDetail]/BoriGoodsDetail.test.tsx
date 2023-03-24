@@ -1,40 +1,37 @@
+
 import { render, screen } from "@testing-library/react";
 import { GetStaticPathsContext } from "next";
-import { QueryClientProvider, QueryClient } from "react-query";
-import { store } from "@/store";
-import { Provider } from "react-redux";
-import BoriGoodsDetail, { getStaticProps, getStaticPaths } from "./index.page";
+import { QueryClient, QueryClientProvider } from "react-query";
+import BoriGoodsDetail, { getStaticPaths, getStaticProps } from "./index.page";
 
 const queryClient = new QueryClient();
 const initRender = () => {
   render(
   <QueryClientProvider client={queryClient}>
-    <Provider store={store}>
-      <BoriGoodsDetail goods={{
-        _id: "23",
-        category_id: '88',
-        product_name: '보리 티셔츠',
-        product_price: 30000,
-        product_stock: 20,
-        product_desc: '보리의 얼굴이 들어간 아주 깜찍한 이미지',
-        product_like: 10,
-        product_image: '/none',
-        created_at: new Date,
-      }} category={{
-        _id: "88",
-        category_name:"의류"
-      }} 
-      categoryErrorMessage={""} 
-      goodsErrorMessage={""}></BoriGoodsDetail>
-    </Provider>
+    <BoriGoodsDetail goods={{
+      _id: "23",
+      category_id: '88',
+      bori_goods_name: '보리 티셔츠',
+      bori_goods_price: 30000,
+      bori_goods_stock: 20,
+      bori_goods_desc: '보리의 얼굴이 들어간 아주 깜찍한 이미지',
+      bori_goods_like: 10,
+      bori_goods_image: '/none',
+      created_at: new Date,
+    }} category={{
+      _id: "88",
+      category_name:"의류"
+    }} 
+    categoryErrorMessage={""} 
+    goodsErrorMessage={""}></BoriGoodsDetail>
   </QueryClientProvider>)
 };
 
 test('BoriGoodsDetail 화면 렌더링 반영 테스트', async () => {
   initRender();
-  const productName = await screen.findByText(/보리 티셔츠/);
+  const boriGoodsName = await screen.findByText(/보리 티셔츠/);
   const tagName = await screen.findByText(/의류/);
-  expect(productName).toBeInTheDocument();
+  expect(boriGoodsName).toBeInTheDocument();
   expect(tagName).toBeInTheDocument();
 })
 
@@ -54,12 +51,12 @@ test("BoriGoodsDetail의 getStaticProps 동작 테스트", async () => {
     goods: {
       _id: "23",
       category_id: '88',
-      product_name: '보리 티셔츠',
-      product_price: 30000,
-      product_stock: 20,
-      product_desc: '보리의 얼굴이 들어간 아주 깜찍한 이미지',
-      product_like: 10,
-      product_image: '/none',
+      bori_goods_name: '보리 티셔츠',
+      bori_goods_price: 30000,
+      bori_goods_stock: 20,
+      bori_goods_desc: '보리의 얼굴이 들어간 아주 깜찍한 이미지',
+      bori_goods_like: 10,
+      bori_goods_image: '/none',
     },
     category: {
       _id: "88",

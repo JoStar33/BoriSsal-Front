@@ -14,7 +14,7 @@ BoriGoodsItemTest.args = {
   bori_goods_image: '/none',
   goods_like: 5,
   goods_name: '보리 티셔츠',
-  product_price: 15000,
+  bori_goods_price: 15000,
   category_name: '의류'
 };
 
@@ -23,6 +23,6 @@ LongTextBoriGoodsItemTest.args = {
   bori_goods_image: '/none',
   goods_like: 12,
   goods_name: 'sadfadsfdsfdfdfaffdsfdsaffdsafdsfdsfasdfdsfdsfsdf',
-  product_price: 25000,
+  bori_goods_price: 25000,
   category_name: 'sdfsdafdasfadsfasdfdfsdfsdfsadfsdfdsffdsdsffasdfdsfdsf'
 };

@@ -1,15 +1,18 @@
-import { useMutation } from "react-query";
 import { postProfileImage } from "@/apis/user/user";
+import { useUserStore } from "@/store/user";
 import { IUserProfileUpload } from "@/types/user";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/store";
-import { setUserProfileState } from "@/store/user";
+import { useRef } from 'react';
+import { useMutation } from "react-query";
 
-export const useProfileUpdateMutation = (userProfile: IUserProfileUpload) => {
-  const dispatch = useDispatch<AppDispatch>();
-  return useMutation(() => postProfileImage(userProfile), {
+export const useProfileUpdateMutation = (profileImage: FormData) => {
+  const { user, setUserProfile } = useUserStore();
+  const userProfile = useRef<IUserProfileUpload>({
+    user_id: user.id,
+    image: profileImage
+  });
+  return useMutation(() => postProfileImage(userProfile.current), {
     onSuccess(data) {
-      dispatch(setUserProfileState(data.data.profile_image))
+      setUserProfile(data.data.profile_image)
     },
   });
 };

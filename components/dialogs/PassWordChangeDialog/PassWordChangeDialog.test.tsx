@@ -1,11 +1,9 @@
-import { store } from "@/store";
-import { QueryClientProvider, QueryClient } from "react-query";
-import { fireEvent, render, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
 import { server } from "@/mocks/server";
-import { rest } from "msw";
-import PassWordChangeDialog from "./PassWordChangeDialog";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { rest } from "msw";
+import { QueryClient, QueryClientProvider } from "react-query";
+import PassWordChangeDialog from "./PassWordChangeDialog";
 
 const queryClient = new QueryClient();
 
@@ -17,9 +15,7 @@ const setState = jest.fn() as any;
 const initRender = () => {
   render(
     <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <PassWordChangeDialog setDialog={setState} />
-      </Provider>
+      <PassWordChangeDialog setDialog={setState} />
     </QueryClientProvider>
   );
   const password = screen.getByRole("password");

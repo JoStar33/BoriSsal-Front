@@ -23,5 +23,4 @@ test("useDeliverAddressMutation 훅 테스트", async () => {
   );
   result.current.mutate();
   await waitFor(() => expect(result.current.isSuccess).toBeTruthy());
-  //expect(result.current.data?.config.data.address).toBe("경기도 안산시 안산동")
 });

@@ -1,16 +1,14 @@
-import { useQuery } from "react-query";
 import { isLoggedIn } from "@/apis/user/auth";
+import { useUserStore } from '@/store/user';
 import { useRouter } from "next/router";
-import { resetUserState } from "@/store/user";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/store";
+import { useQuery } from "react-query";
 
 export const useLoginCheckQuery = () => {
   const router = useRouter();
-  const dispatch = useDispatch<AppDispatch>();
+  const {resetUser} = useUserStore();
   return useQuery(["is-login"], () => isLoggedIn(), {
     onError: () => {
-      dispatch(resetUserState());
+      resetUser();
       router.push("/login");
     },
     retry: 0,

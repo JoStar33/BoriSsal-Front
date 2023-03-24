@@ -1,5 +1,9 @@
+
+import { useUserStore } from "@/store/user";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import styles from "./main_viewer.module.scss";
 import mainImage1 from "/public/images/main_image1.png";
 import mainImage2 from "/public/images/main_image2.png";
 import mainImage4 from "/public/images/main_image4.png";
@@ -7,16 +11,15 @@ import mainImage5 from "/public/images/main_image5.png";
 import mainImage6 from "/public/images/main_image6.png";
 import mainImage7 from "/public/images/main_image7.png";
 import mainImage8 from "/public/images/main_image8.png";
-import styles from "./main_viewer.module.scss";
-import { NextPage } from "next";
-import Link from "next/link";
 
 const MainViewer = () => {
   const [position, setPosition] = useState<number>(0);
   const onScroll = () => {
     setPosition(window.scrollY);
   };
+  const { setPageState } = useUserStore()
   useEffect(() => {
+    setPageState('');
     window.addEventListener("scroll", onScroll);
     return () => {
       window.removeEventListener("scroll", onScroll);

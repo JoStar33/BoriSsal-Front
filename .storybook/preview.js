@@ -1,10 +1,8 @@
-import * as NextImage from "next/image";
-import { RouterContext } from "next/dist/shared/lib/router-context"; // next 12
 import { handlers } from '@/mocks/handlers';
 import { setupWorker } from "msw";
+import { RouterContext } from "next/dist/shared/lib/router-context"; // next 12
+import * as NextImage from "next/image";
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { Provider } from "react-redux";
-import { store }from '@/store';
 
 const queryClient = new QueryClient();
 
@@ -18,9 +16,7 @@ if (typeof global.process === "undefined") {//checks to make sure that this is n
 export const decorators = [
   (Story) => (
     <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <Story />
-      </Provider>
+      <Story />
     </QueryClientProvider>
   ),
 ]

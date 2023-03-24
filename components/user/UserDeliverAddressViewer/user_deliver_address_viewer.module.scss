@@ -1,0 +1,15 @@
+.user_deliver_address {
+  div {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    p {
+      width: 7rem;
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+    input {
+      height: 1.5rem;
+    }
+  }
+}

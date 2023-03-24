@@ -1,27 +1,63 @@
 import { ICartGoods } from "@/types/cart";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import produce from "immer";
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-interface IState {
+interface ICartState {
   cart: ICartGoods[];
 }
 
-const initialState: IState = {
+interface IStore extends ICartState {
+  setCart: (payload: ICartGoods[]) => void;
+  resetCart: () => void;
+  increaseCart: (payload: ICartGoods) => void;
+  decreaseCart: (payload: ICartGoods) => void;
+  deleteCart: (payload: ICartGoods) => void;
+}
+
+const initCart = {
   cart: []
-};
+}
 
-export const cartSlice = createSlice({
-  name: "cart",
-  initialState,
-  reducers: {
-    resetCartState: (state) => {
-      Object.assign(state, initialState);
-    },
-    setCartState: (state, action: PayloadAction<ICartGoods[]>) => {
-      state.cart = action.payload;
-    }
-  },
-});
 
-export const { resetCartState, setCartState } = cartSlice.actions;
-
-export default cartSlice.reducer;
+export const useCartStore = create<IStore>()(
+    persist(
+      (set) => ({
+        ...initCart,
+        setCart: (payload: ICartGoods[]) =>
+          set(produce((state: ICartState) => {
+            state.cart = payload
+        })),
+        resetCart: () => {
+          set(produce((state: ICartState) => {
+            state.cart = initCart.cart
+          }))
+        },
+        increaseCart: (payload: ICartGoods) =>
+          set(produce((state: ICartState) => {
+            state.cart = state.cart.map(cart => {
+              if(cart.bori_goods_id === payload.bori_goods_id)
+                cart.bori_goods_count++;
+              return cart;
+            })
+        })),
+        decreaseCart: (payload: ICartGoods) =>
+          set(produce((state: ICartState) => {
+            state.cart = state.cart.map(cart => {
+              if(cart.bori_goods_id === payload.bori_goods_id)
+                cart.bori_goods_count++;
+              return cart;
+            })
+        })),
+        deleteCart: (payload: ICartGoods) =>
+          set(produce((state: ICartState) => {
+            state.cart = state.cart.filter((cartElement) => {
+              cartElement.bori_goods_id !== payload.bori_goods_id
+            });
+        })),
+      }),
+      {
+        name: 'cart-storage',
+      }
+    )
+  );

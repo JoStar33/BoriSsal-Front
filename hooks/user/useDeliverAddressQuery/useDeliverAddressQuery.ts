@@ -1,10 +1,8 @@
-import { useQuery } from "react-query";
 import { getDeliverAddress } from "@/apis/user/deliverAddress";
+import { useUserStore } from "@/store/user";
+import { useQuery } from "react-query";
 
-interface IProps {
-  user_id: string;
-};
-
-export const useDeliverAddressQuery = ({ user_id }: IProps) => {
-  return useQuery(["deliver-address"], () => getDeliverAddress(user_id));
+export const useDeliverAddressQuery = () => {
+  const { user } = useUserStore();
+  return useQuery(["deliver-address"], () => getDeliverAddress(user.id));
 };

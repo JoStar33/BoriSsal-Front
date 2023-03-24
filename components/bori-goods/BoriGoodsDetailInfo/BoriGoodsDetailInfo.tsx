@@ -1,15 +1,13 @@
-import React, { useRef, useState } from 'react';
-import { AiFillHeart } from "react-icons/ai";
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/store';
-import { IBoriGoods, ICategory } from "@/types/boriGoods";
-import { useLikeGoodsMutation } from '@/hooks/bori-goods/useLikeGoodsMutation/useLikeGoodsMutation';
-import { setGoodsLike } from '@/store/user';
-import Image from "next/image";
-import styles from './bori_goods_detail_info.module.scss';
-import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
-import BoriGoodsDetailController from '../BoriGoodsDetailController/BoriGoodsDetailController';
 import SuccessDialog from '@/components/dialogs/SuccessDialog/SuccessDialog';
+import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
+import { useLikeGoodsMutation } from '@/hooks/bori-goods/useLikeGoodsMutation/useLikeGoodsMutation';
+import { useUserStore } from '@/store/user';
+import { IBoriGoods, ICategory } from "@/types/boriGoods";
+import Image from "next/image";
+import { useRef, useState } from 'react';
+import { AiFillHeart } from "react-icons/ai";
+import BoriGoodsDetailController from '../BoriGoodsDetailController/BoriGoodsDetailController';
+import styles from './bori_goods_detail_info.module.scss';
 interface IProps {
   goods: IBoriGoods;
   category: ICategory;
@@ -19,25 +17,20 @@ const BoriGoodsDetailInfo = ({
   goods,
   category
 }:IProps) => {
-  const dispatch = useDispatch();
   const validateText = useRef<string>("");
   const [validateDialog, setValidateDialog] = useState<boolean>(false);
   const [successDialog, setSuccessDialog] = useState<boolean>(false);
-  const { user } = useSelector((state: RootState) => state.userStore);
-  const likeGoodsMutation = useLikeGoodsMutation(
-    user.id,
-    goods._id,
-    user.user_product_like.find((likeGoods) => likeGoods === goods._id)
-  );
+  const { user, setGoodsLike } = useUserStore();
+  const likeGoodsMutation = useLikeGoodsMutation(goods._id);
   const handleLikeGoods = () => {
     if (!user.id) {
       validateText.current = "로그인 이후에 누를 수 있어요!";
       return setValidateDialog(true);
     }
-    user.user_product_like.find((likeGoods) => likeGoods === goods._id)
-      ? goods.product_like--
-      : goods.product_like++;
-    dispatch(setGoodsLike(goods._id));
+    user.user_bori_goods_like.find((likeGoods) => likeGoods === goods._id)
+      ? goods.bori_goods_like--
+      : goods.bori_goods_like++;
+    setGoodsLike(goods._id);
     likeGoodsMutation.mutate();
   };
   return (
@@ -66,8 +59,8 @@ const BoriGoodsDetailInfo = ({
             <Image
               style={{border: '2px solid black'}}
               fill
-              src={`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}${goods.product_image}`}
-              alt={goods.product_name}
+              src={`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}${goods.bori_goods_image}`}
+              alt={goods.bori_goods_name}
             ></Image>
           </figure>
           <BoriGoodsDetailController 
@@ -77,7 +70,7 @@ const BoriGoodsDetailInfo = ({
             goods={goods}/>
         </div>
         <div className={styles.goods_info}>
-          <p>제품 정보: {goods.product_name}</p>
+          <p>제품 정보: {goods.bori_goods_name}</p>
           <p className={styles.goods_category}>
             카테고리: #{category.category_name}
           </p>
@@ -88,7 +81,7 @@ const BoriGoodsDetailInfo = ({
                 role='like'>
                 <AiFillHeart
                   color={
-                    user.user_product_like.find(
+                    user.user_bori_goods_like.find(
                       (likeGoods) => likeGoods === goods._id
                     )
                       ? "red"
@@ -97,10 +90,10 @@ const BoriGoodsDetailInfo = ({
                   size={25}
                 ></AiFillHeart>
               </button>
-              {goods.product_like}
+              {goods.bori_goods_like}
             </div>
           </p>
-          <p>상품가격: {goods.product_price}</p>
+          <p>상품가격: {goods.bori_goods_price}</p>
         </div>
       </div>
     </>

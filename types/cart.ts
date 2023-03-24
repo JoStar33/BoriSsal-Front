@@ -1,16 +1,12 @@
 export interface ICartGoods {
-  product_id: string;
-  product_name: string;
-  product_image: string;
-  product_stock: number;
-  product_price: number;
+  bori_goods_id: string;
+  bori_goods_name: string;
+  bori_goods_image: string;
+  bori_goods_count: number;
+  bori_goods_price: number;
 }
 
-export interface IPostCartGoods {
+export interface IGetCartGoods extends ICartGoods {
   user_id: string;
-  product_id: string;
-  product_name: string;
-  product_image: string;
-  product_stock: number;
-  product_price: number;
+  _id: string;
 }

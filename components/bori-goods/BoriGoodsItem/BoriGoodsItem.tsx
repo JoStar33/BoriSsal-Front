@@ -8,11 +8,11 @@ interface IProps {
   bori_goods_image: string;
   goods_like: number;
   goods_name: string;
-  product_price: number;
-  category_name?: string
+  bori_goods_price: number;
+  category_name: string
 }
 
-const BoriGoodsItem = ({goods_name, bori_goods_image, goods_like, product_price, category_name}: IProps) => {
+const BoriGoodsItem = ({goods_name, bori_goods_image, goods_like, bori_goods_price, category_name}: IProps) => {
   return (
     <Link href={goods_name}>
       <div className={styles.bori_goods_item}>
@@ -27,8 +27,13 @@ const BoriGoodsItem = ({goods_name, bori_goods_image, goods_like, product_price,
         </div>
         <div className={styles.bori_goods_info}>
           <p className={styles.bori_goods_name}>{goods_name}</p>
-          <p className={styles.goods_category_name}>#{category_name}</p>
-          <p className={styles.bori_goods_price}>{product_price}원</p>
+          <p className={styles.goods_category_name}>
+            {
+              category_name 
+              ? `#${category_name}`
+              : '#카테고리 없음'
+            }</p>
+          <p className={styles.bori_goods_price}>{bori_goods_price}원</p>
         </div>
       </div>
     </Link>

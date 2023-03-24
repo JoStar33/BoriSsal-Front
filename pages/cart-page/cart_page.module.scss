@@ -1,0 +1,27 @@
+.order_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+};
+
+.info_head {
+  margin-top: 2vh;
+  font-size: 3vh;
+};
+
+.cart_container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+};
+
+.order_button {
+  font-size: 4vh;
+  font-weight: 800;
+  margin: 5vh;
+  background-color: #9999CC;
+  width: 70vw;
+  border-radius: 20px;
+  cursor: pointer;
+};

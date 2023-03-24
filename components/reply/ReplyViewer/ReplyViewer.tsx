@@ -1,27 +1,28 @@
-import { IReplyMutation } from '@/types/reply';
-import React, { useRef, useState } from 'react';
-import styles from './reply_viewer.module.scss';
-import ReplyPart from '../ReplyPart/ReplyPart';
-import { AiFillCaretDown } from 'react-icons/ai';
-import { useBoriGoodsReplyMutation } from '@/hooks/bori-goods/useBoriGoodsReplyMutation/useBoriGoodsReplyMutation';
-import { RootState } from '@/store';
-import { useSelector } from 'react-redux';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import ReplySkeleton from '@/components/loading/ReplySkeleton/ReplySkeleton';
+import { useBoriGoodsReplyMutation } from '@/hooks/bori-goods/useBoriGoodsReplyMutation/useBoriGoodsReplyMutation';
+import { useUserStore } from '@/store/user';
+import { IReplyMutation } from '@/types/reply';
+import React, { useRef, useState } from 'react';
+import { AiFillCaretDown } from 'react-icons/ai';
+import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
+import ReplyPart from '../ReplyPart/ReplyPart';
+import styles from './reply_viewer.module.scss';
 
 interface IProps {
   goods_id: string;
-  mutationData?: IReplyMutation;
+  mutationData: IReplyMutation;
   limit: number;
   setLimit: React.Dispatch<React.SetStateAction<number>>;
+  refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<IReplyMutation, unknown>>
 }
 
-const ReplyViewer = ({mutationData, goods_id, setLimit, limit}: IProps) => {
+const ReplyViewer = ({mutationData, goods_id, setLimit, limit, refetch}: IProps) => {
   const [dialog, setDialog] = useState<boolean>(false);
+  const { user } = useUserStore();
   const replyContent = useRef<HTMLInputElement>(null);
   const validateText = useRef<string>('');
-  const { user } = useSelector((state: RootState) => state.userStore);
-  const goodsReplyMutation = useBoriGoodsReplyMutation(user.id, user.email, goods_id);
+  const goodsReplyMutation = useBoriGoodsReplyMutation(goods_id);
   const replyRegist = () => {
     if(!replyContent.current)
       return;
@@ -38,6 +39,14 @@ const ReplyViewer = ({mutationData, goods_id, setLimit, limit}: IProps) => {
     setLimit(limit + 1);
     goodsReplyMutation.mutate(replyContent.current.value);
   };
+  const showMoreReply = async () => {
+    setLimit(() => {
+      return limit + 1;
+    });
+    setTimeout(() => {
+      refetch();
+    }, 300);
+  }
   return (
     <>
       {
@@ -53,13 +62,13 @@ const ReplyViewer = ({mutationData, goods_id, setLimit, limit}: IProps) => {
           goodsReplyMutation.isLoading && <ReplySkeleton></ReplySkeleton>
         }
         {
-          mutationData?.product_reply && mutationData?.product_reply.map((reply)=>{
+          mutationData.bori_goods_reply && mutationData.bori_goods_reply.map((reply)=>{
             return <ReplyPart key={reply._id} reply={reply} setDialog={setDialog} validateText={validateText}></ReplyPart>
           })
         }
         {
-          !mutationData?.overflow && 
-          <button className={styles.more_show_button} onClick={() => setLimit(limit + 1)}>
+          !mutationData.overflow && 
+          <button className={styles.more_show_button} onClick={() => showMoreReply()}>
             더보기
             <AiFillCaretDown></AiFillCaretDown>
           </button>

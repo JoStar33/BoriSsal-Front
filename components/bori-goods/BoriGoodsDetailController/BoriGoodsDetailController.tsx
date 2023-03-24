@@ -1,13 +1,13 @@
 import { errorMessage } from '@/apis/error/customError';
 import { useCartMutation } from '@/hooks/user/useCartMutation/useCartMutation';
-import { RootState } from '@/store';
-import { setCartState } from '@/store/cart';
+import { useCartStore } from '@/store/cart';
+
+import { useUserStore } from '@/store/user';
 import { IBoriGoods } from '@/types/boriGoods';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { BsFillCartFill } from "react-icons/bs";
-import { useDispatch, useSelector } from 'react-redux';
 import styles from './bori_goods_detail_controller.module.scss';
 
 interface IProps {
@@ -18,19 +18,19 @@ interface IProps {
 }
 
 const BoriGoodsDetailController = ({goods, validateText, setValidateDialog, setSuccessDialog}: IProps) => {
+  const { user, setPageState } = useUserStore();
   const router = useRouter();
-  const { user } = useSelector((state: RootState) => state.userStore);
+  const { setCart } = useCartStore();
   const { mutate, isError, isSuccess, error } = useCartMutation(
     user.id,
     {
-      product_id: goods._id,
-      product_name: goods.product_name,
-      product_image: goods.product_image,
-      product_stock: goods.product_stock,
-      product_price: goods.product_price
+      bori_goods_id: goods._id,
+      bori_goods_name: goods.bori_goods_name,
+      bori_goods_image: goods.bori_goods_image,
+      bori_goods_count: 1,
+      bori_goods_price: goods.bori_goods_price
     }
-  )
-  const dispatch = useDispatch();
+  );
   useEffect(() => {
     if (isSuccess) {
       setSuccessDialog(true);
@@ -56,13 +56,14 @@ const BoriGoodsDetailController = ({goods, validateText, setValidateDialog, setS
       validateText.current = '로그인 후 이용 가능합니다.';
       return;
     }
-    dispatch(setCartState([{
-      product_id: goods._id,
-      product_name: goods.product_name,
-      product_image: goods.product_image,
-      product_stock: goods.product_stock,
-      product_price: goods.product_price
-    }]));
+    setCart([{
+      bori_goods_id: goods._id,
+      bori_goods_name: goods.bori_goods_name,
+      bori_goods_image: goods.bori_goods_image,
+      bori_goods_count: 1,
+      bori_goods_price: goods.bori_goods_price
+    }]);
+    setPageState('order');
     router.push('/order');
   }
   return (
