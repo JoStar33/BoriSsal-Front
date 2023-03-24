@@ -8,7 +8,7 @@ import { useProfileUpdateMutation } from "@/hooks/user/useProfileUpdateMutation/
 import { useUserStore } from "@/store/user";
 import { initDeliver } from "@/utils/initData";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { BsFillPencilFill } from "react-icons/bs";
 import styles from "./userpage.module.scss";
 
@@ -17,8 +17,11 @@ const UserPage = () => {
   const [dialog, setDialog] = useState<boolean>(false);
   let { data, isError, isLoading } = useDeliverAddressQuery();
   const loginCheck = useLoginCheckQuery();
-  const formData = new FormData();
-  const { mutate } = useProfileUpdateMutation(formData);
+  let formData: FormData;
+  useLayoutEffect(() => {
+    formData = new FormData();
+  });
+  const { mutate } = useProfileUpdateMutation();
   const handleOnChangeProfileImage = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -27,7 +30,7 @@ const UserPage = () => {
     }
     const file: File = (e.target.files)[0];
     formData.append("img", file);
-    mutate();
+    mutate(formData);
   };
   if(!data) {
     data = initDeliver;
