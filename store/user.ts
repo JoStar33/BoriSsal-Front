@@ -33,33 +33,33 @@ const initUser = {
 
 
 export const useUserStore = create<IStore>()(
-    persist(
-      (set) => ({
-        ...initUser,
-        setUser: (payload: IUser) =>
-          set(produce((state: IUserState) => {
-            state.user = payload
-        })),
-        resetUser: () => {
-          set(produce((state: IUserState) => {
-            state.user = initUser.user
-          }))
-        },
-        setUserProfile: (payload: string) =>
-          set(produce((state: IUserState) => {
-            state.user = { ...state.user, profile_image: payload };
-        })),
-        setGoodsLike: (payload: string) =>
-          set(produce((state: IUserState) => {
-            state.user = { ...state.user, profile_image: payload };
-        })),
-        setPageState: (payload: string) =>
-          set(produce((state: IUserState) => {
-            state.pageState = payload;
-        })),
-      }),
-      {
-        name: 'user-storage',
-      }
-    )
-  );
+  persist(
+    (set) => ({
+      ...initUser,
+      setUser: (payload: IUser) =>
+        set(produce((state: IUserState) => {
+          state.user = payload
+      })),
+      resetUser: () => {
+        set(produce((state: IUserState) => {
+          state.user = initUser.user
+        }))
+      },
+      setUserProfile: (payload: string) =>
+        set(produce((state: IUserState) => {
+          state.user = { ...state.user, profile_image: payload };
+      })),
+      setGoodsLike: (payload: string) =>
+        set(produce((state: IUserState) => {
+          state.user = { ...state.user, profile_image: payload };
+      })),
+      setPageState: (payload: string) =>
+        set(produce((state: IUserState) => {
+          state.pageState = payload;
+      })),
+    }),
+    {
+      name: 'user-storage',
+    }
+  )
+);
