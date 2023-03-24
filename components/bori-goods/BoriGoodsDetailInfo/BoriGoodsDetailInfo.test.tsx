@@ -1,35 +1,33 @@
-import { render, screen } from "@testing-library/react";
-import { QueryClientProvider, QueryClient } from "react-query";
-import { store } from "@/store";
-import { Provider } from "react-redux";
-import BoriGoodsDetailInfo from "./BoriGoodsDetailInfo";
-import { resetUserState, setUserState } from "@/store/user";
+
+import { useUserStore } from "@/store/user";
+import { render, renderHook, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { QueryClient, QueryClientProvider } from "react-query";
+import BoriGoodsDetailInfo from "./BoriGoodsDetailInfo";
 
 const user = userEvent.setup();
 
 const queryClient = new QueryClient();
 
 const initRender = () => {
-  store.dispatch(resetUserState());
+  const current = renderHook(() => useUserStore());
+  current.result.current.resetUser();
   render(
     <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <BoriGoodsDetailInfo goods={{
-          _id: "23",
-          category_id: '88',
-          bori_goods_name: '보리 티셔츠',
-          bori_goods_price: 30000,
-          bori_goods_stock: 20,
-          bori_goods_desc: '보리의 얼굴이 들어간 아주 깜찍한 이미지',
-          bori_goods_like: 10,
-          bori_goods_image: '/none',
-          created_at: new Date,
-        }} category={{
-          _id: "88",
-          category_name:"의류"
-        }}></BoriGoodsDetailInfo>
-      </Provider>
+      <BoriGoodsDetailInfo goods={{
+        _id: "23",
+        category_id: '88',
+        bori_goods_name: '보리 티셔츠',
+        bori_goods_price: 30000,
+        bori_goods_stock: 20,
+        bori_goods_desc: '보리의 얼굴이 들어간 아주 깜찍한 이미지',
+        bori_goods_like: 10,
+        bori_goods_image: '/none',
+        created_at: new Date,
+      }} category={{
+        _id: "88",
+        category_name:"의류"
+      }}></BoriGoodsDetailInfo>
     </QueryClientProvider>)
 };
 

@@ -1,8 +1,8 @@
 import { errorMessage } from '@/apis/error/customError';
 import { useCartUpdateMutation } from '@/hooks/user/useCartUpdateMutation/useCartUpdateMutation';
 import { useDeleteCartMutation } from '@/hooks/user/useDeleteCartMutation/useDeleteCartMutation';
-import { decreaseCartState, increaseCartState } from '@/store/cart';
-import { ICartGoods, IGetCartGoods } from '@/types/cart';
+import { useCartStore } from '@/store/cart';
+import { ICartGoods } from '@/types/cart';
 import { validateCount } from '@/utils/validate';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
@@ -10,7 +10,6 @@ import { AiFillCheckCircle } from 'react-icons/ai';
 import { BsFillArrowDownCircleFill, BsFillArrowUpCircleFill } from 'react-icons/bs';
 import { GrClose } from 'react-icons/gr';
 import { RiAlarmWarningFill } from 'react-icons/ri';
-import { useDispatch } from 'react-redux';
 import CartItemSkeleton from '../loading/CartItemSkeleton/CartItemSkeleton';
 import styles from './cart_item.module.scss';
 
@@ -20,7 +19,7 @@ interface IProps {
 }
 
 const CartItem = ({cart_id, cartGoods}: IProps) => {
-  const dispatch = useDispatch();
+  const {decreaseCart, increaseCart} = useCartStore();
   const [cartCount, setCartCount] = useState<number>(0);
   const inputRef = useRef<HTMLInputElement>(null)
   const { mutate, isLoading } = useDeleteCartMutation(cartGoods.bori_goods_id);
@@ -34,10 +33,10 @@ const CartItem = ({cart_id, cartGoods}: IProps) => {
     mutate();
   };
   const handleIncreaseGoods = () => {
-    dispatch(increaseCartState(cartGoods));
+    increaseCart(cartGoods);
   };
   const handleDecreaseGoods = () => {
-    dispatch(decreaseCartState(cartGoods));
+    decreaseCart(cartGoods);
   };
   const handleOnChangeCount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCartCount(parseInt(e.target.value));

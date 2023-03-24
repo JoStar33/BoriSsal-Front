@@ -1,20 +1,19 @@
-import React, { useState } from "react";
-import Image from "next/image";
-import { RootState } from "@/store";
-import { useSelector } from "react-redux";
-import { useDeliverAddressQuery } from "@/hooks/user/useDeliverAddressQuery/useDeliverAddressQuery";
-import styles from "./userpage.module.scss";
-import Loading from "@/components/loading/Loading/Loading";
-import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
 import PassWordChangeDialog from "@/components/dialogs/PassWordChangeDialog/PassWordChangeDialog";
-import { useLoginCheckQuery } from "@/hooks/auth/useLoginCheckQuery/useLoginCheckQuery";
-import { BsFillPencilFill } from "react-icons/bs";
-import { useProfileUpdateMutation } from "@/hooks/user/useProfileUpdateMutation/useProfileUpdateMutation";
-import { initDeliver } from "@/utils/initData";
+import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
+import Loading from "@/components/loading/Loading/Loading";
 import UserDeliverAddressViewer from "@/components/user/UserDeliverAddressViewer/UserDeliverAddressViewer";
+import { useLoginCheckQuery } from "@/hooks/auth/useLoginCheckQuery/useLoginCheckQuery";
+import { useDeliverAddressQuery } from "@/hooks/user/useDeliverAddressQuery/useDeliverAddressQuery";
+import { useProfileUpdateMutation } from "@/hooks/user/useProfileUpdateMutation/useProfileUpdateMutation";
+import { useUserStore } from "@/store/user";
+import { initDeliver } from "@/utils/initData";
+import Image from "next/image";
+import React, { useState } from "react";
+import { BsFillPencilFill } from "react-icons/bs";
+import styles from "./userpage.module.scss";
 
 const UserPage = () => {
-  const { user } = useSelector((state: RootState) => state.userStore);
+  const { user } = useUserStore();
   const [dialog, setDialog] = useState<boolean>(false);
   let { data, isError, isLoading } = useDeliverAddressQuery();
   const loginCheck = useLoginCheckQuery();

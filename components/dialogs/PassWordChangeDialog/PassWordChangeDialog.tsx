@@ -1,21 +1,18 @@
+import { errorMessage } from "@/apis/error/customError";
+import Loading from "@/components/loading/Loading/Loading";
+import InputPart from "@/components/user/InputPart/InputPart";
+import { usePassWordChangeMutation } from "@/hooks/auth/usePassWordChangeMutation/usePassWordChangeMutation";
+import { IPasswordInfo, IPostPasswordInfo } from "@/types/auth";
+import { validatePassword, validatePasswordCheck } from "@/utils/validate";
+import { AxiosError } from "axios";
+import Image from "next/image";
 import React, { useEffect, useMemo, useState } from "react";
+import { AiFillCheckCircle } from "react-icons/ai";
 import { GrClose } from "react-icons/gr";
 import { RiAlarmWarningFill } from "react-icons/ri";
-import { AiFillCheckCircle } from "react-icons/ai";
-import { validatePassword, validatePasswordCheck } from "@/utils/validate";
-import { usePassWordChangeMutation } from "@/hooks/auth/usePassWordChangeMutation/usePassWordChangeMutation";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
-import Image from "next/image";
-import password_bori from "/public/dialog/password_bori.png";
-import styles from "./password_change_dialog.module.scss";
-import InputPart from "@/components/user/InputPart/InputPart";
-import Loading from "@/components/loading/Loading/Loading";
-import { AxiosError } from "axios";
 import SuccessDialog from "../SuccessDialog/SuccessDialog";
-import { errorMessage } from "@/apis/error/customError";
-import { IPasswordInfo } from "@/types/auth";
-import { IPostPasswordInfo } from "@/types/auth";
+import styles from "./password_change_dialog.module.scss";
+import password_bori from "/public/dialog/password_bori.png";
 
 interface IProps {
   setDialog: React.Dispatch<React.SetStateAction<boolean>>;

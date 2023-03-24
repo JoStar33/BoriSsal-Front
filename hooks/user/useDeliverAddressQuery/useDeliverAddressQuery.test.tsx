@@ -1,23 +1,21 @@
-import { QueryClientProvider, QueryClient } from "react-query";
+
+import { useUserStore } from "@/store/user";
 import { renderHook, waitFor } from "@testing-library/react";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { useDeliverAddressQuery } from "./useDeliverAddressQuery";
-import { Provider } from "react-redux";
-import { store } from "@/store";
-import { setUserState } from "@/store/user";
 const queryClient = new QueryClient();
 
 const Wrapper = ({ children }: any) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        {children}
-      </Provider>
+      {children}
     </QueryClientProvider>
   );
 };
 
 test("useDeliverAddressQuery 정상동작 확인 테스트", async () => {
-  store.dispatch(setUserState({
+  const current = renderHook(() => useUserStore());
+  current.result.current.setUser({
     id: "23",
     email: "",
     nick: "",
@@ -27,7 +25,7 @@ test("useDeliverAddressQuery 정상동작 확인 테스트", async () => {
     created_at: new Date(),
     user_bori_goods_like: [],
     user_bori_gallery_like: []
-  }));
+  });
   const { result } = renderHook(
     () => useDeliverAddressQuery(),
     {

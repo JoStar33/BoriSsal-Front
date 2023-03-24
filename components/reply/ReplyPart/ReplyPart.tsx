@@ -1,8 +1,7 @@
 import { useBoriGoodsChildReplyMutation } from "@/hooks/bori-goods/useBoriGoodsChildReplyMutation/useBoriGoodsChildReplyMutation";
-import { RootState } from "@/store";
+import { useUserStore } from "@/store/user";
 import { IReply } from "@/types/reply";
 import React, { useRef, useState } from "react";
-import { useSelector } from "react-redux";
 import ReplyChildPart from "../ReplyChildPart/ReplyChildPart";
 import styles from "./reply_part.module.scss";
 
@@ -14,7 +13,7 @@ interface IProps {
 
 const ReplyPart = ({ reply, setDialog, validateText }: IProps) => {
   const [showChildReply, setShowChildReply] = useState<boolean>(false);
-  const { user } = useSelector((state: RootState) => state.userStore);
+  const { user } = useUserStore();
   const replyDate = useRef<Date>(new Date(reply.created_at));
   const replyInputRef = useRef<HTMLInputElement>(null);
   const goodsReplyChildMutation = useBoriGoodsChildReplyMutation(reply._id);

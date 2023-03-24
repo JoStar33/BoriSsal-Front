@@ -1,19 +1,18 @@
-import { QueryClientProvider, QueryClient } from "react-query";
-import { Provider } from "react-redux";
-import { store } from "@/store";
+
+import { useUserStore } from "@/store/user";
 import { renderHook, waitFor } from "@testing-library/react";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { useUserQuery } from "./useUserQuery";
 const queryClient = new QueryClient();
 
 const Wrapper = ({ children }: any) => {
   return (
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </Provider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
 
 test("useUserQuery 정상동작 확인 테스트", async () => {
+  const current = renderHook(() => useUserStore());
   global.window = Object.create(window);
   const url = "http://example.com/?user_id=23";
   Object.defineProperty(window, "location", {
@@ -30,7 +29,7 @@ test("useUserQuery 정상동작 확인 테스트", async () => {
     }
   );
   await waitFor(() => expect(result.current.isSuccess).toBe(true)).then(() => {
-    const state = store.getState().userStore;
+    const state = current.result.current;
     expect(state.user.id).toEqual("23");
     expect(state.user.email).toEqual("rhwdf@gmail.com");
     expect(state.user.nick).toEqual("우하하");

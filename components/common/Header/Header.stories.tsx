@@ -1,8 +1,8 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Header from './Header';
-import { useDispatch } from "react-redux";
-import { setUserState, resetUserState } from "@/store/user";
+
+import { useUserStore } from "@/store/user";
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useEffect } from 'react';
+import Header from './Header';
 
 export default {
   title: '컴포넌트/일반/헤드 테스트',
@@ -10,9 +10,9 @@ export default {
 } as ComponentMeta<typeof Header>;
 
 const LoggedInComponent = () => {
-  const dispatch = useDispatch();
+  const { setUser } = useUserStore();
   useEffect(() => {
-    dispatch(setUserState({
+    setUser({
       id: "2421424325325",
       email: "",
       nick: "하오우",
@@ -22,16 +22,16 @@ const LoggedInComponent = () => {
       created_at: new Date(),
       user_bori_goods_like: [],
       user_bori_gallery_like: []
-    }));
-  });
+    });
+  }, []);
   return (<Header />);
 }
 
 const NotLoggedInComponent = () => {
-  const dispatch = useDispatch();
+  const { resetUser } = useUserStore();
   useEffect(() => {
-    dispatch(resetUserState());
-  });
+    resetUser();
+  }, []);
   return (<Header />);
 }
 

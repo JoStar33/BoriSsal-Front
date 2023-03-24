@@ -1,12 +1,22 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IUser } from "../types/user";
+import { IUser } from "@/types/user";
+import produce from "immer";
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-interface IState {
+interface IUserState {
   user: IUser;
   pageState: string;
-}
+};
 
-const initialState: IState = {
+interface IStore extends IUserState {
+  setUser: (payload: IUser) => void;
+  setUserProfile: (payload: string) => void;
+  setGoodsLike: (payload: string) => void;
+  setPageState: (payload: string) => void;
+  resetUser: () => void;
+};
+
+const initUser = {
   user: {
     id: "",
     email: ``,
@@ -15,36 +25,41 @@ const initialState: IState = {
     profile_image: "",
     user_role: 0,
     created_at: new Date(),
-    user_bori_goods_like: [],
-    user_bori_gallery_like: [],
+    user_bori_goods_like: ['123'],
+    user_bori_gallery_like: ['123'],
   },
   pageState: ''
 };
 
-export const userSlice = createSlice({
-  name: "user",
-  initialState,
-  reducers: {
-    resetUserState: (state) => {
-      Object.assign(state, initialState);
-    },
-    setUserState: (state, action: PayloadAction<IUser>) => {
-      Object.assign(state.user, action.payload);
-    },
-    setUserProfileState: (state, action: PayloadAction<string>) => {
-      state.user = {...state.user, profile_image: action.payload}
-    },
-    setGoodsLike: (state, action: PayloadAction<string>) => {
-      state.user.user_bori_goods_like.find(likeGoods => likeGoods === action.payload) 
-      ? state.user.user_bori_goods_like = state.user.user_bori_goods_like.filter(likeGoods => likeGoods !== action.payload)
-      : state.user.user_bori_goods_like.push(action.payload);
-    },
-    setPageState: (state, action: PayloadAction<string>) => {
-      state.pageState = action.payload;
-    }
-  },
-});
 
-export const { resetUserState, setUserState, setUserProfileState, setGoodsLike, setPageState } = userSlice.actions;
-
-export default userSlice.reducer;
+export const useUserStore = create<IStore>()(
+    persist(
+      (set) => ({
+        ...initUser,
+        setUser: (payload: IUser) =>
+          set(produce((state: IUserState) => {
+            state.user = payload
+        })),
+        resetUser: () => {
+          set(produce((state: IUserState) => {
+            state.user = initUser.user
+          }))
+        },
+        setUserProfile: (payload: string) =>
+          set(produce((state: IUserState) => {
+            state.user = { ...state.user, profile_image: payload };
+        })),
+        setGoodsLike: (payload: string) =>
+          set(produce((state: IUserState) => {
+            state.user = { ...state.user, profile_image: payload };
+        })),
+        setPageState: (payload: string) =>
+          set(produce((state: IUserState) => {
+            state.pageState = payload;
+        })),
+      }),
+      {
+        name: 'user-storage',
+      }
+    )
+  );

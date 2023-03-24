@@ -1,10 +1,8 @@
-import { RootState } from '@/store';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { useUserStore } from '@/store/user';
 import styles from './user_info_viewer.module.scss';
 
 const UserInfoViewer = () => {
-  const { user } = useSelector((state: RootState) => state.userStore);
+  const { user } = useUserStore();
   return (
     <div className={styles.info_container}>
       <p>이메일: 

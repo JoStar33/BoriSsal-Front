@@ -1,16 +1,15 @@
 import CartItem from "@/components/cart/CartItem";
 import { useCartQuery } from "@/hooks/user/useCartQuery/useCartQuery";
-import styles from "./cart_page.module.scss";
-import React from "react";
-import { useDispatch } from "react-redux";
-import { setCartState } from "@/store/cart";
+import { useCartStore } from "@/store/cart";
+import { useUserStore } from "@/store/user";
 import { useRouter } from "next/router";
-import { setPageState } from "@/store/user";
+import styles from "./cart_page.module.scss";
 
 const CartPage = () => {
   let { data: cartData } = useCartQuery();
+  const { setPageState } = useUserStore();
+  const { setCart } = useCartStore();
   const router = useRouter();
-  const dispatch = useDispatch();
   if (!cartData) {
     cartData = [];
   }
@@ -18,8 +17,8 @@ const CartPage = () => {
     if (!cartData) {
       cartData = [];
     }
-    dispatch(setPageState("order"));
-    dispatch(setCartState(cartData));
+    setPageState("order");
+    setCart(cartData);
     router.push("/order");
   };
   return (

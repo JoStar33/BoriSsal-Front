@@ -1,6 +1,5 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { store } from "@/store";
-import { Provider } from "react-redux";
+
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import UserBar from "./UserBar";
 
 export default {
@@ -9,9 +8,7 @@ export default {
 } as ComponentMeta<typeof UserBar>;
 
 const Template: ComponentStory<typeof UserBar> = () => (
-  <Provider store={store}>
-    <UserBar />
-  </Provider>
+  <UserBar />
 );
 
 export const UserBarTest = Template.bind({});

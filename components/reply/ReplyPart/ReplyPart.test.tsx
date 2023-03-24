@@ -1,10 +1,9 @@
-import React from "react";
+
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import React from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
 import ReplyPart from "./ReplyPart";
-import { QueryClientProvider, QueryClient } from "react-query";
-import { Provider } from "react-redux";
-import { store } from "@/store";
 const queryClient = new QueryClient();
 const user = userEvent.setup();
 
@@ -12,20 +11,18 @@ const validateText = jest.fn() as any;
 
 const initRender = () => {
   render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <ReplyPart reply={{
-        _id: 'qwewqe',
-        user_id: 'dgfdg',
-        email: 'rhwdd123',
-        content: '헬로우 헬로우',
-        reply_child: [],
-        created_at: String(new Date())
-      }} setDialog={function (value: React.SetStateAction<boolean>): void {
-        throw new Error("Function not implemented.");
-      } } validateText={validateText}></ReplyPart>
-      </QueryClientProvider>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <ReplyPart reply={{
+      _id: 'qwewqe',
+      user_id: 'dgfdg',
+      email: 'rhwdd123',
+      content: '헬로우 헬로우',
+      reply_child: [],
+      created_at: String(new Date())
+    }} setDialog={function (value: React.SetStateAction<boolean>): void {
+      throw new Error("Function not implemented.");
+    } } validateText={validateText}></ReplyPart>
+    </QueryClientProvider>
   );
 }
 

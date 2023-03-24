@@ -1,9 +1,8 @@
-import { store } from "@/store";
-import { QueryClientProvider, QueryClient } from "react-query";
+
 import { fireEvent, render, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
-import UserDeliverAddressPart from "./UserDeliverAddressPart";
 import userEvent from "@testing-library/user-event";
+import { QueryClient, QueryClientProvider } from "react-query";
+import UserDeliverAddressPart from "./UserDeliverAddressPart";
 
 const queryClient = new QueryClient();
 
@@ -24,13 +23,11 @@ const initRender = ({
 }: IProps) => {
   render(
     <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <UserDeliverAddressPart
-          addressInfo={addressInfo}
-          labelInfo={labelInfo}
-          addressType={addressType}
-        />
-      </Provider>
+      <UserDeliverAddressPart
+        addressInfo={addressInfo}
+        labelInfo={labelInfo}
+        addressType={addressType}
+      />
     </QueryClientProvider>
   );
   const addressValue = screen.getByRole(addressType);

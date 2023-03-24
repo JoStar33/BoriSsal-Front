@@ -1,15 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
-import { BsFillPencilFill } from "react-icons/bs";
-import { useDeliverAddressMutation } from "@/hooks/user/useDeliverAddressMutation/useDeliverAddressMutation";
-import { IPatchDeliverAddress } from "@/types/deliverAddress";
-import { AiFillCheckCircle } from "react-icons/ai";
-import { RiAlarmWarningFill } from "react-icons/ri";
 import { errorMessage } from "@/apis/error/customError";
+import { useDeliverAddressMutation } from "@/hooks/user/useDeliverAddressMutation/useDeliverAddressMutation";
+import { useUserStore } from "@/store/user";
+import { IPatchDeliverAddress } from "@/types/deliverAddress";
 import { AxiosError } from "axios";
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store';
-import styles from "./user_deliver_address_part.module.scss";
+import React, { useEffect, useRef, useState } from "react";
 import DaumPostcode from "react-daum-postcode";
+import { AiFillCheckCircle } from "react-icons/ai";
+import { BsFillPencilFill } from "react-icons/bs";
+import { RiAlarmWarningFill } from "react-icons/ri";
+import styles from "./user_deliver_address_part.module.scss";
 
 interface IProps {
   addressInfo: string;
@@ -22,7 +21,7 @@ const UserDeliverAddressPart = ({
   labelInfo,
   addressType
 }: IProps) => {
-  const { user } = useSelector((state: RootState) => state.userStore);
+  const { user } = useUserStore();
   const [dialog, setDialog] = useState<boolean>(false);
   const [address, setAddress] = useState<string>(addressInfo);
   const inputRef = useRef<HTMLInputElement>(null);

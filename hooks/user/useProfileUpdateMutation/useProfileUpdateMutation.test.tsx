@@ -1,16 +1,13 @@
-import { QueryClientProvider, QueryClient } from "react-query";
-import { renderHook, waitFor } from "@testing-library/react";
+
+import { renderHook } from "@testing-library/react";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { useProfileUpdateMutation } from "./useProfileUpdateMutation";
-import { Provider } from "react-redux";
-import { store } from "@/store";
 
 const queryClient = new QueryClient();
 
 const Wrapper = ({ children }: any) => {
   return (
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </Provider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
 

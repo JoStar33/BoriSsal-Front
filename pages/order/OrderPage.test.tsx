@@ -1,25 +1,22 @@
-import { store } from "@/store";
-import { render, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
-import { QueryClientProvider, QueryClient } from "react-query";
-import OrderPage from "./index.page";
-import userEvent from "@testing-library/user-event";
-import { setPageState, setUserState } from "@/store/user";
 import { server } from "@/mocks/server";
+import { useCartStore } from "@/store/cart";
+import { useUserStore } from "@/store/user";
+import { render, renderHook, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { rest } from "msw";
-import { setCartState } from "@/store/cart";
+import { QueryClient, QueryClientProvider } from "react-query";
+import OrderPage from "./index.page";
 
 const queryClient = new QueryClient();
 
 const user = userEvent.setup();
 
 const initRender = () => {
-  store.dispatch(setPageState('order'));
+  const current = renderHook(() => useUserStore());
+  current.result.current.setPageState('order')
   render(
     <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <OrderPage />
-      </Provider>
+      <OrderPage />
     </QueryClientProvider>
   );
 }
@@ -40,7 +37,8 @@ test("OrderPage 화면 반영 테스트", () => {
 
 
 test("OrderPage 화면 반영 테스트 (굿즈가 없는 상태일 경우)", async () => {
-  store.dispatch(setUserState({
+  const current = renderHook(() => useUserStore());
+  current.result.current.setUser({
     id: "23",
     email: "rhgfd@naver.com",
     nick: "호우호우",
@@ -50,7 +48,7 @@ test("OrderPage 화면 반영 테스트 (굿즈가 없는 상태일 경우)", as
     created_at: new Date(),
     user_bori_goods_like: [],
     user_bori_gallery_like: []
-  }));
+  });
   initRender();
   const clickOrder = await screen.findByRole('order-button');
   user.click(clickOrder);
@@ -59,7 +57,9 @@ test("OrderPage 화면 반영 테스트 (굿즈가 없는 상태일 경우)", as
 });
 
 test("OrderPage 화면 반영 테스트 (배송지 정보가 없을경우)", async () => {
-  store.dispatch(setUserState({
+  const current = renderHook(() => useUserStore());
+  const cartCurrent = renderHook(() => useCartStore());
+  current.result.current.setUser({
     id: "23",
     email: "rhgfd@naver.com",
     nick: "호우호우",
@@ -69,14 +69,14 @@ test("OrderPage 화면 반영 테스트 (배송지 정보가 없을경우)", asy
     created_at: new Date(),
     user_bori_goods_like: [],
     user_bori_gallery_like: []
-  }));
-  store.dispatch(setCartState([{
+  });
+  cartCurrent.result.current.setCart([{
     bori_goods_id: '', 
     bori_goods_name: '', 
     bori_goods_image: '', 
     bori_goods_count: 3, 
     bori_goods_price: 300000
-  }]));
+  }]);
   server.use(
     rest.get(
       `${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/deliver-address/23`,

@@ -1,23 +1,21 @@
-import { render, screen } from "@testing-library/react";
+
+import { useUserStore } from "@/store/user";
+import { render, renderHook, screen } from "@testing-library/react";
+import { QueryClient, QueryClientProvider } from "react-query";
 import CartPage from "./index.page";
-import { Provider } from "react-redux";
-import { store } from "@/store";
-import { QueryClientProvider, QueryClient } from "react-query";
-import { setUserState } from "@/store/user";
 
 const queryClient = new QueryClient();
 
 const initRender = () => {
   render(
     <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <CartPage></CartPage>
-      </Provider>
+      <CartPage></CartPage>
     </QueryClientProvider>)
 }
 
 test('CartPage 화면 확인', async () => {
-  store.dispatch(setUserState({
+  const current = renderHook(() => useUserStore());
+  current.result.current.setUser({
     id: "23",
     email: "",
     nick: "",
@@ -27,7 +25,7 @@ test('CartPage 화면 확인', async () => {
     created_at: new Date(),
     user_bori_goods_like: [],
     user_bori_gallery_like: []
-  }));
+  });
   initRender();
   const cartText = screen.getByText(/장바구니/);
   const orderText = screen.getByText(/장바구니/);

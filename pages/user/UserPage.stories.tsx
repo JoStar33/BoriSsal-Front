@@ -1,8 +1,7 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import UserPage from "./index.page";
-import { Provider } from "react-redux";
-import { store } from "@/store";
+
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import UserPage from "./index.page";
 const queryClient = new QueryClient();
 
 export default {
@@ -12,9 +11,7 @@ export default {
 
 const Template: ComponentStory<typeof UserPage> = () => (
   <QueryClientProvider client={queryClient}>
-    <Provider store={store}>
-      <UserPage />
-    </Provider>
+    <UserPage />
   </QueryClientProvider>
 );
 

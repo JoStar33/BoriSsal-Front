@@ -1,16 +1,15 @@
 import CartItem from '@/components/cart/CartItem';
-import { useLoginCheckQuery } from '@/hooks/auth/useLoginCheckQuery/useLoginCheckQuery';
-import { useDeliverAddressQuery } from '@/hooks/user/useDeliverAddressQuery/useDeliverAddressQuery';
-import { useSelector } from 'react-redux';
-import React, { useMemo, useRef, useState } from 'react';
-import { RootState } from '@/store';
-import styles from './orderpage.module.scss';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
-import { useOrderMutation } from '@/hooks/order/useOrderMutation/useOrderMutation';
-import UserInfoViewer from '@/components/order/UserInfoViewer/UserInfoViewer';
 import ErrorPage from '@/components/error/ErrorPage/ErrorPage';
-import UserDeliverAddressViewer from '@/components/user/UserDeliverAddressViewer/UserDeliverAddressViewer';
+import UserInfoViewer from '@/components/order/UserInfoViewer/UserInfoViewer';
 import UserDeliverAddressPart from '@/components/user/UserDeliverAddressPart/UserDeliverAddressPart';
+import { useLoginCheckQuery } from '@/hooks/auth/useLoginCheckQuery/useLoginCheckQuery';
+import { useOrderMutation } from '@/hooks/order/useOrderMutation/useOrderMutation';
+import { useDeliverAddressQuery } from '@/hooks/user/useDeliverAddressQuery/useDeliverAddressQuery';
+import { useCartStore } from '@/store/cart';
+import { useUserStore } from '@/store/user';
+import { useMemo, useRef, useState } from 'react';
+import styles from './orderpage.module.scss';
 
 //로그인 여부 확인 필요
 
@@ -24,12 +23,12 @@ const initData = {
 
 const OrderPage = () => {
   useLoginCheckQuery();
-  const { pageState } = useSelector((state: RootState) => state.userStore);
+  const { cart } = useCartStore();
+  const { pageState }= useUserStore();
   const [dialog, setDialog]= useState<boolean>(false);
   const validateText = useRef<string>('');
   let { data: deliverAddressData } = useDeliverAddressQuery();
   const { mutate } = useOrderMutation();
-  const { cart } = useSelector((state: RootState) => state.cartStore);
   const totalPrice = useMemo(() => {
     return cart.reduce((_total, cartElement) => {
       return _total + (cartElement.bori_goods_count * cartElement.bori_goods_price)}, 0);
@@ -86,7 +85,7 @@ const OrderPage = () => {
               {
                 cart.map(cartElement => 
                   <CartItem 
-                    isOrder={true}
+                    cart_id={''}
                     key={cartElement.bori_goods_id} 
                     cartGoods={cartElement}/>)
               }

@@ -1,32 +1,19 @@
-import { waitFor, renderHook } from "@testing-library/react";
+
+import { useUserStore } from "@/store/user";
+import { renderHook, waitFor } from "@testing-library/react";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { useLikeGoodsMutation } from "./useLikeGoodsMutation";
-import { QueryClientProvider, QueryClient } from "react-query";
-import { Provider } from "react-redux";
-import { store } from "@/store";
-import { setUserState } from "@/store/user";
 const queryClient = new QueryClient();
 
 const Wrapper = ({ children }: any) => {
-  store.dispatch(setUserState({
-    id: "6525",
-    email: "",
-    nick: "",
-    sns_id: "",
-    profile_image: "",
-    user_role: 0,
-    created_at: new Date(),
-    user_bori_goods_like: [],
-    user_bori_gallery_like: []
-  }));
   return (
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </Provider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
 
 test("useLikeGoodsMutation 정상동작 확인 테스트(좋아요)", async () => {
-  store.dispatch(setUserState({
+  const current = renderHook(() => useUserStore());
+  current.result.current.setUser({
     id: "23",
     email: "",
     nick: "",
@@ -36,7 +23,7 @@ test("useLikeGoodsMutation 정상동작 확인 테스트(좋아요)", async () =
     created_at: new Date(),
     user_bori_goods_like: [],
     user_bori_gallery_like: []
-  }));
+  });
   const { result } = renderHook(
     () => useLikeGoodsMutation('23'),
     {
@@ -51,7 +38,8 @@ test("useLikeGoodsMutation 정상동작 확인 테스트(좋아요)", async () =
 });
 
 test("useLikeGoodsMutation 정상동작 확인 테스트(좋아요 취소)", async () => {
-  store.dispatch(setUserState({
+  const current = renderHook(() => useUserStore());
+  current.result.current.setUser({
     id: "23",
     email: "",
     nick: "",
@@ -61,7 +49,7 @@ test("useLikeGoodsMutation 정상동작 확인 테스트(좋아요 취소)", asy
     created_at: new Date(),
     user_bori_goods_like: [],
     user_bori_gallery_like: []
-  }));
+  });
   const { result } = renderHook(
     () => useLikeGoodsMutation('23'),
     {

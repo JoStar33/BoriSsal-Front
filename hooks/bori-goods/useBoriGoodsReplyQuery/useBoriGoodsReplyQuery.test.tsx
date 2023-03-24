@@ -1,15 +1,12 @@
-import { waitFor, renderHook } from "@testing-library/react";
+
+import { renderHook, waitFor } from "@testing-library/react";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { useBoriGoodsReplyQuery } from "./useBoriGoodsReplyQuery";
-import { QueryClientProvider, QueryClient } from "react-query";
-import { Provider } from "react-redux";
-import { store } from "@/store";
 const queryClient = new QueryClient();
 
 const Wrapper = ({ children }: any) => {
   return (
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </Provider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
 

@@ -1,20 +1,17 @@
 import { errorMessage } from '@/apis/error/customError';
-import SuccessDialog from '@/components/dialogs/SuccessDialog/SuccessDialog';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import Loading from '@/components/loading/Loading/Loading';
 import { useLogoutMutation } from '@/hooks/auth/useLogoutMutation/useLogoutMutation';
-import { RootState } from '@/store';
+import { useUserStore } from '@/store/user';
 import { AxiosError } from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 import { BsFillCartFill } from 'react-icons/bs';
-import { useSelector } from 'react-redux';
-import styles from './userbar.module.scss'
+import styles from './userbar.module.scss';
 
 const UserBar = () => {
-  const { user } = useSelector((state: RootState) => state.userStore);
-  const { mutate, isError, isLoading, isSuccess, error } = useLogoutMutation();
+  const { user } = useUserStore();
+  const { mutate, isError, isLoading, error } = useLogoutMutation();
   return (
     <>
       {
@@ -22,9 +19,6 @@ const UserBar = () => {
       }
       {
         isLoading && <Loading></Loading>
-      }
-      {
-        isSuccess && <SuccessDialog text='로그아웃 성공!'></SuccessDialog>
       }
       <div className={styles.userbar_container}>
         <Link href='/cart-page' aria-label="장바구니 페이지로 이동">

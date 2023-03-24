@@ -1,16 +1,14 @@
-import { useMutation } from "react-query";
 import { logout } from "@/apis/user/auth";
-import { AppDispatch } from "@/store";
-import { useDispatch } from "react-redux";
-import { resetUserState } from "@/store/user";
+import { useUserStore } from "@/store/user";
 import { useRouter } from "next/router";
+import { useMutation } from "react-query";
 
 export const useLogoutMutation = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const { resetUser } = useUserStore();
   const router = useRouter();
   return useMutation(() => logout(), {
     onSuccess() {
-      dispatch(resetUserState());
+      resetUser();
       router.push("/");
     },
   });

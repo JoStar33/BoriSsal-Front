@@ -1,14 +1,13 @@
-import { IReplyMutation } from '@/types/reply';
-import React, { useRef, useState } from 'react';
-import styles from './reply_viewer.module.scss';
-import ReplyPart from '../ReplyPart/ReplyPart';
-import { AiFillCaretDown } from 'react-icons/ai';
-import { useBoriGoodsReplyMutation } from '@/hooks/bori-goods/useBoriGoodsReplyMutation/useBoriGoodsReplyMutation';
-import { RootState } from '@/store';
-import { useSelector } from 'react-redux';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import ReplySkeleton from '@/components/loading/ReplySkeleton/ReplySkeleton';
+import { useBoriGoodsReplyMutation } from '@/hooks/bori-goods/useBoriGoodsReplyMutation/useBoriGoodsReplyMutation';
+import { useUserStore } from '@/store/user';
+import { IReplyMutation } from '@/types/reply';
+import React, { useRef, useState } from 'react';
+import { AiFillCaretDown } from 'react-icons/ai';
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
+import ReplyPart from '../ReplyPart/ReplyPart';
+import styles from './reply_viewer.module.scss';
 
 interface IProps {
   goods_id: string;
@@ -20,7 +19,7 @@ interface IProps {
 
 const ReplyViewer = ({mutationData, goods_id, setLimit, limit, refetch}: IProps) => {
   const [dialog, setDialog] = useState<boolean>(false);
-  const { user } = useSelector((state: RootState) => state.userStore);
+  const { user } = useUserStore();
   const replyContent = useRef<HTMLInputElement>(null);
   const validateText = useRef<string>('');
   const goodsReplyMutation = useBoriGoodsReplyMutation(goods_id);

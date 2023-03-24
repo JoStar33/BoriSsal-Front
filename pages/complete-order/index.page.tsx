@@ -1,26 +1,24 @@
 import CartItem from '@/components/cart/CartItem';
-import { useLoginCheckQuery } from '@/hooks/auth/useLoginCheckQuery/useLoginCheckQuery';
-import { useDeliverAddressQuery } from '@/hooks/user/useDeliverAddressQuery/useDeliverAddressQuery';
-import { useDispatch, useSelector } from 'react-redux';
-import React, { useEffect, useMemo } from 'react';
-import { RootState } from '@/store';
-import styles from './complete_order_page.module.scss';
-import Link from 'next/link';
-import { render, pop } from '@/utils/congratulate';
-import { setPageState } from '@/store/user';
 import ErrorPage from '@/components/error/ErrorPage/ErrorPage';
 import UserInfoViewer from '@/components/order/UserInfoViewer/UserInfoViewer';
+import { useLoginCheckQuery } from '@/hooks/auth/useLoginCheckQuery/useLoginCheckQuery';
+import { useDeliverAddressQuery } from '@/hooks/user/useDeliverAddressQuery/useDeliverAddressQuery';
+import { useCartStore } from '@/store/cart';
+import { useUserStore } from '@/store/user';
+import { pop, render } from '@/utils/congratulate';
 import { initDeliver } from '@/utils/initData';
+import Link from 'next/link';
+import { useEffect, useMemo } from 'react';
+import styles from './complete_order_page.module.scss';
 
 const CompleteOrderPage = () => {
   useLoginCheckQuery();
-  const dispatch = useDispatch();
   let { data } = useDeliverAddressQuery();
   if(!data) {
     data = initDeliver;
   }
-  const { pageState } = useSelector((state: RootState) => state.userStore);
-  const { cart } = useSelector((state: RootState) => state.cartStore);
+  const { pageState, setPageState } = useUserStore();
+  const { cart } = useCartStore();
   const totalPrice = useMemo(() => {
     return cart.reduce((_total, cartElement) => {
       return _total + (cartElement.bori_goods_count * cartElement.bori_goods_price)}, 0);
@@ -34,7 +32,7 @@ const CompleteOrderPage = () => {
       render();
     }
     return () => {
-      dispatch(setPageState(''));
+      setPageState('');
     };
   }, []);
   return (

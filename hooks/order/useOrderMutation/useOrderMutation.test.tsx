@@ -1,18 +1,14 @@
 import { server } from "@/mocks/server";
-import { rest } from "msw";
-import { useOrderMutation } from "./useOrderMutation";
-import { QueryClientProvider, QueryClient } from "react-query";
 import { renderHook, waitFor } from "@testing-library/react";
-import { Provider } from "react-redux";
-import { store } from "@/store";
+import { rest } from "msw";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { useOrderMutation } from "./useOrderMutation";
 
 const queryClient = new QueryClient();
 
 const Wrapper = ({ children }: any) => {
   return (
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </Provider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
 

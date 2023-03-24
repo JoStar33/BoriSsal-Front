@@ -1,15 +1,13 @@
-import React, { useRef, useState } from 'react';
-import { AiFillHeart } from "react-icons/ai";
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/store';
-import { IBoriGoods, ICategory } from "@/types/boriGoods";
-import { useLikeGoodsMutation } from '@/hooks/bori-goods/useLikeGoodsMutation/useLikeGoodsMutation';
-import { setGoodsLike } from '@/store/user';
-import Image from "next/image";
-import styles from './bori_goods_detail_info.module.scss';
-import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
-import BoriGoodsDetailController from '../BoriGoodsDetailController/BoriGoodsDetailController';
 import SuccessDialog from '@/components/dialogs/SuccessDialog/SuccessDialog';
+import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
+import { useLikeGoodsMutation } from '@/hooks/bori-goods/useLikeGoodsMutation/useLikeGoodsMutation';
+import { useUserStore } from '@/store/user';
+import { IBoriGoods, ICategory } from "@/types/boriGoods";
+import Image from "next/image";
+import { useRef, useState } from 'react';
+import { AiFillHeart } from "react-icons/ai";
+import BoriGoodsDetailController from '../BoriGoodsDetailController/BoriGoodsDetailController';
+import styles from './bori_goods_detail_info.module.scss';
 interface IProps {
   goods: IBoriGoods;
   category: ICategory;
@@ -19,11 +17,10 @@ const BoriGoodsDetailInfo = ({
   goods,
   category
 }:IProps) => {
-  const dispatch = useDispatch();
   const validateText = useRef<string>("");
   const [validateDialog, setValidateDialog] = useState<boolean>(false);
   const [successDialog, setSuccessDialog] = useState<boolean>(false);
-  const { user } = useSelector((state: RootState) => state.userStore);
+  const { user, setGoodsLike } = useUserStore();
   const likeGoodsMutation = useLikeGoodsMutation(goods._id);
   const handleLikeGoods = () => {
     if (!user.id) {
@@ -33,7 +30,7 @@ const BoriGoodsDetailInfo = ({
     user.user_bori_goods_like.find((likeGoods) => likeGoods === goods._id)
       ? goods.bori_goods_like--
       : goods.bori_goods_like++;
-    dispatch(setGoodsLike(goods._id));
+    setGoodsLike(goods._id);
     likeGoodsMutation.mutate();
   };
   return (

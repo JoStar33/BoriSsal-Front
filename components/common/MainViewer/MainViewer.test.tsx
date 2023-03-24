@@ -1,11 +1,10 @@
-import { store } from "@/store";
+
 import { render, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
 import MainViewer from "./MainViewer";
 
 describe("메인페이지 테스트", () => {
   test("메인페이지 텍스트 반영 테스트", () => {
-    render(<Provider store={store}><MainViewer /></Provider>);
+    render(<MainViewer />);
     const mainText = screen.getByText(/보리쌀에 온걸 환영해/);
     expect(mainText).toBeInTheDocument();
     const subText = screen.getByText(
@@ -14,7 +13,7 @@ describe("메인페이지 테스트", () => {
     expect(subText).toBeInTheDocument();
   });
   test("이미지 반영 테스트", () => {
-    render(<Provider store={store}><MainViewer /></Provider>);
+    render(<MainViewer />);
     const image1 = screen.getByRole("image_test1");
     expect(image1).toHaveStyle({
       width: "25vw",
