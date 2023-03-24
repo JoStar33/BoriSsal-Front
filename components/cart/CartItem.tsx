@@ -2,6 +2,7 @@ import { errorMessage } from '@/apis/error/customError';
 import { useCartUpdateMutation } from '@/hooks/user/useCartUpdateMutation/useCartUpdateMutation';
 import { useDeleteCartMutation } from '@/hooks/user/useDeleteCartMutation/useDeleteCartMutation';
 import { useCartStore } from '@/store/cart';
+import { useUserStore } from '@/store/user';
 import { ICartGoods } from '@/types/cart';
 import { validateCount } from '@/utils/validate';
 import Image from 'next/image';
@@ -19,11 +20,12 @@ interface IProps {
 }
 
 const CartItem = ({cart_id, cartGoods}: IProps) => {
+  const { pageState } = useUserStore();
   const {decreaseCart, increaseCart} = useCartStore();
   const [cartCount, setCartCount] = useState<number>(0);
-  const inputRef = useRef<HTMLInputElement>(null)
-  const { mutate, isLoading } = useDeleteCartMutation(cartGoods.bori_goods_id);
+  const inputRef = useRef<HTMLInputElement>(null);
   const updateCartMutation = useCartUpdateMutation(cart_id, cartCount);
+  const { mutate, isLoading } = useDeleteCartMutation(cart_id);
   useEffect(() => {
     if(!inputRef.current)
       return;
@@ -63,19 +65,23 @@ const CartItem = ({cart_id, cartGoods}: IProps) => {
             <p>제품명: {cartGoods.bori_goods_name}</p>
             {
               !cart_id
-              ? <p className={styles.cart_count_inc_dec_container}>
+              ? (
+                pageState !== 'complete-order' && 
+                <p className={styles.cart_count_inc_dec_container}>
                   주문수량: {cartGoods.bori_goods_count}개
                   <BsFillArrowDownCircleFill
+                    role='count-down-button'
                     style={{width: '2vw', height: '2vw', marginLeft: '0.4vw', cursor: 'pointer'}}
                     onClick={handleDecreaseGoods}/>
                   <BsFillArrowUpCircleFill
+                    role='count-up-button'
                     style={{width: '2vw', height: '2vw', marginLeft: '0.4vw', cursor: 'pointer'}}
                     onClick={handleIncreaseGoods}/>
-                </p>
+                </p>)
               : <div className={styles.cart_count_container}>
                   <p>
                     주문수량:
-                    <input ref={inputRef} type="number" onChange={handleOnChangeCount}/>
+                    <input role='count-input' ref={inputRef} type="number" onChange={handleOnChangeCount}/>
                     개
                     <button onClick={handleUpdateCount} className={styles.count_update_button}>수정</button>
                     <div>
