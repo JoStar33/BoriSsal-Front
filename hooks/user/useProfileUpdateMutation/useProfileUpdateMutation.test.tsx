@@ -13,10 +13,10 @@ const Wrapper = ({ children }: any) => {
 
 test("useProfileUpdateMutation 정상동작 확인 테스트", async () => {
   const { result } = renderHook(
-    () => useProfileUpdateMutation(new FormData()),
+    () => useProfileUpdateMutation(),
     {
       wrapper: Wrapper,
     }
   );
-  result.current.mutate();
+  result.current.mutate(new FormData());
 });

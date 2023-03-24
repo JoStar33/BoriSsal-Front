@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import ErrorPage from "./ErrorPage";
 
 export default {
@@ -10,5 +10,5 @@ const Template: ComponentStory<typeof ErrorPage> = (args) => <ErrorPage {...args
 
 export const BoriGoodsDetailTest = Template.bind({});
 BoriGoodsDetailTest.args = {
-  errorMessage: '에러메시지입니다.',
+  errorText: '에러메시지입니다.',
 }
