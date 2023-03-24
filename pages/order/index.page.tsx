@@ -24,7 +24,7 @@ const initData = {
 const OrderPage = () => {
   useLoginCheckQuery();
   const { cart } = useCartStore();
-  const { pageState }= useUserStore();
+  const { pageState, setPageState }= useUserStore();
   const [dialog, setDialog]= useState<boolean>(false);
   const validateText = useRef<string>('');
   let { data: deliverAddressData } = useDeliverAddressQuery();
@@ -53,6 +53,7 @@ const OrderPage = () => {
       setDialog(true);
       return;
     };
+    setPageState('complete-order')
     mutate();
   }
   return (
