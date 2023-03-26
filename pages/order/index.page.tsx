@@ -1,4 +1,4 @@
-import CartItem from '@/components/cart/CartItem';
+import CartItem from '@/components/cart/CartItem/CartItem';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import ErrorPage from '@/components/error/ErrorPage/ErrorPage';
 import UserInfoViewer from '@/components/order/UserInfoViewer/UserInfoViewer';
@@ -24,7 +24,7 @@ const initData = {
 const OrderPage = () => {
   useLoginCheckQuery();
   const { cart } = useCartStore();
-  const { pageState, setPageState }= useUserStore();
+  const { pageState }= useUserStore();
   const [dialog, setDialog]= useState<boolean>(false);
   const validateText = useRef<string>('');
   let { data: deliverAddressData } = useDeliverAddressQuery();
@@ -53,7 +53,6 @@ const OrderPage = () => {
       setDialog(true);
       return;
     };
-    setPageState('complete-order')
     mutate();
   }
   return (

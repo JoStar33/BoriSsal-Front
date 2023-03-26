@@ -1,4 +1,4 @@
-import CartItem from '@/components/cart/CartItem';
+import CartItem from '@/components/cart/CartItem/CartItem';
 import ErrorPage from '@/components/error/ErrorPage/ErrorPage';
 import UserInfoViewer from '@/components/order/UserInfoViewer/UserInfoViewer';
 import { useLoginCheckQuery } from '@/hooks/auth/useLoginCheckQuery/useLoginCheckQuery';
@@ -24,10 +24,10 @@ const CompleteOrderPage = () => {
       return _total + (cartElement.bori_goods_count * cartElement.bori_goods_price)}, 0);
   }, [cart]);
   const orderShow = useMemo(() => {
-    return pageState === 'complete-order' ? true : false;
+    return pageState === 'complete-order' ? false : true;
   }, [pageState]);
   useEffect(() => {
-    if (orderShow) {
+    if (!orderShow) {
       pop();
       render();
     }
@@ -38,7 +38,7 @@ const CompleteOrderPage = () => {
   return (
     <>
       {
-        orderShow
+        !orderShow
         ? <div className={styles.order_container}>
             <div>
               <h1>결제가 완료됐습니다!</h1>
