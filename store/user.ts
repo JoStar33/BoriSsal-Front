@@ -5,7 +5,6 @@ import { persist } from "zustand/middleware";
 
 interface IUserState {
   user: IUser;
-  pageState: string;
 };
 
 interface IStore extends IUserState {
@@ -27,7 +26,6 @@ const initUser = {
     user_bori_goods_like: ['123'],
     user_bori_gallery_like: ['123'],
   },
-  pageState: ''
 };
 
 

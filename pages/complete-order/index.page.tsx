@@ -18,8 +18,7 @@ const CompleteOrderPage = () => {
   if(!data) {
     data = initDeliver;
   }
-  const { pageState } = useUserStore();
-  const { setPageState } = usePageStore();
+  const { pageState, setPageState } = usePageStore();
   const { cart } = useCartStore();
   const totalPrice = useMemo(() => {
     return cart.reduce((_total, cartElement) => {

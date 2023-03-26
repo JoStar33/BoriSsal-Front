@@ -2,7 +2,6 @@ import { errorMessage } from '@/apis/error/customError';
 import { useCartUpdateMutation } from '@/hooks/user/useCartUpdateMutation/useCartUpdateMutation';
 import { useDeleteCartMutation } from '@/hooks/user/useDeleteCartMutation/useDeleteCartMutation';
 import { useCartStore } from '@/store/cart';
-import { useUserStore } from '@/store/user';
 import { ICartGoods } from '@/types/cart';
 import { validateCount } from '@/utils/validate';
 import Image from 'next/image';
@@ -13,6 +12,7 @@ import { GrClose } from 'react-icons/gr';
 import { RiAlarmWarningFill } from 'react-icons/ri';
 import CartItemSkeleton from '@/components/loading/CartItemSkeleton/CartItemSkeleton';
 import styles from './cart_item.module.scss';
+import { usePageStore } from '@/store/page';
 
 interface IProps {
   cart_id: string; 
@@ -20,7 +20,7 @@ interface IProps {
 }
 
 const CartItem = ({cart_id, cartGoods}: IProps) => {
-  const { pageState } = useUserStore();
+  const { pageState } = usePageStore();
   const {decreaseCart, increaseCart} = useCartStore();
   const [cartCount, setCartCount] = useState<number>(0);
   const inputRef = useRef<HTMLInputElement>(null);

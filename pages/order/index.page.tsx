@@ -7,7 +7,7 @@ import { useLoginCheckQuery } from '@/hooks/auth/useLoginCheckQuery/useLoginChec
 import { useOrderMutation } from '@/hooks/order/useOrderMutation/useOrderMutation';
 import { useDeliverAddressQuery } from '@/hooks/user/useDeliverAddressQuery/useDeliverAddressQuery';
 import { useCartStore } from '@/store/cart';
-import { useUserStore } from '@/store/user';
+import { usePageStore } from '@/store/page';
 import { useMemo, useRef, useState } from 'react';
 import styles from './orderpage.module.scss';
 
@@ -24,7 +24,7 @@ const initData = {
 const OrderPage = () => {
   useLoginCheckQuery();
   const { cart } = useCartStore();
-  const { pageState }= useUserStore();
+  const { pageState } = usePageStore();
   const [dialog, setDialog]= useState<boolean>(false);
   const validateText = useRef<string>('');
   let { data: deliverAddressData } = useDeliverAddressQuery();
