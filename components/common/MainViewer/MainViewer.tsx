@@ -1,6 +1,5 @@
 
 import { usePageStore } from "@/store/page";
-import { useUserStore } from "@/store/user";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";

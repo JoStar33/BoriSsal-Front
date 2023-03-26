@@ -3,20 +3,24 @@ import ErrorPage from '@/components/error/ErrorPage/ErrorPage';
 import UserInfoViewer from '@/components/order/UserInfoViewer/UserInfoViewer';
 import { useLoginCheckQuery } from '@/hooks/auth/useLoginCheckQuery/useLoginCheckQuery';
 import { useDeliverAddressQuery } from '@/hooks/user/useDeliverAddressQuery/useDeliverAddressQuery';
+import { useUserQuery } from '@/hooks/user/useUserQuery/useUserQuery';
 import { useCartStore } from '@/store/cart';
 import { usePageStore } from '@/store/page';
-import { useUserStore } from '@/store/user';
 import { pop, render } from '@/utils/congratulate';
-import { initDeliver } from '@/utils/initData';
+import { initDeliver, initUser } from '@/utils/initData';
 import Link from 'next/link';
 import { useEffect, useMemo } from 'react';
 import styles from './complete_order_page.module.scss';
 
 const CompleteOrderPage = () => {
   useLoginCheckQuery();
-  let { data } = useDeliverAddressQuery();
-  if(!data) {
-    data = initDeliver;
+  let { data: user } = useUserQuery();
+  let { data: deliverAddress } = useDeliverAddressQuery();
+  if(!deliverAddress) {
+    deliverAddress = initDeliver;
+  }
+  if(!user) {
+    user = initUser;
   }
   const { pageState, setPageState } = usePageStore();
   const { cart } = useCartStore();
@@ -45,20 +49,20 @@ const CompleteOrderPage = () => {
               <h1>결제가 완료됐습니다!</h1>
             </div>
             <h1 className={styles.info_head}>회원정보</h1>
-            <UserInfoViewer/>
+            <UserInfoViewer user={user}/>
             <h1 className={styles.info_head}>배송지 정보</h1>
             <div className={styles.info_container}>
               <div className={styles.deliver_container}>
                 <p>전화번호:</p>
-                <p>{data.phone_number}</p>
+                <p>{deliverAddress.phone_number}</p>
               </div>
               <div className={styles.deliver_container}>
                 <p>주소:</p>
-                <p>{data.address}</p>
+                <p>{deliverAddress.address}</p>
               </div>
               <div className={styles.deliver_container}>
                 <p>상세주소:</p>
-                <p>{data.address_detail}</p>
+                <p>{deliverAddress.address_detail}</p>
               </div>
             </div>
             <h1 className={styles.info_head}>주문 상품 정보</h1>

@@ -1,11 +1,8 @@
 import { ICartGoods, IGetCartGoods } from "@/types/cart";
 import { customAxios } from "../axios/customAxios";
 
-const postCart = (user_id: string, cartGoods: ICartGoods) => {
-  return customAxios.post('/cart', {
-    user_id: user_id,
-    ...cartGoods
-  });
+const postCart = (cartGoods: ICartGoods) => {
+  return customAxios.post('/cart', cartGoods);
 };
 const updateCart = (  cart_id: string, bori_goods_count: number) => {
   return customAxios.patch('/cart', {
@@ -14,16 +11,16 @@ const updateCart = (  cart_id: string, bori_goods_count: number) => {
   });
 }
 
-const getCart = (user_id: string) => {
-  const cart =  customAxios.get(`/cart/${user_id}`)
+const getCart = () => {
+  const cart =  customAxios.get(`/cart`)
     .then(res => res)
     .then(res => res.data)
     .then((data: IGetCartGoods[]) => data);
   return cart;
 };
 
-const deleteCart = (user_id: string, cart_id: string) => {
-  return customAxios.delete(`/cart/${user_id}/${cart_id}`);
+const deleteCart = (cart_id: string) => {
+  return customAxios.delete(`/cart/${cart_id}`);
 }
 
 export { postCart, getCart, deleteCart, updateCart };

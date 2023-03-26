@@ -1,6 +1,5 @@
 import { errorMessage } from "@/apis/error/customError";
 import { useDeliverAddressMutation } from "@/hooks/user/useDeliverAddressMutation/useDeliverAddressMutation";
-import { useUserStore } from "@/store/user";
 import { IPatchDeliverAddress } from "@/types/deliverAddress";
 import { AxiosError } from "axios";
 import React, { useEffect, useRef, useState } from "react";
@@ -21,12 +20,10 @@ const UserDeliverAddressPart = ({
   labelInfo,
   addressType
 }: IProps) => {
-  const { user } = useUserStore();
   const [dialog, setDialog] = useState<boolean>(false);
   const [address, setAddress] = useState<string>(addressInfo);
   const inputRef = useRef<HTMLInputElement>(null);
   const userAddressInfo: IPatchDeliverAddress = {
-    user_id: user.id,
     address_info: address,
     address_type: addressType,
   }

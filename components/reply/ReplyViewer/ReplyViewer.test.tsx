@@ -1,5 +1,4 @@
 
-import { useUserStore } from "@/store/user";
 import { IReplyMutation } from "@/types/reply";
 import { fireEvent, render, renderHook, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -57,18 +56,6 @@ test("댓글 입력후 댓글 등록시에 (로그인을 하지 않았을시에)
 
 
 test("댓글 등록시에 (댓글의 글자가 없을경우)", async () => {
-  const current = renderHook(() => useUserStore());
-  current.result.current.setUser({
-    id: "53645",
-    email: "jojo@naver.com",
-    nick: "jojo",
-    sns_id: "joster",
-    profile_image: "",
-    user_role: 0,
-    created_at: new Date(),
-    user_bori_goods_like: [],
-    user_bori_gallery_like: []
-  });
   initRender();
   const replyRegistButton = screen.getByRole('regist');
   fireEvent.change(replyRegistButton, { target: { value: "" } });

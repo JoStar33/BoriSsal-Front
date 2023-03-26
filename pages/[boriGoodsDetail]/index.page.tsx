@@ -9,7 +9,8 @@ import ReplyViewer from "@/components/reply/ReplyViewer/ReplyViewer";
 import ReplyLoading from "@/components/loading/ReplyLoading/ReplyLoading";
 import BoriGoodsDetailInfo from "@/components/bori-goods/BoriGoodsDetailInfo/BoriGoodsDetailInfo";
 import ErrorPage from "@/components/error/ErrorPage/ErrorPage";
-import { initReplyMutation } from "@/utils/initData";
+import { initReplyMutation, initUser } from "@/utils/initData";
+import { useUserQuery } from "@/hooks/user/useUserQuery/useUserQuery";
 
 interface IProps {
   goods: IBoriGoods;
@@ -25,9 +26,13 @@ const BoriGoodsDetail = ({
   goodsErrorMessage,
 }: IProps) => {
   const [limit, setLimit] = useState<number>(1);
-  let { data, isLoading, refetch, error } = useBoriGoodsReplyQuery(goods._id, limit);
-  if (!data) {
-    data = initReplyMutation
+  let { data: user } = useUserQuery();
+  let { data: boriGoodsReply, isLoading, refetch, error } = useBoriGoodsReplyQuery(goods._id, limit);
+  if (!user) {
+    user = initUser;
+  }
+  if (!boriGoodsReply) {
+    boriGoodsReply = initReplyMutation
   }
   if (goodsErrorMessage || categoryErrorMessage) {
     return (
@@ -38,8 +43,8 @@ const BoriGoodsDetail = ({
     <div>
       {/*굿즈의 상세정보 조회*/}
       <BoriGoodsDetailInfo 
-        goods={goods} 
-        category={category}></BoriGoodsDetailInfo>
+        goods={goods}
+        category={category} user={user}></BoriGoodsDetailInfo>
       {
         isLoading 
           ? <ReplyLoading></ReplyLoading>
@@ -48,7 +53,7 @@ const BoriGoodsDetail = ({
             setLimit={setLimit}
             limit={limit}
             goods_id={goods._id}
-            mutationData={data}
+            mutationData={boriGoodsReply}
           ></ReplyViewer>
       }
     </div>

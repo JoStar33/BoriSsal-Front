@@ -12,7 +12,7 @@ const Wrapper = ({ children }: any) => {
 test("useDeliverAddressMutation 훅 테스트", async () => {
   const { result } = renderHook(
     () =>
-      useCartMutation('23', {
+      useCartMutation({
         bori_goods_id: "231",
         bori_goods_name: "왓",
         bori_goods_image: "/none",

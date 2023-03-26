@@ -1,18 +1,14 @@
 import { logout } from "@/apis/user/auth";
-import { useUserStore } from "@/store/user";
 import { useRouter } from "next/router";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 
 export const useLogoutMutation = () => {
-  const { resetUser } = useUserStore();
   const router = useRouter();
+  const queryClient = useQueryClient();
   return useMutation(() => logout(), {
     onSuccess() {
-      resetUser();
+      queryClient.invalidateQueries("user");
       router.push("/");
-    },
-    onError() {
-      resetUser();
     }
   });
 };

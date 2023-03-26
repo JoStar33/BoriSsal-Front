@@ -1,6 +1,5 @@
 import { useCartStore } from '@/store/cart';
 import { usePageStore } from '@/store/page';
-import { useUserStore } from '@/store/user';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useEffect } from 'react';
 import OrderPage from './index.page';
@@ -11,21 +10,9 @@ export default {
 } as ComponentMeta<typeof OrderPage>;
 
 const OrderPageComponent = () => {
-  const { setUser } = useUserStore();
   const { setPageState } = usePageStore();
   const { setCart } = useCartStore();
   useEffect(() => {
-    setUser({
-      id: "2421424325325",
-      email: "",
-      nick: "하오우",
-      sns_id: "",
-      profile_image: "",
-      user_role: 0,
-      created_at: new Date(),
-      user_bori_goods_like: [],
-      user_bori_gallery_like: []
-    });
     setCart([{
       bori_goods_id: '23', 
       bori_goods_name: '보리 굿즈', 

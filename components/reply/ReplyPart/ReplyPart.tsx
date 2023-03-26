@@ -1,6 +1,7 @@
 import { useBoriGoodsChildReplyMutation } from "@/hooks/bori-goods/useBoriGoodsChildReplyMutation/useBoriGoodsChildReplyMutation";
-import { useUserStore } from "@/store/user";
+import { useUserQuery } from "@/hooks/user/useUserQuery/useUserQuery";
 import { IReply } from "@/types/reply";
+import { initUser } from "@/utils/initData";
 import React, { useRef, useState } from "react";
 import ReplyChildPart from "../ReplyChildPart/ReplyChildPart";
 import styles from "./reply_part.module.scss";
@@ -13,16 +14,19 @@ interface IProps {
 
 const ReplyPart = ({ reply, setDialog, validateText }: IProps) => {
   const [showChildReply, setShowChildReply] = useState<boolean>(false);
-  const { user } = useUserStore();
+  let { data: user } = useUserQuery();
   const replyDate = useRef<Date>(new Date(reply.created_at));
   const replyInputRef = useRef<HTMLInputElement>(null);
-  const goodsReplyChildMutation = useBoriGoodsChildReplyMutation(reply._id);
+  if(!user) {
+    user = initUser;
+  }
+  const goodsReplyChildMutation = useBoriGoodsChildReplyMutation(user.email, reply._id);
   const handleOnChilk = () => {
     setShowChildReply(!showChildReply);
   };
   const replyRegist = () => {
     if (!replyInputRef.current) return;
-    if (!user.email) {
+    if (!user) {
       setDialog(true);
       validateText.current = "로그인후 이용해주세요!";
       return;

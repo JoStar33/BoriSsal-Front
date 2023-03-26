@@ -1,8 +1,9 @@
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import ReplySkeleton from '@/components/loading/ReplySkeleton/ReplySkeleton';
 import { useBoriGoodsReplyMutation } from '@/hooks/bori-goods/useBoriGoodsReplyMutation/useBoriGoodsReplyMutation';
-import { useUserStore } from '@/store/user';
+import { useUserQuery } from '@/hooks/user/useUserQuery/useUserQuery';
 import { IReplyMutation } from '@/types/reply';
+import { initUser } from '@/utils/initData';
 import React, { useRef, useState } from 'react';
 import { AiFillCaretDown } from 'react-icons/ai';
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
@@ -19,14 +20,17 @@ interface IProps {
 
 const ReplyViewer = ({mutationData, goods_id, setLimit, limit, refetch}: IProps) => {
   const [dialog, setDialog] = useState<boolean>(false);
-  const { user } = useUserStore();
+  let {data: user} = useUserQuery();
   const replyContent = useRef<HTMLInputElement>(null);
   const validateText = useRef<string>('');
-  const goodsReplyMutation = useBoriGoodsReplyMutation(goods_id);
+  if(!user) {
+    user = initUser;
+  }
+  const goodsReplyMutation = useBoriGoodsReplyMutation(user.email, goods_id);
   const replyRegist = () => {
     if(!replyContent.current)
       return;
-    if(!user.email){
+    if(!user){
       validateText.current = '로그인후 이용해주세요!'
       setDialog(true);
       return;

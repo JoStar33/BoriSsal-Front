@@ -1,12 +1,15 @@
-import { IUserProfileUpload } from "@/types/user";
+import { IUser, IUserProfileUpload } from "@/types/user";
 import { customAxios } from "../axios/customAxios";
 
-const getUser = (user_id: string) => {
-  return customAxios.get(`/user/${user_id}`);
+const getUser = () => {
+  return customAxios.get(`/user`)
+    .then(res => res)
+    .then(res => res.data)
+    .then((data: IUser) => data);;
 };
 
 const postProfileImage = (userProfileInfo: IUserProfileUpload) => {
-  return customAxios.post(`/user/profile-image/${userProfileInfo.user_id}`, userProfileInfo.image, {
+  return customAxios.post(`/user/profile-image`, userProfileInfo.image, {
     headers: {
       "Content-Type": "multipart/form-data",
     },

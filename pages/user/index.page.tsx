@@ -5,17 +5,17 @@ import UserDeliverAddressViewer from "@/components/user/UserDeliverAddressViewer
 import { useLoginCheckQuery } from "@/hooks/auth/useLoginCheckQuery/useLoginCheckQuery";
 import { useDeliverAddressQuery } from "@/hooks/user/useDeliverAddressQuery/useDeliverAddressQuery";
 import { useProfileUpdateMutation } from "@/hooks/user/useProfileUpdateMutation/useProfileUpdateMutation";
-import { useUserStore } from "@/store/user";
-import { initDeliver } from "@/utils/initData";
+import { useUserQuery } from "@/hooks/user/useUserQuery/useUserQuery";
+import { initDeliver, initUser } from "@/utils/initData";
 import Image from "next/image";
 import React, { useLayoutEffect, useState } from "react";
 import { BsFillPencilFill } from "react-icons/bs";
 import styles from "./userpage.module.scss";
 
 const UserPage = () => {
-  const { user } = useUserStore();
+  let {data: user} = useUserQuery();
   const [dialog, setDialog] = useState<boolean>(false);
-  let { data, isError, isLoading } = useDeliverAddressQuery();
+  let { data: deliverAddress, isError, isLoading } = useDeliverAddressQuery();
   const loginCheck = useLoginCheckQuery();
   let formData: FormData;
   useLayoutEffect(() => {
@@ -32,8 +32,11 @@ const UserPage = () => {
     formData.append("img", file);
     mutate(formData);
   };
-  if(!data) {
-    data = initDeliver;
+  if(!user) {
+    user =initUser;
+  }
+  if(!deliverAddress) {
+    deliverAddress = initDeliver;
   }
   return (
     <>
@@ -87,7 +90,7 @@ const UserPage = () => {
             </div>
           </div>
           <UserDeliverAddressViewer 
-            deliverAddress={data} 
+            deliverAddress={deliverAddress} 
             isLoading={isLoading} 
             isError={isError}/>
         </div>

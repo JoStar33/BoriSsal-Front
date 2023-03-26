@@ -14,7 +14,6 @@ const initRender = () => {
     <QueryClientProvider client={queryClient}>
       <ReplyPart reply={{
       _id: 'qwewqe',
-      user_id: 'dgfdg',
       email: 'rhwdd123',
       content: '헬로우 헬로우',
       reply_child: [],

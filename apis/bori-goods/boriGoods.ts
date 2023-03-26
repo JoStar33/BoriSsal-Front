@@ -17,34 +17,30 @@ const getBoriGoodsReply = (goods_id: string, limit: number) => {
   return boriGoodsReply;
 };
 
-const postBoriGoodsReply = (user_id: string, email: string, bori_goods_id: string, content: string) => {
+const postBoriGoodsReply = (email: string, bori_goods_id: string, content: string) => {
   return customAxios.post(`/bori-goods-reply`, {
-    user_id: user_id,
     email: email,
     bori_goods_id: bori_goods_id,
     content: content,
   })
 };
 
-const postBoriGoodsChildReply = (user_id: string, email: string, content: string, reply_id: string) => {
+const postBoriGoodsChildReply = (email: string, content: string, reply_id: string) => {
   return customAxios.post(`/bori-goods-reply/child`, {
     reply_id: reply_id,
-    user_id: user_id,
     email: email,
     content: content,
   })
 };
 
-const likeGoods = (user_id: string, goods_id: string) => {
+const likeGoods = (goods_id: string) => {
   return customAxios.patch(`/bori-goods/like`, {
-    user_id: user_id,
     bori_goods_id: goods_id
   });
 };
 
-const dislikeGoods = (user_id: string, goods_id: string) => {
+const dislikeGoods = (goods_id: string) => {
   return customAxios.patch(`/bori-goods/dislike`, {
-    user_id: user_id,
     bori_goods_id: goods_id
   });
 };

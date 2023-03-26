@@ -6,8 +6,10 @@ import UserDeliverAddressPart from '@/components/user/UserDeliverAddressPart/Use
 import { useLoginCheckQuery } from '@/hooks/auth/useLoginCheckQuery/useLoginCheckQuery';
 import { useOrderMutation } from '@/hooks/order/useOrderMutation/useOrderMutation';
 import { useDeliverAddressQuery } from '@/hooks/user/useDeliverAddressQuery/useDeliverAddressQuery';
+import { useUserQuery } from '@/hooks/user/useUserQuery/useUserQuery';
 import { useCartStore } from '@/store/cart';
 import { usePageStore } from '@/store/page';
+import { initUser } from '@/utils/initData';
 import { useMemo, useRef, useState } from 'react';
 import styles from './orderpage.module.scss';
 
@@ -27,7 +29,8 @@ const OrderPage = () => {
   const { pageState } = usePageStore();
   const [dialog, setDialog]= useState<boolean>(false);
   const validateText = useRef<string>('');
-  let { data: deliverAddressData } = useDeliverAddressQuery();
+  let { data: deliverAddress } = useDeliverAddressQuery();
+  let { data: user } = useUserQuery();
   const { mutate } = useOrderMutation();
   const totalPrice = useMemo(() => {
     return cart.reduce((_total, cartElement) => {
@@ -36,19 +39,22 @@ const OrderPage = () => {
   const orderShow = useMemo(() => {
     return pageState === 'order' ? true : false;
   }, [pageState]);
-  if (!deliverAddressData) {
-    deliverAddressData = initData;
+  if (!deliverAddress) {
+    deliverAddress = initData;
+  };
+  if (!user) {
+    user = initUser;
   };
   const handleOrder = () => {
-    if (!deliverAddressData) {
-      deliverAddressData = initData;
+    if (!deliverAddress) {
+      deliverAddress = initData;
     }
     if (cart.length === 0) {
       validateText.current = '최소 하나의 상품이 있어야합니다!';
       setDialog(true);
       return;
     };
-    if (!deliverAddressData.phone_number || !deliverAddressData.address || !deliverAddressData.address_detail) {
+    if (!deliverAddress.phone_number || !deliverAddress.address || !deliverAddress.address_detail) {
       validateText.current = '배송지 정보 입력을 모두 마쳐야 해요!';
       setDialog(true);
       return;
@@ -64,19 +70,19 @@ const OrderPage = () => {
         orderShow
         ? <div className={styles.order_container}>
             <h1 className={styles.info_head}>회원정보</h1>
-            <UserInfoViewer/>
+            <UserInfoViewer user={user}/>
             <h1 className={styles.info_head}>배송지 정보</h1>
             <div className={styles.info_container}>
               <UserDeliverAddressPart 
-                addressInfo={deliverAddressData.phone_number}
+                addressInfo={deliverAddress.phone_number}
                 addressType="phone_number"
                 labelInfo="전화번호: "/>
               <UserDeliverAddressPart               
-                addressInfo={deliverAddressData.address}
+                addressInfo={deliverAddress.address}
                 addressType="address"
                 labelInfo="주소: "/>
               <UserDeliverAddressPart 
-                addressInfo={deliverAddressData.address_detail}
+                addressInfo={deliverAddress.address_detail}
                 addressType="address_detail"
                 labelInfo="상세주소: "/>
             </div>
