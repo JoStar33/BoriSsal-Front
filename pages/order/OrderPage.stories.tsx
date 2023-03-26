@@ -1,4 +1,5 @@
 import { useCartStore } from '@/store/cart';
+import { usePageStore } from '@/store/page';
 import { useUserStore } from '@/store/user';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useEffect } from 'react';
@@ -10,7 +11,8 @@ export default {
 } as ComponentMeta<typeof OrderPage>;
 
 const OrderPageComponent = () => {
-  const { setUser, setPageState } = useUserStore();
+  const { setUser } = useUserStore();
+  const { setPageState } = usePageStore();
   const { setCart } = useCartStore();
   useEffect(() => {
     setUser({

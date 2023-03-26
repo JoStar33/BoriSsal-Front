@@ -1,5 +1,6 @@
 
 import { useCartStore } from "@/store/cart";
+import { usePageStore } from "@/store/page";
 import { useUserStore } from "@/store/user";
 import { render, renderHook, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -17,6 +18,7 @@ const initRender = () => {
 test('CompleteOrder store 반영 테스트', () => {
   const current = renderHook(() => useUserStore());
   const cartCurrent = renderHook(() => useCartStore());
+  const pageCurrent = renderHook(() => usePageStore());
   cartCurrent.result.current.setCart([{
     bori_goods_id: '23', 
     bori_goods_name: '보리 굿즈', 
@@ -24,7 +26,7 @@ test('CompleteOrder store 반영 테스트', () => {
     bori_goods_count: 2, 
     bori_goods_price: 3000
   }]);
-  current.result.current.setPageState('complete-order');
+  pageCurrent.result.current.setPageState('complete-order');
   current.result.current.setUser({
     id: "23",
     email: "",
@@ -37,12 +39,13 @@ test('CompleteOrder store 반영 테스트', () => {
     user_bori_gallery_like: []
   });
   initRender();
-  expect(current.result.current.pageState).toBe('complete-order');
+  expect(pageCurrent.result.current.pageState).toBe('complete-order');
 });
 
 test('CompleteOrder 화면 반영 테스트', async () => {
   const current = renderHook(() => useUserStore());
   const cartCurrent = renderHook(() => useCartStore());
+  const pageCurrent = renderHook(() => usePageStore());
   cartCurrent.result.current.setCart([{
     bori_goods_id: '23', 
     bori_goods_name: '보리 굿즈', 
@@ -50,7 +53,7 @@ test('CompleteOrder 화면 반영 테스트', async () => {
     bori_goods_count: 2, 
     bori_goods_price: 3000
   }]);
-  current.result.current.setPageState('complete-order');
+  pageCurrent.result.current.setPageState('complete-order');
   current.result.current.setUser({
     id: "23",
     email: "",

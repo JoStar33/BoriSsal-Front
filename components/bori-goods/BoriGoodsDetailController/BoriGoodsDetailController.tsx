@@ -1,6 +1,7 @@
 import { errorMessage } from '@/apis/error/customError';
 import { useCartMutation } from '@/hooks/user/useCartMutation/useCartMutation';
 import { useCartStore } from '@/store/cart';
+import { usePageStore } from '@/store/page';
 
 import { useUserStore } from '@/store/user';
 import { IBoriGoods } from '@/types/boriGoods';
@@ -18,7 +19,8 @@ interface IProps {
 }
 
 const BoriGoodsDetailController = ({goods, validateText, setValidateDialog, setSuccessDialog}: IProps) => {
-  const { user, setPageState } = useUserStore();
+  const { setPageState } = usePageStore();
+  const { user } = useUserStore();
   const router = useRouter();
   const { setCart } = useCartStore();
   const { mutate, isError, isSuccess, error } = useCartMutation(

@@ -3,6 +3,7 @@ import CartItem from "@/components/cart/CartItem/CartItem";
 import { useLoginCheckQuery } from "@/hooks/auth/useLoginCheckQuery/useLoginCheckQuery";
 import { useCartQuery } from "@/hooks/user/useCartQuery/useCartQuery";
 import { useCartStore } from "@/store/cart";
+import { usePageStore } from "@/store/page";
 import { useUserStore } from "@/store/user";
 import { useRouter } from "next/router";
 import styles from "./cart_page.module.scss";
@@ -10,7 +11,7 @@ import styles from "./cart_page.module.scss";
 const CartPage = () => {
   useLoginCheckQuery();
   let { data: cartData } = useCartQuery();
-  const { setPageState } = useUserStore();
+  const { setPageState } = usePageStore();
   const { setCart } = useCartStore();
   const router = useRouter();
   if (!cartData) {

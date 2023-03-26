@@ -4,6 +4,7 @@ import UserInfoViewer from '@/components/order/UserInfoViewer/UserInfoViewer';
 import { useLoginCheckQuery } from '@/hooks/auth/useLoginCheckQuery/useLoginCheckQuery';
 import { useDeliverAddressQuery } from '@/hooks/user/useDeliverAddressQuery/useDeliverAddressQuery';
 import { useCartStore } from '@/store/cart';
+import { usePageStore } from '@/store/page';
 import { useUserStore } from '@/store/user';
 import { pop, render } from '@/utils/congratulate';
 import { initDeliver } from '@/utils/initData';
@@ -17,7 +18,8 @@ const CompleteOrderPage = () => {
   if(!data) {
     data = initDeliver;
   }
-  const { pageState, setPageState } = useUserStore();
+  const { pageState } = useUserStore();
+  const { setPageState } = usePageStore();
   const { cart } = useCartStore();
   const totalPrice = useMemo(() => {
     return cart.reduce((_total, cartElement) => {

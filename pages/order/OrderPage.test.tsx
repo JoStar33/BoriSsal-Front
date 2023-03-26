@@ -1,5 +1,6 @@
 import { server } from "@/mocks/server";
 import { useCartStore } from "@/store/cart";
+import { usePageStore } from "@/store/page";
 import { useUserStore } from "@/store/user";
 import { render, renderHook, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -12,8 +13,8 @@ const queryClient = new QueryClient();
 const user = userEvent.setup();
 
 const initRender = () => {
-  const current = renderHook(() => useUserStore());
-  current.result.current.setPageState('order')
+  const pageCurrent = renderHook(() => usePageStore());
+  pageCurrent.result.current.setPageState('order')
   render(
     <QueryClientProvider client={queryClient}>
       <OrderPage />

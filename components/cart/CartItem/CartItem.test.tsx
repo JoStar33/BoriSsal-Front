@@ -1,4 +1,4 @@
-import { useUserStore } from "@/store/user";
+import { usePageStore } from "@/store/page";
 import { fireEvent, render, renderHook, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import CartItem from "./CartItem";
@@ -6,7 +6,7 @@ import CartItem from "./CartItem";
 const queryClient = new QueryClient();
 
 const initRender = (cart_id: string) => {
-  const current = renderHook(() => useUserStore());
+  const current = renderHook(() => usePageStore());
   render(
     <QueryClientProvider client={queryClient}>
       <CartItem cart_id={cart_id} cartGoods={{
