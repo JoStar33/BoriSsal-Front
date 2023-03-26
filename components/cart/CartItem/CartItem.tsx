@@ -11,7 +11,7 @@ import { AiFillCheckCircle } from 'react-icons/ai';
 import { BsFillArrowDownCircleFill, BsFillArrowUpCircleFill } from 'react-icons/bs';
 import { GrClose } from 'react-icons/gr';
 import { RiAlarmWarningFill } from 'react-icons/ri';
-import CartItemSkeleton from '../loading/CartItemSkeleton/CartItemSkeleton';
+import CartItemSkeleton from '@/components/loading/CartItemSkeleton/CartItemSkeleton';
 import styles from './cart_item.module.scss';
 
 interface IProps {

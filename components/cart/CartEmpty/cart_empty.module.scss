@@ -1,0 +1,14 @@
+.cart_empty_container {
+  margin: 1vw;
+  width: 70vw;
+  height: 50vh;
+  border: 2px solid black;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  h1 {
+    margin-left: 2vw;
+  }
+}
