@@ -70,6 +70,6 @@ test("useLogoutMutation 훅이 실패했을 경우.", async () => {
   });
   result.current.mutate();
   await waitFor(() => expect(result.current.isError).toBeTruthy()).then(() => {
-    expect(current.result.current.user.email).toEqual("hello");
+    expect(current.result.current.user.email).toEqual("");
   });
 });

@@ -11,5 +11,8 @@ export const useLogoutMutation = () => {
       resetUser();
       router.push("/");
     },
+    onError() {
+      resetUser();
+    }
   });
 };
