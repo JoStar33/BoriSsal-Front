@@ -12,7 +12,6 @@ interface IStore extends IUserState {
   setUser: (payload: IUser) => void;
   setUserProfile: (payload: string) => void;
   setGoodsLike: (payload: string) => void;
-  setPageState: (payload: string) => void;
   resetUser: () => void;
 };
 
@@ -52,10 +51,6 @@ export const useUserStore = create<IStore>()(
       setGoodsLike: (payload: string) =>
         set(produce((state: IUserState) => {
           state.user = { ...state.user, profile_image: payload };
-      })),
-      setPageState: (payload: string) =>
-        set(produce((state: IUserState) => {
-          state.pageState = payload;
       })),
     }),
     {

@@ -1,7 +1,7 @@
 import { ICartGoods } from "@/types/cart";
 import produce from "immer";
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 interface ICartState {
   cart: ICartGoods[];
@@ -58,6 +58,7 @@ export const useCartStore = create<IStore>()(
     }),
     {
       name: 'cart-storage',
+      storage: createJSONStorage(() => sessionStorage)
     }
   )
 );
