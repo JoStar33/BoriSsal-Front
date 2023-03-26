@@ -26,7 +26,8 @@ const ReplyPart = ({ reply, setDialog, validateText }: IProps) => {
   };
   const replyRegist = () => {
     if (!replyInputRef.current) return;
-    if (!user) {
+    if (!user) return;
+    if (!user.email) {
       setDialog(true);
       validateText.current = "로그인후 이용해주세요!";
       return;

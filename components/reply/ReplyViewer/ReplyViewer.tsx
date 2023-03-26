@@ -30,7 +30,8 @@ const ReplyViewer = ({mutationData, goods_id, setLimit, limit, refetch}: IProps)
   const replyRegist = () => {
     if(!replyContent.current)
       return;
-    if(!user){
+    if (!user) return;
+    if (!user.email) {
       validateText.current = '로그인후 이용해주세요!'
       setDialog(true);
       return;
