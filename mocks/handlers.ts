@@ -1,4 +1,5 @@
 import { authMock } from './apis/auth';
+import { boriGalleryMock } from './apis/boriGallery';
 import { boriGoodsMock } from './apis/boriGoods';
 import { cartMock } from './apis/cart';
 import { orderMock } from './apis/order';
@@ -9,5 +10,6 @@ export const handlers = [
   ...userMock(),
   ...boriGoodsMock(),
   ...orderMock(),
-  ...cartMock()
+  ...cartMock(),
+  ...boriGalleryMock()
 ]

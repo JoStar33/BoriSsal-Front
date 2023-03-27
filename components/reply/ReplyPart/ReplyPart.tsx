@@ -1,20 +1,20 @@
 import { useBoriGoodsChildReplyMutation } from "@/hooks/bori-goods/useBoriGoodsChildReplyMutation/useBoriGoodsChildReplyMutation";
-import { useUserQuery } from "@/hooks/user/useUserQuery/useUserQuery";
 import { IReply } from "@/types/reply";
+import { IUser } from "@/types/user";
 import { initUser } from "@/utils/initData";
 import React, { useRef, useState } from "react";
 import ReplyChildPart from "../ReplyChildPart/ReplyChildPart";
 import styles from "./reply_part.module.scss";
 
 interface IProps {
+  user: IUser;
   reply: IReply;
   setDialog: React.Dispatch<React.SetStateAction<boolean>>;
   validateText: React.MutableRefObject<string>;
 }
 
-const ReplyPart = ({ reply, setDialog, validateText }: IProps) => {
+const ReplyPart = ({ user, reply, setDialog, validateText }: IProps) => {
   const [showChildReply, setShowChildReply] = useState<boolean>(false);
-  let { data: user } = useUserQuery();
   const replyDate = useRef<Date>(new Date(reply.created_at));
   const replyInputRef = useRef<HTMLInputElement>(null);
   if(!user) {

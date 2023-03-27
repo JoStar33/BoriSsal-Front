@@ -22,3 +22,16 @@ test("useLoginCheckQuery 훅 테스트(성공)", async () => {
   expect(result.current.isSuccess).toBeTruthy();
 });
 
+test("useFindPassWordMutation 훅 테스트(실패 케이스)", async () => {
+  server.use(    
+    rest.get(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/is-login`, (req, res, ctx) => {
+      return res(
+        ctx.status(500),
+      );
+    })
+  )
+  const { result } = renderHook(() => useLoginCheckQuery(), {
+    wrapper: Wrapper,
+  });
+  await waitFor(() => expect(result.current.isError).toBeTruthy());
+});

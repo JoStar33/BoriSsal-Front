@@ -23,7 +23,7 @@ test("useOrderMutation 훅 테스트(성공)", async () => {
   expect(result.current.isSuccess).toBeTruthy();
 });
 
-test("useOrderMutation 훅 테스트(성공)", async () => {
+test("useOrderMutation 훅 테스트(실패)", async () => {
   server.use(
     rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/order`, (req, res, ctx) => {
       return res(

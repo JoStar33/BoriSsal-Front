@@ -63,7 +63,7 @@ const ReplyViewer = ({user, mutationData, goods_id, setLimit, limit, refetch}: I
         }
         {
           mutationData.bori_goods_reply && mutationData.bori_goods_reply.map((reply)=>{
-            return <ReplyPart key={reply._id} reply={reply} setDialog={setDialog} validateText={validateText}></ReplyPart>
+            return <ReplyPart user={user} key={reply._id} reply={reply} setDialog={setDialog} validateText={validateText}></ReplyPart>
           })
         }
         {
