@@ -4,6 +4,7 @@
 }
 
 .userpage_container {
+  position: relative;
   @include center;
   flex-direction: row;
   .user_image__deliver_info {
