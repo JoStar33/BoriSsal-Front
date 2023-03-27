@@ -96,7 +96,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     });
   await getCategory()
     .then((res) => {
-      categoryData = res.data;
+      categoryData = res;
     })
     .catch((error: AxiosError) => {
       categoryErrorMessage = errorMessage(error);

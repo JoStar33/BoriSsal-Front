@@ -1,3 +1,4 @@
+import { ICategory, IPostBoriGoods } from "@/types/boriGoods";
 import { IReplyMutation } from "@/types/reply";
 import { customAxios } from "../axios/customAxios";
 
@@ -6,8 +7,24 @@ const getGoods = () => {
 };
 
 const getCategory = () => {
-  return customAxios.get('/bori-goods-category');
+  const category = customAxios.get('/bori-goods-category')    
+    .then(res => res)
+    .then(res => res.data)
+    .then((data: ICategory[]) => data);
+  return category;
 };
+
+const postBoriGoods = (category_id: string, bori_goods: IPostBoriGoods, bori_goods_image: FormData) => {
+  bori_goods_image.append('bori_goods', JSON.stringify({
+    category_id: category_id,
+    bori_goods: bori_goods
+  }));
+  return customAxios.post('/bori-goods', bori_goods_image, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+}
 
 const getBoriGoodsReply = (goods_id: string, limit: number) => {
   const boriGoodsReply = customAxios.get(`/bori-goods-reply/${goods_id}/${limit}`)    
@@ -45,4 +62,4 @@ const dislikeGoods = (goods_id: string) => {
   });
 };
 
-export { getGoods, getCategory, getBoriGoodsReply, postBoriGoodsReply, likeGoods, dislikeGoods, postBoriGoodsChildReply };
+export { getGoods, getCategory, getBoriGoodsReply, postBoriGoods, postBoriGoodsReply, likeGoods, dislikeGoods, postBoriGoodsChildReply };

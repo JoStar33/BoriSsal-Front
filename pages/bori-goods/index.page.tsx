@@ -98,7 +98,7 @@ export async function getStaticProps() {
     });
   await getCategory()
     .then((res) => { 
-      categoryData = res.data;
+      categoryData = res;
       categoryData.unshift({
         _id: '0',
         category_name: '전체'
