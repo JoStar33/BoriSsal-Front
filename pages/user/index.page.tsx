@@ -34,7 +34,7 @@ const UserPage = () => {
     mutate(formData);
   };
   if(!user) {
-    user =initUser;
+    user = initUser;
   }
   if(!deliverAddress) {
     deliverAddress = initDeliver;
