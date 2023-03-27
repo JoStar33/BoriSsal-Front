@@ -24,9 +24,9 @@ test('CompleteOrder store 반영 테스트', () => {
     bori_goods_count: 2, 
     bori_goods_price: 3000
   }]);
-  pageCurrent.result.current.setPageState('complete-order');
+  pageCurrent.result.current.setPageState('order');
   initRender();
-  expect(pageCurrent.result.current.pageState).toBe('complete-order');
+  expect(pageCurrent.result.current.pageState).toBe('order');
 });
 
 test('CompleteOrder 화면 반영 테스트', async () => {
@@ -39,7 +39,7 @@ test('CompleteOrder 화면 반영 테스트', async () => {
     bori_goods_count: 2, 
     bori_goods_price: 3000
   }]);
-  pageCurrent.result.current.setPageState('complete-order');
+  pageCurrent.result.current.setPageState('order');
   initRender();
   const orderText = await screen.findByText(/최종 결제금액:/);
   const addressText = await screen.findByText(/경기도 안양시 동안구 호랑이아파트/);

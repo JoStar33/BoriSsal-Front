@@ -16,11 +16,8 @@ test("useLikeGoodsMutation 정상동작 확인 테스트(좋아요)", async () =
       wrapper: Wrapper,
     }
   );
-  await waitFor(() => {
-    result.current.mutate();
-  }).then(() => {
-    expect(result.current.isSuccess).toBeTruthy();
-  });
+  result.current.mutate();
+  await waitFor(() => expect(result.current.isSuccess).toBeTruthy());
 });
 
 test("useLikeGoodsMutation 정상동작 확인 테스트(좋아요 취소)", async () => {
@@ -30,10 +27,7 @@ test("useLikeGoodsMutation 정상동작 확인 테스트(좋아요 취소)", asy
       wrapper: Wrapper,
     }
   );
-  await waitFor(() => {
-    result.current.mutate();
-  }).then(() => {
-    expect(result.current.isSuccess).toBeTruthy();
-  });
+  result.current.mutate();
+  await waitFor(() => expect(result.current.isSuccess).toBeTruthy());
 });
 
