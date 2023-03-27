@@ -19,7 +19,6 @@ export const userMock = () => {
       (
         ctx.status(200),
         ctx.json({
-          user_id: "23",
           phone_number: "01033332222",
           address: '경기도 안양시 동안구 호랑이아파트',
           address_detail: '102동 304호'

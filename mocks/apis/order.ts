@@ -8,6 +8,12 @@ export const orderMock = () => {
         return res(ctx.status(200));
       }
     ),
+    rest.delete(
+      `${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/order/23`,
+      (req, res, ctx) => {
+        return res(ctx.status(200));
+      }
+    ),
     rest.get(
       `${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/order`,
       (req, res, ctx) => {
@@ -26,7 +32,6 @@ export const orderMock = () => {
               ],
               order_status: "배송진행",
               price: 7000,
-              user_id: "23",
               _id: "23",
             },
           ])

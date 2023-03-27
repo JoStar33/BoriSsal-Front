@@ -1,3 +1,4 @@
+import { useDeleteOrderMutation } from "@/hooks/order/useDeleteOrderMutation/useDeleteOrderMutation";
 import { IDeliverAddress } from "@/types/deliverAddress";
 import { IOrder } from "@/types/order";
 import { initDeliver } from "@/utils/initData";
@@ -12,6 +13,7 @@ interface IProps {
 
 const OrderHistoryItem = ({ order, deliverAddress }: IProps) => {
   const [goodsShow, setGoodsShow] = useState<boolean>(false);
+  const { mutate } = useDeleteOrderMutation(order._id);
   const deliverStatusColor = useMemo<string>(() => {
     if(order.order_status === "배송중") 
       return "#5B59C1"
@@ -35,6 +37,7 @@ const OrderHistoryItem = ({ order, deliverAddress }: IProps) => {
         <div className={styles.order_controller}>
           <div>
             <p 
+              role="deliver-status"
               className={styles.status}
               style={{
                 color: deliverStatusColor
@@ -43,12 +46,12 @@ const OrderHistoryItem = ({ order, deliverAddress }: IProps) => {
           </div>
           <div className={styles.button_container}> 
             {
-              order.order_status === "배송준비" && <button className={styles.order_cancel_button}>주문 취소</button>
+              order.order_status === "배송준비" && <button className={styles.order_cancel_button} onClick={() => mutate()}>주문 취소</button>
             }
             {
               goodsShow 
               ? <button className={styles.order_list_button} onClick={() => setGoodsShow(!goodsShow)}>닫기</button>
-              : <button className={styles.order_list_button} onClick={() => setGoodsShow(!goodsShow)}>구매 목록 보기</button>
+              : <button role="show-goods" className={styles.order_list_button} onClick={() => setGoodsShow(!goodsShow)}>구매 목록 보기</button>
             }
           </div>
         </div>

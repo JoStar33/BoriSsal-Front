@@ -15,7 +15,11 @@ const getOrder = () => {
     .then(res => res.data)
     .then((data: IOrder) => data);
   return order;
+};
+
+const deleteOrder = (order_id: string) => {
+  return customAxios.delete(`/order/${order_id}`);
 }
 
-export { postOrder, getOrder };
+export { postOrder, getOrder, deleteOrder };
 
