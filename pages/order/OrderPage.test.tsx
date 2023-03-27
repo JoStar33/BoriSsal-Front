@@ -55,12 +55,11 @@ test("OrderPage 화면 반영 테스트 (배송지 정보가 없을경우)", asy
   }]);
   server.use(
     rest.get(
-      `${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/deliver-address/23`,
+      `${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/deliver-address`,
       (req, res, ctx) => {
         return res(
           ctx.status(200),
           ctx.json([{
-            user_id: "23",
             phone_number: "",
             address: '',
             address_detail: ''

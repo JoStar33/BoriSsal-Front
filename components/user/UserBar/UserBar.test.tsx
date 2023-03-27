@@ -1,4 +1,4 @@
-import { render, renderHook, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import UserBar from "./UserBar";
 
@@ -23,7 +23,19 @@ const initRender = () => {
 };
 
 test("유저의 프로필 사진이 없을 경우", () => {
-  initRender();
+  render(
+    <QueryClientProvider client={queryClient}>
+      <UserBar user={{
+        email: "rhwd12@fasdgf.sdfa",
+        nick: "dsa",
+        sns_id: "asdg",
+        profile_image: "",
+        created_at: new Date(),
+        user_bori_goods_like: [],
+        user_bori_gallery_like: [],
+      }} />
+    </QueryClientProvider>
+  );
   const nonProfile = screen.getByRole("non_profile");
   expect(nonProfile).toBeInTheDocument();
 });

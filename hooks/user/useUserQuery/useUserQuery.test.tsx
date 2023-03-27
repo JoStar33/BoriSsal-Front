@@ -10,14 +10,6 @@ const Wrapper = ({ children }: any) => {
 };
 
 test("useUserQuery 정상동작 확인 테스트", async () => {
-  global.window = Object.create(window);
-  const url = "http://example.com/?user_id=23";
-  Object.defineProperty(window, "location", {
-    value: {
-      href: url,
-    },
-  });
-  expect(window.location.href).toEqual(url);
   const { result } = renderHook(
     () => useUserQuery(),
     {
@@ -25,5 +17,9 @@ test("useUserQuery 정상동작 확인 테스트", async () => {
     }
   );
   await waitFor(() => expect(result.current.isSuccess).toBe(true)).then(() => {
-  });
+    if(!result.current.data) {
+      return;
+    }
+    expect(result.current.data.email).toBe('rhwdf@gmail.com');
+  })
 });

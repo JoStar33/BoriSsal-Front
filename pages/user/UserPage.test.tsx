@@ -1,4 +1,4 @@
-import { render, renderHook, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import UserPage from "./index.page";
 
@@ -20,6 +20,6 @@ test("UserPage 화면 테스트", () => {
 
 test("UserPage 스토어 데이터 반영 테스트", async () => {
   initRender();
-  const textCheck = await screen.findByText(/rhwd12@fasdgf.sdfa/);
+  const textCheck = await screen.findByText(/rhwdf@gmail.com/);
   expect(textCheck).toBeInTheDocument();
 });

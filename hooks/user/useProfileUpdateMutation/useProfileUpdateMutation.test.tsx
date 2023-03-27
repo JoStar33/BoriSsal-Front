@@ -1,5 +1,5 @@
 
-import { renderHook } from "@testing-library/react";
+import { renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useProfileUpdateMutation } from "./useProfileUpdateMutation";
 
@@ -19,4 +19,5 @@ test("useProfileUpdateMutation 정상동작 확인 테스트", async () => {
     }
   );
   result.current.mutate(new FormData());
+  await waitFor(() => result.current.isSuccess);
 });

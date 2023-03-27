@@ -1,8 +1,8 @@
 import { server } from "@/mocks/server";
-import { rest } from "msw";
-import { useJoinMutation } from "./useJoinMutation";
-import { QueryClientProvider, QueryClient } from "react-query";
 import { renderHook, waitFor } from "@testing-library/react";
+import { rest } from "msw";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { useJoinMutation } from "./useJoinMutation";
 const queryClient = new QueryClient();
 
 const Wrapper = ({ children }: any) => {
@@ -28,11 +28,8 @@ test("useJoinMutation 훅 테스트", async () => {
       wrapper: Wrapper,
     }
   );
-  await waitFor(() => {
-    result.current.mutate();
-  }).then(() => {
-    expect(result.current.isSuccess).toBeTruthy();
-  });
+  result.current.mutate();
+  await waitFor(() => expect(result.current.isSuccess).toBeTruthy());
 });
 
 test("useJoinMutation 훅 테스트 실패 케이스", async () => {

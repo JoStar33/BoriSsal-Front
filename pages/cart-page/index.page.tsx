@@ -50,7 +50,7 @@ const CartPage = () => {
       </div>
       {
         cartData.length > 0 
-        ? <button className={styles.order_button} onClick={() => handleOrder()}>
+        ? <button role="order" className={styles.order_button} onClick={() => handleOrder()}>
             주문하러 가기
           </button>
         : <button className={styles.order_button} onClick={() => handleShowGoods()}>
