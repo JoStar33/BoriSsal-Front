@@ -1,8 +1,8 @@
 import { IDeliverAddress, IPatchDeliverAddress } from "@/types/deliverAddress";
 import { customAxios } from "../axios/customAxios";
 
-const getDeliverAddress = (user_id: string) => {
-  const deliverAddresss = customAxios.get(`/deliver-address/${user_id}`)
+const getDeliverAddress = () => {
+  const deliverAddresss = customAxios.get(`/deliver-address`)
     .then(res => res)
     .then(res => res.data)
     .then((data: IDeliverAddress) => data);

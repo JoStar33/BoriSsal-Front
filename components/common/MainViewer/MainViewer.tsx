@@ -1,5 +1,5 @@
 
-import { useUserStore } from "@/store/user";
+import { usePageStore } from "@/store/page";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -17,7 +17,7 @@ const MainViewer = () => {
   const onScroll = () => {
     setPosition(window.scrollY);
   };
-  const { setPageState } = useUserStore()
+  const { setPageState } = usePageStore();
   useEffect(() => {
     setPageState('');
     window.addEventListener("scroll", onScroll);

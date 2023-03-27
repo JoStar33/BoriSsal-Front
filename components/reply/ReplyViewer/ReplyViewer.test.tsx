@@ -1,7 +1,6 @@
 
-import { useUserStore } from "@/store/user";
 import { IReplyMutation } from "@/types/reply";
-import { fireEvent, render, renderHook, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider, QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
 import ReplyViewer from "./ReplyViewer";
@@ -33,7 +32,15 @@ const initRender = () => {
     <QueryClientProvider client={queryClient}>
       <ReplyViewer goods_id={"23"} mutationData={mutationInitData} limit={1} setLimit={setState} refetch={function <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined): Promise<QueryObserverResult<IReplyMutation, unknown>> {
         throw new Error("Function not implemented.");
-      } }></ReplyViewer>
+      } } user={{
+        email: '',
+        nick: '',
+        sns_id: "", 
+        profile_image: "", 
+        created_at: new Date,
+        user_bori_goods_like: [],
+        user_bori_gallery_like: []
+      }}></ReplyViewer>
     </QueryClientProvider>
   );
 }
@@ -49,7 +56,8 @@ test("화면 반영 테스트", () => {
 test("댓글 입력후 댓글 등록시에 (로그인을 하지 않았을시에)", async () => {
   initRender();
   const replyRegistButton = screen.getByRole('regist');
-  fireEvent.change(replyRegistButton, { target: { value: "test123412^^" } });
+  const replyInput = screen.getByRole('reply-input');
+  fireEvent.change(replyInput, { target: { value: "헬로우헬로우" } });
   await user.click(replyRegistButton);
   const notLoginText = await screen.findByText(/로그인후 이용해주세요!/);
   expect(notLoginText).toBeInTheDocument();
@@ -57,21 +65,24 @@ test("댓글 입력후 댓글 등록시에 (로그인을 하지 않았을시에)
 
 
 test("댓글 등록시에 (댓글의 글자가 없을경우)", async () => {
-  const current = renderHook(() => useUserStore());
-  current.result.current.setUser({
-    id: "53645",
-    email: "jojo@naver.com",
-    nick: "jojo",
-    sns_id: "joster",
-    profile_image: "",
-    user_role: 0,
-    created_at: new Date(),
-    user_bori_goods_like: [],
-    user_bori_gallery_like: []
-  });
-  initRender();
+  render(
+    <QueryClientProvider client={queryClient}>
+      <ReplyViewer goods_id={"23"} mutationData={mutationInitData} limit={1} setLimit={setState} refetch={function <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined): Promise<QueryObserverResult<IReplyMutation, unknown>> {
+        throw new Error("Function not implemented.");
+      } } user={{
+        email: 'rhwdf@gmail.com',
+        nick: '우하하',
+        sns_id: '', 
+        profile_image: '', 
+        created_at: new Date,
+        user_bori_goods_like: [],
+        user_bori_gallery_like: []
+      }}></ReplyViewer>
+    </QueryClientProvider>
+  );
   const replyRegistButton = screen.getByRole('regist');
-  fireEvent.change(replyRegistButton, { target: { value: "" } });
+  const replyInput = screen.getByRole('reply-input');
+  fireEvent.change(replyInput, { target: { value: "" } });
   await user.click(replyRegistButton);
   const notLoginText = await screen.findByText(/최소 두글자는 입력해주세요!/);
   expect(notLoginText).toBeInTheDocument();

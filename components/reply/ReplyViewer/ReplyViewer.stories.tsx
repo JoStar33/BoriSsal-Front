@@ -13,14 +13,12 @@ ReplyViewerTest.args = {
   mutationData: {
     bori_goods_reply: [{
       _id: 'string',
-      user_id: 'string',
       email: 'string',
       content: 'string',
       reply_child: [],
       created_at: String(new Date()),
     }, {
       _id: 'string',
-      user_id: 'string',
       email: 'string',
       content: 'string',
       reply_child: [],

@@ -4,6 +4,7 @@
 }
 
 .userpage_container {
+  position: relative;
   @include center;
   flex-direction: row;
   .user_image__deliver_info {
@@ -50,6 +51,20 @@
       cursor: pointer;
       border-radius: 20px;
     }
+  }
+}
+.button_container {
+  margin-top: 10vw;
+  width: 100vw;
+  @include center;
+  button {
+    background-color: #CCCCFF;
+    font-weight: 800;
+    font-size: 1.5vw;
+    width: 20vw;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
   }
 }
 

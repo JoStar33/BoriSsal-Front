@@ -1,9 +1,9 @@
 import { errorMessage } from '@/apis/error/customError';
 import { useCartMutation } from '@/hooks/user/useCartMutation/useCartMutation';
 import { useCartStore } from '@/store/cart';
-
-import { useUserStore } from '@/store/user';
+import { usePageStore } from '@/store/page';
 import { IBoriGoods } from '@/types/boriGoods';
+import { IUser } from '@/types/user';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
@@ -15,14 +15,14 @@ interface IProps {
   setValidateDialog: React.Dispatch<React.SetStateAction<boolean>>;
   setSuccessDialog: React.Dispatch<React.SetStateAction<boolean>>;
   goods: IBoriGoods;
+  user: IUser;
 }
 
-const BoriGoodsDetailController = ({goods, validateText, setValidateDialog, setSuccessDialog}: IProps) => {
-  const { user, setPageState } = useUserStore();
+const BoriGoodsDetailController = ({user, goods, validateText, setValidateDialog, setSuccessDialog}: IProps) => {
+  const { setPageState } = usePageStore();
   const router = useRouter();
   const { setCart } = useCartStore();
   const { mutate, isError, isSuccess, error } = useCartMutation(
-    user.id,
     {
       bori_goods_id: goods._id,
       bori_goods_name: goods.bori_goods_name,

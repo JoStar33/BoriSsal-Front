@@ -12,7 +12,6 @@ export const ReplyPartTest = Template.bind({});
 ReplyPartTest.args = {
   reply: {
     _id: 'string',
-    user_id: 'string',
     email: 'string',
     content: 'string',
     reply_child: [],

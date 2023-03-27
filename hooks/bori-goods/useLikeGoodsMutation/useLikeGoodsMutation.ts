@@ -1,12 +1,15 @@
 import { dislikeGoods, likeGoods } from "@/apis/bori-goods/boriGoods";
-import { useUserStore } from "@/store/user";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 
-export const useLikeGoodsMutation = (goods_id: string) => {
-  const { user } = useUserStore();
+export const useLikeGoodsMutation = (user_bori_goods_like: string[], goods_id: string) => {
+  const queryClient = useQueryClient();
   return useMutation(() =>
-    user.user_bori_goods_like.find((likeGoods) => likeGoods === goods_id)
-      ? dislikeGoods(user.id, goods_id)
-      : likeGoods(user.id, goods_id)
+    user_bori_goods_like.find((likeGoods) => likeGoods === goods_id)
+      ? dislikeGoods(goods_id)
+      : likeGoods(goods_id), {
+        onSuccess: () => {
+          queryClient.invalidateQueries("user");
+        }
+      }
   );
 };

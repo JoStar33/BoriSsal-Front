@@ -1,14 +1,12 @@
 import { postOrder } from "@/apis/order/order";
 import { useCartStore } from "@/store/cart";
-import { useUserStore } from "@/store/user";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 
-export const useOrderMutation = () => {
-  const { user } = useUserStore();
+export const useOrderMutation = (price: number) => {
   const { cart } = useCartStore();
   const router = useRouter();
-  return useMutation(() => postOrder(user.id, cart), {
+  return useMutation(() => postOrder(price, cart), {
     onSuccess: () => {
       router.push('/complete-order');
     }

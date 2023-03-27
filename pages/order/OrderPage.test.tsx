@@ -1,6 +1,6 @@
 import { server } from "@/mocks/server";
 import { useCartStore } from "@/store/cart";
-import { useUserStore } from "@/store/user";
+import { usePageStore } from "@/store/page";
 import { render, renderHook, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { rest } from "msw";
@@ -12,8 +12,8 @@ const queryClient = new QueryClient();
 const user = userEvent.setup();
 
 const initRender = () => {
-  const current = renderHook(() => useUserStore());
-  current.result.current.setPageState('order')
+  const pageCurrent = renderHook(() => usePageStore());
+  pageCurrent.result.current.setPageState('order')
   render(
     <QueryClientProvider client={queryClient}>
       <OrderPage />
@@ -37,18 +37,6 @@ test("OrderPage 화면 반영 테스트", () => {
 
 
 test("OrderPage 화면 반영 테스트 (굿즈가 없는 상태일 경우)", async () => {
-  const current = renderHook(() => useUserStore());
-  current.result.current.setUser({
-    id: "23",
-    email: "rhgfd@naver.com",
-    nick: "호우호우",
-    sns_id: "",
-    profile_image: "",
-    user_role: 0,
-    created_at: new Date(),
-    user_bori_goods_like: [],
-    user_bori_gallery_like: []
-  });
   initRender();
   const clickOrder = await screen.findByRole('order-button');
   user.click(clickOrder);
@@ -57,19 +45,7 @@ test("OrderPage 화면 반영 테스트 (굿즈가 없는 상태일 경우)", as
 });
 
 test("OrderPage 화면 반영 테스트 (배송지 정보가 없을경우)", async () => {
-  const current = renderHook(() => useUserStore());
   const cartCurrent = renderHook(() => useCartStore());
-  current.result.current.setUser({
-    id: "23",
-    email: "rhgfd@naver.com",
-    nick: "호우호우",
-    sns_id: "",
-    profile_image: "",
-    user_role: 0,
-    created_at: new Date(),
-    user_bori_goods_like: [],
-    user_bori_gallery_like: []
-  });
   cartCurrent.result.current.setCart([{
     bori_goods_id: '', 
     bori_goods_name: '', 
@@ -79,12 +55,11 @@ test("OrderPage 화면 반영 테스트 (배송지 정보가 없을경우)", asy
   }]);
   server.use(
     rest.get(
-      `${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/deliver-address/23`,
+      `${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/deliver-address`,
       (req, res, ctx) => {
         return res(
           ctx.status(200),
           ctx.json([{
-            user_id: "23",
             phone_number: "",
             address: '',
             address_detail: ''

@@ -1,8 +1,11 @@
-import { useUserStore } from '@/store/user';
+import { IUser } from '@/types/user';
 import styles from './user_info_viewer.module.scss';
 
-const UserInfoViewer = () => {
-  const { user } = useUserStore();
+interface IProps {
+  user: IUser
+}
+
+const UserInfoViewer = ({user}: IProps) => {
   return (
     <div className={styles.info_container}>
       <p>이메일: 

@@ -1,6 +1,6 @@
 
 import { useCartStore } from '@/store/cart';
-import { useUserStore } from '@/store/user';
+import { usePageStore } from '@/store/page';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useEffect } from 'react';
 import CompleteOrder from './index.page';
@@ -10,20 +10,9 @@ export default {
 } as ComponentMeta<typeof CompleteOrder>;
 
 const CompleteOrderComponent = () => {
-  const { setUser, setPageState } = useUserStore();
+  const { setPageState } = usePageStore();
   const { setCart } = useCartStore();
   useEffect(() => {
-    setUser({
-      id: "2421424325325",
-      email: "",
-      nick: "하오우",
-      sns_id: "",
-      profile_image: "",
-      user_role: 0,
-      created_at: new Date(),
-      user_bori_goods_like: [],
-      user_bori_gallery_like: []
-    });
     setPageState('order');
     setCart([{
       bori_goods_id: '23', 

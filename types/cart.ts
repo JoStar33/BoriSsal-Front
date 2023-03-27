@@ -7,6 +7,5 @@ export interface ICartGoods {
 }
 
 export interface IGetCartGoods extends ICartGoods {
-  user_id: string;
   _id: string;
 }

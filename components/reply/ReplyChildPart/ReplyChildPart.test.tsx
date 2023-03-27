@@ -8,7 +8,6 @@ const user = userEvent.setup();
 const initRender = () => {
   render(
     <ReplyChildPart replyChild={{
-      user_id: 'dgfdg',
       email: 'rhwdd123',
       content: '헬로우 헬로우',
       created_at:  String(new Date())

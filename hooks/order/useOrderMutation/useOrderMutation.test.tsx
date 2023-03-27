@@ -13,7 +13,7 @@ const Wrapper = ({ children }: any) => {
 };
 
 test("useOrderMutation 훅 테스트(성공)", async () => {
-  const { result } = renderHook(() => useOrderMutation(), {
+  const { result } = renderHook(() => useOrderMutation(20000), {
     wrapper: Wrapper,
   });
   result.current.mutate()
@@ -23,7 +23,7 @@ test("useOrderMutation 훅 테스트(성공)", async () => {
   expect(result.current.isSuccess).toBeTruthy();
 });
 
-test("useOrderMutation 훅 테스트(성공)", async () => {
+test("useOrderMutation 훅 테스트(실패)", async () => {
   server.use(
     rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/order`, (req, res, ctx) => {
       return res(
@@ -31,7 +31,7 @@ test("useOrderMutation 훅 테스트(성공)", async () => {
       );
     })
   )
-  const { result } = renderHook(() => useOrderMutation(), {
+  const { result } = renderHook(() => useOrderMutation(20000), {
     wrapper: Wrapper,
   });
   result.current.mutate()

@@ -26,5 +26,8 @@ test("useBoriGalleryReplyQuery 정상동작 확인 테스트", async () => {
   await waitFor(() => 
     expect(result.current.isSuccess).toBeTruthy()
   );
-  expect(result.current.data?.data[0].email).toBe('junho@naver.com');
+  if(!result.current.data)
+    return;
+  expect(result.current.data.bori_goods_reply[0].content).toBe('테스트 댓글');
 });
+

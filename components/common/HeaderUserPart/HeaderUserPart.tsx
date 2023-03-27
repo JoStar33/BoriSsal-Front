@@ -1,13 +1,17 @@
 import LoginButton from '@/components/user/LoginButton/LoginButton';
 import UserBar from '@/components/user/UserBar/UserBar';
-import { useUserStore } from '@/store/user';
+import { useUserQuery } from '@/hooks/user/useUserQuery/useUserQuery';
+import { initUser } from '@/utils/initData';
 
 const HeaderUserPart = () => {
-  const { user } = useUserStore();
+  let { data: user, isError } = useUserQuery();
+  if(!user) {
+    user = initUser;
+  }
   return (
     <>
-      {user.id.length > 3 ? (
-        <UserBar></UserBar>
+      { user && !isError ? (
+        <UserBar user={user}></UserBar>
       ) : (
         <LoginButton></LoginButton>
       )}

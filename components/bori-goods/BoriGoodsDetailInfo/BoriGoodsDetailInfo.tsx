@@ -1,8 +1,8 @@
 import SuccessDialog from '@/components/dialogs/SuccessDialog/SuccessDialog';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import { useLikeGoodsMutation } from '@/hooks/bori-goods/useLikeGoodsMutation/useLikeGoodsMutation';
-import { useUserStore } from '@/store/user';
 import { IBoriGoods, ICategory } from "@/types/boriGoods";
+import { IUser } from '@/types/user';
 import Image from "next/image";
 import { useRef, useState } from 'react';
 import { AiFillHeart } from "react-icons/ai";
@@ -11,26 +11,26 @@ import styles from './bori_goods_detail_info.module.scss';
 interface IProps {
   goods: IBoriGoods;
   category: ICategory;
+  user: IUser;
 }
 
 const BoriGoodsDetailInfo = ({
   goods,
-  category
+  category,
+  user
 }:IProps) => {
   const validateText = useRef<string>("");
   const [validateDialog, setValidateDialog] = useState<boolean>(false);
   const [successDialog, setSuccessDialog] = useState<boolean>(false);
-  const { user, setGoodsLike } = useUserStore();
-  const likeGoodsMutation = useLikeGoodsMutation(goods._id);
+  const likeGoodsMutation = useLikeGoodsMutation(user.user_bori_goods_like, goods._id);
   const handleLikeGoods = () => {
-    if (!user.id) {
+    if (!user.email) {
       validateText.current = "로그인 이후에 누를 수 있어요!";
       return setValidateDialog(true);
     }
     user.user_bori_goods_like.find((likeGoods) => likeGoods === goods._id)
       ? goods.bori_goods_like--
       : goods.bori_goods_like++;
-    setGoodsLike(goods._id);
     likeGoodsMutation.mutate();
   };
   return (
@@ -67,7 +67,8 @@ const BoriGoodsDetailInfo = ({
             validateText={validateText}
             setValidateDialog={setValidateDialog}
             setSuccessDialog={setSuccessDialog}
-            goods={goods}/>
+            goods={goods} 
+            user={user}/>
         </div>
         <div className={styles.goods_info}>
           <p>제품 정보: {goods.bori_goods_name}</p>

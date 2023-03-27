@@ -12,9 +12,18 @@ const validateText = jest.fn() as any;
 const initRender = () => {
   render(
     <QueryClientProvider client={queryClient}>
-      <ReplyPart reply={{
+      <ReplyPart 
+      user={{
+        email: 'rhwdf@gmail.com',
+        nick: '우하하',
+        sns_id: '', 
+        profile_image: '', 
+        created_at: new Date,
+        user_bori_goods_like: [],
+        user_bori_gallery_like: []
+      }}
+      reply={{
       _id: 'qwewqe',
-      user_id: 'dgfdg',
       email: 'rhwdd123',
       content: '헬로우 헬로우',
       reply_child: [],

@@ -1,6 +1,5 @@
 export interface IReply {
   _id: string;
-  user_id: string;
   email: string;
   content: string;
   reply_child: IReplyChild[];
@@ -8,7 +7,6 @@ export interface IReply {
 }
 
 export interface IReplyChild {
-  user_id: string;
   email: string;
   content: string;
   created_at: string;

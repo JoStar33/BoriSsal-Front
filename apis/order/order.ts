@@ -1,11 +1,25 @@
 import { ICartGoods } from "@/types/cart";
+import { IOrder } from '@/types/order';
 import { customAxios } from "../axios/customAxios";
 
-const postOrder = (user_id: string, bori_goods: ICartGoods[]) => {
+const postOrder = (price: number, bori_goods: ICartGoods[]) => {
   return customAxios.post('/order', {
-    user_id: user_id,
+    price: price,
     bori_goods: bori_goods
   });
 };
 
-export { postOrder }
+const getOrder = () => {
+  const order = customAxios.get('/order')    
+    .then(res => res)
+    .then(res => res.data)
+    .then((data: IOrder) => data);
+  return order;
+};
+
+const deleteOrder = (order_id: string) => {
+  return customAxios.delete(`/order/${order_id}`);
+}
+
+export { postOrder, getOrder, deleteOrder };
+

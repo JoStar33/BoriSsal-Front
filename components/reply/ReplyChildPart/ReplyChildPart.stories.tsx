@@ -11,7 +11,6 @@ const Template: ComponentStory<typeof ReplyChildPart> = (args) => <ReplyChildPar
 export const ReplyPartTest = Template.bind({});
 ReplyPartTest.args = {
   replyChild: {
-    user_id: 'string',
     email: 'string',
     content: 'string',
     created_at: String(new Date()),

@@ -1,15 +1,16 @@
-import React, { useState } from "react";
 import { getCategory, getGoods } from "@/apis/bori-goods/boriGoods";
 import { errorMessage } from "@/apis/error/customError";
-import { IBoriGoods, ICategory } from "@/types/boriGoods";
-import { AxiosError } from "axios";
-import { GetStaticPaths, GetStaticProps } from "next";
-import { useBoriGoodsReplyQuery } from "@/hooks/bori-goods/useBoriGoodsReplyQuery/useBoriGoodsReplyQuery";
-import ReplyViewer from "@/components/reply/ReplyViewer/ReplyViewer";
-import ReplyLoading from "@/components/loading/ReplyLoading/ReplyLoading";
 import BoriGoodsDetailInfo from "@/components/bori-goods/BoriGoodsDetailInfo/BoriGoodsDetailInfo";
 import ErrorPage from "@/components/error/ErrorPage/ErrorPage";
-import { initReplyMutation } from "@/utils/initData";
+import ReplyLoading from "@/components/loading/ReplyLoading/ReplyLoading";
+import ReplyViewer from "@/components/reply/ReplyViewer/ReplyViewer";
+import { useBoriGoodsReplyQuery } from "@/hooks/bori-goods/useBoriGoodsReplyQuery/useBoriGoodsReplyQuery";
+import { useUserQuery } from "@/hooks/user/useUserQuery/useUserQuery";
+import { IBoriGoods, ICategory } from "@/types/boriGoods";
+import { initReplyMutation, initUser } from "@/utils/initData";
+import { AxiosError } from "axios";
+import { GetStaticPaths, GetStaticProps } from "next";
+import { useState } from "react";
 
 interface IProps {
   goods: IBoriGoods;
@@ -25,9 +26,13 @@ const BoriGoodsDetail = ({
   goodsErrorMessage,
 }: IProps) => {
   const [limit, setLimit] = useState<number>(1);
-  let { data, isLoading, refetch, error } = useBoriGoodsReplyQuery(goods._id, limit);
-  if (!data) {
-    data = initReplyMutation
+  let { data: user } = useUserQuery();
+  let { data: boriGoodsReply, isLoading, refetch, error } = useBoriGoodsReplyQuery(goods._id, limit);
+  if (!user) {
+    user = initUser;
+  }
+  if (!boriGoodsReply) {
+    boriGoodsReply = initReplyMutation
   }
   if (goodsErrorMessage || categoryErrorMessage) {
     return (
@@ -38,17 +43,18 @@ const BoriGoodsDetail = ({
     <div>
       {/*굿즈의 상세정보 조회*/}
       <BoriGoodsDetailInfo 
-        goods={goods} 
-        category={category}></BoriGoodsDetailInfo>
+        goods={goods}
+        category={category} user={user}></BoriGoodsDetailInfo>
       {
         isLoading 
           ? <ReplyLoading></ReplyLoading>
           : <ReplyViewer
+            user={user}
             refetch={refetch}
             setLimit={setLimit}
             limit={limit}
             goods_id={goods._id}
-            mutationData={data}
+            mutationData={boriGoodsReply}
           ></ReplyViewer>
       }
     </div>

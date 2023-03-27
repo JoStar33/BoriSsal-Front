@@ -1,5 +1,3 @@
-
-import { useUserStore } from "@/store/user";
 import { fireEvent, render, renderHook, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { rest } from "msw";
@@ -25,7 +23,6 @@ test("일반적으로 버튼을 클릭했을 경우.", async () => {
 });
 
 test("이메일과 비밀번호를 입력후 테스트를 시도했을 경우(성공 케이스)", async () => {
-  const current = renderHook(() => useUserStore());
   render(
     <QueryClientProvider client={queryClient}>
       <Login />
@@ -38,10 +35,6 @@ test("이메일과 비밀번호를 입력후 테스트를 시도했을 경우(�
   expect(password).toHaveValue("test123412^^");
   const loginButton = screen.getByRole("login");
   await user.click(loginButton);
-  //리덕스
-  const state = current.result.current.user;
-  expect(state.email).toEqual("user12@test.com");
-  expect(state.nick).toEqual("클라나이");
 });
 
 test("이메일과 비밀번호를 입력후 테스트를 시도했을 경우(에러 케이스)", async () => {

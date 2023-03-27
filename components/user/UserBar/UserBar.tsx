@@ -2,15 +2,18 @@ import { errorMessage } from '@/apis/error/customError';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import Loading from '@/components/loading/Loading/Loading';
 import { useLogoutMutation } from '@/hooks/auth/useLogoutMutation/useLogoutMutation';
-import { useUserStore } from '@/store/user';
+import { IUser } from '@/types/user';
 import { AxiosError } from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BsFillCartFill } from 'react-icons/bs';
 import styles from './userbar.module.scss';
 
-const UserBar = () => {
-  const { user } = useUserStore();
+interface IProps {
+  user: IUser;
+}
+
+const UserBar = ({ user }: IProps) => {
   const { mutate, isError, isLoading, error } = useLogoutMutation();
   return (
     <>

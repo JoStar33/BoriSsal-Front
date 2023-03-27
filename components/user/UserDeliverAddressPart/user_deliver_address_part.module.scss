@@ -50,7 +50,7 @@
 
 .address_dialog_background {
   @include center;
-  position: absolute;
+  position: fixed;
   top: 0vh;
   left: 0vh;
   width: 100%;
