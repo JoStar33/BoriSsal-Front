@@ -29,7 +29,7 @@ const CompleteOrderPage = () => {
       return _total + (cartElement.bori_goods_count * cartElement.bori_goods_price)}, 0);
   }, [cart]);
   const orderShow = useMemo(() => {
-    return pageState === 'complete-order' ? false : true;
+    return pageState === 'order' ? false : true;
   }, [pageState]);
   useEffect(() => {
     if (!orderShow) {
