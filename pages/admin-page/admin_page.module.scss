@@ -1,0 +1,12 @@
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.admin_page_container {
+  @include center;
+  position: relative;
+  margin-top: 20vh;
+}
