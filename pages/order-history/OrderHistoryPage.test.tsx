@@ -12,8 +12,8 @@ const initRender = () => {
   );
 };
 
-test("화면 반영 테스트", () => {
+test("OrderHistoryPage 화면 반영 테스트", () => {
   initRender();
-  const orderText = screen.getByText(/주문 내역/);
+  const orderText = screen.getByText("주문 내역");
   expect(orderText).toBeInTheDocument();
 })

@@ -19,16 +19,13 @@ test("usePassWordChangeMutation 정상동작 확인 테스트", async () => {
       wrapper: Wrapper,
     }
   );
-  await waitFor(() => {
-    result.current.mutate();
-  }).then(() => {
-    expect(result.current.isSuccess).toBeTruthy();
-  });
+  result.current.mutate();
+  await waitFor(() => expect(result.current.isSuccess).toBeTruthy());
 });
 
 test("usePassWordChangeMutation 정상동작 확인 테스트(실패 케이스)", async () => {
   server.use(    
-    rest.get(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/password`, (req, res, ctx) => {
+    rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/password`, (req, res, ctx) => {
       return res(
         ctx.status(500),
       );
@@ -40,9 +37,6 @@ test("usePassWordChangeMutation 정상동작 확인 테스트(실패 케이스)"
       wrapper: Wrapper,
     }
   );
-  await waitFor(() => {
-    result.current.mutate();
-  }).then(() => {
-    expect(result.current.isError).toBeTruthy();
-  });
+  result.current.mutate();
+  await waitFor(() => expect(result.current.isError).toBeTruthy());
 });
