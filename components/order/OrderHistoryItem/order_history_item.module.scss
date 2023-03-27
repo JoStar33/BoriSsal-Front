@@ -1,0 +1,67 @@
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.order_item_box {
+  @include center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.order_item_container {
+  width: 96vw;
+  border: 2px solid black;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  .order_info {
+    width: 75%;
+    p {
+      font-size: 0.9vw;
+      font-weight: 800;
+    }
+  }
+  .order_controller {
+    display: flex;
+    flex-direction: row;
+  }
+  .status {
+    font-size: 2vw;
+    font-weight: 800;
+  }
+  .price {
+    font-size: 1.3vw;
+    font-weight: 800;
+  }
+}
+
+.button_container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-end;
+  margin: 2vw;
+  .order_cancel_button {
+    background-color: #F04343;
+    font-size: 1vw;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    width: 7vw;
+    margin-bottom: 1vw;
+  };
+
+  .order_list_button {
+    background-color: #D9D9D9;
+    font-size: 1vw;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    width: 7vw;
+    margin-bottom: 0.2vw;
+  }
+}

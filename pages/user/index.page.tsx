@@ -8,6 +8,7 @@ import { useProfileUpdateMutation } from "@/hooks/user/useProfileUpdateMutation/
 import { useUserQuery } from "@/hooks/user/useUserQuery/useUserQuery";
 import { initDeliver, initUser } from "@/utils/initData";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useLayoutEffect, useState } from "react";
 import { BsFillPencilFill } from "react-icons/bs";
 import styles from "./userpage.module.scss";
@@ -99,6 +100,11 @@ const UserPage = () => {
           <p>회원 닉네임: {user.nick}</p>
           <button onClick={() => setDialog(true)}>비밀번호 변경</button>
         </div>
+      </div>
+      <div className={styles.button_container}>
+        <Link href="/order-history">
+          <button>주문내역 보러가기</button>
+        </Link>
       </div>
     </>
   );

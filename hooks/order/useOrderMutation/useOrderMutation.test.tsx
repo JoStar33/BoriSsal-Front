@@ -13,7 +13,7 @@ const Wrapper = ({ children }: any) => {
 };
 
 test("useOrderMutation 훅 테스트(성공)", async () => {
-  const { result } = renderHook(() => useOrderMutation(), {
+  const { result } = renderHook(() => useOrderMutation(20000), {
     wrapper: Wrapper,
   });
   result.current.mutate()
@@ -31,7 +31,7 @@ test("useOrderMutation 훅 테스트(실패)", async () => {
       );
     })
   )
-  const { result } = renderHook(() => useOrderMutation(), {
+  const { result } = renderHook(() => useOrderMutation(20000), {
     wrapper: Wrapper,
   });
   result.current.mutate()

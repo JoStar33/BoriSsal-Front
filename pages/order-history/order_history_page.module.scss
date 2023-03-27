@@ -1,0 +1,13 @@
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.order_history_page_container {
+  h1 {
+    margin: 5vw
+  }
+  @include center;
+  flex-direction: column;
+}

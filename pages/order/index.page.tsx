@@ -31,11 +31,11 @@ const OrderPage = () => {
   const validateText = useRef<string>('');
   let { data: deliverAddress } = useDeliverAddressQuery();
   let { data: user } = useUserQuery();
-  const { mutate } = useOrderMutation();
   const totalPrice = useMemo(() => {
     return cart.reduce((_total, cartElement) => {
       return _total + (cartElement.bori_goods_count * cartElement.bori_goods_price)}, 0);
   }, [cart]);
+  const { mutate } = useOrderMutation(totalPrice);
   const orderShow = useMemo(() => {
     return pageState === 'order' ? true : false;
   }, [pageState]);
