@@ -6,6 +6,7 @@ import { IUser } from '@/types/user';
 import React, { useRef, useState } from 'react';
 import { AiFillCaretDown } from 'react-icons/ai';
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
+import ReplyEmpty from '../ReplyEmpty/ReplyEmpty';
 import ReplyPart from '../ReplyPart/ReplyPart';
 import styles from './reply_viewer.module.scss';
 
@@ -62,9 +63,11 @@ const ReplyViewer = ({user, mutationData, goods_id, setLimit, limit, refetch}: I
           goodsReplyMutation.isLoading && <ReplySkeleton></ReplySkeleton>
         }
         {
-          mutationData.bori_goods_reply && mutationData.bori_goods_reply.map((reply)=>{
+          mutationData.bori_goods_reply.length !== 0
+          ? mutationData.bori_goods_reply.map((reply)=>{
             return <ReplyPart user={user} key={reply._id} reply={reply} setDialog={setDialog} validateText={validateText}></ReplyPart>
           })
+          : <ReplyEmpty/>
         }
         {
           !mutationData.overflow && 
