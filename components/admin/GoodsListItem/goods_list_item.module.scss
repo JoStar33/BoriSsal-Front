@@ -1,0 +1,126 @@
+.goods_list_item_container {
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input {
+    outline: none;
+    border: none;
+  }
+  width: 85vw;
+  background-color: D9D9D9;
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  .goods_info {
+    display: flex;
+    flex-direction: column;
+    .name {
+      width: 20vw;
+      font-size: 2vw;
+      font-weight: 800;
+    }
+    .price {
+      display: flex;
+      flex-direction: row;
+      input {
+        font-size: 2vw;
+        font-weight: 800;
+        width: 10vw;
+      }
+      font-size: 2vw;
+      font-weight: 800;
+      width: 10vw;
+    }
+  }
+  .stock_info {
+    font-size: 1vw;
+    margin: 3vw;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    input {
+      font-weight: 800;
+      text-align: center;
+      width: 3vw;
+    }
+  }
+  .desc_container {
+    font-weight: 800;
+    display: flex;
+    flex-direction: column;
+    textarea {
+      font-weight: 800;
+      font-size: 1vw;
+      outline: none;
+      width: 20vw;
+      height: 6.25em;
+      border: none;
+      resize: none;
+    }
+  }
+  .button_container {
+    display: flex;
+    flex-direction: column;
+    button {
+      width: 6vw;
+      margin-top: 2vw;
+      margin-left: 2vw;
+      cursor: pointer;
+      border: none;
+      border-radius: 20px;
+      font-size: 1.4vw;
+      font-weight: 800;
+    }
+    .modify_button {
+      color: white;
+      background-color: #3f924f;
+    }
+    .delete_button {
+      color: white;
+      background-color: #e77373;
+    }
+  }
+  .middle_cover {
+    margin: 3vw;
+    display: flex;
+    flex-direction: column;
+    .select_container {
+      display: flex;
+      align-items: center;
+      label {
+        width: 6vw;
+        font-size: 1vw;
+        font-weight: 800;
+      }
+      select {
+        outline: none;
+        width: 5vw;
+        border: none;
+        height: 1.4vw;
+        text-align: center;
+        font-size: 1vw;
+      }
+    }
+    .stock_info {
+      width: 9vw;
+      font-size: 1vw;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      label {
+        width: 6vw;
+        font-size: 1vw;
+        font-weight: 800;
+      }
+      input {
+        font-weight: 800;
+        text-align: center;
+        width: 3vw;
+      }
+    }
+  }
+}
