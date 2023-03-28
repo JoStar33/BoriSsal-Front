@@ -1,4 +1,4 @@
-import { getCategory, getGoods } from "@/apis/bori-goods/boriGoods";
+import { getBoriGoods, getCategory } from "@/apis/bori-goods/boriGoods";
 import { errorMessage } from "@/apis/error/customError";
 import BoriGoodsDetailInfo from "@/components/bori-goods/BoriGoodsDetailInfo/BoriGoodsDetailInfo";
 import ErrorPage from "@/components/error/ErrorPage/ErrorPage";
@@ -65,8 +65,8 @@ export default BoriGoodsDetail;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   let goodsData: IBoriGoods[] = [];
-  await getGoods().then((res) => {
-    goodsData = res.data;
+  await getBoriGoods().then((res) => {
+    goodsData = res;
   });
   const paths = goodsData.map((goods) => ({
     params: { boriGoodsDetail: goods.bori_goods_name },
@@ -87,9 +87,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       },
     }
   }
-  await getGoods()
+  await getBoriGoods()
     .then((res) => {
-      goodsData = res.data;
+      goodsData = res;
     })
     .catch((error: AxiosError) => {
       goodsErrorMessage = errorMessage(error);

@@ -1,11 +1,11 @@
-import React, { useMemo, useState } from 'react';
-import BoriGoodsItem from '@/components/bori-goods/BoriGoodsItem/BoriGoodsItem';
-import { getGoods, getCategory } from '@/apis/bori-goods/boriGoods';
-import { AxiosError } from 'axios';
-import { IBoriGoods, ICategory } from '@/types/boriGoods';
-import styles from './bori_goods_page.module.scss';
+import { getBoriGoods, getCategory } from '@/apis/bori-goods/boriGoods';
 import { errorMessage } from '@/apis/error/customError';
+import BoriGoodsItem from '@/components/bori-goods/BoriGoodsItem/BoriGoodsItem';
 import ErrorPage from '@/components/error/ErrorPage/ErrorPage';
+import { IBoriGoods, ICategory } from '@/types/boriGoods';
+import { AxiosError } from 'axios';
+import React, { useState } from 'react';
+import styles from './bori_goods_page.module.scss';
 
 interface IProps {
   goodsData: IBoriGoods[];
@@ -90,9 +90,9 @@ export async function getStaticProps() {
   let categoryData: ICategory[] = [];
   let goodsErrorMessage = null;
   let categoryErrorMessage = null;
-  await getGoods()
+  await getBoriGoods()
     .then((res) => {
-      goodsData = res.data;
+      goodsData = res;
     }).catch((error: AxiosError) => {
       goodsErrorMessage = errorMessage(error)
     });
