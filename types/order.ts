@@ -4,5 +4,8 @@ export interface IOrder {
   order_date: Date;
   price: number;
   order_status: string;
-  order_detail: ICartGoods[]
+  order_detail: ICartGoods[];
+  phone_number: string,
+  address: string,
+  address_detail: string
 }
