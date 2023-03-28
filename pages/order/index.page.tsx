@@ -9,6 +9,7 @@ import { useDeliverAddressQuery } from '@/hooks/user/useDeliverAddressQuery/useD
 import { useUserQuery } from '@/hooks/user/useUserQuery/useUserQuery';
 import { useCartStore } from '@/store/cart';
 import { usePageStore } from '@/store/page';
+import { IPostDeliverAddress } from '@/types/deliverAddress';
 import { initUser } from '@/utils/initData';
 import { useMemo, useRef, useState } from 'react';
 import styles from './orderpage.module.scss';
@@ -31,20 +32,30 @@ const OrderPage = () => {
   const validateText = useRef<string>('');
   let { data: deliverAddress } = useDeliverAddressQuery();
   let { data: user } = useUserQuery();
-  const totalPrice = useMemo(() => {
-    return cart.reduce((_total, cartElement) => {
-      return _total + (cartElement.bori_goods_count * cartElement.bori_goods_price)}, 0);
-  }, [cart]);
-  const { mutate } = useOrderMutation(totalPrice);
-  const orderShow = useMemo(() => {
-    return pageState === 'order' ? true : false;
-  }, [pageState]);
   if (!deliverAddress) {
     deliverAddress = initData;
   };
   if (!user) {
     user = initUser;
   };
+  const totalPrice = useMemo(() => {
+    return cart.reduce((_total, cartElement) => {
+      return _total + (cartElement.bori_goods_count * cartElement.bori_goods_price)}, 0);
+  }, [cart]);
+  const postDeliverAddress = useMemo<IPostDeliverAddress>(() => {
+    if (!deliverAddress) {
+      deliverAddress = initData;
+    };
+    return {
+      address: deliverAddress.address,
+      address_detail: deliverAddress.address_detail,
+      phone_number: deliverAddress.phone_number
+    }
+  }, [deliverAddress, initData]);
+  const orderShow = useMemo(() => {
+    return pageState === 'order' ? true : false;
+  }, [pageState]);
+  const { mutate } = useOrderMutation(totalPrice, postDeliverAddress);
   const handleOrder = () => {
     if (!deliverAddress) {
       deliverAddress = initData;

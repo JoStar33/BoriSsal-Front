@@ -1,9 +1,11 @@
 import { ICartGoods } from "@/types/cart";
+import { IPostDeliverAddress } from "@/types/deliverAddress";
 import { IOrder } from '@/types/order';
 import { customAxios } from "../axios/customAxios";
 
-const postOrder = (price: number, bori_goods: ICartGoods[]) => {
+const postOrder = (price: number, bori_goods: ICartGoods[], deliver_address: IPostDeliverAddress) => {
   return customAxios.post('/order', {
+    deliver_address: deliver_address,
     price: price,
     bori_goods: bori_goods
   });

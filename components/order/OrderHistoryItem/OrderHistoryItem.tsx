@@ -1,17 +1,14 @@
 import { useDeleteOrderMutation } from "@/hooks/order/useDeleteOrderMutation/useDeleteOrderMutation";
-import { IDeliverAddress } from "@/types/deliverAddress";
 import { IOrder } from "@/types/order";
-import { initDeliver } from "@/utils/initData";
 import { useMemo, useState } from "react";
 import OrderHistoryGoodsItem from "../OrderHistoryGoodsItem/OrderHistoryGoodsItem";
 import styles from './order_history_item.module.scss';
 
 interface IProps {
   order: IOrder;
-  deliverAddress?: IDeliverAddress;
 }
 
-const OrderHistoryItem = ({ order, deliverAddress }: IProps) => {
+const OrderHistoryItem = ({ order }: IProps) => {
   const [goodsShow, setGoodsShow] = useState<boolean>(false);
   const { mutate } = useDeleteOrderMutation(order._id);
   const deliverStatusColor = useMemo<string>(() => {
@@ -21,18 +18,15 @@ const OrderHistoryItem = ({ order, deliverAddress }: IProps) => {
       return "#4DC667"
     return "#000000"
   }, [order])
-  if(!deliverAddress) {
-    deliverAddress = initDeliver;
-  } 
   return (
     <div className={styles.order_item_box}>
       <div className={styles.order_item_container}>
         <div className={styles.order_info}>
           <p>{order.order_date.toLocaleString()}</p>
           <p>주문내역</p>
-          <p>{deliverAddress.address}</p>
-          <p>{deliverAddress.address_detail}</p>
-          <p>{deliverAddress.phone_number}</p>
+          <p>{order.address}</p>
+          <p>{order.address_detail}</p>
+          <p>{order.phone_number}</p>
         </div>
         <div className={styles.order_controller}>
           <div>
