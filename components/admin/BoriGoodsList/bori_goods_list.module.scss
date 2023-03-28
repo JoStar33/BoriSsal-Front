@@ -1,0 +1,52 @@
+.select_container {
+  display: flex;
+  align-items: center;
+  label {
+    width: 12vw;
+    font-size: 2vw;
+    font-weight: 800;
+  }
+  select {
+    outline: none;
+    width: 30vw;
+    border: none;
+    height: 2vw;
+    text-align: center;
+    font-size: 1.4vw;
+  }
+}
+
+.list_container {
+  margin: 3vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.search_container {
+  margin: 4vw;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  label {
+    font-size: 2vw;
+    font-weight: 800;
+    margin-right: 2vw;
+  }
+  input {
+    outline: none;
+    border: none;
+    font-size: 2vw;
+    font-weight: 800;
+    width: 20vw;
+  }
+  margin-right: 4vw;
+}
+
+.list_controller {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
