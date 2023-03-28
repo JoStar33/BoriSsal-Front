@@ -33,8 +33,9 @@ const BoriGoodsRegister = () => {
     fr.onload = (e) => {
       if (!e.target) return;
       if (fr.readyState === 2) {
+        formData.current = new FormData();
         setImage(e.target.result);
-        formData.current.append("img", file);
+        formData.current.append("bori_goods_images", file);
         console.log(file);
         console.log(formData.current);
       }
