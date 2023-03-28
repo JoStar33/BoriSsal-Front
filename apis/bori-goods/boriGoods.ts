@@ -1,9 +1,13 @@
-import { ICategory, IPostBoriGoods } from "@/types/boriGoods";
+import { IBoriGoods, ICategory, IPostBoriGoods } from "@/types/boriGoods";
 import { IReplyMutation } from "@/types/reply";
 import { customAxios } from "../axios/customAxios";
 
-const getGoods = () => {
-  return customAxios.get('/bori-goods');
+const getBoriGoods = () => {
+  const boriGoods = customAxios.get('/bori-goods')
+    .then(res => res)
+    .then(res => res.data)
+    .then((data: IBoriGoods[]) => data);
+  return boriGoods;
 };
 
 const getCategory = () => {
@@ -12,6 +16,26 @@ const getCategory = () => {
     .then(res => res.data)
     .then((data: ICategory[]) => data);
   return category;
+};
+
+
+const patchBoriGoodsImage = (goods_id: string, bori_goods_image: FormData) => {
+  return customAxios.patch(`/bori-goods/image/${goods_id}`, bori_goods_image, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  })
+}
+
+const putBorigoods = (bori_goods: IPostBoriGoods, category_id: string, bori_goods_id: string) => {
+  return customAxios.put(`/bori-goods/${bori_goods_id}`, {
+    bori_goods: bori_goods,
+    category_id: category_id
+  })
+}
+
+const deleteBorigoods = (bori_goods_id: string) => {
+  return customAxios.delete(`/bori-goods/${bori_goods_id}`);
 };
 
 const postBoriGoods = (category_id: string, bori_goods: IPostBoriGoods, bori_goods_image: FormData) => {
@@ -62,4 +86,5 @@ const dislikeGoods = (goods_id: string) => {
   });
 };
 
-export { getGoods, getCategory, getBoriGoodsReply, postBoriGoods, postBoriGoodsReply, likeGoods, dislikeGoods, postBoriGoodsChildReply };
+export { getBoriGoods, deleteBorigoods, putBorigoods, getCategory, getBoriGoodsReply, postBoriGoods, postBoriGoodsReply, patchBoriGoodsImage, likeGoods, dislikeGoods, postBoriGoodsChildReply };
+
