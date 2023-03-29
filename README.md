@@ -22,3 +22,4 @@ https://www.figma.com/file/ostLEtK2oJDRCU3HInhDbD/%EB%B3%B4%EB%A6%AC%EC%8C%80?no
 - feature/goods-page
 - feature/bori-gallery-page
 - feature/user-page
+- feature/admin-page
