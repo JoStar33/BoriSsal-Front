@@ -1,6 +1,4 @@
-import Image from "next/image";
 import { useRef, useState } from "react";
-import styles from "./use_regist_image.module.scss";
 
 export const useRegistImage = () => {
   const [image, setImage] = useState<any>("");
@@ -21,33 +19,5 @@ export const useRegistImage = () => {
       }
     };
   };
-  const renderRegistImage = (desc: string) => (
-    <>
-      {!image ? (
-        <label className={styles.regist_image} htmlFor="input-file">
-          {
-            desc
-          }
-        </label>
-      ) : (
-        <>
-          <label className={styles.regist_image} htmlFor="input-file">
-            <figure
-              style={{ width: "30vw", height: "30vw", position: "relative" }}
-            >
-              <Image fill src={image} alt="굿즈 이미지" />
-            </figure>
-          </label>
-          <input
-            id="input-file"
-            type="file"
-            onChange={handleOnChangeImage}
-            style={{ display: "none" }}
-            accept="image/png, image/jpeg"
-          />
-        </>
-      )}
-    </>
-  );
-  return { image, setImage, formData, handleOnChangeImage, renderRegistImage };
+  return { image, setImage, formData, handleOnChangeImage };
 };

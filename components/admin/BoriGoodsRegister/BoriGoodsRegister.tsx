@@ -4,11 +4,12 @@ import { useDialog } from "@/hooks/common/useDialog/useDialog";
 import { useRegistImage } from "@/hooks/common/useRegistImage/useRegistImage";
 import { IPostBoriGoods } from "@/types/boriGoods";
 import { useState } from "react";
+import RegistImage from "../RegistImage/RegistImage";
 import styles from "./bori_goods_register.module.scss";
 
 const BoriGoodsRegister = () => {
   let { data: categoryData } = useCategoryQuery();
-  const {formData, setImage, image, renderRegistImage} = useRegistImage();
+  const {formData, setImage, image} = useRegistImage();
   const [goodsInfo, setGoodsInfo] = useState<IPostBoriGoods>({
     bori_goods_name: "",
     bori_goods_price: 0,
@@ -81,9 +82,7 @@ const BoriGoodsRegister = () => {
         </figure>
       )}
       <div className={styles.bori_goods_register_container}>
-        {
-          renderRegistImage("굿즈 이미지")
-        }
+        <RegistImage desc="굿즈 이미지"/>
         <div className={styles.text_container}>
           <label htmlFor="goods-name">굿즈명:</label>
           <input

@@ -4,7 +4,7 @@ import { useUpdateBoriGalleryMutation } from "@/hooks/bori-gallery/useUpdateBori
 import { useDialog } from "@/hooks/common/useDialog/useDialog";
 import { IBoriGallery, IPostBoriGallery } from "@/types/boriGallery";
 import Image from "next/image";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from '../GoodsListItem/goods_list_item.module.scss';
 
 interface IProps {
@@ -12,7 +12,7 @@ interface IProps {
 }
 
 const GalleryListItem = ({ boriGallery }: IProps) => {
-  let formData: FormData;
+  const formData = useRef<FormData>(new FormData());
   const [galleryInfo, setGalleryInfo] = useState<IPostBoriGallery>({
     bori_gallery_title: "",
     bori_gallery_desc: ""
@@ -27,9 +27,6 @@ const GalleryListItem = ({ boriGallery }: IProps) => {
       bori_gallery_desc: boriGallery.bori_gallery_desc
     });
   }, []);
-  useLayoutEffect(() => {
-    formData = new FormData();
-  });
   const handleOnChangeGoodsInfo = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -43,8 +40,8 @@ const GalleryListItem = ({ boriGallery }: IProps) => {
       return;
     }
     const file: File = e.target.files[0];
-    formData.append("bori_goods_images", file);
-    updateBoriImage(formData);
+    formData.current.append("bori_goods_images", file);
+    updateBoriImage(formData.current);
   };
   const handleUpdateGoods = () => {
     if (

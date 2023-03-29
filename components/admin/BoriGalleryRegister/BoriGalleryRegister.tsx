@@ -4,6 +4,7 @@ import { useRegistImage } from "@/hooks/common/useRegistImage/useRegistImage";
 import { IPostBoriGallery } from "@/types/boriGallery";
 import { useState } from "react";
 import styles from "../BoriGoodsRegister/bori_goods_register.module.scss";
+import RegistImage from "../RegistImage/RegistImage";
 
 const BoriGalleryRegister = () => {
   const [galleryInfo, setGalleryInfo] = useState<IPostBoriGallery>({
@@ -11,7 +12,7 @@ const BoriGalleryRegister = () => {
     bori_gallery_desc: "",
   });
   const { dialog, setDialog, setDialogText, renderDialog } = useDialog();
-  const {formData, setImage, renderRegistImage, image} = useRegistImage();
+  const {formData, setImage, image} = useRegistImage();
   const { mutate } = useRegistBoriGalleryMutaton(
     galleryInfo,
     formData.current,
@@ -54,9 +55,7 @@ const BoriGalleryRegister = () => {
         </figure>
       )}
       <div className={styles.bori_goods_register_container}>
-        {
-          renderRegistImage("갤러리 이미지")
-        }
+        <RegistImage desc="갤러리 이미지"/>
         <div className={styles.text_container}>
           <label htmlFor="goods-name">제목:</label>
           <input

@@ -7,7 +7,7 @@ import { useUpdateBoriGoodsMutation } from "@/hooks/bori-goods/useUpdateBoriGood
 import { useDialog } from "@/hooks/common/useDialog/useDialog";
 import { IBoriGoods, ICategory, IPostBoriGoods } from "@/types/boriGoods";
 import Image from "next/image";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./goods_list_item.module.scss";
 
 interface IProps {
@@ -16,7 +16,7 @@ interface IProps {
 }
 
 const GoodsListItem = ({ boriGoods, category }: IProps) => {
-  let formData: FormData;
+  const formData = useRef<FormData>(new FormData());
   const [goodsInfo, setGoodsInfo] = useState<IPostBoriGoods>({
     bori_goods_name: "",
     bori_goods_price: 0,
@@ -66,9 +66,6 @@ const GoodsListItem = ({ boriGoods, category }: IProps) => {
   const handleDeleteGoods = () => {
     deleteBoriGoods();
   }
-  useLayoutEffect(() => {
-    formData = new FormData();
-  });
   const handleOnChangeGoodsInfo = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -82,8 +79,8 @@ const GoodsListItem = ({ boriGoods, category }: IProps) => {
       return;
     }
     const file: File = e.target.files[0];
-    formData.append("bori_goods_images", file);
-    updateBoriImage(formData);
+    formData.current.append("bori_goods_images", file);
+    updateBoriImage(formData.current);
   };
   const handleSelectLayout = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategoryInfo(e.target.value);
