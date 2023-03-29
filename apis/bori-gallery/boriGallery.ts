@@ -32,8 +32,8 @@ const putBoriGallery = (bori_gallery_id: string, bori_gallery: IPostBoriGallery)
   return customAxios.put(`/bori-gallery/${bori_gallery_id}`, bori_gallery);
 };
 
-const deleteBoriGallery = (bori_goods_id: string) => {
-  return customAxios.delete(`/bori-gallery/${bori_goods_id}`);
+const deleteBoriGallery = (bori_gallery_id: string) => {
+  return customAxios.delete(`/bori-gallery/${bori_gallery_id}`);
 };
 
 const patchBoriGalleryImage = (bori_gallery_id: string, bori_gallery_image: FormData) => {
