@@ -1,9 +1,9 @@
 import { useState } from "react";
-import BoriGalleryList from "../BoriGalleryList/BoriGalleryList";
-import BoriGalleryRegister from "../BoriGalleryRegister/BoriGalleryRegister";
-import BoriGoodsList from "../BoriGoodsList/BoriGoodsList";
-import BoriGoodsRegister from "../BoriGoodsRegister/BoriGoodsRegister";
-import OrderController from "../OrderController/OrderController";
+import BoriGalleryList from "../bori-gallery/BoriGalleryList/BoriGalleryList";
+import BoriGalleryRegister from "../bori-gallery/BoriGalleryRegister/BoriGalleryRegister";
+import BoriGoodsList from "../bori-goods/BoriGoodsList/BoriGoodsList";
+import BoriGoodsRegister from "../bori-goods/BoriGoodsRegister/BoriGoodsRegister";
+import OrderController from "../order/OrderController/OrderController";
 import styles from './admin_viewer.module.scss';
 
 const AdminViewer = () => {
