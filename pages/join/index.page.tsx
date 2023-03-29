@@ -1,23 +1,23 @@
-import React, { useMemo, useState } from "react";
+import SuccessDialog from "@/components/dialogs/SuccessDialog/SuccessDialog";
 import Loading from "@/components/loading/Loading/Loading";
-import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
-import styles from "./join.module.scss";
-import Image from "next/image";
-import { IJoin } from "@/types/auth";
+import DuplicateCheckPart from "@/components/user/DuplicateCheckPart/DuplicateCheckPart";
+import InputPart from "@/components/user/InputPart/InputPart";
 import { useJoinMutation } from "@/hooks/auth/useJoinMutation/useJoinMutation";
+import { useDialog } from "@/hooks/common/useDialog/useDialog";
+import { IJoin } from "@/types/auth";
 import {
   validateEmail,
   validateNick,
   validatePassword,
-  validatePasswordCheck,
+  validatePasswordCheck
 } from "@/utils/validate";
+import Image from "next/image";
+import React, { useMemo, useState } from "react";
+import styles from "./join.module.scss";
 import join1 from "/public/login/join1.png";
 import join2 from "/public/login/join2.png";
 import join3 from "/public/login/join3.png";
 import join4 from "/public/login/join4.png";
-import InputPart from "@/components/user/InputPart/InputPart";
-import SuccessDialog from "@/components/dialogs/SuccessDialog/SuccessDialog";
-import DuplicateCheckPart from "@/components/user/DuplicateCheckPart/DuplicateCheckPart";
 
 interface IJoinAccount extends IJoin{
   passwordCheck: string;
@@ -30,8 +30,7 @@ const Join = () => {
     password: "",
     passwordCheck: "",
   });
-  const [dialogText, setDialogText] = useState<string>("");
-  const [dialog, setDialog] = useState<boolean>(false);
+  const { dialog, setDialog, setDialogText, renderDialog } = useDialog();
   const joinInfo = useMemo<IJoin>(() => {
     return {
       email: account.email,
@@ -73,10 +72,7 @@ const Join = () => {
   return (
     <>
       {dialog && (
-        <ValidateDialog
-          text={dialogText}
-          setDialog={setDialog}
-        ></ValidateDialog>
+        renderDialog()
       )}
       {
         isLoading && <Loading></Loading>

@@ -1,9 +1,9 @@
 import CartItem from '@/components/cart/CartItem/CartItem';
-import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import ErrorPage from '@/components/error/ErrorPage/ErrorPage';
 import UserInfoViewer from '@/components/order/UserInfoViewer/UserInfoViewer';
 import UserDeliverAddressPart from '@/components/user/UserDeliverAddressPart/UserDeliverAddressPart';
 import { useLoginCheckQuery } from '@/hooks/auth/useLoginCheckQuery/useLoginCheckQuery';
+import { useDialog } from '@/hooks/common/useDialog/useDialog';
 import { useOrderMutation } from '@/hooks/order/useOrderMutation/useOrderMutation';
 import { useDeliverAddressQuery } from '@/hooks/user/useDeliverAddressQuery/useDeliverAddressQuery';
 import { useUserQuery } from '@/hooks/user/useUserQuery/useUserQuery';
@@ -11,7 +11,7 @@ import { useCartStore } from '@/store/cart';
 import { usePageStore } from '@/store/page';
 import { IPostDeliverAddress } from '@/types/deliverAddress';
 import { initUser } from '@/utils/initData';
-import { useMemo, useRef, useState } from 'react';
+import { useMemo } from 'react';
 import styles from './orderpage.module.scss';
 
 //로그인 여부 확인 필요
@@ -28,8 +28,7 @@ const OrderPage = () => {
   useLoginCheckQuery();
   const { cart } = useCartStore();
   const { pageState } = usePageStore();
-  const [dialog, setDialog]= useState<boolean>(false);
-  const validateText = useRef<string>('');
+  const { dialog, setDialog, setDialogText, renderDialog } = useDialog();
   let { data: deliverAddress } = useDeliverAddressQuery();
   let { data: user } = useUserQuery();
   if (!deliverAddress) {
@@ -61,12 +60,12 @@ const OrderPage = () => {
       deliverAddress = initData;
     }
     if (cart.length === 0) {
-      validateText.current = '최소 하나의 상품이 있어야합니다!';
+      setDialogText('최소 하나의 상품이 있어야합니다!');
       setDialog(true);
       return;
     };
     if (!deliverAddress.phone_number || !deliverAddress.address || !deliverAddress.address_detail) {
-      validateText.current = '배송지 정보 입력을 모두 마쳐야 해요!';
+      setDialogText('배송지 정보 입력을 모두 마쳐야 해요!');
       setDialog(true);
       return;
     };
@@ -75,7 +74,7 @@ const OrderPage = () => {
   return (
     <>
       {
-        dialog && <ValidateDialog text={validateText.current} setDialog={setDialog}></ValidateDialog>
+        dialog && renderDialog()
       }
       {
         orderShow

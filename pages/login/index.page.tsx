@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import styles from "./login.module.scss";
-import Image from "next/image";
-import kakaoImage from "/public/login/kakao.png";
-import googleImage from "/public/login/google.png";
-import { validateEmail, validatePassword } from "@/utils/validate";
+import { errorMessage } from "@/apis/error/customError";
 import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
+import Loading from "@/components/loading/Loading/Loading";
 import { useLoginMutation } from "@/hooks/auth/useLoginMutation/useLoginMutation";
 import { useNotLoginCheckQuery } from "@/hooks/auth/useNotLoginCheckQuery/useNotLoginCheckQuery";
+import { useDialog } from "@/hooks/common/useDialog/useDialog";
 import { ILogin } from "@/types/auth";
-import Loading from "@/components/loading/Loading/Loading";
-import Link from "next/link";
+import { validateEmail, validatePassword } from "@/utils/validate";
 import { AxiosError } from "axios";
-import { errorMessage } from "@/apis/error/customError";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useState } from "react";
+import styles from "./login.module.scss";
+import googleImage from "/public/login/google.png";
+import kakaoImage from "/public/login/kakao.png";
 
 const Login = () => {
-  const [dialog, setDialog] = useState<boolean>(false);
-  const [dialogText, setDialogText] = useState<string>("");
+  const { dialog, setDialog, setDialogText, renderDialog } = useDialog();
   const [account, setAccount] = useState<ILogin>({
     email: "",
     password: "",
@@ -61,10 +61,7 @@ const Login = () => {
       )}
       {(loginMutation.isLoading || isLoading) && <Loading></Loading>}
       {dialog && (
-        <ValidateDialog
-          text={dialogText}
-          setDialog={setDialog}
-        ></ValidateDialog>
+        renderDialog()
       )}
       <div className={styles.login_container}>
         <h1>로그인</h1>
