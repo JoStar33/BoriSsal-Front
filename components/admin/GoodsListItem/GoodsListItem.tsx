@@ -4,6 +4,7 @@ import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
 import { useBoriGoodsImageMutation } from "@/hooks/bori-goods/useBoriGoodsImageMutation/useBoriGoodsImageMutation";
 import { useDeleteBoriGoodsMutation } from "@/hooks/bori-goods/useDeleteBoriGoodsMutation/useDeleteBoriGoodsMutation";
 import { useUpdateBoriGoodsMutation } from "@/hooks/bori-goods/useUpdateBoriGoodsMutation/useUpdateBoriGoodsMutation";
+import { useDialog } from "@/hooks/common/useDialog/useDialog";
 import { IBoriGoods, ICategory, IPostBoriGoods } from "@/types/boriGoods";
 import Image from "next/image";
 import { useEffect, useLayoutEffect, useState } from "react";
@@ -22,9 +23,8 @@ const GoodsListItem = ({ boriGoods, category }: IProps) => {
     bori_goods_stock: 0,
     bori_goods_desc: "",
   });
+  const { dialog, setDialog, dialogText, setDialogText, renderDialog } = useDialog();
   const [categoryInfo, setCategoryInfo] = useState<string>("");
-  const [dialog, setDialog] = useState<boolean>(false);
-  const [validateText, setValidateText] = useState<string>("");
   const { mutate: updateBoriImage } = useBoriGoodsImageMutation(boriGoods._id);
   const { mutate: updateBoriGoods } = useUpdateBoriGoodsMutation(
     categoryInfo,
@@ -50,17 +50,17 @@ const GoodsListItem = ({ boriGoods, category }: IProps) => {
       !goodsInfo.bori_goods_price ||
       !goodsInfo.bori_goods_stock
     ) {
-      setValidateText("값을 비운 상태로 수정이 불가능합니다.");
+      setDialogText("값을 비운 상태로 수정이 불가능합니다.");
       setDialog(true);
       return;
     }
     if (categoryInfo === "0") {
-      setValidateText("전체 카테고리 상태로 등록이 불가능합니다.");
+      setDialogText("전체 카테고리 상태로 등록이 불가능합니다.");
       setDialog(true);
       return;
     }
     setDialog(true);
-    setValidateText("수정이 완료됐습니다!");
+    setDialogText("수정이 완료됐습니다!");
     updateBoriGoods();
   };
   const handleDeleteGoods = () => {
@@ -94,13 +94,13 @@ const GoodsListItem = ({ boriGoods, category }: IProps) => {
         dialog && isError && <ValidateDialog setDialog={setDialog} text={errorMessage(error)}/>
       }
       {
-        dialog && validateText !== "수정이 완료됐습니다!" && validateText !== "삭제가 완료됐습니다!" && 
-          <ValidateDialog text={validateText} setDialog={setDialog}/>
+        dialog && dialogText !== "수정이 완료됐습니다!" && dialogText !== "삭제가 완료됐습니다!" && 
+        renderDialog() 
       }
       {
-        dialog && (validateText === "수정이 완료됐습니다!" || validateText === "삭제가 완료됐습니다!") && (
+        dialog && (dialogText === "수정이 완료됐습니다!" || dialogText === "삭제가 완료됐습니다!") && (
           <SuccessDialog
-            text={validateText}
+            text={dialogText}
             setDialog={setDialog}
           />
       )}

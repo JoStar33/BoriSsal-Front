@@ -1,6 +1,7 @@
 import { useBoriGalleryImageMutation } from "@/hooks/bori-gallery/useBoriGalleryImageMutation/useBoriGalleryImageMutation";
 import { useDeleteBoriGalleryMutation } from "@/hooks/bori-gallery/useDeleteBoriGalleryMutation/useDeleteBoriGalleryMutation";
 import { useUpdateBoriGalleryMutation } from "@/hooks/bori-gallery/useUpdateBoriGalleryMutation/useUpdateBoriGalleryMutation";
+import { useDialog } from "@/hooks/common/useDialog/useDialog";
 import { IBoriGallery, IPostBoriGallery } from "@/types/boriGallery";
 import Image from "next/image";
 import { useEffect, useLayoutEffect, useState } from "react";
@@ -16,8 +17,7 @@ const GalleryListItem = ({ boriGallery }: IProps) => {
     bori_gallery_title: "",
     bori_gallery_desc: ""
   });
-  const [dialog, setDialog] = useState<boolean>(false);
-  const [validateText, setValidateText] = useState<string>("");
+  const { dialog, setDialog, setDialogText, renderDialog } = useDialog();
   const { mutate: updateBoriImage } = useBoriGalleryImageMutation(boriGallery._id);
   const { mutate: updateBoriGoods } = useUpdateBoriGalleryMutation(boriGallery._id, galleryInfo);
   const { mutate: deleteBoriGoods } = useDeleteBoriGalleryMutation(boriGallery._id);
@@ -51,12 +51,12 @@ const GalleryListItem = ({ boriGallery }: IProps) => {
       !galleryInfo.bori_gallery_title ||
       !galleryInfo.bori_gallery_desc 
     ) {
-      setValidateText("값을 비운 상태로 수정이 불가능합니다.");
+      setDialogText("값을 비운 상태로 수정이 불가능합니다.");
       setDialog(true);
       return;
     }
     setDialog(true);
-    setValidateText("수정이 완료됐습니다!");
+    setDialogText("수정이 완료됐습니다!");
     updateBoriGoods();
   };
   const handleDeleteGoods = () => {

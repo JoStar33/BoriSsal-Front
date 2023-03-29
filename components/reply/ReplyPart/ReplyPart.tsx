@@ -10,10 +10,10 @@ interface IProps {
   user: IUser;
   reply: IReply;
   setDialog: React.Dispatch<React.SetStateAction<boolean>>;
-  validateText: React.MutableRefObject<string>;
+  setDialogText: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const ReplyPart = ({ user, reply, setDialog, validateText }: IProps) => {
+const ReplyPart = ({ user, reply, setDialog, setDialogText }: IProps) => {
   const [showChildReply, setShowChildReply] = useState<boolean>(false);
   const replyDate = useRef<Date>(new Date(reply.created_at));
   const replyInputRef = useRef<HTMLInputElement>(null);
@@ -29,11 +29,11 @@ const ReplyPart = ({ user, reply, setDialog, validateText }: IProps) => {
     if (!user) return;
     if (!user.email) {
       setDialog(true);
-      validateText.current = "로그인후 이용해주세요!";
+      setDialogText("로그인후 이용해주세요!");
       return;
     }
     if (replyInputRef.current.value.length < 2) {
-      validateText.current = "최소 두글자는 입력해주세요!";
+      setDialogText("최소 두글자는 입력해주세요!");
       setDialog(true);
       return;
     }

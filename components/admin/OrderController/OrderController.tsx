@@ -1,5 +1,6 @@
 import OrderStatusUpdateDialog from "@/components/dialogs/OrderStatusUpdateDialog/OrderStatusUpdateDialog";
 import OrderEmpty from "@/components/order/OrderEmpty/OrderEmpty";
+import { useSearch } from "@/hooks/common/useSearch/useSearch";
 import { useAllOrderQuery } from "@/hooks/order/useAllOrderQuery/useAllOrderQuery";
 import { useRef, useState } from "react";
 import DatePicker from "react-datepicker";
@@ -12,10 +13,10 @@ const OrderController = () => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [limit, setLimit] = useState<number>(1);
-  const [search, setSearch] = useState<string>('');
   const [dialog, setDialog] = useState<boolean>(false);
   const updateOrderId = useRef<string>('');
-  let { data, refetch } = useAllOrderQuery(limit, search, startDate, endDate);
+  const { searchInfo, renderSearch } = useSearch();
+  let { data, refetch } = useAllOrderQuery(limit, searchInfo, startDate, endDate);
   if(!data) {
     data = {
       order: [],
@@ -29,9 +30,6 @@ const OrderController = () => {
     setTimeout(() => {
       refetch();
     }, 300);
-  };
-  const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value)
   };
   const handleSearch = async () => {
     setLimit(() => {
@@ -51,10 +49,9 @@ const OrderController = () => {
       }
       <div className={styles.order_controller_container}>
         <div className={styles.controller_container}>
-          <div className={styles.search_container}>
-            <label htmlFor="search_goods">검색:</label>
-            <input onChange={handleChangeSearch} id='search_goods' type="text"/>
-          </div>
+          {
+            renderSearch()
+          }
           <div className={styles.date_box}>
             <div className={styles.date_container}>
               <p>시작일: </p>

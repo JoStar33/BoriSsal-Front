@@ -1,5 +1,6 @@
 import { useBoriGoodsQuery } from "@/hooks/bori-goods/useBoriGoodsQuery/useBoriGoodsQuery";
 import { useCategoryQuery } from "@/hooks/bori-goods/useCategoryQuery/useCategoryQuery";
+import { useSearch } from "@/hooks/common/useSearch/useSearch";
 import { useState } from "react";
 import GoodsListItem from "../GoodsListItem/GoodsListItem";
 import styles from "./bori_goods_list.module.scss";
@@ -8,8 +9,8 @@ import styles from "./bori_goods_list.module.scss";
 const BoriGoodsList = () => {
   let { data: boriGoods } = useBoriGoodsQuery();
   let { data: categoryData } = useCategoryQuery();
+  const { searchInfo, renderSearch } = useSearch();
   const [categoryInfo, setCategoryInfo] = useState<string>('0');
-  const [searchInfo, setSearchInfo] = useState<string>('');
   if (!boriGoods) {
     boriGoods = [];
   };
@@ -19,16 +20,12 @@ const BoriGoodsList = () => {
   const handleSelectLayout = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategoryInfo(e.target.value)
   };
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchInfo(e.target.value);
-  };
   return (
     <>
       <div className={styles.list_controller}>
-        <div className={styles.search_container}>
-          <label htmlFor="search_goods">검색:</label>
-          <input id='search_goods' type="text" onChange={handleSearch}/>
-        </div>
+        {
+          renderSearch()
+        }
         <div className={styles.select_container}>
           <label htmlFor="goods-category">카테고리:</label>
           <select onChange={handleSelectLayout}>

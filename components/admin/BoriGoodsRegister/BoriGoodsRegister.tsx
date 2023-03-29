@@ -1,14 +1,14 @@
-import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
 import { useCategoryQuery } from "@/hooks/bori-goods/useCategoryQuery/useCategoryQuery";
 import { useRegistBoriGoodsMutation } from "@/hooks/bori-goods/useRegistBoriGoodsMutation/useRegistBoriGoodsMutation";
+import { useDialog } from "@/hooks/common/useDialog/useDialog";
+import { useRegistImage } from "@/hooks/common/useRegistImage/useRegistImage";
 import { IPostBoriGoods } from "@/types/boriGoods";
-import Image from "next/image";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import styles from "./bori_goods_register.module.scss";
 
 const BoriGoodsRegister = () => {
   let { data: categoryData } = useCategoryQuery();
-  const [image, setImage] = useState<any>("");
+  const {formData, setImage, image, renderRegistImage} = useRegistImage();
   const [goodsInfo, setGoodsInfo] = useState<IPostBoriGoods>({
     bori_goods_name: "",
     bori_goods_price: 0,
@@ -19,9 +19,7 @@ const BoriGoodsRegister = () => {
   if (!categoryData) {
     categoryData = [];
   }
-  const [dialog, setDialog] = useState<boolean>(false);
-  const [dialogText, setDialogText] = useState<string>("");
-  let formData = useRef<FormData>(new FormData());
+  const { dialog, setDialog, setDialogText, renderDialog } = useDialog();
   const { mutate } = useRegistBoriGoodsMutation(
     categoryInfo,
     goodsInfo,
@@ -29,22 +27,6 @@ const BoriGoodsRegister = () => {
     setGoodsInfo,
     setImage
   );
-  const handleOnChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) {
-      return;
-    }
-    const file: File = e.target.files[0];
-    const fr = new FileReader();
-    fr.readAsDataURL(file);
-    fr.onload = (e) => {
-      if (!e.target) return;
-      if (fr.readyState === 2) {
-        formData.current = new FormData();
-        setImage(e.target.result);
-        formData.current.append("bori_goods_images", file);
-      }
-    };
-  };
   const handleSelectLayout = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategoryInfo(e.target.value);
   };
@@ -93,33 +75,15 @@ const BoriGoodsRegister = () => {
     <>
       {dialog && (
         <figure style={{ marginLeft: "-5vw" }}>
-          <ValidateDialog
-            setDialog={setDialog}
-            text={dialogText}
-          ></ValidateDialog>
+          {
+            renderDialog()
+          }
         </figure>
       )}
       <div className={styles.bori_goods_register_container}>
-        {!image ? (
-          <label className={styles.regist_image} htmlFor="input-file">
-            굿즈 이미지
-          </label>
-        ) : (
-          <label className={styles.regist_image} htmlFor="input-file">
-            <figure
-              style={{ width: "30vw", height: "30vw", position: "relative" }}
-            >
-              <Image fill src={image} alt="굿즈 이미지" />
-            </figure>
-          </label>
-        )}
-        <input
-          id="input-file"
-          type="file"
-          onChange={handleOnChangeImage}
-          style={{ display: "none" }}
-          accept="image/png, image/jpeg"
-        />
+        {
+          renderRegistImage("굿즈 이미지")
+        }
         <div className={styles.text_container}>
           <label htmlFor="goods-name">굿즈명:</label>
           <input

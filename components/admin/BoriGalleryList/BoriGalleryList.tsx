@@ -1,24 +1,20 @@
 import { useBoriGalleryQuery } from "@/hooks/bori-gallery/useBoriGalleryQuery/useBoriGalleryQuery";
-import { useState } from "react";
+import { useSearch } from "@/hooks/common/useSearch/useSearch";
 import styles from '../BoriGoodsList/bori_goods_list.module.scss';
 import GalleryListItem from "../GalleryListItem/GalleryListItem";
 
 const BoriGalleryList = () => {
   let { data: boriGallery } = useBoriGalleryQuery();
-  const [searchInfo, setSearchInfo] = useState<string>('');
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchInfo(e.target.value);
-  };
+  const { renderSearch, searchInfo } = useSearch();
   if(!boriGallery) {
     boriGallery = [];
   }
   return (
     <>
       <div className={styles.list_controller}>
-        <div className={styles.search_container}>
-          <label htmlFor="search_goods">검색:</label>
-          <input id='search_goods' type="text" onChange={handleSearch}/>
-        </div>
+        {
+          renderSearch()
+        }
       </div>
       <div className={styles.list_container}>
         {

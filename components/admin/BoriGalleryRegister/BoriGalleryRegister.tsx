@@ -1,41 +1,23 @@
-import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
 import { useRegistBoriGalleryMutaton } from "@/hooks/bori-gallery/useRegistBoriGalleryMutaton/useRegistBoriGalleryMutaton";
+import { useDialog } from "@/hooks/common/useDialog/useDialog";
+import { useRegistImage } from "@/hooks/common/useRegistImage/useRegistImage";
 import { IPostBoriGallery } from "@/types/boriGallery";
-import Image from "next/image";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import styles from "../BoriGoodsRegister/bori_goods_register.module.scss";
 
 const BoriGalleryRegister = () => {
-  const [image, setImage] = useState<any>("");
   const [galleryInfo, setGalleryInfo] = useState<IPostBoriGallery>({
     bori_gallery_title: "",
     bori_gallery_desc: "",
   });
-  let formData = useRef<FormData>(new FormData());
-  const [dialog, setDialog] = useState<boolean>(false);
-  const [dialogText, setDialogText] = useState<string>("");
+  const { dialog, setDialog, setDialogText, renderDialog } = useDialog();
+  const {formData, setImage, renderRegistImage, image} = useRegistImage();
   const { mutate } = useRegistBoriGalleryMutaton(
     galleryInfo,
     formData.current,
     setGalleryInfo,
     setImage
   );
-  const handleOnChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) {
-      return;
-    }
-    const file: File = e.target.files[0];
-    const fr = new FileReader();
-    fr.readAsDataURL(file);
-    fr.onload = (e) => {
-      if (!e.target) return;
-      if (fr.readyState === 2) {
-        formData.current = new FormData();
-        setImage(e.target.result);
-        formData.current.append("bori_gallery_images", file);
-      }
-    };
-  };
   const handleOnChangeGalleryInfo = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -66,33 +48,15 @@ const BoriGalleryRegister = () => {
     <>
       {dialog && (
         <figure style={{ marginLeft: "-5vw" }}>
-          <ValidateDialog
-            setDialog={setDialog}
-            text={dialogText}
-          ></ValidateDialog>
+          {
+            renderDialog()
+          }
         </figure>
       )}
       <div className={styles.bori_goods_register_container}>
-        {!image ? (
-          <label className={styles.regist_image} htmlFor="input-file">
-            갤러리 이미지
-          </label>
-        ) : (
-          <label className={styles.regist_image} htmlFor="input-file">
-            <figure
-              style={{ width: "30vw", height: "30vw", position: "relative" }}
-            >
-              <Image fill src={image} alt="갤러리 이미지" />
-            </figure>
-          </label>
-        )}
-        <input
-          id="input-file"
-          type="file"
-          onChange={handleOnChangeImage}
-          style={{ display: "none" }}
-          accept="image/png, image/jpeg"
-        />
+        {
+          renderRegistImage("갤러리 이미지")
+        }
         <div className={styles.text_container}>
           <label htmlFor="goods-name">제목:</label>
           <input
