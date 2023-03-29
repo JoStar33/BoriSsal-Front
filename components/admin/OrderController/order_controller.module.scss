@@ -8,6 +8,15 @@
     align-items: center;
     justify-content: center;
     flex-direction: row;
+    .search_button {
+      width: 8vw;
+      height: 2vw;
+      font-size: 1vw;
+      font-weight: 800;
+      border-radius: 20px;
+      cursor: pointer;
+      background-color: wheat;
+    }
   }
   .search_container {
     margin: 3vw;
@@ -22,7 +31,7 @@
     input {
       outline: none;
       border: none;
-      font-size: 2vw;
+      font-size: 1.4vw;
       font-weight: 800;
       width: 20vw;
     }
