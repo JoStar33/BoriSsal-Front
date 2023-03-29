@@ -55,7 +55,7 @@ const OrderPage = () => {
   const orderShow = useMemo(() => {
     return pageState === 'order' ? true : false;
   }, [pageState]);
-  const { mutate } = useOrderMutation(totalPrice, postDeliverAddress);
+  const { mutate } = useOrderMutation(user.email, totalPrice, postDeliverAddress);
   const handleOrder = () => {
     if (!deliverAddress) {
       deliverAddress = initData;
