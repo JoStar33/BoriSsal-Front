@@ -4,10 +4,10 @@ import { IPostDeliverAddress } from '@/types/deliverAddress';
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 
-export const useOrderMutation = (price: number, deliverAddress: IPostDeliverAddress) => {
+export const useOrderMutation = (email: string, price: number, deliverAddress: IPostDeliverAddress) => {
   const { cart } = useCartStore();
   const router = useRouter();
-  return useMutation(() => postOrder(price, cart, deliverAddress), {
+  return useMutation(() => postOrder(email, price, cart, deliverAddress), {
     onSuccess: () => {
       router.push('/complete-order');
     }
