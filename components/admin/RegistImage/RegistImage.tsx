@@ -30,6 +30,7 @@ const RegistImage = ({desc}: IProps) => {
       <input
         id="input-file"
         type="file"
+        role="upload"
         onChange={handleOnChangeImage}
         style={{ display: "none" }}
         accept="image/png, image/jpeg"

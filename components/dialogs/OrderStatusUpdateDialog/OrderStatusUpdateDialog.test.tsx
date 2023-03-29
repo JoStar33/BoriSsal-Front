@@ -18,23 +18,12 @@ const initRender = () => {
   );
 };
 
-test("화면내에 input 이벤트 테스트(동일한 비밀번호)", () => {
+test("주문 상태 변경 다이얼로그 기본 화면 테스트", () => {
   initRender();
-  fireEvent.change(password, { target: { value: "test123412^^" } });
-  fireEvent.change(passwordCheck, { target: { value: "test123412^^" } });
-  fireEvent.change(newPassword, { target: { value: "test123412^^" } });
-  fireEvent.change(newPasswordCheck, { target: { value: "test123412^^" } });
-  const samePassword = screen.getByText(/이런 이전 비밀번호와 동일해요!/);
-  expect(samePassword).toBeInTheDocument();
-});
-test("화면내에 input 이벤트 테스트(비밀번호 확인값과 다를 경우)", () => {
-  initRender();
-  fireEvent.change(password, { target: { value: "test123412^^" } });
-  fireEvent.change(passwordCheck, { target: { value: "test123^^" } });
-  fireEvent.change(newPassword, { target: { value: "test123412^^" } });
-  fireEvent.change(newPasswordCheck, { target: { value: "test123412^^" } });
-  const differentPassword = screen.getByText(
-    /비밀번호가 확인값과 다릅니다. 다시입력 해주세요./
-  );
-  expect(differentPassword).toBeInTheDocument();
+  const deliverReady = screen.getByText(/배송준비/);
+  const deliverOn = screen.getByText(/배송중/);
+  const deliverOver = screen.getByText(/배송완료/);
+  expect(deliverReady).toBeInTheDocument();
+  expect(deliverOn).toBeInTheDocument();
+  expect(deliverOver).toBeInTheDocument();
 });
