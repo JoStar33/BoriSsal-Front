@@ -81,6 +81,21 @@ export const boriGoodsMock = () => {
       return res(
         ctx.status(200)
       );
+    }),
+    rest.put(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/bori-goods/23`, (req, res, ctx) => {
+      return res(
+        ctx.status(200)
+      );
+    }),
+    rest.delete(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/bori-goods/23`, (req, res, ctx) => {
+      return res(
+        ctx.status(200)
+      );
+    }),
+    rest.patch(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/bori-goods/image/23`, (req, res, ctx) => {
+      return res(
+        ctx.status(200)
+      );
     })
   ];
 }
