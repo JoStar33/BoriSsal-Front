@@ -10,9 +10,9 @@ const Wrapper = ({ children }: any) => {
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
-
+const setState = jest.fn() as any;
 test("useFindPassWordMutation 훅 테스트", async () => {
-  const { result } = renderHook(() => useFindPassWordMutation('jojo@naver.com'), {
+  const { result } = renderHook(() => useFindPassWordMutation('jojo@naver.com', setState, setState, setState, setState), {
     wrapper: Wrapper,
   });
   result.current.mutate()
@@ -27,7 +27,7 @@ test("useFindPassWordMutation 훅 테스트(실패 케이스)", async () => {
       );
     })
   )
-  const { result } = renderHook(() => useFindPassWordMutation('jojo@naver.com'), {
+  const { result } = renderHook(() => useFindPassWordMutation('jojo@naver.com', setState, setState, setState, setState), {
     wrapper: Wrapper,
   });
   result.current.mutate()

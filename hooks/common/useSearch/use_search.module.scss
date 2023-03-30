@@ -1,0 +1,19 @@
+.search_container {
+  margin: 4vw;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  label {
+    font-size: 2vw;
+    font-weight: 800;
+    margin-right: 2vw;
+  }
+  input {
+    outline: none;
+    border: none;
+    font-size: 2vw;
+    font-weight: 800;
+    width: 20vw;
+  }
+  margin-right: 4vw;
+}

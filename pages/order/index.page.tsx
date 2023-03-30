@@ -1,16 +1,17 @@
 import CartItem from '@/components/cart/CartItem/CartItem';
-import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import ErrorPage from '@/components/error/ErrorPage/ErrorPage';
 import UserInfoViewer from '@/components/order/UserInfoViewer/UserInfoViewer';
 import UserDeliverAddressPart from '@/components/user/UserDeliverAddressPart/UserDeliverAddressPart';
 import { useLoginCheckQuery } from '@/hooks/auth/useLoginCheckQuery/useLoginCheckQuery';
+import { useValidateDialog } from '@/hooks/common/useValidateDialog/useValidateDialog';
 import { useOrderMutation } from '@/hooks/order/useOrderMutation/useOrderMutation';
 import { useDeliverAddressQuery } from '@/hooks/user/useDeliverAddressQuery/useDeliverAddressQuery';
 import { useUserQuery } from '@/hooks/user/useUserQuery/useUserQuery';
 import { useCartStore } from '@/store/cart';
 import { usePageStore } from '@/store/page';
+import { IPostDeliverAddress } from '@/types/deliverAddress';
 import { initUser } from '@/utils/initData';
-import { useMemo, useRef, useState } from 'react';
+import { useMemo } from 'react';
 import styles from './orderpage.module.scss';
 
 //로그인 여부 확인 필요
@@ -27,35 +28,44 @@ const OrderPage = () => {
   useLoginCheckQuery();
   const { cart } = useCartStore();
   const { pageState } = usePageStore();
-  const [dialog, setDialog]= useState<boolean>(false);
-  const validateText = useRef<string>('');
+  const { dialog, setDialog, setDialogText, renderDialog } = useValidateDialog();
   let { data: deliverAddress } = useDeliverAddressQuery();
   let { data: user } = useUserQuery();
-  const totalPrice = useMemo(() => {
-    return cart.reduce((_total, cartElement) => {
-      return _total + (cartElement.bori_goods_count * cartElement.bori_goods_price)}, 0);
-  }, [cart]);
-  const { mutate } = useOrderMutation(totalPrice);
-  const orderShow = useMemo(() => {
-    return pageState === 'order' ? true : false;
-  }, [pageState]);
   if (!deliverAddress) {
     deliverAddress = initData;
   };
   if (!user) {
     user = initUser;
   };
+  const totalPrice = useMemo(() => {
+    return cart.reduce((_total, cartElement) => {
+      return _total + (cartElement.bori_goods_count * cartElement.bori_goods_price)}, 0);
+  }, [cart]);
+  const postDeliverAddress = useMemo<IPostDeliverAddress>(() => {
+    if (!deliverAddress) {
+      deliverAddress = initData;
+    };
+    return {
+      address: deliverAddress.address,
+      address_detail: deliverAddress.address_detail,
+      phone_number: deliverAddress.phone_number
+    }
+  }, [deliverAddress, initData]);
+  const orderShow = useMemo(() => {
+    return pageState === 'order' ? true : false;
+  }, [pageState]);
+  const { mutate } = useOrderMutation(user.email, totalPrice, postDeliverAddress);
   const handleOrder = () => {
     if (!deliverAddress) {
       deliverAddress = initData;
     }
     if (cart.length === 0) {
-      validateText.current = '최소 하나의 상품이 있어야합니다!';
+      setDialogText('최소 하나의 상품이 있어야합니다!');
       setDialog(true);
       return;
     };
     if (!deliverAddress.phone_number || !deliverAddress.address || !deliverAddress.address_detail) {
-      validateText.current = '배송지 정보 입력을 모두 마쳐야 해요!';
+      setDialogText('배송지 정보 입력을 모두 마쳐야 해요!');
       setDialog(true);
       return;
     };
@@ -64,7 +74,7 @@ const OrderPage = () => {
   return (
     <>
       {
-        dialog && <ValidateDialog text={validateText.current} setDialog={setDialog}></ValidateDialog>
+        dialog && renderDialog()
       }
       {
         orderShow

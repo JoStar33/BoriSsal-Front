@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { useEffect } from "react";
 import CartPage from "./index.page";
 
 export default {

@@ -1,0 +1,23 @@
+.admin_viewer_container {
+  width: 90vw;
+  position: relative;
+  .viewer_change_button_container {
+    width: 92vw;
+    button {
+      width: 16.4vw;
+      border-radius: 20px 20px 0 0;
+      background-color: #D9D9D9;
+      border: none;
+      font-size: 1vw;
+      font-weight: 800;
+      margin-right: 2vw;
+      height: 2vw;
+      cursor: pointer;
+    }
+  }
+  .admin_viewer {
+    width: 90vw;
+    position: relative;
+    background-color: #D9D9D9;
+  }
+}

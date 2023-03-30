@@ -1,9 +1,9 @@
-import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import ReplySkeleton from '@/components/loading/ReplySkeleton/ReplySkeleton';
 import { useBoriGoodsReplyMutation } from '@/hooks/bori-goods/useBoriGoodsReplyMutation/useBoriGoodsReplyMutation';
+import { useValidateDialog } from '@/hooks/common/useValidateDialog/useValidateDialog';
 import { IReplyMutation } from '@/types/reply';
 import { IUser } from '@/types/user';
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { AiFillCaretDown } from 'react-icons/ai';
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-query';
 import ReplyEmpty from '../ReplyEmpty/ReplyEmpty';
@@ -20,20 +20,19 @@ interface IProps {
 }
 
 const ReplyViewer = ({user, mutationData, goods_id, setLimit, limit, refetch}: IProps) => {
-  const [dialog, setDialog] = useState<boolean>(false);
+  const { renderDialog, dialog, setDialog, setDialogText } = useValidateDialog();
   const replyContent = useRef<HTMLInputElement>(null);
-  const validateText = useRef<string>('');
   const goodsReplyMutation = useBoriGoodsReplyMutation(user.email, goods_id);
   const replyRegist = () => {
     if(!replyContent.current)
       return;
     if (!user.email) {
-      validateText.current = '로그인후 이용해주세요!'
+      setDialogText('로그인후 이용해주세요!')
       setDialog(true);
       return;
     };
     if(replyContent.current.value.length < 2) {
-      validateText.current = '최소 두글자는 입력해주세요!'
+      setDialogText('최소 두글자는 입력해주세요!')
       setDialog(true);
       return;
     };
@@ -51,7 +50,7 @@ const ReplyViewer = ({user, mutationData, goods_id, setLimit, limit, refetch}: I
   return (
     <>
       {
-        dialog && <ValidateDialog text={validateText.current} setDialog={setDialog}></ValidateDialog>
+        dialog && renderDialog()
       }
       <div className={styles.reply_input_container}>
         <label htmlFor="goods_reply">댓글: </label>
@@ -65,7 +64,7 @@ const ReplyViewer = ({user, mutationData, goods_id, setLimit, limit, refetch}: I
         {
           mutationData.bori_goods_reply.length !== 0
           ? mutationData.bori_goods_reply.map((reply)=>{
-            return <ReplyPart user={user} key={reply._id} reply={reply} setDialog={setDialog} validateText={validateText}></ReplyPart>
+            return <ReplyPart user={user} key={reply._id} reply={reply} setDialog={setDialog} setDialogText={setDialogText}></ReplyPart>
           })
           : <ReplyEmpty/>
         }

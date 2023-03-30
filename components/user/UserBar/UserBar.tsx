@@ -1,9 +1,7 @@
-import { errorMessage } from '@/apis/error/customError';
-import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
 import Loading from '@/components/loading/Loading/Loading';
 import { useLogoutMutation } from '@/hooks/auth/useLogoutMutation/useLogoutMutation';
+import { useValidateDialog } from '@/hooks/common/useValidateDialog/useValidateDialog';
 import { IUser } from '@/types/user';
-import { AxiosError } from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BsFillCartFill } from 'react-icons/bs';
@@ -14,11 +12,13 @@ interface IProps {
 }
 
 const UserBar = ({ user }: IProps) => {
-  const { mutate, isError, isLoading, error } = useLogoutMutation();
+  const { dialog, setDialog, setDialogText, renderDialog } =
+    useValidateDialog();
+  const { mutate, isLoading } = useLogoutMutation(setDialog, setDialogText);
   return (
     <>
       {
-        isError && <ValidateDialog text={errorMessage(error as AxiosError)} ></ValidateDialog>
+        dialog && renderDialog()
       }
       {
         isLoading && <Loading></Loading>

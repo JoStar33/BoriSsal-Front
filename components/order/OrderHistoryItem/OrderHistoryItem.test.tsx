@@ -10,14 +10,12 @@ const initRender = (deliverStatus: string) => {
   render(
     <QueryClientProvider client={queryClient}>
       <OrderHistoryItem   
-        deliverAddress={{
-          _id: '23',
-          phone_number: "01033332222",
-          address: '경기도 안양시 동안구 호랑이아파트',
-          address_detail: '102동 304호'
-        }} 
         order={{
           order_date: new Date,
+          email: '', 
+          phone_number: '01033332222', 
+          address: "호랑이아파트", 
+          address_detail: "",
           order_detail: [
             {
               bori_goods_count: 1,

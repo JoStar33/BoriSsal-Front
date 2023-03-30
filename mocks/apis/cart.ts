@@ -24,6 +24,11 @@ export const cartMock = () => {
       return res(
         ctx.status(200)
       );
-    })
+    }),
+    rest.patch(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/cart`, (req, res, ctx) => {
+      return res(
+        ctx.status(200)
+      );
+    }),
   ];
 }

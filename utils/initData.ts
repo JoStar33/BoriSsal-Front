@@ -1,3 +1,5 @@
+import { IPostBoriGoods } from "@/types/boriGoods";
+
 const initDeliver = {
   _id: '', 
   user_id: '', 
@@ -16,10 +18,18 @@ const initUser = {
   user_bori_gallery_like: [],
 }
 
+const initPostBoriGoods: IPostBoriGoods = {
+  bori_goods_name: "",
+  bori_goods_price: 0,
+  bori_goods_stock: 0,
+  bori_goods_desc: "",
+};
+
+
 const initReplyMutation = {
   bori_goods_reply: [], 
   overflow: false
 }
 
-export { initDeliver, initUser, initReplyMutation };
+export { initDeliver, initUser, initReplyMutation, initPostBoriGoods };
 

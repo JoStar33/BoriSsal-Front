@@ -1,27 +1,27 @@
-import React, { useState } from 'react';
-import { validateEmail } from '@/utils/validate';
-import { useFindPassWordMutation } from '@/hooks/auth/useFindPassWordMutation/useFindPassWordMutation';
-import styles from './find_password.module.scss';
-import InputPart from '@/components/user/InputPart/InputPart';
-import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
-import { AxiosError } from 'axios';
-import SuccessDialog from '@/components/dialogs/SuccessDialog/SuccessDialog';
 import Loading from '@/components/loading/Loading/Loading';
-import { errorMessage } from '@/apis/error/customError';
+import InputPart from '@/components/user/InputPart/InputPart';
+import { useFindPassWordMutation } from '@/hooks/auth/useFindPassWordMutation/useFindPassWordMutation';
+import { useSuccessDialog } from '@/hooks/common/useSuccessDialog/useSuccessDialog';
+import { useValidateDialog } from '@/hooks/common/useValidateDialog/useValidateDialog';
+import { validateEmail } from '@/utils/validate';
+import React, { useState } from 'react';
+import styles from './find_password.module.scss';
 
 const FindPassWord = () => {
   const [email, setEmail] = useState<string>('');
+  const { dialog, setDialog, setDialogText, renderDialog } = useValidateDialog();
+  const { successDialog, setSuccessDialog, setSuccessDialogText, renderSuccessDialog } = useSuccessDialog();
   const onChangeAccount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
-  const { mutate, isError, error, isSuccess, isLoading } = useFindPassWordMutation(email);
+  const { mutate, isLoading } = useFindPassWordMutation(email, setDialog, setDialogText, setSuccessDialog, setSuccessDialogText);
   return (
     <>
       {
-        isError && <ValidateDialog text={errorMessage(error as AxiosError)}></ValidateDialog>
+        dialog && renderDialog()
       }
       {
-        isSuccess && <SuccessDialog text='비밀번호 발급 성공! 메일을 확인해주세요.'></SuccessDialog>
+        successDialog && renderSuccessDialog()
       }
       {
         isLoading && <Loading></Loading>

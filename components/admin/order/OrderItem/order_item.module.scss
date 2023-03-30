@@ -1,0 +1,42 @@
+.order_item_container {
+  background-color: white;
+  width: 75vw;
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  .order_info {
+    margin: 3vw;
+    p {
+      font-size: 1vw;
+      font-weight: 800;
+    }
+  }
+  .order_control_part {
+    width: 45vw;
+    p {
+      font-size: 1.3vw;
+      font-weight: 800;
+    }
+    button {
+      cursor: pointer;
+      color: white;
+      font-size: 1.5vw;
+      font-weight: 800;
+      width: 8vw;
+      height: 3vw;
+      border-radius: 20px
+    }
+  }
+  .goods_info_part {
+    margin-top: 10%;
+    button {
+      cursor: pointer;
+      border-radius: 20px;
+      width: 7vw;
+      height: 2vw;
+      font-size: 1vw;
+      font-weight: 800;
+    }
+  } 
+};

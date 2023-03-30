@@ -2,6 +2,8 @@ import { errorMessage } from "@/apis/error/customError";
 import Loading from "@/components/loading/Loading/Loading";
 import InputPart from "@/components/user/InputPart/InputPart";
 import { usePassWordChangeMutation } from "@/hooks/auth/usePassWordChangeMutation/usePassWordChangeMutation";
+import { useSuccessDialog } from "@/hooks/common/useSuccessDialog/useSuccessDialog";
+import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { IPasswordInfo, IPostPasswordInfo } from "@/types/auth";
 import { validatePassword, validatePasswordCheck } from "@/utils/validate";
 import { AxiosError } from "axios";
@@ -10,14 +12,12 @@ import React, { useEffect, useMemo, useState } from "react";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { GrClose } from "react-icons/gr";
 import { RiAlarmWarningFill } from "react-icons/ri";
-import SuccessDialog from "../SuccessDialog/SuccessDialog";
 import styles from "./password_change_dialog.module.scss";
 import password_bori from "/public/dialog/password_bori.png";
 
 interface IProps {
   setDialog: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
+}
 
 const PassWordChangeDialog = ({ setDialog }: IProps) => {
   const [account, setAccount] = useState<IPasswordInfo>({
@@ -30,10 +30,28 @@ const PassWordChangeDialog = ({ setDialog }: IProps) => {
     return {
       password: account.password,
       newPassword: account.newPassword,
-    }
-  }, [account])
+    };
+  }, [account]);
+  const {
+    dialog: validateDialog,
+    setDialog: setValidateDialog,
+    setDialogText,
+    renderDialog,
+  } = useValidateDialog();
+  const {
+    successDialog,
+    setSuccessDialog,
+    setSuccessDialogText,
+    renderSuccessDialog,
+  } = useSuccessDialog();
   const { mutate, isLoading, isError, error, isSuccess } =
-    usePassWordChangeMutation(postPassWord);
+    usePassWordChangeMutation(
+      postPassWord,
+      setValidateDialog,
+      setDialogText,
+      setSuccessDialog,
+      setSuccessDialogText
+    );
   const onChangeAccount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAccount({
       ...account,
@@ -77,8 +95,9 @@ const PassWordChangeDialog = ({ setDialog }: IProps) => {
   }, [isSuccess, setDialog]);
   return (
     <>
-      { isSuccess && <SuccessDialog text="비밀번호 변경 성공!"></SuccessDialog>}
-      { isLoading && <Loading></Loading> }
+      {successDialog && renderSuccessDialog()}
+      {isLoading && <Loading></Loading>}
+      {validateDialog && renderDialog()}
       <div className={styles.dialog_background}>
         {/*비밀번호 다이얼로그 배경*/}
         <div className={styles.dialog_container}>
@@ -99,14 +118,14 @@ const PassWordChangeDialog = ({ setDialog }: IProps) => {
           <h2>비밀번호 변경</h2>
           {/*비밀번호 변경 안내 타이틀*/}
           <InputPart
-            textOrPassword="password" 
+            textOrPassword="password"
             inputLabel="현재 비밀번호: "
             inputName="password"
             onChangeAccount={onChangeAccount}
             validate={validatePassword(account.password)}
           ></InputPart>
           <InputPart
-            textOrPassword="password" 
+            textOrPassword="password"
             inputLabel="현재 비밀번호 확인: "
             inputName="passwordCheck"
             onChangeAccount={onChangeAccount}
@@ -116,21 +135,22 @@ const PassWordChangeDialog = ({ setDialog }: IProps) => {
             )}
           ></InputPart>
           <InputPart
-            textOrPassword="password" 
+            textOrPassword="password"
             inputLabel="새 비밀번호: "
             inputName="newPassword"
             onChangeAccount={onChangeAccount}
             validate={validatePassword(account.newPassword)}
           ></InputPart>
           <InputPart
-            textOrPassword="password"  
+            textOrPassword="password"
             inputLabel="새 비밀번호 확인: "
             inputName="newPasswordCheck"
             onChangeAccount={onChangeAccount}
             validate={validatePasswordCheck(
               account.newPassword,
               account.newPasswordCheck
-            )}></InputPart>
+            )}
+          ></InputPart>
           <button role="password_change" onClick={handlePassWordChange}>
             비밀번호 변경
           </button>
