@@ -1,4 +1,5 @@
 import OrderStatusUpdateDialog from "@/components/dialogs/OrderStatusUpdateDialog/OrderStatusUpdateDialog";
+import OrderItemSkeleton from "@/components/loading/admin/OrderItemSkeleton/OrderItemSkeleton";
 import OrderEmpty from "@/components/order/OrderEmpty/OrderEmpty";
 import { useSearch } from "@/hooks/common/useSearch/useSearch";
 import { useAllOrderQuery } from "@/hooks/order/useAllOrderQuery/useAllOrderQuery";
@@ -16,7 +17,7 @@ const OrderController = () => {
   const [dialog, setDialog] = useState<boolean>(false);
   const updateOrderId = useRef<string>('');
   const { searchInfo, renderSearch } = useSearch();
-  let { data, refetch } = useAllOrderQuery(limit, searchInfo, startDate, endDate);
+  let { data, refetch, isLoading } = useAllOrderQuery(limit, searchInfo, startDate, endDate);
   if(!data) {
     data = {
       order: [],
@@ -80,9 +81,13 @@ const OrderController = () => {
         </div>
         <div className={styles.list_container}>
           {
-            data.order.length !== 0
-            ? data.order.map(orderElement => <OrderItem key={orderElement._id} order={orderElement} updateOrderId={updateOrderId} setDialog={setDialog}/>)
-            : <OrderEmpty/>
+            isLoading 
+            ? new Array(3)
+              .fill(1)
+              .map((_, index) => <OrderItemSkeleton key={index}/>)
+            : data.order.length !== 0
+              ? data.order.map(orderElement => <OrderItem key={orderElement._id} order={orderElement} updateOrderId={updateOrderId} setDialog={setDialog}/>)
+              : <OrderEmpty/>
           }
           {
             !data.overflow && 

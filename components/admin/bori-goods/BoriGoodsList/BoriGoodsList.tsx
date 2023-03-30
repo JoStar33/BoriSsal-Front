@@ -1,4 +1,5 @@
 import BoriGoodsEmpty from "@/components/bori-goods/BoriGoodsEmpty/BoriGoodsEmpty";
+import BoriGoodsItemSkeleton from "@/components/loading/admin/BoriGoodsItemSkeleton/BoriGoodsItemSkeleton";
 import { useBoriGoodsQuery } from "@/hooks/bori-goods/useBoriGoodsQuery/useBoriGoodsQuery";
 import { useCategoryQuery } from "@/hooks/bori-goods/useCategoryQuery/useCategoryQuery";
 import { useSearch } from "@/hooks/common/useSearch/useSearch";
@@ -8,7 +9,7 @@ import styles from "./bori_goods_list.module.scss";
 
 
 const BoriGoodsList = () => {
-  let { data: boriGoods } = useBoriGoodsQuery();
+  let { data: boriGoods, isLoading } = useBoriGoodsQuery();
   let { data: categoryData } = useCategoryQuery();
   const { searchInfo, renderSearch } = useSearch();
   const [categoryInfo, setCategoryInfo] = useState<string>('0');
@@ -46,18 +47,22 @@ const BoriGoodsList = () => {
       </div>
       <div className={styles.list_container}>
         {
-          boriGoods.length === 0 
-          ? <BoriGoodsEmpty/>
-          : boriGoods          
-            .filter((searchGoods) =>
-              searchGoods.bori_goods_name.includes(searchInfo)
-            ).filter((cateGoods) => {
-              if (categoryInfo === '0')
-                return cateGoods;
-              if(cateGoods.category_id === categoryInfo)
-                return cateGoods;
-              }
-            ).map(goodsElement => <GoodsListItem key={goodsElement._id} category={categoryData} boriGoods={goodsElement}/>)
+          isLoading
+          ? new Array(3)
+            .fill(1)
+            .map((_, index) => <BoriGoodsItemSkeleton key={index}/>)
+          : boriGoods.length === 0 
+            ? <BoriGoodsEmpty/>
+            : boriGoods          
+              .filter((searchGoods) =>
+                searchGoods.bori_goods_name.includes(searchInfo)
+              ).filter((cateGoods) => {
+                if (categoryInfo === '0')
+                  return cateGoods;
+                if(cateGoods.category_id === categoryInfo)
+                  return cateGoods;
+                }
+              ).map(goodsElement => <GoodsListItem key={goodsElement._id} category={categoryData} boriGoods={goodsElement}/>)
         }
       </div>
     </>
