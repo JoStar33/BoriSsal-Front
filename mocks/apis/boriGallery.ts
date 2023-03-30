@@ -46,6 +46,11 @@ export const boriGalleryMock = () => {
       return res(
         ctx.status(200)
       )
+    }),
+    rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/bori-gallery`, (req, res, ctx) => {
+      return res(
+        ctx.status(200)
+      )
     })
   ];
 }

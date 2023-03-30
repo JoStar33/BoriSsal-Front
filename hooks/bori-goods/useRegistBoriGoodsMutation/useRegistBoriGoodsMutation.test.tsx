@@ -28,7 +28,7 @@ test("useRegistBoriGoodsMutation 정상동작 확인 테스트", async () => {
 
 test("useRegistBoriGoodsMutation 실패케이스 확인 테스트", async () => {
   server.use(
-    rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/bori-gallery`, (req, res, ctx) => {
+    rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/bori-goods`, (req, res, ctx) => {
       return res(
         ctx.status(500)
       )

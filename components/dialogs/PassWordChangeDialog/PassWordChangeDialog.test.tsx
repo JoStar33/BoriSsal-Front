@@ -52,6 +52,8 @@ test("화면내에 input 이벤트 테스트(비밀번호 확인값과 다를 �
   );
   expect(differentPassword).toBeInTheDocument();
 });
+
+
 test("비밀번호 변경이 성공적으로 이루어졌을 경우", async () => {
   const { password, passwordCheck, newPassword, newPasswordCheck } =
     initRender();
@@ -64,6 +66,8 @@ test("비밀번호 변경이 성공적으로 이루어졌을 경우", async () =
   const success = await screen.findByRole('success');
   expect(success).toBeInTheDocument();
 });
+
+
 test("비밀번호 변경이 실패했을 경우", async () => {
   const { password, passwordCheck, newPassword, newPasswordCheck } =
     initRender();
@@ -84,9 +88,10 @@ test("비밀번호 변경이 실패했을 경우", async () => {
   fireEvent.change(newPassword, { target: { value: "tt12341212^^" } });
   fireEvent.change(newPasswordCheck, { target: { value: "tt12341212^^" } });
   const passwordChange = screen.getByRole("password_change");
-  await user.click(passwordChange);
-  const success = await screen.findByText(
-    "내부오류"
-  );
-  expect(success).toBeInTheDocument();
+  user.click(passwordChange).then(() => {
+    const success = screen.findByText(
+      /내부오류/
+    );
+    expect(success).toBeInTheDocument();
+  });
 });

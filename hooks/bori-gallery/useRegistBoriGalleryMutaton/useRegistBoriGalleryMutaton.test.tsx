@@ -21,7 +21,7 @@ const initPostBoriGallery: IPostBoriGallery = {
 
 test("useRegistBoriGalleryMutaton 정상동작 확인 테스트", async () => {
   const { result } = renderHook(
-    () => useRegistBoriGalleryMutaton(initPostBoriGallery, new FormData, setState, setState),
+    () => useRegistBoriGalleryMutaton(initPostBoriGallery, new FormData, setState, setState, setState, setState, setState, setState),
     {
       wrapper: Wrapper,
     }
@@ -40,7 +40,7 @@ test("useRegistBoriGalleryMutaton 실패케이스 확인 테스트", async () =>
     })
   );
   const { result } = renderHook(
-    () => useRegistBoriGalleryMutaton(initPostBoriGallery, new FormData, setState, setState),
+    () => useRegistBoriGalleryMutaton(initPostBoriGallery, new FormData, setState, setState, setState, setState, setState, setState),
     {
       wrapper: Wrapper,
     }

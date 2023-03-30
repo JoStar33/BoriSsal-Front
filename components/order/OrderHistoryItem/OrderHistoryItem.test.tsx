@@ -13,7 +13,7 @@ const initRender = (deliverStatus: string) => {
         order={{
           order_date: new Date,
           email: '', 
-          phone_number: '', 
+          phone_number: '01033332222', 
           address: "호랑이아파트", 
           address_detail: "",
           order_detail: [
