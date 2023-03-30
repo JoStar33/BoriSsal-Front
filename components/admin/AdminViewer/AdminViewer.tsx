@@ -11,11 +11,11 @@ const AdminViewer = () => {
   return (
     <div className={styles.admin_viewer_container}>
       <div className={styles.viewer_change_button_container}>
-        <button onClick={() => setPageState("boriGoods")}>boriGoods</button>
-        <button onClick={() => setPageState("goodsList")}>goodsList</button>
-        <button onClick={() => setPageState("boriGallery")}>boriGallery</button>
-        <button onClick={() => setPageState("galleryList")}>galleryList</button>
-        <button onClick={() => setPageState("orderControl")}>orderControl</button>
+        <button role="boriGoodsShow" onClick={() => setPageState("boriGoods")}>boriGoods</button>
+        <button role="goodsListShow" onClick={() => setPageState("goodsList")}>goodsList</button>
+        <button role="boriGalleryShow" onClick={() => setPageState("boriGallery")}>boriGallery</button>
+        <button role="galleryListShow" onClick={() => setPageState("galleryList")}>galleryList</button>
+        <button role="orderControlShow" onClick={() => setPageState("orderControl")}>orderControl</button>
       </div>
       <div className={styles.admin_viewer}>
         {
