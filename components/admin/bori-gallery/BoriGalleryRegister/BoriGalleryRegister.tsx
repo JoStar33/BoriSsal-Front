@@ -1,17 +1,17 @@
 import { useRegistBoriGalleryMutaton } from "@/hooks/bori-gallery/useRegistBoriGalleryMutaton/useRegistBoriGalleryMutaton";
-import { useDialog } from "@/hooks/common/useDialog/useDialog";
 import { useRegistImage } from "@/hooks/common/useRegistImage/useRegistImage";
+import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { IPostBoriGallery } from "@/types/boriGallery";
 import { useState } from "react";
+import RegistImage from "../../RegistImage/RegistImage";
 import styles from "../BoriGoodsRegister/bori_goods_register.module.scss";
-import RegistImage from "../RegistImage/RegistImage";
 
 const BoriGalleryRegister = () => {
   const [galleryInfo, setGalleryInfo] = useState<IPostBoriGallery>({
     bori_gallery_title: "",
     bori_gallery_desc: "",
   });
-  const { dialog, setDialog, setDialogText, renderDialog } = useDialog();
+  const { dialog, setDialog, setDialogText, renderDialog } = useValidateDialog();
   const {formData, setImage, image} = useRegistImage();
   const { mutate } = useRegistBoriGalleryMutaton(
     galleryInfo,

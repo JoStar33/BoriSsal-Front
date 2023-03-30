@@ -1,15 +1,16 @@
 import { useCategoryQuery } from "@/hooks/bori-goods/useCategoryQuery/useCategoryQuery";
 import { useRegistBoriGoodsMutation } from "@/hooks/bori-goods/useRegistBoriGoodsMutation/useRegistBoriGoodsMutation";
-import { useDialog } from "@/hooks/common/useDialog/useDialog";
 import { useRegistImage } from "@/hooks/common/useRegistImage/useRegistImage";
+import { useSuccessDialog } from "@/hooks/common/useSuccessDialog/useSuccessDialog";
+import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { IPostBoriGoods } from "@/types/boriGoods";
 import { useState } from "react";
-import RegistImage from "../RegistImage/RegistImage";
+import RegistImage from "../../RegistImage/RegistImage";
 import styles from "./bori_goods_register.module.scss";
 
 const BoriGoodsRegister = () => {
   let { data: categoryData } = useCategoryQuery();
-  const {formData, setImage, image} = useRegistImage();
+  const { formData, setImage, image } = useRegistImage();
   const [goodsInfo, setGoodsInfo] = useState<IPostBoriGoods>({
     bori_goods_name: "",
     bori_goods_price: 0,
@@ -20,13 +21,24 @@ const BoriGoodsRegister = () => {
   if (!categoryData) {
     categoryData = [];
   }
-  const { dialog, setDialog, setDialogText, renderDialog } = useDialog();
+  const { dialog, setDialog, setDialogText, renderDialog } =
+    useValidateDialog();
+  const {
+    successDialog,
+    setSuccessDialog,
+    setSuccessDialogText,
+    renderSuccessDialog,
+  } = useSuccessDialog();
   const { mutate } = useRegistBoriGoodsMutation(
     categoryInfo,
     goodsInfo,
     formData.current,
     setGoodsInfo,
-    setImage
+    setImage,
+    setDialog,
+    setDialogText,
+    setSuccessDialog,
+    setSuccessDialogText
   );
   const handleSelectLayout = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategoryInfo(e.target.value);
@@ -75,19 +87,19 @@ const BoriGoodsRegister = () => {
   return (
     <>
       {dialog && (
-        <figure style={{ marginLeft: "-5vw" }}>
-          {
-            renderDialog()
-          }
-        </figure>
+        <figure style={{ marginLeft: "-5vw" }}>{renderDialog()}</figure>
+      )}
+      {successDialog && (
+        <figure style={{ marginLeft: "-5vw" }}>{renderSuccessDialog()}</figure>
       )}
       <div className={styles.bori_goods_register_container}>
-        <RegistImage desc="굿즈 이미지"/>
+        <RegistImage desc="굿즈 이미지" />
         <div className={styles.text_container}>
           <label htmlFor="goods-name">굿즈명:</label>
           <input
             onChange={handleOnChangeGoodsInfo}
             name="bori_goods_name"
+            role="bori_goods_name"
             id="goods-name"
             type="text"
           />
@@ -97,8 +109,9 @@ const BoriGoodsRegister = () => {
           <input
             onChange={handleOnChangeGoodsInfo}
             name="bori_goods_price"
+            role="bori_goods_price"
             id="goods-price"
-            type="text"
+            type="number"
           />
         </div>
         <div className={styles.text_container}>
@@ -106,13 +119,14 @@ const BoriGoodsRegister = () => {
           <input
             onChange={handleOnChangeGoodsInfo}
             name="bori_goods_stock"
+            role="bori_goods_stock"
             id="goods-stock"
             type="number"
           />
         </div>
         <div className={styles.select_container}>
           <label htmlFor="goods-category">카테고리:</label>
-          <select onChange={handleSelectLayout}>
+          <select role="goods-category" onChange={handleSelectLayout}>
             {categoryData.map((category) => (
               <option key={category._id} value={category._id}>
                 {category.category_name}
@@ -125,9 +139,11 @@ const BoriGoodsRegister = () => {
           <textarea
             onChange={handleOnChangeGoodsInfo}
             name="bori_goods_desc"
+            role="bori_goods_desc"
           ></textarea>
         </div>
         <button
+          role="regist-button"
           onClick={handleRegistBoriGoods}
           className={styles.goods_register_button}
         >

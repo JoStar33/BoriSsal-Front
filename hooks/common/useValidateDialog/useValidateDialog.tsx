@@ -1,7 +1,7 @@
 import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
 import { useState } from "react";
 
-export const useDialog = () => {
+export const useValidateDialog = () => {
   const [dialog, setDialog] = useState<boolean>(false);
   const [dialogText, setDialogText] = useState<string>("");
   const renderDialog =() => (

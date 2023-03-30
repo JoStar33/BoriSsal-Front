@@ -3,7 +3,7 @@ import ErrorPage from '@/components/error/ErrorPage/ErrorPage';
 import UserInfoViewer from '@/components/order/UserInfoViewer/UserInfoViewer';
 import UserDeliverAddressPart from '@/components/user/UserDeliverAddressPart/UserDeliverAddressPart';
 import { useLoginCheckQuery } from '@/hooks/auth/useLoginCheckQuery/useLoginCheckQuery';
-import { useDialog } from '@/hooks/common/useDialog/useDialog';
+import { useValidateDialog } from '@/hooks/common/useValidateDialog/useValidateDialog';
 import { useOrderMutation } from '@/hooks/order/useOrderMutation/useOrderMutation';
 import { useDeliverAddressQuery } from '@/hooks/user/useDeliverAddressQuery/useDeliverAddressQuery';
 import { useUserQuery } from '@/hooks/user/useUserQuery/useUserQuery';
@@ -28,7 +28,7 @@ const OrderPage = () => {
   useLoginCheckQuery();
   const { cart } = useCartStore();
   const { pageState } = usePageStore();
-  const { dialog, setDialog, setDialogText, renderDialog } = useDialog();
+  const { dialog, setDialog, setDialogText, renderDialog } = useValidateDialog();
   let { data: deliverAddress } = useDeliverAddressQuery();
   let { data: user } = useUserQuery();
   if (!deliverAddress) {

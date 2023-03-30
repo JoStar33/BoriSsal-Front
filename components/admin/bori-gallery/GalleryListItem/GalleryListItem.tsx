@@ -1,7 +1,8 @@
 import { useBoriGalleryImageMutation } from "@/hooks/bori-gallery/useBoriGalleryImageMutation/useBoriGalleryImageMutation";
 import { useDeleteBoriGalleryMutation } from "@/hooks/bori-gallery/useDeleteBoriGalleryMutation/useDeleteBoriGalleryMutation";
 import { useUpdateBoriGalleryMutation } from "@/hooks/bori-gallery/useUpdateBoriGalleryMutation/useUpdateBoriGalleryMutation";
-import { useDialog } from "@/hooks/common/useDialog/useDialog";
+import { useSuccessDialog } from "@/hooks/common/useSuccessDialog/useSuccessDialog";
+import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { IBoriGallery, IPostBoriGallery } from "@/types/boriGallery";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -17,10 +18,11 @@ const GalleryListItem = ({ boriGallery }: IProps) => {
     bori_gallery_title: "",
     bori_gallery_desc: ""
   });
-  const { dialog, setDialog, setDialogText, renderDialog } = useDialog();
-  const { mutate: updateBoriImage } = useBoriGalleryImageMutation(boriGallery._id);
-  const { mutate: updateBoriGoods } = useUpdateBoriGalleryMutation(boriGallery._id, galleryInfo);
-  const { mutate: deleteBoriGoods } = useDeleteBoriGalleryMutation(boriGallery._id);
+  const { dialog, setDialog, setDialogText, renderDialog } = useValidateDialog();
+  const { successDialog, setSuccessDialog, setSuccessDialogText, renderSuccessDialog } = useSuccessDialog();
+  const { mutate: updateBoriImage } = useBoriGalleryImageMutation(boriGallery._id, setDialog, setDialogText, setSuccessDialog, setSuccessDialogText);
+  const { mutate: updateBoriGoods } = useUpdateBoriGalleryMutation(boriGallery._id, galleryInfo, setDialog, setDialogText);
+  const { mutate: deleteBoriGoods } = useDeleteBoriGalleryMutation(boriGallery._id, setDialog, setDialogText, setSuccessDialog, setSuccessDialogText);
   useEffect(() => {
     setGalleryInfo({
       bori_gallery_title: boriGallery.bori_gallery_title,
@@ -60,55 +62,63 @@ const GalleryListItem = ({ boriGallery }: IProps) => {
     deleteBoriGoods();
   }
   return (
-    <div className={styles.goods_list_item_container}>
-      <label htmlFor="">
-        <figure
-          style={{
-            width: "10vw",
-            height: "10vw",
-            position: "relative",
-            margin: "2vw",
-          }}
-        >
-          <Image
-            fill
-            src={`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}${boriGallery.bori_gallery_image}`}
-            alt={boriGallery.bori_gallery_title}
-          />
-        </figure>
-      </label>
-      <input
-        id="input-file"
-        type="file"
-        onChange={handleOnChangeGoodsImage}
-        style={{ display: "none" }}
-        accept="image/png, image/jpeg"
-      />
-      <div className={styles.goods_info}>
+    <>
+      {
+        dialog && renderDialog() 
+      }
+      {
+        successDialog && renderSuccessDialog()
+      }
+      <div className={styles.goods_list_item_container}>
+        <label htmlFor="">
+          <figure
+            style={{
+              width: "10vw",
+              height: "10vw",
+              position: "relative",
+              margin: "2vw",
+            }}
+          >
+            <Image
+              fill
+              src={`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}${boriGallery.bori_gallery_image}`}
+              alt={boriGallery.bori_gallery_title}
+            />
+          </figure>
+        </label>
         <input
-          style={{marginLeft: "9vw", marginRight: "9vw"}}
-          className={styles.name}
-          onChange={handleOnChangeGoodsInfo}
-          name="bori_gallery_title"
-          value={galleryInfo.bori_gallery_title}
-          type="text"
+          id="input-file"
+          type="file"
+          onChange={handleOnChangeGoodsImage}
+          style={{ display: "none" }}
+          accept="image/png, image/jpeg"
         />
+        <div className={styles.goods_info}>
+          <input
+            style={{marginLeft: "9vw", marginRight: "9vw"}}
+            className={styles.name}
+            onChange={handleOnChangeGoodsInfo}
+            name="bori_gallery_title"
+            value={galleryInfo.bori_gallery_title}
+            type="text"
+          />
+        </div>
+        <div className={styles.desc_container}>
+          <p>설명</p>
+          <textarea
+            onChange={handleOnChangeGoodsInfo}
+            name="bori_gallery_desc"
+            value={galleryInfo.bori_gallery_desc}
+          />
+        </div>
+        <div className={styles.button_container}>
+          <button role="update-gallery" onClick={handleUpdateGoods} className={styles.modify_button}>
+            수정
+          </button>
+          <button onClick={handleDeleteGoods} className={styles.delete_button}>삭제</button>
+        </div>
       </div>
-      <div className={styles.desc_container}>
-        <p>설명</p>
-        <textarea
-          onChange={handleOnChangeGoodsInfo}
-          name="bori_gallery_desc"
-          value={galleryInfo.bori_gallery_desc}
-        />
-      </div>
-      <div className={styles.button_container}>
-        <button  onClick={handleUpdateGoods} className={styles.modify_button}>
-          수정
-        </button>
-        <button onClick={handleDeleteGoods} className={styles.delete_button}>삭제</button>
-      </div>
-    </div>
+    </>
   );
 };
 

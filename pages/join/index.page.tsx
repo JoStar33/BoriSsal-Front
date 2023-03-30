@@ -3,7 +3,7 @@ import Loading from "@/components/loading/Loading/Loading";
 import DuplicateCheckPart from "@/components/user/DuplicateCheckPart/DuplicateCheckPart";
 import InputPart from "@/components/user/InputPart/InputPart";
 import { useJoinMutation } from "@/hooks/auth/useJoinMutation/useJoinMutation";
-import { useDialog } from "@/hooks/common/useDialog/useDialog";
+import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { IJoin } from "@/types/auth";
 import {
   validateEmail,
@@ -30,7 +30,7 @@ const Join = () => {
     password: "",
     passwordCheck: "",
   });
-  const { dialog, setDialog, setDialogText, renderDialog } = useDialog();
+  const { dialog, setDialog, setDialogText, renderDialog } = useValidateDialog();
   const joinInfo = useMemo<IJoin>(() => {
     return {
       email: account.email,

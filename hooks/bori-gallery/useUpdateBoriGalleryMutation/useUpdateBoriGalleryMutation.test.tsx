@@ -11,6 +11,7 @@ const Wrapper = ({ children }: any) => {
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
+const setState = jest.fn() as any;
 
 const initPostBoriGallery: IPostBoriGallery = {
   bori_gallery_title: '', 
@@ -19,7 +20,7 @@ const initPostBoriGallery: IPostBoriGallery = {
 
 test("useUpdateBoriGalleryMutation 정상동작 확인 테스트", async () => {
   const { result } = renderHook(
-    () => useUpdateBoriGalleryMutation('23', initPostBoriGallery),
+    () => useUpdateBoriGalleryMutation('23', initPostBoriGallery, setState, setState),
     {
       wrapper: Wrapper,
     }
@@ -38,7 +39,7 @@ test("useUpdateBoriGalleryMutation 실패케이스 확인 테스트", async () =
     })
   );
   const { result } = renderHook(
-    () => useUpdateBoriGalleryMutation('23', initPostBoriGallery),
+    () => useUpdateBoriGalleryMutation('23', initPostBoriGallery, setState, setState),
     {
       wrapper: Wrapper,
     }

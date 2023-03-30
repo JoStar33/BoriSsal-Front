@@ -1,6 +1,6 @@
 import ReplySkeleton from '@/components/loading/ReplySkeleton/ReplySkeleton';
 import { useBoriGoodsReplyMutation } from '@/hooks/bori-goods/useBoriGoodsReplyMutation/useBoriGoodsReplyMutation';
-import { useDialog } from '@/hooks/common/useDialog/useDialog';
+import { useValidateDialog } from '@/hooks/common/useValidateDialog/useValidateDialog';
 import { IReplyMutation } from '@/types/reply';
 import { IUser } from '@/types/user';
 import React, { useRef } from 'react';
@@ -20,7 +20,7 @@ interface IProps {
 }
 
 const ReplyViewer = ({user, mutationData, goods_id, setLimit, limit, refetch}: IProps) => {
-  const { renderDialog, dialog, setDialog, setDialogText } = useDialog();
+  const { renderDialog, dialog, setDialog, setDialogText } = useValidateDialog();
   const replyContent = useRef<HTMLInputElement>(null);
   const goodsReplyMutation = useBoriGoodsReplyMutation(user.email, goods_id);
   const replyRegist = () => {

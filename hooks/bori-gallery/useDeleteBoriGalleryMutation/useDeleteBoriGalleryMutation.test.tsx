@@ -11,9 +11,11 @@ const Wrapper = ({ children }: any) => {
   );
 };
 
+const setState = jest.fn() as any;
+
 test("useDeleteBoriGalleryMutation 정상동작 확인 테스트", async () => {
   const { result } = renderHook(
-    () => useDeleteBoriGalleryMutation('23'),
+    () => useDeleteBoriGalleryMutation('23', setState, setState, setState, setState),
     {
       wrapper: Wrapper,
     }
@@ -32,7 +34,7 @@ test("useDeleteBoriGalleryMutation 정상동작 확인 테스트", async () => {
     })
   );
   const { result } = renderHook(
-    () => useDeleteBoriGalleryMutation('23'),
+    () => useDeleteBoriGalleryMutation('23', setState, setState, setState, setState),
     {
       wrapper: Wrapper,
     }

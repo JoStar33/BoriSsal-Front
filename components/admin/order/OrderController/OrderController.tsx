@@ -75,7 +75,7 @@ const OrderController = () => {
                 endDate={endDate}
               />
             </div>
-            <button className={styles.search_button} onClick={handleSearch}>검색하기</button>
+            <button role="search-button" className={styles.search_button} onClick={handleSearch}>검색하기</button>
           </div>
         </div>
         <div className={styles.list_container}>

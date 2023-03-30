@@ -34,10 +34,10 @@ const OrderItem = ({order, updateOrderId, setDialog}: IProps) => {
         </div>
         <div className={styles.order_control_part}>
           <p>{`주문금액: ${order.price}원`}</p>
-          <button style={{backgroundColor: orderStatusColor}} onClick={handleUpdateState}>{order.order_status}</button>
+          <button role="order-status" style={{backgroundColor: orderStatusColor}} onClick={handleUpdateState}>{order.order_status}</button>
         </div>
         <div className={styles.goods_info_part}>
-          <button onClick={() => setShowDetailGoods(!showDetailGoods)}>상품 내역</button>
+          <button role="goods-list" onClick={() => setShowDetailGoods(!showDetailGoods)}>상품 내역</button>
         </div>
       </div>
       {

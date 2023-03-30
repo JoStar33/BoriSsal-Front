@@ -1,10 +1,9 @@
-import { useDialog } from './useDialog';
 import { render, screen } from '@testing-library/react';
-import React from 'react';
-test("useDialog 기본 동작 확인", () => {
-  let result = {} as ReturnType<typeof useDialog>;
+import { useValidateDialog } from './useValidateDialog';
+test("useValidateDialog 기본 동작 확인", () => {
+  let result = {} as ReturnType<typeof useValidateDialog>;
   const Wrapper = () => {
-    result = useDialog();
+    result = useValidateDialog();
     return null;
   };
   render(<Wrapper />);
@@ -13,10 +12,10 @@ test("useDialog 기본 동작 확인", () => {
 });
 
 
-test("useDialog를 통한 다이얼로그 오픈 확인", async () => {
-  let result = {} as ReturnType<typeof useDialog>;
+test("useValidateDialog를 통한 다이얼로그 오픈 확인", async () => {
+  let result = {} as ReturnType<typeof useValidateDialog>;
   const Wrapper = () => {
-    result = useDialog();
+    result = useValidateDialog();
     return result.renderDialog();
   };
   render(<Wrapper />);

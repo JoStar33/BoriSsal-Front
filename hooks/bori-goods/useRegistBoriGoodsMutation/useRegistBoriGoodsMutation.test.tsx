@@ -16,7 +16,7 @@ const setState = jest.fn() as any;
 
 test("useRegistBoriGoodsMutation 정상동작 확인 테스트", async () => {
   const { result } = renderHook(
-    () => useRegistBoriGoodsMutation('23', initPostBoriGoods, new FormData, setState, setState),
+    () => useRegistBoriGoodsMutation('23', initPostBoriGoods, new FormData, setState, setState, setState, setState, setState, setState),
     {
       wrapper: Wrapper,
     }
@@ -35,7 +35,7 @@ test("useRegistBoriGoodsMutation 실패케이스 확인 테스트", async () => 
     })
   );
   const { result } = renderHook(
-    () => useRegistBoriGoodsMutation('23', initPostBoriGoods, new FormData, setState, setState),
+    () => useRegistBoriGoodsMutation('23', initPostBoriGoods, new FormData, setState, setState, setState, setState, setState, setState),
     {
       wrapper: Wrapper,
     }

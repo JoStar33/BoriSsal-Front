@@ -3,7 +3,7 @@ import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
 import Loading from "@/components/loading/Loading/Loading";
 import { useLoginMutation } from "@/hooks/auth/useLoginMutation/useLoginMutation";
 import { useNotLoginCheckQuery } from "@/hooks/auth/useNotLoginCheckQuery/useNotLoginCheckQuery";
-import { useDialog } from "@/hooks/common/useDialog/useDialog";
+import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { ILogin } from "@/types/auth";
 import { validateEmail, validatePassword } from "@/utils/validate";
 import { AxiosError } from "axios";
@@ -15,7 +15,7 @@ import googleImage from "/public/login/google.png";
 import kakaoImage from "/public/login/kakao.png";
 
 const Login = () => {
-  const { dialog, setDialog, setDialogText, renderDialog } = useDialog();
+  const { dialog, setDialog, setDialogText, renderDialog } = useValidateDialog();
   const [account, setAccount] = useState<ILogin>({
     email: "",
     password: "",

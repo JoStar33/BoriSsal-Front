@@ -1,10 +1,11 @@
-
 import { server } from "@/mocks/server";
 import { renderHook, waitFor } from "@testing-library/react";
 import { rest } from "msw";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { usePassWordChangeMutation } from "./usePassWordChangeMutation";
 const queryClient = new QueryClient();
+
+const setState = jest.fn() as any;
 
 const Wrapper = ({ children }: any) => {
   return (
@@ -14,7 +15,14 @@ const Wrapper = ({ children }: any) => {
 
 test("usePassWordChangeMutation 정상동작 확인 테스트", async () => {
   const { result } = renderHook(
-    () => usePassWordChangeMutation({password: "", newPassword: "" }),
+    () =>
+      usePassWordChangeMutation(
+        { password: "", newPassword: "" },
+        setState,
+        setState,
+        setState,
+        setState
+      ),
     {
       wrapper: Wrapper,
     }
@@ -24,15 +32,23 @@ test("usePassWordChangeMutation 정상동작 확인 테스트", async () => {
 });
 
 test("usePassWordChangeMutation 정상동작 확인 테스트(실패 케이스)", async () => {
-  server.use(    
-    rest.post(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/password`, (req, res, ctx) => {
-      return res(
-        ctx.status(500),
-      );
-    })
+  server.use(
+    rest.post(
+      `${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/password`,
+      (req, res, ctx) => {
+        return res(ctx.status(500));
+      }
+    )
   );
   const { result } = renderHook(
-    () => usePassWordChangeMutation({password: "", newPassword: "" }),
+    () =>
+      usePassWordChangeMutation(
+        { password: "", newPassword: "" },
+        setState,
+        setState,
+        setState,
+        setState
+      ),
     {
       wrapper: Wrapper,
     }

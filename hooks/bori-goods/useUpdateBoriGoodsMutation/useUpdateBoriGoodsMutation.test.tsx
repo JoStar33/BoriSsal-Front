@@ -11,9 +11,10 @@ const Wrapper = ({ children }: any) => {
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
+const setState = jest.fn() as any;
 test("useUpdateBoriGoodsMutation 정상동작 확인 테스트", async () => {
   const { result } = renderHook(
-    () => useUpdateBoriGoodsMutation('23', initPostBoriGoods, '23'),
+    () => useUpdateBoriGoodsMutation('23', initPostBoriGoods, '23', setState, setState),
     {
       wrapper: Wrapper,
     }
@@ -32,7 +33,7 @@ test("useUpdateBoriGoodsMutation 실패케이스 확인 테스트", async () => 
     })
   );
   const { result } = renderHook(
-    () => useUpdateBoriGoodsMutation('23', initPostBoriGoods, '23'),
+    () => useUpdateBoriGoodsMutation('23', initPostBoriGoods, '23', setState, setState),
     {
       wrapper: Wrapper,
     }

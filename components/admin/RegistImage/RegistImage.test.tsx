@@ -1,4 +1,4 @@
-import {  fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "react-query";
 import RegistImage from "./RegistImage";
@@ -31,4 +31,4 @@ test('이미지 반영 테스트', async () => {
   if(!image.files) return;
   expect(image.files[0].name).toBe("chucknorris.png");
   expect(image.files.length).toBe(1);
-})
+});

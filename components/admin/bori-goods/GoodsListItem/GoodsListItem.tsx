@@ -1,10 +1,8 @@
-import { errorMessage } from "@/apis/error/customError";
-import SuccessDialog from "@/components/dialogs/SuccessDialog/SuccessDialog";
-import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
 import { useBoriGoodsImageMutation } from "@/hooks/bori-goods/useBoriGoodsImageMutation/useBoriGoodsImageMutation";
 import { useDeleteBoriGoodsMutation } from "@/hooks/bori-goods/useDeleteBoriGoodsMutation/useDeleteBoriGoodsMutation";
 import { useUpdateBoriGoodsMutation } from "@/hooks/bori-goods/useUpdateBoriGoodsMutation/useUpdateBoriGoodsMutation";
-import { useDialog } from "@/hooks/common/useDialog/useDialog";
+import { useSuccessDialog } from "@/hooks/common/useSuccessDialog/useSuccessDialog";
+import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { IBoriGoods, ICategory, IPostBoriGoods } from "@/types/boriGoods";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -23,15 +21,36 @@ const GoodsListItem = ({ boriGoods, category }: IProps) => {
     bori_goods_stock: 0,
     bori_goods_desc: "",
   });
-  const { dialog, setDialog, dialogText, setDialogText, renderDialog } = useDialog();
+  const { dialog, setDialog, dialogText, setDialogText, renderDialog } =
+    useValidateDialog();
+  const {
+    successDialog,
+    setSuccessDialog,
+    setSuccessDialogText,
+    renderSuccessDialog,
+  } = useSuccessDialog();
   const [categoryInfo, setCategoryInfo] = useState<string>("");
-  const { mutate: updateBoriImage } = useBoriGoodsImageMutation(boriGoods._id);
+  const { mutate: updateBoriImage } = useBoriGoodsImageMutation(
+    boriGoods._id,
+    setDialog,
+    setDialogText,
+    setSuccessDialog,
+    setSuccessDialogText
+  );
   const { mutate: updateBoriGoods } = useUpdateBoriGoodsMutation(
     categoryInfo,
     goodsInfo,
-    boriGoods._id
+    boriGoods._id,
+    setDialog,
+    setDialogText
   );
-  const { mutate: deleteBoriGoods, isError, error } = useDeleteBoriGoodsMutation(boriGoods._id);
+  const { mutate: deleteBoriGoods } = useDeleteBoriGoodsMutation(
+    boriGoods._id,
+    setDialog,
+    setDialogText,
+    setSuccessDialog,
+    setSuccessDialogText
+  );
   useEffect(() => {
     setCategoryInfo(boriGoods.category_id);
     setGoodsInfo({
@@ -65,7 +84,7 @@ const GoodsListItem = ({ boriGoods, category }: IProps) => {
   };
   const handleDeleteGoods = () => {
     deleteBoriGoods();
-  }
+  };
   const handleOnChangeGoodsInfo = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -87,20 +106,8 @@ const GoodsListItem = ({ boriGoods, category }: IProps) => {
   };
   return (
     <>
-      {
-        dialog && isError && <ValidateDialog setDialog={setDialog} text={errorMessage(error)}/>
-      }
-      {
-        dialog && dialogText !== "수정이 완료됐습니다!" && dialogText !== "삭제가 완료됐습니다!" && 
-        renderDialog() 
-      }
-      {
-        dialog && (dialogText === "수정이 완료됐습니다!" || dialogText === "삭제가 완료됐습니다!") && (
-          <SuccessDialog
-            text={dialogText}
-            setDialog={setDialog}
-          />
-      )}
+      {dialog && renderDialog()}
+      {successDialog && renderSuccessDialog()}
       <div className={styles.goods_list_item_container}>
         <label htmlFor="">
           <figure
@@ -129,6 +136,7 @@ const GoodsListItem = ({ boriGoods, category }: IProps) => {
           <input
             className={styles.name}
             onChange={handleOnChangeGoodsInfo}
+            role="bori_goods_name"
             name="bori_goods_name"
             value={goodsInfo.bori_goods_name}
             type="text"
@@ -137,6 +145,7 @@ const GoodsListItem = ({ boriGoods, category }: IProps) => {
             <input
               onChange={handleOnChangeGoodsInfo}
               name="bori_goods_price"
+              role="bori_goods_price"
               value={goodsInfo.bori_goods_price}
               type="number"
             />
@@ -149,6 +158,7 @@ const GoodsListItem = ({ boriGoods, category }: IProps) => {
             <input
               onChange={handleOnChangeGoodsInfo}
               name="bori_goods_stock"
+              role="bori_goods_stock"
               value={goodsInfo.bori_goods_stock}
               type="number"
             />
@@ -169,15 +179,22 @@ const GoodsListItem = ({ boriGoods, category }: IProps) => {
           <p>설명</p>
           <textarea
             onChange={handleOnChangeGoodsInfo}
+            role="bori_goods_desc"
             name="bori_goods_desc"
             value={goodsInfo.bori_goods_desc}
           />
         </div>
         <div className={styles.button_container}>
-          <button  onClick={handleUpdateGoods} className={styles.modify_button}>
+          <button
+            role="update-goods"
+            onClick={handleUpdateGoods}
+            className={styles.modify_button}
+          >
             수정
           </button>
-          <button onClick={handleDeleteGoods} className={styles.delete_button}>삭제</button>
+          <button onClick={handleDeleteGoods} className={styles.delete_button}>
+            삭제
+          </button>
         </div>
       </div>
     </>

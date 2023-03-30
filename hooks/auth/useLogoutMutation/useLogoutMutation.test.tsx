@@ -11,8 +11,10 @@ const Wrapper = ({ children }: any) => {
   );
 };
 
+const setState = jest.fn() as any;
+
 test("useLogoutMutation 정상동작 확인 테스트", async () => {
-  const { result } = renderHook(() => useLogoutMutation(), {
+  const { result } = renderHook(() => useLogoutMutation(setState, setState), {
     wrapper: Wrapper,
   });
   result.current.mutate()
@@ -20,7 +22,7 @@ test("useLogoutMutation 정상동작 확인 테스트", async () => {
 });
 
 test("useLogoutMutation 훅을 통해 store에 정상적으로 유저의 정보를 리셋시키는지 확인.", async () => {
-  const { result } = renderHook(() => useLogoutMutation(), {
+  const { result } = renderHook(() => useLogoutMutation(setState, setState), {
     wrapper: Wrapper,
   });
   result.current.mutate();
@@ -39,7 +41,7 @@ test("useLogoutMutation 훅이 실패했을 경우.", async () => {
       }
     )
   );
-  const { result } = renderHook(() => useLogoutMutation(), {
+  const { result } = renderHook(() => useLogoutMutation(setState, setState), {
     wrapper: Wrapper,
   });
   result.current.mutate();

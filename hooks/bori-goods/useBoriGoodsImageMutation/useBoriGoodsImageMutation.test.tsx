@@ -10,10 +10,10 @@ const Wrapper = ({ children }: any) => {
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
-
+const setState = jest.fn() as any;
 test("useBoriGoodsImageMutation 정상동작 확인 테스트", async () => {
   const { result } = renderHook(
-    () => useBoriGoodsImageMutation('23'),
+    () => useBoriGoodsImageMutation('23', setState, setState, setState, setState),
     {
       wrapper: Wrapper,
     }
@@ -31,7 +31,7 @@ test("useBoriGoodsImageMutation 실패케이스 확인 테스트", async () => {
     })
   );
   const { result } = renderHook(
-    () => useBoriGoodsImageMutation('23'),
+    () => useBoriGoodsImageMutation('23', setState, setState, setState, setState),
     {
       wrapper: Wrapper,
     }

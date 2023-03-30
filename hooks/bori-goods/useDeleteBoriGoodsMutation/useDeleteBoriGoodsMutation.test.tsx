@@ -10,10 +10,10 @@ const Wrapper = ({ children }: any) => {
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
-
+const setState = jest.fn() as any;
 test("useDeleteBoriGoodsMutation 정상동작 확인 테스트", async () => {
   const { result } = renderHook(
-    () => useDeleteBoriGoodsMutation('23'),
+    () => useDeleteBoriGoodsMutation('23', setState, setState, setState, setState),
     {
       wrapper: Wrapper,
     }
@@ -32,7 +32,7 @@ test("useDeleteBoriGoodsMutation 정상동작 확인 테스트", async () => {
     })
   );
   const { result } = renderHook(
-    () => useDeleteBoriGoodsMutation('23'),
+    () => useDeleteBoriGoodsMutation('23', setState, setState, setState, setState),
     {
       wrapper: Wrapper,
     }
