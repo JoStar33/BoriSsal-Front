@@ -1,6 +1,6 @@
 import { useBoriGalleryQuery } from "@/hooks/bori-gallery/useBoriGalleryQuery/useBoriGalleryQuery";
 import { useSearch } from "@/hooks/common/useSearch/useSearch";
-import styles from '../BoriGoodsList/bori_goods_list.module.scss';
+import styles from '../../bori-goods/BoriGoodsList/bori_goods_list.module.scss';
 import GalleryListItem from "../GalleryListItem/GalleryListItem";
 
 const BoriGalleryList = () => {

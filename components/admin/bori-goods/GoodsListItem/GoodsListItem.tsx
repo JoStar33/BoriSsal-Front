@@ -47,9 +47,7 @@ const GoodsListItem = ({ boriGoods, category }: IProps) => {
   const { mutate: deleteBoriGoods } = useDeleteBoriGoodsMutation(
     boriGoods._id,
     setDialog,
-    setDialogText,
-    setSuccessDialog,
-    setSuccessDialogText
+    setDialogText
   );
   useEffect(() => {
     setCategoryInfo(boriGoods.category_id);
@@ -78,8 +76,8 @@ const GoodsListItem = ({ boriGoods, category }: IProps) => {
       setDialog(true);
       return;
     }
-    setDialog(true);
-    setDialogText("수정이 완료됐습니다!");
+    setSuccessDialog(true);
+    setSuccessDialogText("수정이 완료됐습니다!");
     updateBoriGoods();
   };
   const handleDeleteGoods = () => {

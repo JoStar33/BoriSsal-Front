@@ -6,7 +6,7 @@ import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateD
 import { IBoriGallery, IPostBoriGallery } from "@/types/boriGallery";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import styles from '../GoodsListItem/goods_list_item.module.scss';
+import styles from '../../bori-goods/GoodsListItem/goods_list_item.module.scss';
 
 interface IProps {
   boriGallery: IBoriGallery;
@@ -22,7 +22,7 @@ const GalleryListItem = ({ boriGallery }: IProps) => {
   const { successDialog, setSuccessDialog, setSuccessDialogText, renderSuccessDialog } = useSuccessDialog();
   const { mutate: updateBoriImage } = useBoriGalleryImageMutation(boriGallery._id, setDialog, setDialogText, setSuccessDialog, setSuccessDialogText);
   const { mutate: updateBoriGoods } = useUpdateBoriGalleryMutation(boriGallery._id, galleryInfo, setDialog, setDialogText);
-  const { mutate: deleteBoriGoods } = useDeleteBoriGalleryMutation(boriGallery._id, setDialog, setDialogText, setSuccessDialog, setSuccessDialogText);
+  const { mutate: deleteBoriGoods } = useDeleteBoriGalleryMutation(boriGallery._id, setDialog, setDialogText);
   useEffect(() => {
     setGalleryInfo({
       bori_gallery_title: boriGallery.bori_gallery_title,

@@ -1,8 +1,8 @@
-import { fireEvent, waitFor, render, screen } from "@testing-library/react";
-import { QueryClientProvider, QueryClient } from "react-query";
 import { server } from "@/mocks/server";
-import { rest } from "msw";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { rest } from "msw";
+import { QueryClient, QueryClientProvider } from "react-query";
 import FindPassWord from "./index.page";
 
 const user = userEvent.setup();
@@ -23,7 +23,7 @@ test('임시 비밀번호 발급 테스트(성공 케이스)', async () => {
   const button = screen.getByRole("button");
   fireEvent.change(email, { target: { value: "rhwe@naver.com" } });
   user.click(button);
-  const samePassword = await screen.findByText(/비밀번호 발급 성공! 메일을 확인해주세요./);
+  const samePassword = await screen.findByText(/임시비밀번호가 메일로 전송됐습니다!/);
   expect(samePassword).toBeInTheDocument();
 });
 
