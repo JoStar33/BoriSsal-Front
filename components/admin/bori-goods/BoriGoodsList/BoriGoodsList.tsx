@@ -1,3 +1,4 @@
+import BoriGoodsEmpty from "@/components/bori-goods/BoriGoodsEmpty/BoriGoodsEmpty";
 import { useBoriGoodsQuery } from "@/hooks/bori-goods/useBoriGoodsQuery/useBoriGoodsQuery";
 import { useCategoryQuery } from "@/hooks/bori-goods/useCategoryQuery/useCategoryQuery";
 import { useSearch } from "@/hooks/common/useSearch/useSearch";
@@ -45,16 +46,18 @@ const BoriGoodsList = () => {
       </div>
       <div className={styles.list_container}>
         {
-          boriGoods          
-          .filter((searchGoods) =>
-            searchGoods.bori_goods_name.includes(searchInfo)
-          ).filter((cateGoods) => {
-            if (categoryInfo === '0')
-              return cateGoods;
-            if(cateGoods.category_id === categoryInfo)
-              return cateGoods;
-            }
-          ).map(goodsElement => <GoodsListItem key={goodsElement._id} category={categoryData} boriGoods={goodsElement}/>)
+          boriGoods.length === 0 
+          ? <BoriGoodsEmpty/>
+          : boriGoods          
+            .filter((searchGoods) =>
+              searchGoods.bori_goods_name.includes(searchInfo)
+            ).filter((cateGoods) => {
+              if (categoryInfo === '0')
+                return cateGoods;
+              if(cateGoods.category_id === categoryInfo)
+                return cateGoods;
+              }
+            ).map(goodsElement => <GoodsListItem key={goodsElement._id} category={categoryData} boriGoods={goodsElement}/>)
         }
       </div>
     </>

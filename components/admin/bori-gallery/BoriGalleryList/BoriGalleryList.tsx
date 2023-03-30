@@ -1,3 +1,4 @@
+import BoriGalleryEmpty from "@/components/bori-gallery/BoriGalleryEmpty/BoriGalleryEmpty";
 import { useBoriGalleryQuery } from "@/hooks/bori-gallery/useBoriGalleryQuery/useBoriGalleryQuery";
 import { useSearch } from "@/hooks/common/useSearch/useSearch";
 import styles from '../../bori-goods/BoriGoodsList/bori_goods_list.module.scss';
@@ -18,11 +19,13 @@ const BoriGalleryList = () => {
       </div>
       <div className={styles.list_container}>
         {
-          boriGallery
-          .filter((searchGallery) =>
-            searchGallery.bori_gallery_title.includes(searchInfo)
-          )
-          .map(galleryElement => <GalleryListItem key={galleryElement._id} boriGallery={galleryElement}/>)
+          boriGallery.length === 0
+          ? <BoriGalleryEmpty/>
+          : boriGallery
+            .filter((searchGallery) =>
+              searchGallery.bori_gallery_title.includes(searchInfo)
+            )
+            .map(galleryElement => <GalleryListItem key={galleryElement._id} boriGallery={galleryElement}/>)
         }
       </div>
     </>

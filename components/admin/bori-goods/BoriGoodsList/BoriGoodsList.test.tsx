@@ -15,7 +15,7 @@ const initRender = () => {
   );
 };
 
-test('GoodsListItem 화면 반영 테스트', async () => {
+test('BoriGoodsList 화면 반영 테스트', async () => {
   initRender();
   const goodsName = await screen.findByDisplayValue(/보리 티셔츠/);
   const goodsPrice = await screen.findByDisplayValue(/30000/);
@@ -26,7 +26,7 @@ test('GoodsListItem 화면 반영 테스트', async () => {
 });
 
 
-test('GoodsListItem 검색 테스트', async () => {
+test('BoriGoodsList 검색 테스트', async () => {
   initRender();
   const searchInput = screen.getByRole("search");
   const goodsName = await screen.findByDisplayValue(/보리 펜/);

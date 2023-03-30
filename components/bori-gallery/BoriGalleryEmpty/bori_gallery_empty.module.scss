@@ -1,0 +1,15 @@
+.bori_gallery_empty_container {
+  margin: 1vw;
+  width: 90vw;
+  height: 50vh;
+  border: 2px solid black;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  .textbox {
+    margin-left: 2vw;
+    flex-direction: column;
+  }
+};
