@@ -75,7 +75,7 @@ const MainViewer = () => {
       <p
         className={styles.desc3}
         style={{
-          opacity: (position - 750) / 50,
+          opacity: (position - 750) / 30,
         }}
       >
         보리는 세상에서 제일 귀여운 강아지입니다.
@@ -83,7 +83,7 @@ const MainViewer = () => {
       <p
         className={styles.desc3}
         style={{
-          opacity: (position - 850) / 50,
+          opacity: (position - 850) / 30,
         }}
       >
         이렇게 귀여운 강아지를
@@ -91,7 +91,7 @@ const MainViewer = () => {
       <p
         className={styles.desc3}
         style={{
-          opacity: (position - 950) / 50,
+          opacity: (position - 950) / 30,
         }}
       >
         저 혼자만 볼 순 없죠.

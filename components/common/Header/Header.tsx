@@ -22,7 +22,7 @@ const Header = () => {
       <div className={styles.header}>
         <div className={styles.side_bar_button}>
           <AiOutlineMenu
-            size={30}
+            size={40}
             onClick={() => setShowSideBar(!showSideBar)}
           />
         </div>

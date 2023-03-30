@@ -15,13 +15,17 @@
   align-items: center;
   flex-direction: row;
   input {
-    height: 1.5rem;
+    width: 20vw;;
+    height: 3vw;
+  }
+  .address {
+    width: 20vw;
   }
 }
 
 .deliver_address_label {
-  width: 7rem;
-  font-size: 1.3rem;
+  width: 10vw;
+  font-size: 0.5vw;
   font-weight: 800;
 }
 

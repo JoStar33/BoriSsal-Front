@@ -79,7 +79,7 @@ const UserDeliverAddressPart = ({
             role={addressType}
           />
         ) : (
-          <p role="address">{address}</p>
+          <p className={styles.address} role="address">{address}</p>
         )}
         {!(addressType === "address") ? (
           <button

@@ -25,13 +25,15 @@
     justify-content: space-between;
     flex-direction: row;
     .show_count {
-      width: calc(90vw - 480px - 7rem);
-      font-size: 1.3rem;
+      width: 20vw;
+      font-size: 1vw;
       font-weight: 800;
     }
     .category_label {
-      width: 7rem;
-      font-size: 1.4rem;
+      padding: 0.3vw;
+      text-align: end;
+      width: 12vw;
+      font-size: 1vw;
       font-weight: 800;
     }
   }
@@ -41,13 +43,15 @@
   @include center;
   flex-direction: row;
   label {
-    width: 4rem;
-    font-size: 1.4rem;
+    padding: 0.3vw;
+    text-align: end;
+    width: 8vw;
+    font-size: 1vw;
     font-weight: 800;
   }
   input {
     padding-left: 1rem;
-    width: 240px;
+    width: 20vw;
     height: 34px;
     border-radius: 20px;
     font-size: 1.3rem;
@@ -63,7 +67,7 @@
   overflow: hidden;
   position: relative;
 }
-.styled_select, .styled_select select { width: 240px; }
+.styled_select, .styled_select select { width: 20vw; }
 
 .styled_select:focus { outline: none; }
 

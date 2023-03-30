@@ -15,7 +15,9 @@
     background-color: #9999CC;
     display: flex;
     align-items: center;
-    justify-content: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .order_button {
     margin-left: 10vw;
