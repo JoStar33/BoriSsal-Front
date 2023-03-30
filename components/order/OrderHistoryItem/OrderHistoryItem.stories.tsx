@@ -10,14 +10,12 @@ const Template: ComponentStory<typeof OrderHistoryItem> = (args) => <OrderHistor
 
 export const OrderHistoryItemTest = Template.bind({});
 OrderHistoryItemTest.args = {
-  deliverAddress: {
-    _id: '23',
-    phone_number: "01033332222",
-    address: '경기도 안양시 동안구 호랑이아파트',
-    address_detail: '102동 304호'
-  },
   order: {
     order_date: new Date,
+    email: 'rhrhwewe@naver.com',
+    phone_number: "01033332222",
+    address: '경기도 안양시 동안구 호랑이아파트',
+    address_detail: '102동 304호',
     order_detail: [
       {
         bori_goods_count: 1,
