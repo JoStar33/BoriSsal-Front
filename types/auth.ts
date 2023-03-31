@@ -11,7 +11,6 @@ export interface ILogin {
 
 export interface IPasswordInfo {
   password: string;
-  passwordCheck: string;
   newPassword: string;
   newPasswordCheck: string;
 };

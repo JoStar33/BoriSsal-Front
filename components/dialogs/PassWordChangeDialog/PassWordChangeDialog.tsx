@@ -22,7 +22,6 @@ interface IProps {
 const PassWordChangeDialog = ({ setDialog }: IProps) => {
   const [account, setAccount] = useState<IPasswordInfo>({
     password: "",
-    passwordCheck: "",
     newPassword: "",
     newPasswordCheck: "",
   });
@@ -62,7 +61,6 @@ const PassWordChangeDialog = ({ setDialog }: IProps) => {
     if (
       !(
         account.password &&
-        account.passwordCheck &&
         account.newPassword &&
         account.newPasswordCheck
       )
@@ -70,9 +68,6 @@ const PassWordChangeDialog = ({ setDialog }: IProps) => {
       return;
     }
     if (validatePassword(account.password)) {
-      return;
-    }
-    if (validatePasswordCheck(account.password, account.passwordCheck)) {
       return;
     }
     if (validatePassword(account.newPassword)) {
@@ -126,16 +121,6 @@ const PassWordChangeDialog = ({ setDialog }: IProps) => {
           ></InputPart>
           <InputPart
             textOrPassword="password"
-            inputLabel="현재 비밀번호 확인: "
-            inputName="passwordCheck"
-            onChangeAccount={onChangeAccount}
-            validate={validatePasswordCheck(
-              account.password,
-              account.passwordCheck
-            )}
-          ></InputPart>
-          <InputPart
-            textOrPassword="password"
             inputLabel="새 비밀번호: "
             inputName="newPassword"
             onChangeAccount={onChangeAccount}
@@ -155,7 +140,6 @@ const PassWordChangeDialog = ({ setDialog }: IProps) => {
             비밀번호 변경
           </button>
           {!account.password &&
-            !account.passwordCheck &&
             !account.newPassword &&
             !account.newPasswordCheck && (
               <div className={styles.mutation_handle_message}>
