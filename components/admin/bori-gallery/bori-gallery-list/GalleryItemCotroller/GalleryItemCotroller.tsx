@@ -1,3 +1,4 @@
+import Loading from "@/components/loading/Loading/Loading";
 import { useDeleteBoriGalleryMutation } from "@/hooks/bori-gallery/useDeleteBoriGalleryMutation/useDeleteBoriGalleryMutation";
 import { useUpdateBoriGalleryMutation } from "@/hooks/bori-gallery/useUpdateBoriGalleryMutation/useUpdateBoriGalleryMutation";
 import { IBoriGallery, IPostBoriGallery } from "@/types/boriGallery";
@@ -14,8 +15,8 @@ interface IProps {
 const GalleryItemCotroller = ({
   boriGallery, galleryInfo, setDialog, dialogText
 }: IProps) => {
-  const { mutate: updateBoriGoods } = useUpdateBoriGalleryMutation(boriGallery._id, galleryInfo, setDialog, dialogText);
-  const { mutate: deleteBoriGoods } = useDeleteBoriGalleryMutation(boriGallery._id, setDialog, dialogText);
+  const { mutate: updateBoriGoods, isLoading: updateLoading } = useUpdateBoriGalleryMutation(boriGallery._id, galleryInfo, setDialog, dialogText);
+  const { mutate: deleteBoriGoods, isLoading: deleteLoading } = useDeleteBoriGalleryMutation(boriGallery._id, setDialog, dialogText);
   const handleUpdateGoods = () => {
     if (
       !galleryInfo.bori_gallery_title ||
@@ -34,6 +35,9 @@ const GalleryItemCotroller = ({
   }
   return (
     <>
+      {
+        (deleteLoading || updateLoading) && <Loading/>
+      }
       <div className={styles.button_container}>
         <button role="update-gallery" onClick={handleUpdateGoods} className={styles.modify_button}>
           수정

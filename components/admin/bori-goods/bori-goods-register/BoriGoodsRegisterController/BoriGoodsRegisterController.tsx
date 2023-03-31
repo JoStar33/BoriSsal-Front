@@ -1,3 +1,4 @@
+import Loading from "@/components/loading/Loading/Loading";
 import { useRegistBoriGoodsMutation } from "@/hooks/bori-goods/useRegistBoriGoodsMutation/useRegistBoriGoodsMutation";
 import { IPostBoriGoods } from "@/types/boriGoods";
 import { Dispatch, MutableRefObject, SetStateAction } from "react";
@@ -28,7 +29,7 @@ const BoriGoodsRegisterController = ({
   image,
   formData,
 }: IProps) => {
-  const { mutate } = useRegistBoriGoodsMutation(
+  const { mutate, isLoading } = useRegistBoriGoodsMutation(
     categoryInfo,
     goodsInfo,
     formData.current,
@@ -73,7 +74,10 @@ const BoriGoodsRegisterController = ({
     mutate();
   };
   return (
-  <>        
+  <>       
+    {
+      isLoading &&  <Loading/>
+    }
     <button
       role="regist-button"
       onClick={handleRegistBoriGoods}

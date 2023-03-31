@@ -1,3 +1,4 @@
+import Loading from "@/components/loading/Loading/Loading";
 import { useDeleteBoriGoodsMutation } from "@/hooks/bori-goods/useDeleteBoriGoodsMutation/useDeleteBoriGoodsMutation";
 import { useUpdateBoriGoodsMutation } from "@/hooks/bori-goods/useUpdateBoriGoodsMutation/useUpdateBoriGoodsMutation";
 import { IBoriGoods, IPostBoriGoods } from "@/types/boriGoods";
@@ -26,14 +27,14 @@ const GoodsItemController = ({
   const handleDeleteGoods = () => {
     deleteBoriGoods();
   };
-  const { mutate: updateBoriGoods } = useUpdateBoriGoodsMutation(
+  const { mutate: updateBoriGoods, isLoading: updateLoading } = useUpdateBoriGoodsMutation(
     categoryInfo,
     goodsInfo,
     boriGoods._id,
     setDialog,
     dialogText
   );
-  const { mutate: deleteBoriGoods } = useDeleteBoriGoodsMutation(
+  const { mutate: deleteBoriGoods, isLoading: deleteLoading } = useDeleteBoriGoodsMutation(
     boriGoods._id,
     setDialog,
     dialogText
@@ -59,18 +60,23 @@ const GoodsItemController = ({
     updateBoriGoods();
   };
   return (
-    <div className={styles.button_container}>
-      <button
-        role="update-goods"
-        onClick={handleUpdateGoods}
-        className={styles.modify_button}
-      >
-        수정
-      </button>
-      <button onClick={handleDeleteGoods} className={styles.delete_button}>
-        삭제
-      </button>
-    </div>
+    <>
+      {
+        (updateLoading || deleteLoading) &&  <Loading/>
+      }
+      <div className={styles.button_container}>
+        <button
+          role="update-goods"
+          onClick={handleUpdateGoods}
+          className={styles.modify_button}
+        >
+          수정
+        </button>
+        <button onClick={handleDeleteGoods} className={styles.delete_button}>
+          삭제
+        </button>
+      </div>
+    </>
   );
 };
 
