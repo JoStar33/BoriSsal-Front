@@ -2,6 +2,7 @@ import { getBoriGoods, getCategory } from '@/apis/bori-goods/boriGoods';
 import { errorMessage } from '@/apis/error/customError';
 import BoriGoodsItem from '@/components/bori-goods/BoriGoodsItem/BoriGoodsItem';
 import ErrorPage from '@/components/error/ErrorPage/ErrorPage';
+import { useSearch } from '@/hooks/common/useSearch/useSearch';
 import { IBoriGoods, ICategory } from '@/types/boriGoods';
 import { AxiosError } from 'axios';
 import React, { useState } from 'react';
@@ -15,7 +16,7 @@ interface IProps {
 
 const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
   const [categoryInfo, setCategoryInfo] = useState<string>('0');
-  const [searchInfo, setSearchInfo] = useState<string>('');
+  const { searchInfo, renderSearch } = useSearch();
   const categoryName = (goods: IBoriGoods) => {
     const findCategoryData = categoryData.find(category => category._id === goods.category_id)
     if(!findCategoryData)
@@ -25,9 +26,6 @@ const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
   const handleSelectLayout = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategoryInfo(e.target.value)
   };
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchInfo(e.target.value);
-  };
   if (errorMessage) {
     return <ErrorPage errorText={errorMessage}></ErrorPage>
   }
@@ -36,10 +34,9 @@ const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
       <h1>보리 굿즈</h1>
       <div className={styles.user_place}>
         <p className={styles.show_count}>전체 (수량: {goodsData.length})</p>
-        <div className={styles.search_part}>
-          <label htmlFor="search_goods">검색:</label>
-          <input id='search_goods' onChange={handleSearch}/>
-        </div>
+        {
+          renderSearch()
+        }
         <p className={styles.category_label}>카테고리: </p>
         <div className={styles.styled_select}>
           <select onChange={handleSelectLayout}>
