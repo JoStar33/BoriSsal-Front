@@ -34,22 +34,22 @@ const PassWordChangeDialog = ({ setDialog }: IProps) => {
   const {
     dialog: validateDialog,
     setDialog: setValidateDialog,
-    setDialogText,
+    dialogText,
     renderDialog,
   } = useValidateDialog();
   const {
     successDialog,
     setSuccessDialog,
-    setSuccessDialogText,
+    successDialogText,
     renderSuccessDialog,
   } = useSuccessDialog();
   const { mutate, isLoading, isError, error, isSuccess } =
     usePassWordChangeMutation(
       postPassWord,
       setValidateDialog,
-      setDialogText,
+      dialogText,
       setSuccessDialog,
-      setSuccessDialogText
+      successDialogText
     );
   const onChangeAccount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAccount({

@@ -1,12 +1,12 @@
 import { deleteBoriGallery } from "@/apis/bori-gallery/boriGallery";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, MutableRefObject, SetStateAction } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { errorMessage } from './../../../apis/error/customError';
 
 export const useDeleteBoriGalleryMutation = (
   bori_gallery_id: string,
   setDialog: Dispatch<SetStateAction<boolean>>,
-  setDialogText: Dispatch<SetStateAction<string>>
+  dialogText: MutableRefObject<string>
 ) => {
   const queryClient = useQueryClient();
   return useMutation(
@@ -16,7 +16,7 @@ export const useDeleteBoriGalleryMutation = (
       },
       onError: (error) => {
         setDialog(true);
-        setDialogText(errorMessage(error));
+        dialogText.current = errorMessage(error);
       }
     }
   );

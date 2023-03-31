@@ -15,7 +15,7 @@ import googleImage from "/public/login/google.png";
 import kakaoImage from "/public/login/kakao.png";
 
 const Login = () => {
-  const { dialog, setDialog, setDialogText, renderDialog } = useValidateDialog();
+  const { dialog, setDialog, dialogText, renderDialog } = useValidateDialog();
   const [account, setAccount] = useState<ILogin>({
     email: "",
     password: "",
@@ -23,12 +23,12 @@ const Login = () => {
   const { isError, isLoading, error } = useNotLoginCheckQuery();
   const loginMutation = useLoginMutation({
     loginInfo: account,
-    setDialogText,
+    dialogText,
     setDialog,
   });
   const handleLogin = () => {
     if (!(account.email && account.password)) {
-      setDialogText("이메일 비밀번호를 입력해주세요.");
+      dialogText.current = "이메일 비밀번호를 입력해주세요.";
       setDialog(true);
       return;
     }

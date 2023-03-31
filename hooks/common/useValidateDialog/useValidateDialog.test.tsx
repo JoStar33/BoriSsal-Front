@@ -19,7 +19,7 @@ test("useValidateDialog를 통한 다이얼로그 오픈 확인", async () => {
     return result.renderDialog();
   };
   render(<Wrapper />);
-  result.setDialogText('테스트 다이얼로그');
+  result.dialogText.current = '테스트 다이얼로그';
   const testText = await screen.findByText(/테스트 다이얼로그/)
   expect(testText).toBeInTheDocument();
 })

@@ -1,6 +1,6 @@
 import { postBoriGoods } from "@/apis/bori-goods/boriGoods";
 import { IPostBoriGoods } from "@/types/boriGoods";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, MutableRefObject, SetStateAction } from "react";
 import { useMutation } from "react-query";
 import { errorMessage } from './../../../apis/error/customError';
 
@@ -11,28 +11,30 @@ export const useRegistBoriGoodsMutation = (
   setGoodsInfo: Dispatch<SetStateAction<IPostBoriGoods>>,
   setImage: Dispatch<any>,
   setDialog: Dispatch<SetStateAction<boolean>>,
-  setDialogText: Dispatch<SetStateAction<string>>,
+  dialogText: MutableRefObject<string>,
   setSuccessDialog: Dispatch<SetStateAction<boolean>>,
-  setSuccessDialogText: Dispatch<SetStateAction<string>>
+  successDialogText: MutableRefObject<string>
 ) => {
   return useMutation(
     () => postBoriGoods(category_id, bori_goods, bori_goods_image),
     {
       onSuccess: () => {
-        setGoodsInfo({
-          bori_goods_name: "",
-          bori_goods_price: 0,
-          bori_goods_stock: 0,
-          bori_goods_desc: "",
+        setGoodsInfo(() => {
+          return {
+            bori_goods_name: "",
+            bori_goods_price: 0,
+            bori_goods_stock: 0,
+            bori_goods_desc: "",
+          }
         });
         bori_goods_image = new FormData();
         setImage("");
         setSuccessDialog(true);
-        setSuccessDialogText("굿즈 등록이 완료됐습니다!");
+        successDialogText.current = ("굿즈 등록이 완료됐습니다!");
       },
       onError: (error) => {
         setDialog(true);
-        setDialogText(errorMessage(error));
+        dialogText.current = errorMessage(error);
       }
     }
   );

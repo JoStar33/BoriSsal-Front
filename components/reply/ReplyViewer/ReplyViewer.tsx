@@ -20,19 +20,19 @@ interface IProps {
 }
 
 const ReplyViewer = ({user, mutationData, goods_id, setLimit, limit, refetch}: IProps) => {
-  const { renderDialog, dialog, setDialog, setDialogText } = useValidateDialog();
+  const { renderDialog, dialog, setDialog, dialogText } = useValidateDialog();
   const replyContent = useRef<HTMLInputElement>(null);
   const goodsReplyMutation = useBoriGoodsReplyMutation(user.email, goods_id);
   const replyRegist = () => {
     if(!replyContent.current)
       return;
     if (!user.email) {
-      setDialogText('로그인후 이용해주세요!')
+      dialogText.current = '로그인후 이용해주세요!';
       setDialog(true);
       return;
     };
     if(replyContent.current.value.length < 2) {
-      setDialogText('최소 두글자는 입력해주세요!')
+      dialogText.current = '최소 두글자는 입력해주세요!';
       setDialog(true);
       return;
     };
@@ -64,7 +64,7 @@ const ReplyViewer = ({user, mutationData, goods_id, setLimit, limit, refetch}: I
         {
           mutationData.bori_goods_reply.length !== 0
           ? mutationData.bori_goods_reply.map((reply)=>{
-            return <ReplyPart user={user} key={reply._id} reply={reply} setDialog={setDialog} setDialogText={setDialogText}></ReplyPart>
+            return <ReplyPart user={user} key={reply._id} reply={reply} setDialog={setDialog} dialogText={dialogText}></ReplyPart>
           })
           : <ReplyEmpty/>
         }

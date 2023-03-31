@@ -3,18 +3,19 @@ import { login } from "@/apis/user/auth";
 import { ILogin } from "@/types/auth";
 import { AxiosError } from "axios";
 import { useRouter } from "next/router";
+import { MutableRefObject } from "react";
 import { useMutation, useQueryClient } from "react-query";
 
 interface IProps {
   setDialog: React.Dispatch<React.SetStateAction<boolean>>;
-  setDialogText: React.Dispatch<React.SetStateAction<string>>;
+  dialogText: MutableRefObject<string>;
   loginInfo: ILogin;
 };
 
 export const useLoginMutation = ({
   loginInfo,
   setDialog,
-  setDialogText,
+  dialogText,
 }: IProps) => {
   const queryClient = useQueryClient();
   const router = useRouter();
@@ -24,7 +25,7 @@ export const useLoginMutation = ({
       router.push("/");
     },
     onError: (error: AxiosError) => {
-      setDialogText(errorMessage(error));
+      dialogText.current = errorMessage(error);
       setDialog(true);
     },
   });

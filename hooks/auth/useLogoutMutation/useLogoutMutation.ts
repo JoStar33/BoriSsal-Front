@@ -1,12 +1,12 @@
 import { logout } from "@/apis/user/auth";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, MutableRefObject, SetStateAction } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { errorMessage } from './../../../apis/error/customError';
 
 export const useLogoutMutation = (
   setDialog: Dispatch<SetStateAction<boolean>>,
-  setDialogText: Dispatch<SetStateAction<string>>
+  dialogText: MutableRefObject<string>
 ) => {
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -17,7 +17,7 @@ export const useLogoutMutation = (
     },
     onError: (error) => {
       setDialog(true);
-      setDialogText(errorMessage(error));
+      dialogText.current = errorMessage(error);
     }
   });
 };

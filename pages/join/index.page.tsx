@@ -30,7 +30,7 @@ const Join = () => {
     password: "",
     passwordCheck: "",
   });
-  const { dialog, setDialog, setDialogText, renderDialog } = useValidateDialog();
+  const { dialog, setDialog, dialogText, renderDialog } = useValidateDialog();
   const joinInfo = useMemo<IJoin>(() => {
     return {
       email: account.email,
@@ -40,12 +40,12 @@ const Join = () => {
   }, [account]);
   const { mutate, isLoading, isSuccess } = useJoinMutation({
     joinInfo,
-    setDialogText,
+    dialogText,
     setDialog,
   });
   const join = async () => {
     if (!(account.email && account.nick && account.password)) {
-      setDialogText("닉네임 이메일 비밀번호를 입력해주세요.");
+      dialogText.current = "닉네임 이메일 비밀번호를 입력해주세요.";
       setDialog(true);
       return;
     }

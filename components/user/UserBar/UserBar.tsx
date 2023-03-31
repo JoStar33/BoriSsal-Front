@@ -12,9 +12,9 @@ interface IProps {
 }
 
 const UserBar = ({ user }: IProps) => {
-  const { dialog, setDialog, setDialogText, renderDialog } =
+  const { dialog, setDialog, dialogText, renderDialog } =
     useValidateDialog();
-  const { mutate, isLoading } = useLogoutMutation(setDialog, setDialogText);
+  const { mutate, isLoading } = useLogoutMutation(setDialog, dialogText);
   return (
     <>
       {
