@@ -2,7 +2,7 @@ import BoriGalleryEmpty from "@/components/bori-gallery/BoriGalleryEmpty/BoriGal
 import BoriGalleryItemSkeleton from "@/components/loading/admin/BoriGalleryItemSkeleton/BoriGalleryItemSkeleton";
 import { useBoriGalleryQuery } from "@/hooks/bori-gallery/useBoriGalleryQuery/useBoriGalleryQuery";
 import { useSearch } from "@/hooks/common/useSearch/useSearch";
-import styles from '../../bori-goods/BoriGoodsList/bori_goods_list.module.scss';
+import styles from '../../../bori-goods/bori-goods-list/BoriGoodsList/bori_goods_list.module.scss';
 import GalleryListItem from "../GalleryListItem/GalleryListItem";
 
 const BoriGalleryList = () => {

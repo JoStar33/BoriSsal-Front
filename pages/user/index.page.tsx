@@ -9,14 +9,17 @@ import { useUserQuery } from "@/hooks/user/useUserQuery/useUserQuery";
 import { initDeliver, initUser } from "@/utils/initData";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useRef, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { BsFillPencilFill } from "react-icons/bs";
 import styles from "./userpage.module.scss";
 
 const UserPage = () => {
   let {data: user} = useUserQuery();
   const [dialog, setDialog] = useState<boolean>(false);
-  const formData = useRef<FormData>(new FormData());
+  let formData: FormData;
+  useLayoutEffect(() => {
+    formData = new FormData()
+  })
   let { data: deliverAddress, isError, isLoading } = useDeliverAddressQuery();
   const loginCheck = useLoginCheckQuery();
   const { mutate } = useProfileUpdateMutation();
@@ -27,8 +30,8 @@ const UserPage = () => {
       return
     }
     const file: File = (e.target.files)[0];
-    formData.current.append("img", file);
-    mutate(formData.current);
+    formData.append("img", file);
+    mutate(formData);
   };
   if(!user) {
     user = initUser;

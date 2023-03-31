@@ -5,6 +5,7 @@ import { useSuccessDialog } from "@/hooks/common/useSuccessDialog/useSuccessDial
 import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { IPostBoriGoods } from "@/types/boriGoods";
 import { useState } from "react";
+import BoriGoodsRegisterInputViewer from "../BoriGoodsRegisterInputViewer/BoriGoodsRegisterInputViewer";
 import styles from "./bori_goods_register.module.scss";
 
 const BoriGoodsRegister = () => {
@@ -39,17 +40,6 @@ const BoriGoodsRegister = () => {
     setSuccessDialog,
     setSuccessDialogText
   );
-  const handleSelectLayout = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCategoryInfo(e.target.value);
-  };
-  const handleOnChangeGoodsInfo = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setGoodsInfo({
-      ...goodsInfo,
-      [e.target.name]: e.target.value,
-    });
-  };
   const handleRegistBoriGoods = () => {
     if (!image) {
       setDialogText("상품이미지는 반드시 있어야해요!");
@@ -95,54 +85,12 @@ const BoriGoodsRegister = () => {
         {
           renderRegistImage("굿즈 이미지", "bori_goods_images")
         }
-        <div className={styles.text_container}>
-          <label htmlFor="goods-name">굿즈명:</label>
-          <input
-            onChange={handleOnChangeGoodsInfo}
-            name="bori_goods_name"
-            role="bori_goods_name"
-            id="goods-name"
-            type="text"
-          />
-        </div>
-        <div className={styles.text_container}>
-          <label htmlFor="goods-price">굿즈가격:</label>
-          <input
-            onChange={handleOnChangeGoodsInfo}
-            name="bori_goods_price"
-            role="bori_goods_price"
-            id="goods-price"
-            type="number"
-          />
-        </div>
-        <div className={styles.text_container}>
-          <label htmlFor="goods-stock">재고량:</label>
-          <input
-            onChange={handleOnChangeGoodsInfo}
-            name="bori_goods_stock"
-            role="bori_goods_stock"
-            id="goods-stock"
-            type="number"
-          />
-        </div>
-        <div className={styles.select_container}>
-          <label htmlFor="goods-category">카테고리:</label>
-          <select role="goods-category" onChange={handleSelectLayout}>
-            {categoryData.map((category) => (
-              <option key={category._id} value={category._id}>
-                {category.category_name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className={styles.content_container}>
-          <p>굿즈 설명</p>
-          <textarea
-            onChange={handleOnChangeGoodsInfo}
-            name="bori_goods_desc"
-            role="bori_goods_desc"
-          ></textarea>
-        </div>
+        <BoriGoodsRegisterInputViewer
+          categoryData={categoryData}
+          setCategoryInfo={setCategoryInfo}
+          setGoodsInfo={setGoodsInfo}
+          goodsInfo={goodsInfo}
+        />
         <button
           role="regist-button"
           onClick={handleRegistBoriGoods}
