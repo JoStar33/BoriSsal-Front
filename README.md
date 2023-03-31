@@ -1,5 +1,10 @@
-## 보리사이트 프론트엔드
+## 보리쌀 - 보리사이트 프론트엔드
 
+### 왜 보리쌀을 만들게 됐나?
+우리 귀엽고 세상에서 제일귀여운 보리를 사람들에게 자랑하고 싶어서 만들게 됐습니다. 실제로 우리 보리는 너무 귀엽습니다. 아래 사진을 보실래요? 
+![KakaoTalk_20230331_170007171](https://user-images.githubusercontent.com/52379503/229061211-af0e2c3a-b9c0-4bcf-8b3c-a2a3ec0f4b28.jpg)
+
+너무귀엽죠ㅎㅎ
 ### 기획서
 
 https://www.figma.com/file/ostLEtK2oJDRCU3HInhDbD/%EB%B3%B4%EB%A6%AC%EC%8C%80?node-id=0%3A1&t=4JlyKT2EoBWC6vIP-1
@@ -22,6 +27,7 @@ https://www.figma.com/file/ostLEtK2oJDRCU3HInhDbD/%EB%B3%B4%EB%A6%AC%EC%8C%80?no
 - feature/goods-page
 - feature/bori-gallery-page
 - feature/user-page
+- feature/admin-page
 
 ### 플로우 차트
 - 로그인과 회원가입 플로우차트
@@ -45,3 +51,6 @@ https://www.figma.com/file/ostLEtK2oJDRCU3HInhDbD/%EB%B3%B4%EB%A6%AC%EC%8C%80?no
 ![보리갤러리 플로우차트](https://user-images.githubusercontent.com/52379503/229060070-a4c3fb88-ce49-4594-9352-8152a2532f28.png)
 
 
+### 폴더 기본 구조
+![image](https://user-images.githubusercontent.com/52379503/229061537-8080493f-c2cb-4af6-9ad5-610dd9958542.png)
+폴더들은 위에 보시는 구조처럼 이루어져 있습니다. scss파일, test파일, 스토리북 파일과 같은 파일들을 계속해서 찾아다니는 과정이 불편하고 비효율적이라고 생각이 들었습니다. 때문에 저는 하나의 컴포넌트와 연관된 모든 test, stories, module.scss파일들을 다음과 같이 구성시키게 되었습니다. 
