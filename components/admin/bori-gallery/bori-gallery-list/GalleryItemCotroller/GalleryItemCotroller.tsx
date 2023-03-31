@@ -1,32 +1,32 @@
 import { useDeleteBoriGalleryMutation } from "@/hooks/bori-gallery/useDeleteBoriGalleryMutation/useDeleteBoriGalleryMutation";
 import { useUpdateBoriGalleryMutation } from "@/hooks/bori-gallery/useUpdateBoriGalleryMutation/useUpdateBoriGalleryMutation";
 import { IBoriGallery, IPostBoriGallery } from "@/types/boriGallery";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, MutableRefObject, SetStateAction } from "react";
 import styles from './gallery_item_controller.module.scss';
 
 interface IProps {
   boriGallery: IBoriGallery;
   galleryInfo: IPostBoriGallery;
   setDialog: Dispatch<SetStateAction<boolean>>;
-  setDialogText: Dispatch<SetStateAction<string>>;
+  dialogText: MutableRefObject<string>;
 }
 
 const GalleryItemCotroller = ({
-  boriGallery, galleryInfo, setDialog, setDialogText
+  boriGallery, galleryInfo, setDialog, dialogText
 }: IProps) => {
-  const { mutate: updateBoriGoods } = useUpdateBoriGalleryMutation(boriGallery._id, galleryInfo, setDialog, setDialogText);
-  const { mutate: deleteBoriGoods } = useDeleteBoriGalleryMutation(boriGallery._id, setDialog, setDialogText);
+  const { mutate: updateBoriGoods } = useUpdateBoriGalleryMutation(boriGallery._id, galleryInfo, setDialog, dialogText);
+  const { mutate: deleteBoriGoods } = useDeleteBoriGalleryMutation(boriGallery._id, setDialog, dialogText);
   const handleUpdateGoods = () => {
     if (
       !galleryInfo.bori_gallery_title ||
       !galleryInfo.bori_gallery_desc 
     ) {
-      setDialogText("값을 비운 상태로 수정이 불가능합니다.");
+      dialogText.current = "값을 비운 상태로 수정이 불가능합니다.";
       setDialog(true);
       return;
     }
     setDialog(true);
-    setDialogText("수정이 완료됐습니다!");
+    dialogText.current = "수정이 완료됐습니다!";
     updateBoriGoods();
   };
   const handleDeleteGoods = () => {

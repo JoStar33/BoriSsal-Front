@@ -12,11 +12,11 @@ const BoriGalleryRegister = () => {
     bori_gallery_title: "",
     bori_gallery_desc: "",
   });
-  const { dialog, setDialog, setDialogText, renderDialog } = useValidateDialog();
+  const { dialog, setDialog, dialogText, renderDialog } = useValidateDialog();
   const {
     successDialog,
     setSuccessDialog,
-    setSuccessDialogText,
+    successDialogText,
     renderSuccessDialog,
   } = useSuccessDialog();
   const {formData, setImage, image, renderRegistImage} = useRegistImage();
@@ -51,9 +51,9 @@ const BoriGalleryRegister = () => {
           formData={formData}
           setImage={setImage}
           setDialog={setDialog}
-          setDialogText={setDialogText}
+          dialogText={dialogText}
           setSuccessDialog={setSuccessDialog}
-          setSuccessDialogText={setSuccessDialogText}
+          successDialogText={successDialogText}
           setGalleryInfo={setGalleryInfo}/>
       </div>
     </>

@@ -14,8 +14,8 @@ const GalleryListItem = ({ boriGallery }: IProps) => {
     bori_gallery_title: "",
     bori_gallery_desc: ""
   });
-  const { dialog, setDialog, setDialogText, renderDialog } = useValidateDialog();
-  const { successDialog, setSuccessDialog, setSuccessDialogText, renderSuccessDialog } = useSuccessDialog();
+  const { dialog, setDialog, dialogText, renderDialog } = useValidateDialog();
+  const { successDialog, setSuccessDialog, successDialogText, renderSuccessDialog } = useSuccessDialog();
   useEffect(() => {
     setGalleryInfo({
       bori_gallery_title: boriGallery.bori_gallery_title,
@@ -42,9 +42,9 @@ const GalleryListItem = ({ boriGallery }: IProps) => {
         <GalleryItemImage
           boriGallery={boriGallery}
           setDialog={setDialog}
-          setDialogText={setDialogText}
+          dialogText={dialogText}
           setSuccessDialog={setSuccessDialog}
-          setSuccessDialogText={setSuccessDialogText}/>
+          successDialogText={successDialogText}/>
         <div className={styles.goods_info}>
           <input
             style={{marginLeft: "9vw", marginRight: "9vw"}}

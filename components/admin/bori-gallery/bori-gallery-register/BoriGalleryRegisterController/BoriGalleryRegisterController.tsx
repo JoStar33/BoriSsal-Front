@@ -6,9 +6,9 @@ import styles from './bori_gallery_register_controller.module.scss';
 interface IProps {
   image: any;
   setDialog: Dispatch<SetStateAction<boolean>>;
-  setDialogText: Dispatch<SetStateAction<string>>;
+  dialogText: MutableRefObject<string>;
   setSuccessDialog: Dispatch<SetStateAction<boolean>>;
-  setSuccessDialogText: Dispatch<SetStateAction<string>>;
+  successDialogText: MutableRefObject<string>
   setGalleryInfo: Dispatch<SetStateAction<IPostBoriGallery>>;
   galleryInfo: IPostBoriGallery;
   setImage: Dispatch<any>;
@@ -20,9 +20,9 @@ const BoriGalleryRegisterController = ({
   image,
   setImage,
   setDialog,
-  setDialogText,
+  dialogText,
   setSuccessDialog,
-  setSuccessDialogText,
+  successDialogText,
   setGalleryInfo,
   formData
 }: IProps) => {
@@ -32,23 +32,23 @@ const BoriGalleryRegisterController = ({
     setGalleryInfo,
     setImage,
     setDialog,
-    setDialogText,
+    dialogText,
     setSuccessDialog,
-    setSuccessDialogText
+    successDialogText
   );
   const handleRegistBoriGoods = () => {
     if (!image) {
-      setDialogText("이미지는 반드시 있어야해요!");
+      dialogText.current = "이미지는 반드시 있어야해요!";
       setDialog(true);
       return;
     }
     if (galleryInfo.bori_gallery_title.length < 1) {
-      setDialogText("이런 제목을 안 설정하셨는데... 다시 확인해주세요!");
+      dialogText.current = "이런 제목을 안 설정하셨는데... 다시 확인해주세요!";
       setDialog(true);
       return;
     }
     if (galleryInfo.bori_gallery_desc.length < 10) {
-      setDialogText("설명을 최소 10글자 이상 써주세요!");
+      dialogText.current = "설명을 최소 10글자 이상 써주세요!";
       setDialog(true);
       return;
     }

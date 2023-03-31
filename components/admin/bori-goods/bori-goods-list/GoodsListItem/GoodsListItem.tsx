@@ -18,12 +18,12 @@ const GoodsListItem = ({ boriGoods, category }: IProps) => {
     bori_goods_stock: 0,
     bori_goods_desc: "",
   });
-  const { dialog, setDialog, setDialogText, renderDialog } =
+  const { dialog, setDialog, dialogText, renderDialog } =
     useValidateDialog();
   const {
     successDialog,
     setSuccessDialog,
-    setSuccessDialogText,
+    successDialogText,
     renderSuccessDialog,
   } = useSuccessDialog();
   const [categoryInfo, setCategoryInfo] = useState<string>("");
@@ -57,9 +57,9 @@ const GoodsListItem = ({ boriGoods, category }: IProps) => {
         <GoodsItemImage
           boriGoods={boriGoods}
           setDialog={setDialog}
-          setDialogText={setDialogText}
+          dialogText={dialogText}
           setSuccessDialog={setSuccessDialog}
-          setSuccessDialogText={setSuccessDialogText}
+          successDialogText={successDialogText}
         />
         <div className={styles.goods_info}>
           <input
@@ -115,9 +115,9 @@ const GoodsListItem = ({ boriGoods, category }: IProps) => {
         </div>
         <GoodsItemController
           setDialog={setDialog}
-          setDialogText={setDialogText}
+          dialogText={dialogText}
           setSuccessDialog={setSuccessDialog}
-          setSuccessDialogText={setSuccessDialogText}
+          successDialogText={successDialogText}
           boriGoods={boriGoods}
           goodsInfo={goodsInfo}
           categoryInfo={categoryInfo}

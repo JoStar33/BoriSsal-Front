@@ -1,14 +1,14 @@
 import { useDeleteBoriGoodsMutation } from "@/hooks/bori-goods/useDeleteBoriGoodsMutation/useDeleteBoriGoodsMutation";
 import { useUpdateBoriGoodsMutation } from "@/hooks/bori-goods/useUpdateBoriGoodsMutation/useUpdateBoriGoodsMutation";
 import { IBoriGoods, IPostBoriGoods } from "@/types/boriGoods";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, MutableRefObject, SetStateAction } from "react";
 import styles from './goods_item_controller.module.scss';
 
 interface IProps {
   setDialog: Dispatch<SetStateAction<boolean>>;
-  setDialogText: Dispatch<SetStateAction<string>>;
+  dialogText: MutableRefObject<string>;
   setSuccessDialog: Dispatch<SetStateAction<boolean>>;
-  setSuccessDialogText: Dispatch<SetStateAction<string>>;
+  successDialogText: MutableRefObject<string>;
   boriGoods: IBoriGoods;
   goodsInfo: IPostBoriGoods;
   categoryInfo: string;
@@ -16,9 +16,9 @@ interface IProps {
 
 const GoodsItemController = ({
   setDialog,
-  setDialogText,
+  dialogText,
   setSuccessDialog,
-  setSuccessDialogText,
+  successDialogText,
   boriGoods,
   goodsInfo,
   categoryInfo,
@@ -31,12 +31,12 @@ const GoodsItemController = ({
     goodsInfo,
     boriGoods._id,
     setDialog,
-    setDialogText
+    dialogText
   );
   const { mutate: deleteBoriGoods } = useDeleteBoriGoodsMutation(
     boriGoods._id,
     setDialog,
-    setDialogText
+    dialogText
   );
   const handleUpdateGoods = () => {
     if (
@@ -45,17 +45,17 @@ const GoodsItemController = ({
       !goodsInfo.bori_goods_price ||
       !goodsInfo.bori_goods_stock
     ) {
-      setDialogText("값을 비운 상태로 수정이 불가능합니다.");
+      dialogText.current = "값을 비운 상태로 수정이 불가능합니다.";
       setDialog(true);
       return;
     }
     if (categoryInfo === "0") {
-      setDialogText("전체 카테고리 상태로 등록이 불가능합니다.");
+      dialogText.current = "전체 카테고리 상태로 등록이 불가능합니다.";
       setDialog(true);
       return;
     }
     setSuccessDialog(true);
-    setSuccessDialogText("수정이 완료됐습니다!");
+    successDialogText.current = "수정이 완료됐습니다!";
     updateBoriGoods();
   };
   return (

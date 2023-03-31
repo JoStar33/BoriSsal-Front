@@ -1,10 +1,10 @@
 import { useCategoryQuery } from "@/hooks/bori-goods/useCategoryQuery/useCategoryQuery";
-import { useRegistBoriGoodsMutation } from "@/hooks/bori-goods/useRegistBoriGoodsMutation/useRegistBoriGoodsMutation";
 import { useRegistImage } from "@/hooks/common/useRegistImage/useRegistImage";
 import { useSuccessDialog } from "@/hooks/common/useSuccessDialog/useSuccessDialog";
 import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { IPostBoriGoods } from "@/types/boriGoods";
 import { useState } from "react";
+import BoriGoodsRegisterController from "../BoriGoodsRegisterController/BoriGoodsRegisterController";
 import BoriGoodsRegisterInputViewer from "../BoriGoodsRegisterInputViewer/BoriGoodsRegisterInputViewer";
 import styles from "./bori_goods_register.module.scss";
 
@@ -21,58 +21,14 @@ const BoriGoodsRegister = () => {
   if (!categoryData) {
     categoryData = [];
   }
-  const { dialog, setDialog, setDialogText, renderDialog } =
+  const { dialog, setDialog, dialogText, renderDialog } =
     useValidateDialog();
   const {
     successDialog,
     setSuccessDialog,
-    setSuccessDialogText,
+    successDialogText,
     renderSuccessDialog,
   } = useSuccessDialog();
-  const { mutate } = useRegistBoriGoodsMutation(
-    categoryInfo,
-    goodsInfo,
-    formData.current,
-    setGoodsInfo,
-    setImage,
-    setDialog,
-    setDialogText,
-    setSuccessDialog,
-    setSuccessDialogText
-  );
-  const handleRegistBoriGoods = () => {
-    if (!image) {
-      setDialogText("상품이미지는 반드시 있어야해요!");
-      setDialog(true);
-      return;
-    }
-    if (goodsInfo.bori_goods_name.length < 1) {
-      setDialogText("이런 굿즈 이름을 안 설정하셨는데... 다시 확인해주세요!");
-      setDialog(true);
-      return;
-    }
-    if (goodsInfo.bori_goods_price < 500) {
-      setDialogText("가격은 500원보다 커야해요!");
-      setDialog(true);
-      return;
-    }
-    if (goodsInfo.bori_goods_stock < 2) {
-      setDialogText("재고는 최소 3개는 있어야해요!");
-      setDialog(true);
-      return;
-    }
-    if (goodsInfo.bori_goods_desc.length < 10) {
-      setDialogText("설명을 최소 10글자 이상 써주세요!");
-      setDialog(true);
-      return;
-    }
-    if (!categoryInfo) {
-      setDialogText("카테고리를 반드시 설정해주셔야 해요!");
-      setDialog(true);
-      return;
-    }
-    mutate();
-  };
   return (
     <>
       {dialog && (
@@ -91,13 +47,17 @@ const BoriGoodsRegister = () => {
           setGoodsInfo={setGoodsInfo}
           goodsInfo={goodsInfo}
         />
-        <button
-          role="regist-button"
-          onClick={handleRegistBoriGoods}
-          className={styles.goods_register_button}
-        >
-          굿즈 등록
-        </button>
+        <BoriGoodsRegisterController
+          setGoodsInfo={setGoodsInfo}
+          setImage={setImage}
+          setDialog={setDialog}
+          dialogText={dialogText}
+          setSuccessDialog={setSuccessDialog}
+          successDialogText={successDialogText}
+          goodsInfo={goodsInfo}
+          categoryInfo={categoryInfo}
+          formData={formData}
+          image={image}/>
       </div>
     </>
   );
