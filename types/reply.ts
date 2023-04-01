@@ -13,6 +13,7 @@ export interface IReplyChild {
 }
 
 export interface IReplyMutation {
+  bori_gallery_reply: IReply[];
   bori_goods_reply: IReply[];
   overflow: boolean
 }

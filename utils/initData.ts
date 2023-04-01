@@ -28,6 +28,7 @@ const initPostBoriGoods: IPostBoriGoods = {
 
 const initReplyMutation = {
   bori_goods_reply: [], 
+  bori_gallery_reply: [],
   overflow: false
 }
 
