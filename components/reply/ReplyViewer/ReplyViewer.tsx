@@ -9,20 +9,28 @@ import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-
 import ReplyEmpty from '../ReplyEmpty/ReplyEmpty';
 import ReplyPart from '../ReplyPart/ReplyPart';
 import styles from './reply_viewer.module.scss';
+import { useBoriGalleryReplyMutation } from '@/hooks/bori-gallery/useBoriGalleryReplyMutation/useBoriGalleryReplyMutation';
+import dynamic from 'next/dynamic';
 
 interface IProps {
   user: IUser;
-  goods_id: string;
+  goods_id?: string;
+  gallery_id?: string;
   mutationData: IReplyMutation;
   limit: number;
   setLimit: React.Dispatch<React.SetStateAction<number>>;
   refetch: <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined) => Promise<QueryObserverResult<IReplyMutation, unknown>>
 }
 
-const ReplyViewer = ({user, mutationData, goods_id, setLimit, limit, refetch}: IProps) => {
+const ReplyViewer = ({user, mutationData, goods_id, gallery_id, setLimit, limit, refetch}: IProps) => {
   const { renderDialog, dialog, setDialog, dialogText } = useValidateDialog();
   const replyContent = useRef<HTMLInputElement>(null);
+  if(!goods_id )
+    goods_id = "null"
+  if(!gallery_id )
+    gallery_id = "null"
   const goodsReplyMutation = useBoriGoodsReplyMutation(user.email, goods_id);
+  const galleryReplyMutation = useBoriGalleryReplyMutation(user.email, gallery_id);
   const replyRegist = () => {
     if(!replyContent.current)
       return;
@@ -37,7 +45,10 @@ const ReplyViewer = ({user, mutationData, goods_id, setLimit, limit, refetch}: I
       return;
     };
     setLimit(limit + 1);
-    goodsReplyMutation.mutate(replyContent.current.value);
+    if(goods_id !== "null")
+      goodsReplyMutation.mutate(replyContent.current.value);
+    if(gallery_id !== "null")
+      galleryReplyMutation.mutate(replyContent.current.value);
   };
   const showMoreReply = async () => {
     setLimit(() => {
@@ -59,14 +70,20 @@ const ReplyViewer = ({user, mutationData, goods_id, setLimit, limit, refetch}: I
       </div>
       <div className={styles.reply_container}>
         {
-          goodsReplyMutation.isLoading && <ReplySkeleton></ReplySkeleton>
+          (goodsReplyMutation.isLoading || galleryReplyMutation.isLoading) && <ReplySkeleton></ReplySkeleton>
         }
         {
-          mutationData.bori_goods_reply.length !== 0
-          ? mutationData.bori_goods_reply.map((reply)=>{
-            return <ReplyPart user={user} key={reply._id} reply={reply} setDialog={setDialog} dialogText={dialogText}></ReplyPart>
-          })
-          : <ReplyEmpty/>
+          goods_id !== "null" 
+          ?  mutationData.bori_goods_reply.length !== 0
+            ? mutationData.bori_goods_reply.map((reply)=>{
+              return <ReplyPart user={user} key={reply._id} isGoods={goods_id !== "null" ? true : false} reply={reply} setDialog={setDialog} dialogText={dialogText}></ReplyPart>
+            })
+            : <ReplyEmpty/>
+          : mutationData.bori_gallery_reply.length !== 0
+            ? mutationData.bori_goods_reply.map((reply)=>{
+              return <ReplyPart user={user} key={reply._id} isGoods={goods_id !== "null" ? true : false} reply={reply} setDialog={setDialog} dialogText={dialogText}></ReplyPart>
+            })
+            : <ReplyEmpty/>
         }
         {
           !mutationData.overflow && 

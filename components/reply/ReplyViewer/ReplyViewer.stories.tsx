@@ -24,6 +24,7 @@ ReplyViewerTest.args = {
       reply_child: [],
       created_at:  String(new Date())
     }],
+    bori_gallery_reply: [],
     overflow: true
   },
   limit: 1,

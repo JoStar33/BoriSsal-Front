@@ -5,15 +5,17 @@ import { initUser } from "@/utils/initData";
 import React, { useRef, useState } from "react";
 import ReplyChildPart from "../ReplyChildPart/ReplyChildPart";
 import styles from "./reply_part.module.scss";
+import { useBoriGalleryChildReplyMutation } from "@/hooks/bori-gallery/useBoriGalleryChildReplyMutation/useBoriGalleryChildReplyMutation";
 
 interface IProps {
   user: IUser;
+  isGoods: boolean;
   reply: IReply;
   setDialog: React.Dispatch<React.SetStateAction<boolean>>;
   dialogText: React.MutableRefObject<string>;
 }
 
-const ReplyPart = ({ user, reply, setDialog, dialogText }: IProps) => {
+const ReplyPart = ({ user, isGoods, reply, setDialog, dialogText }: IProps) => {
   const [showChildReply, setShowChildReply] = useState<boolean>(false);
   const replyDate = useRef<Date>(new Date(reply.created_at));
   const replyInputRef = useRef<HTMLInputElement>(null);
@@ -21,6 +23,7 @@ const ReplyPart = ({ user, reply, setDialog, dialogText }: IProps) => {
     user = initUser;
   }
   const goodsReplyChildMutation = useBoriGoodsChildReplyMutation(user.email, reply._id);
+  const galleryReplyChildMutation = useBoriGalleryChildReplyMutation(user.email, reply._id);
   const handleOnChilk = () => {
     setShowChildReply(!showChildReply);
   };
@@ -37,7 +40,10 @@ const ReplyPart = ({ user, reply, setDialog, dialogText }: IProps) => {
       setDialog(true);
       return;
     }
-    goodsReplyChildMutation.mutate(replyInputRef.current.value);
+    if(isGoods)
+      goodsReplyChildMutation.mutate(replyInputRef.current.value);
+    if(!isGoods)
+      galleryReplyChildMutation.mutate(replyInputRef.current.value);
   };
   return (
     <div className={styles.reply_part_container}>
