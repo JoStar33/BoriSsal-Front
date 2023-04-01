@@ -1,0 +1,36 @@
+.bori_gallery_detail_info_container {
+  margin: 1vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    margin: 4vw;
+    font-size: 2vw;
+  }
+  .gallery_info {
+    margin: 2vw;
+    p {
+      font-weight: 800;
+      font-size: 1.4rem;
+    }
+    .gallery_like_container {
+      display: flex;
+      flex-direction: row;
+      button {
+        margin-left: 1vw;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+      }
+    }
+  }
+  .gallery_description {
+    padding: 2vw;
+    min-height: 20vh;
+    border-radius: 20px;
+    box-shadow: 0 6px 6px 0 gray;
+    font-size: 1.2vw;
+    font-weight: 800;
+  }
+}

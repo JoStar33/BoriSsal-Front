@@ -1,0 +1,43 @@
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bori_gallery_item {
+  margin: 1vw;
+  width: 30vw;
+  border-radius: 20px;
+  box-shadow: 0 6px 6px 0 gray;
+  @include center;
+  position: relative;
+  flex-direction: column;
+  img {
+    margin-top: 2.5vw;
+  }
+  .heart_box {
+    @include center;
+    font-size: 1vw;
+    font-weight: 800;
+    position: absolute;
+    top: 25vw;
+    left: 25vw;
+  }
+  .bori_gallery_info {
+    @include center;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 3.5vw;
+    margin-bottom: 1vw;
+    .bori_gallery_title {
+      width: 70%;
+      font-size: 1.4vw;
+      font-weight: 800;
+      color: #9999CC;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+  }
+}
