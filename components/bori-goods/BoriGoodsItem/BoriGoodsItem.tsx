@@ -13,7 +13,7 @@ interface IProps {
 
 const BoriGoodsItem = ({goods_name, bori_goods_image, goods_like, bori_goods_price, category_name}: IProps) => {
   return (
-    <Link href={goods_name}>
+    <Link href={`/bori-goods/${goods_name}`}>
       <div className={styles.bori_goods_item}>
         <div>
           <div style={{ position: 'relative', width: "25vw", height: "25vw" }}>

@@ -4,15 +4,19 @@ import { useLikeGoodsMutation } from '@/hooks/bori-goods/useLikeGoodsMutation/us
 import { IBoriGoods, ICategory } from "@/types/boriGoods";
 import { IUser } from '@/types/user';
 import Image from "next/image";
-import { useRef, useState } from 'react';
+import { SetStateAction, useRef, useState } from 'react';
 import { AiFillHeart } from "react-icons/ai";
 import BoriGoodsDetailController from '../BoriGoodsDetailController/BoriGoodsDetailController';
 import styles from './bori_goods_detail_info.module.scss';
+import dynamic from 'next/dynamic';
+
 interface IProps {
   goods: IBoriGoods;
   category: ICategory;
   user: IUser;
 }
+
+const BoriGoodsDetailLike = dynamic(() => import('../BoriGoodsDetailLike/BoriGoodsDetailLike'), { ssr: false })
 
 const BoriGoodsDetailInfo = ({
   goods,
@@ -22,17 +26,6 @@ const BoriGoodsDetailInfo = ({
   const validateText = useRef<string>("");
   const [validateDialog, setValidateDialog] = useState<boolean>(false);
   const [successDialog, setSuccessDialog] = useState<boolean>(false);
-  const likeGoodsMutation = useLikeGoodsMutation(user.user_bori_goods_like, goods._id);
-  const handleLikeGoods = () => {
-    if (!user.email) {
-      validateText.current = "로그인 이후에 누를 수 있어요!";
-      return setValidateDialog(true);
-    }
-    user.user_bori_goods_like.find((likeGoods) => likeGoods === goods._id)
-      ? goods.bori_goods_like--
-      : goods.bori_goods_like++;
-    likeGoodsMutation.mutate();
-  };
   return (
     <>
       {
@@ -75,25 +68,11 @@ const BoriGoodsDetailInfo = ({
           <p className={styles.goods_category}>
             카테고리: #{category.category_name}
           </p>
-          <p className={styles.goods_like_container}>
-            좋아요:
-            <div>
-              <button onClick={handleLikeGoods}
-                role='like'>
-                <AiFillHeart
-                  color={
-                    user.user_bori_goods_like.find(
-                      (likeGoods) => likeGoods === goods._id
-                    )
-                      ? "red"
-                      : "black"
-                  }
-                  size={25}
-                ></AiFillHeart>
-              </button>
-              {goods.bori_goods_like}
-            </div>
-          </p>
+          <BoriGoodsDetailLike 
+            validateText={validateText} 
+            setValidateDialog={setValidateDialog} 
+            user={user}
+            goods={goods}/>
           <p>상품가격: {goods.bori_goods_price}</p>
         </div>
       </div>
