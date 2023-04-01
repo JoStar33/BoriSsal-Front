@@ -10,11 +10,12 @@ import styles from './bori_goods_page.module.scss';
 
 interface IProps {
   goodsData: IBoriGoods[];
-  errorMessage: string;
+  goodsErrorMessage: string;
   categoryData: ICategory[];
+  categoryErrorMessage: string;
 };
 
-const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
+const BoriGoodsPage = ({goodsData, goodsErrorMessage, categoryData, categoryErrorMessage}: IProps) => {
   const [categoryInfo, setCategoryInfo] = useState<string>('0');
   const { searchInfo, renderSearch } = useSearch();
   const categoryName = (goods: IBoriGoods) => {
@@ -26,8 +27,11 @@ const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
   const handleSelectLayout = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategoryInfo(e.target.value)
   };
-  if (errorMessage) {
-    return <ErrorPage errorText={errorMessage}></ErrorPage>
+  if (goodsErrorMessage) {
+    return <ErrorPage errorText={goodsErrorMessage}></ErrorPage>
+  }
+  if (categoryErrorMessage) {
+    return <ErrorPage errorText={categoryErrorMessage}></ErrorPage>
   }
   return (
     <div className={styles.bori_goods_page_container}>
@@ -104,7 +108,7 @@ export async function getStaticProps() {
       categoryErrorMessage = errorMessage(error)
     });
   return {
-    props: { goodsData, goodsErrorMessage, categoryErrorMessage, categoryData },
+    props: { goodsData, goodsErrorMessage, categoryData, categoryErrorMessage },
     revalidate: 5 /** https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration */,
   };
 }
