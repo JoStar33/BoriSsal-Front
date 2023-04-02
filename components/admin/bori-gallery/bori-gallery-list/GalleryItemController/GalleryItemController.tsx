@@ -12,7 +12,7 @@ interface IProps {
   dialogText: MutableRefObject<string>;
 }
 
-const GalleryItemCotroller = ({
+const GalleryItemController = ({
   boriGallery, galleryInfo, setDialog, dialogText
 }: IProps) => {
   const { mutate: updateBoriGoods, isLoading: updateLoading } = useUpdateBoriGalleryMutation(boriGallery._id, galleryInfo, setDialog, dialogText);
@@ -48,4 +48,4 @@ const GalleryItemCotroller = ({
   );
 };
 
-export default GalleryItemCotroller;
+export default GalleryItemController;

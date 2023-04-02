@@ -33,6 +33,7 @@ const BoriGalleryDetailLike = ({validateText, setValidateDialog, gallery, user}:
           <button onClick={handleLikeGoods}
             role='like'>
             <AiFillHeart
+              role="like-heart"
               color={
                 user.user_bori_gallery_like.find(
                   (likeGoods) => likeGoods === gallery._id

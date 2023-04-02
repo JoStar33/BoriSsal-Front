@@ -4,6 +4,7 @@ import { IBoriGallery, IPostBoriGallery } from "@/types/boriGallery";
 import { useEffect, useState } from "react";
 import styles from '../../../bori-goods/bori-goods-list/GoodsListItem/goods_list_item.module.scss';
 import GalleryItemImage from "../GalleryItemImage/GalleryItemImage";
+import GalleryItemController from "../GalleryItemController/GalleryItemController";
 
 interface IProps {
   boriGallery: IBoriGallery;
@@ -63,6 +64,11 @@ const GalleryListItem = ({ boriGallery }: IProps) => {
             value={galleryInfo.bori_gallery_desc}
           />
         </div>
+        <GalleryItemController 
+          boriGallery={boriGallery} 
+          galleryInfo={galleryInfo} 
+          setDialog={setDialog} 
+          dialogText={dialogText}/>
       </div>
     </>
   );

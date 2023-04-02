@@ -22,7 +22,7 @@ test("useJoinMutation 훅 테스트", async () => {
           password: "123123123",
         },
         setDialog: setState,
-        setDialogText: setState,
+        dialogText: setState,
       }),
     {
       wrapper: Wrapper,
@@ -51,15 +51,12 @@ test("useJoinMutation 훅 테스트 실패 케이스", async () => {
           password: "123123123",
         },
         setDialog: setState,
-        setDialogText: setState,
+        dialogText: setState,
       }),
     {
       wrapper: Wrapper,
     }
   );
-  await waitFor(() => {
-    result.current.mutate();
-  }).then(() => {
-    expect(result.current.isError).toBeTruthy();
-  });
+  result.current.mutate();
+  await waitFor(() => expect(result.current.isError).toBeTruthy());
 });

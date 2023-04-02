@@ -37,6 +37,7 @@ const BoriGoodsDetailLike = ({
           <button onClick={handleLikeGoods}
             role='like'>
             <AiFillHeart
+              role='like-heart'
               color={
                 user.user_bori_goods_like.find(
                   (likeGoods) => likeGoods === goods._id
