@@ -4,10 +4,9 @@
 
 ### 왜 보리쌀을 만들게 됐나?
 우리 귀엽고 세상에서 제일귀여운 보리를 사람들에게 자랑하고 싶어서 만들게 됐습니다. 실제로 우리 보리는 너무 귀엽습니다. 아래 사진을 보실래요? 
-![KakaoTalk_20230331_170007171](https://user-images.githubusercontent.com/52379503/229061211-af0e2c
+![KakaoTalk_20230331_170007171](https://user-images.githubusercontent.com/52379503/229061211-af0e2c3a-b9c0-4bcf-8b3c-a2a3ec0f4b28.jpg)
 
 ![KakaoTalk_20230402_223912387](https://user-images.githubusercontent.com/52379503/229356806-ba325358-1b0a-418d-b3ca-228ce130aa36.jpg)
-3a-b9c0-4bcf-8b3c-a2a3ec0f4b28.jpg)
 
 ![KakaoTalk_20230402_223912387_01](https://user-images.githubusercontent.com/52379503/229356815-3e63dd74-6097-44c6-9279-bb2ed97e746f.jpg)
 
