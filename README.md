@@ -59,4 +59,4 @@ https://www.figma.com/file/ostLEtK2oJDRCU3HInhDbD/%EB%B3%B4%EB%A6%AC%EC%8C%80?no
 ## 5. 폴더 기본 구조
 ![image](https://user-images.githubusercontent.com/52379503/229061537-8080493f-c2cb-4af6-9ad5-610dd9958542.png)
 
-폴더들은 위에 보시는 구조처럼 이루어져 있습니다. scss파일, test파일, 스토리북 파일과 같은 파일들을 계속해서 찾아다니는 과정이 불편하고 비효율적이라고 생각이 들었습니다. 때문에 저는 하나의 컴포넌트와 연관된 모든 "test, stories, module.scss"파일들을 다음과 같이 구성시켰습니다. 
+폴더들은 위에 보시는 구조처럼 이루어져 있습니다. scss파일, test파일, 스토리북 파일과 같은 파일들을 계속해서 찾아다니는 과정이 불편하고 비효율적이라고 생각이 들었습니다. 때문에 저는 하나의 컴포넌트와 연관된 모든 *test, stories, module.scss*파일들을 다음과 같이 구성시켰습니다. 
