@@ -23,7 +23,7 @@ test("useDuplicateCheckMutation 훅 테스트", async () => {
   );
   await waitFor(() => {
     result.current.mutate();
-  }).then(() => {
-    expect(result.current.isSuccess).toBeTruthy();
-  });
+  }).then(() => 
+    expect(result.current.isSuccess).toBeTruthy()
+  );
 });

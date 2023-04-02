@@ -1,0 +1,28 @@
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bori_gallery_page_container {
+  @include center;
+  flex-direction: column;
+  h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 2vw;
+  }
+  .bori_gallery_container {
+    margin-top: 1vw;
+    border-top: 3px solid black;
+    width: 96vw;
+    display: flex;
+    flex-wrap: wrap; 
+  }
+  .user_place {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+}

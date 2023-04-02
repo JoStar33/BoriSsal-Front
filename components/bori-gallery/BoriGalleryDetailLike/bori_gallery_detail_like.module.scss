@@ -1,0 +1,12 @@
+.gallery_like_container {
+  display: flex;
+  flex-direction: row;
+  font-size: 1vw;
+  font-weight: 800;
+  button {
+    margin-left: 1vw;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}

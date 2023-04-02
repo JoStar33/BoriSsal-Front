@@ -17,7 +17,7 @@
   }
   .heart_box {
     @include center;
-    font-size: 1.2rem;
+    font-size: 1vw;
     font-weight: 800;
     position: absolute;
     top: 25vw;
@@ -31,16 +31,16 @@
     margin-top: 3.5vw;
     margin-bottom: 1vw;
     .bori_goods_name {
-      font-size: 1.5rem;
+      font-size: 2vw;
       font-weight: 800;
       color: #9999CC;
     }
     .bori_goods_price {
-      font-size: 1.2rem;
+      font-size: 2vw;
       font-weight: 800;
     }
     .goods_category_name  {
-      font-size: 1.2rem;
+      font-size: 2vw;
       font-weight: 700;
       color: gray;
     }

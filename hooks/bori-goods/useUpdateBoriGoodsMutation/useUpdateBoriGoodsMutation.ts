@@ -1,6 +1,6 @@
 import { putBorigoods } from "@/apis/bori-goods/boriGoods";
 import { IPostBoriGoods } from "@/types/boriGoods";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, MutableRefObject, SetStateAction } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { errorMessage } from './../../../apis/error/customError';
 
@@ -9,7 +9,7 @@ export const useUpdateBoriGoodsMutation = (
   bori_goods: IPostBoriGoods,
   bori_goods_id: string,
   setDialog: Dispatch<SetStateAction<boolean>>,
-  setDialogText: Dispatch<SetStateAction<string>>
+  dialogText: MutableRefObject<string>
 ) => {
   const queryClient = useQueryClient();
   return useMutation(
@@ -20,7 +20,7 @@ export const useUpdateBoriGoodsMutation = (
       },
       onError: (error) => {
         setDialog(true);
-        setDialogText(errorMessage(error))
+        dialogText.current = errorMessage(error);
       }
     }
   );

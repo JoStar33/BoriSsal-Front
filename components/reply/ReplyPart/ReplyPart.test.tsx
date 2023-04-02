@@ -30,7 +30,7 @@ const initRender = () => {
       created_at: String(new Date())
     }} setDialog={function (value: React.SetStateAction<boolean>): void {
       throw new Error("Function not implemented.");
-    } } validateText={validateText}></ReplyPart>
+    } } isGoods={true} dialogText={validateText}></ReplyPart>
     </QueryClientProvider>
   );
 }

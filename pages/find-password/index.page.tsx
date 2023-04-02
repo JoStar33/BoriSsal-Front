@@ -9,12 +9,12 @@ import styles from './find_password.module.scss';
 
 const FindPassWord = () => {
   const [email, setEmail] = useState<string>('');
-  const { dialog, setDialog, setDialogText, renderDialog } = useValidateDialog();
-  const { successDialog, setSuccessDialog, setSuccessDialogText, renderSuccessDialog } = useSuccessDialog();
+  const { dialog, setDialog, dialogText, renderDialog } = useValidateDialog();
+  const { successDialog, setSuccessDialog, successDialogText, renderSuccessDialog } = useSuccessDialog();
   const onChangeAccount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
-  const { mutate, isLoading } = useFindPassWordMutation(email, setDialog, setDialogText, setSuccessDialog, setSuccessDialogText);
+  const { mutate, isLoading } = useFindPassWordMutation(email, setDialog, dialogText, setSuccessDialog, successDialogText);
   return (
     <>
       {

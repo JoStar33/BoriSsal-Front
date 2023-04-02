@@ -1,0 +1,73 @@
+@mixin skeleton_default {
+  position: relative;
+  overflow: hidden;
+  background: #f2f2f2;
+  @keyframes loading {
+    0% {
+      transform: translateX(0);
+    }
+    50%,
+    100% {
+      transform: translateX(460px);
+    }
+  };
+  ::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 100%;
+    background: linear-gradient(to right, #f2f2f2, #ddd, #f2f2f2);
+    animation: loading 2s infinite linear;
+  };
+};
+
+.gallery_list_item_container {
+  width: 85vw;
+  background-color: D9D9D9;
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  .gallery_image {
+    @include skeleton_default;
+    width: 10vw;
+    height: 10vw;
+    position: relative;
+    margin: 2vw;
+  }
+  .gallery_info {
+    display: flex;
+    flex-direction: column;
+    width: 38vw;
+    div {
+      @include skeleton_default;
+      margin: 0.2vw;
+      width: 20vw;
+      height: 2.4vw;
+    }
+  }
+  .desc_container {
+    @include skeleton_default;
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    height: 6.25em;
+  }
+  .button_container {
+    display: flex;
+    flex-direction: column;
+    div {
+      @include skeleton_default;
+      width: 6vw;
+      margin-top: 2vw;
+      margin-left: 2vw;
+      border: none;
+      border-radius: 20px;
+      height: 2vw;
+      font-weight: 800;
+    }
+  }
+}

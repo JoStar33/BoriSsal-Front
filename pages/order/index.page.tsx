@@ -28,7 +28,7 @@ const OrderPage = () => {
   useLoginCheckQuery();
   const { cart } = useCartStore();
   const { pageState } = usePageStore();
-  const { dialog, setDialog, setDialogText, renderDialog } = useValidateDialog();
+  const { dialog, setDialog, dialogText, renderDialog } = useValidateDialog();
   let { data: deliverAddress } = useDeliverAddressQuery();
   let { data: user } = useUserQuery();
   if (!deliverAddress) {
@@ -60,12 +60,12 @@ const OrderPage = () => {
       deliverAddress = initData;
     }
     if (cart.length === 0) {
-      setDialogText('최소 하나의 상품이 있어야합니다!');
+      dialogText.current = '최소 하나의 상품이 있어야합니다!';
       setDialog(true);
       return;
     };
     if (!deliverAddress.phone_number || !deliverAddress.address || !deliverAddress.address_detail) {
-      setDialogText('배송지 정보 입력을 모두 마쳐야 해요!');
+      dialogText.current = '배송지 정보 입력을 모두 마쳐야 해요!';
       setDialog(true);
       return;
     };

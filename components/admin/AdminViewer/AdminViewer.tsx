@@ -1,8 +1,8 @@
 import { useState } from "react";
-import BoriGalleryList from "../bori-gallery/BoriGalleryList/BoriGalleryList";
-import BoriGalleryRegister from "../bori-gallery/BoriGalleryRegister/BoriGalleryRegister";
-import BoriGoodsList from "../bori-goods/BoriGoodsList/BoriGoodsList";
-import BoriGoodsRegister from "../bori-goods/BoriGoodsRegister/BoriGoodsRegister";
+import BoriGalleryList from "../bori-gallery/bori-gallery-list/BoriGalleryList/BoriGalleryList";
+import BoriGalleryRegister from "../bori-gallery/bori-gallery-register/BoriGalleryRegister/BoriGalleryRegister";
+import BoriGoodsList from "../bori-goods/bori-goods-list/BoriGoodsList/BoriGoodsList";
+import BoriGoodsRegister from "../bori-goods/bori-goods-register/BoriGoodsRegister/BoriGoodsRegister";
 import OrderController from "../order/OrderController/OrderController";
 import styles from './admin_viewer.module.scss';
 

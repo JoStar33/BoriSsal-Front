@@ -19,33 +19,29 @@ const initRender = () => {
     </QueryClientProvider>
   );
   const password = screen.getByRole("password");
-  const passwordCheck = screen.getByRole("passwordCheck");
   const newPassword = screen.getByRole("newPassword");
   const newPasswordCheck = screen.getByRole("newPasswordCheck");
   return {
     password,
-    passwordCheck,
     newPassword,
     newPasswordCheck,
   };
 };
 
 test("화면내에 input 이벤트 테스트(동일한 비밀번호)", () => {
-  const { password, passwordCheck, newPassword, newPasswordCheck } =
+  const { password, newPassword, newPasswordCheck } =
     initRender();
   fireEvent.change(password, { target: { value: "test123412^^" } });
-  fireEvent.change(passwordCheck, { target: { value: "test123412^^" } });
   fireEvent.change(newPassword, { target: { value: "test123412^^" } });
   fireEvent.change(newPasswordCheck, { target: { value: "test123412^^" } });
   const samePassword = screen.getByText(/이런 이전 비밀번호와 동일해요!/);
   expect(samePassword).toBeInTheDocument();
 });
 test("화면내에 input 이벤트 테스트(비밀번호 확인값과 다를 경우)", () => {
-  const { password, passwordCheck, newPassword, newPasswordCheck } =
+  const { password, newPassword, newPasswordCheck } =
     initRender();
   fireEvent.change(password, { target: { value: "test123412^^" } });
-  fireEvent.change(passwordCheck, { target: { value: "test123^^" } });
-  fireEvent.change(newPassword, { target: { value: "test123412^^" } });
+  fireEvent.change(newPassword, { target: { value: "test1234^^" } });
   fireEvent.change(newPasswordCheck, { target: { value: "test123412^^" } });
   const differentPassword = screen.getByText(
     /비밀번호가 확인값과 다릅니다. 다시입력 해주세요./
@@ -55,10 +51,9 @@ test("화면내에 input 이벤트 테스트(비밀번호 확인값과 다를 �
 
 
 test("비밀번호 변경이 성공적으로 이루어졌을 경우", async () => {
-  const { password, passwordCheck, newPassword, newPasswordCheck } =
+  const { password, newPassword, newPasswordCheck } =
     initRender();
   fireEvent.change(password, { target: { value: "test123412^^" } });
-  fireEvent.change(passwordCheck, { target: { value: "test123412^^" } });
   fireEvent.change(newPassword, { target: { value: "tt12341212^^" } });
   fireEvent.change(newPasswordCheck, { target: { value: "tt12341212^^" } });
   const passwordChange = screen.getByRole("password_change");
@@ -69,7 +64,7 @@ test("비밀번호 변경이 성공적으로 이루어졌을 경우", async () =
 
 
 test("비밀번호 변경이 실패했을 경우", async () => {
-  const { password, passwordCheck, newPassword, newPasswordCheck } =
+  const { password, newPassword, newPasswordCheck } =
     initRender();
   server.use(
     rest.post(
@@ -84,7 +79,6 @@ test("비밀번호 변경이 실패했을 경우", async () => {
     )
   );
   fireEvent.change(password, { target: { value: "test123412^^" } });
-  fireEvent.change(passwordCheck, { target: { value: "test123412^^" } });
   fireEvent.change(newPassword, { target: { value: "tt12341212^^" } });
   fireEvent.change(newPasswordCheck, { target: { value: "tt12341212^^" } });
   const passwordChange = screen.getByRole("password_change");

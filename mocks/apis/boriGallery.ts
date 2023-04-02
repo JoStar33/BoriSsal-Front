@@ -3,7 +3,7 @@ import { rest } from 'msw';
 
 export const boriGalleryMock = () => {
   return [
-    rest.get(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/bori-gallery-reply/23`, (req, res, ctx) => {
+    rest.get(`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/bori-gallery-reply/23/1`, (req, res, ctx) => {
       return res(
         ctx.status(200),
         ctx.json({

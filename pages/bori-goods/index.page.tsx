@@ -2,6 +2,7 @@ import { getBoriGoods, getCategory } from '@/apis/bori-goods/boriGoods';
 import { errorMessage } from '@/apis/error/customError';
 import BoriGoodsItem from '@/components/bori-goods/BoriGoodsItem/BoriGoodsItem';
 import ErrorPage from '@/components/error/ErrorPage/ErrorPage';
+import { useSearch } from '@/hooks/common/useSearch/useSearch';
 import { IBoriGoods, ICategory } from '@/types/boriGoods';
 import { AxiosError } from 'axios';
 import React, { useState } from 'react';
@@ -9,13 +10,14 @@ import styles from './bori_goods_page.module.scss';
 
 interface IProps {
   goodsData: IBoriGoods[];
-  errorMessage: string;
+  goodsErrorMessage: string;
   categoryData: ICategory[];
+  categoryErrorMessage: string;
 };
 
-const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
+const BoriGoodsPage = ({goodsData, goodsErrorMessage, categoryData, categoryErrorMessage}: IProps) => {
   const [categoryInfo, setCategoryInfo] = useState<string>('0');
-  const [searchInfo, setSearchInfo] = useState<string>('');
+  const { searchInfo, renderSearch } = useSearch();
   const categoryName = (goods: IBoriGoods) => {
     const findCategoryData = categoryData.find(category => category._id === goods.category_id)
     if(!findCategoryData)
@@ -25,21 +27,20 @@ const BoriGoodsPage = ({goodsData, errorMessage, categoryData}: IProps) => {
   const handleSelectLayout = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategoryInfo(e.target.value)
   };
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchInfo(e.target.value);
-  };
-  if (errorMessage) {
-    return <ErrorPage errorText={errorMessage}></ErrorPage>
+  if (goodsErrorMessage) {
+    return <ErrorPage errorText={goodsErrorMessage}></ErrorPage>
+  }
+  if (categoryErrorMessage) {
+    return <ErrorPage errorText={categoryErrorMessage}></ErrorPage>
   }
   return (
     <div className={styles.bori_goods_page_container}>
       <h1>보리 굿즈</h1>
       <div className={styles.user_place}>
         <p className={styles.show_count}>전체 (수량: {goodsData.length})</p>
-        <div className={styles.search_part}>
-          <label htmlFor="search_goods">검색:</label>
-          <input id='search_goods' onChange={handleSearch}/>
-        </div>
+        {
+          renderSearch()
+        }
         <p className={styles.category_label}>카테고리: </p>
         <div className={styles.styled_select}>
           <select onChange={handleSelectLayout}>
@@ -107,7 +108,7 @@ export async function getStaticProps() {
       categoryErrorMessage = errorMessage(error)
     });
   return {
-    props: { goodsData, goodsErrorMessage, categoryErrorMessage, categoryData },
+    props: { goodsData, goodsErrorMessage, categoryData, categoryErrorMessage },
     revalidate: 5 /** https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration */,
   };
 }

@@ -1,7 +1,6 @@
 .wrapper {
   width: 100vw;
   overflow: hidden;
-  height: 300vh
   p {
     position: relative;
     z-index: 2;
@@ -55,22 +54,22 @@
 }
 
 .bg {
-  width: 62.5rem;
+  width: 40vw;
   margin: 0 auto;
   display: flex;
-  height: 12.5rem;
+  height: 10vw;
   justify-content: center;
   align-items: center;
   z-index: 4;
   h1 {
-    font-size: 6.25rem;
+    font-size: 3vw;
   }
 }
 
 .desc3 {
   font-weight: bold;
   text-align: center;
-  font-size: 3.75rem;
+  font-size: 2vw;
   opacity: 1;
 }
 
@@ -81,8 +80,6 @@
   align-items: center;
   position : relative;
   bottom: 0;
-  //transform : translateY(-0%);
-  margin-bottom: 25vh;
   z-index: 2;
   h1 {
     font-size: 4vw;

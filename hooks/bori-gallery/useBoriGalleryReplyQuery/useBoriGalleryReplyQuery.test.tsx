@@ -12,7 +12,7 @@ const Wrapper = ({ children }: any) => {
 
 const initRender = () => {
   const { result } = renderHook(
-    () => useBoriGalleryReplyQuery('23'),
+    () => useBoriGalleryReplyQuery('23', 1),
     {
       wrapper: Wrapper,
     }
