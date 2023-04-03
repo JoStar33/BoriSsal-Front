@@ -12,6 +12,7 @@ export const useLogoutMutation = (
   const queryClient = useQueryClient();
   return useMutation(() => logout(), {
     onSuccess() {
+      queryClient.setQueryData("user", null);
       queryClient.invalidateQueries("user");
       router.push("/");
     },
