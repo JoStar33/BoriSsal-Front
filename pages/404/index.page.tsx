@@ -15,8 +15,6 @@ const Custom404 = () => {
           height={400}
           src={error_bori}
           sizes="
-          (max-width: 768px) 100vw,
-          (max-width: 1200px) 50vw,
           33vw"
           alt='404 에러창입니다.'></Image>
         <div className={styles.text_container}>

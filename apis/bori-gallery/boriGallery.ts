@@ -20,7 +20,7 @@ const getBoriGallery = () => {
 }
 
 const postBoriGalleryReply = (email: string, bori_gallery_id: string, content: string) => {
-  return customAxios.post(`/bori-gellery-reply`, {
+  return customAxios.post(`/bori-gallery-reply`, {
     email: email,
     bori_gallery_id: bori_gallery_id,
     content: content,

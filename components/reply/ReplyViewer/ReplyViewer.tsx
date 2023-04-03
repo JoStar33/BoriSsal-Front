@@ -79,7 +79,7 @@ const ReplyViewer = ({user, mutationData, goods_id, gallery_id, setLimit, limit,
             })
             : <ReplyEmpty/>
           : mutationData.bori_gallery_reply.length !== 0
-            ? mutationData.bori_goods_reply.map((reply)=>{
+            ? mutationData.bori_gallery_reply.map((reply)=>{
               return <ReplyPart user={user} key={reply._id} isGoods={goods_id !== "null" ? true : false} reply={reply} setDialog={setDialog} dialogText={dialogText}></ReplyPart>
             })
             : <ReplyEmpty/>

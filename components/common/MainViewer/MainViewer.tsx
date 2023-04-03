@@ -133,14 +133,15 @@ const MainViewer = () => {
           width: "30vw",
           height: "43vw",
           position: "relative",
-          transform: `translateX(${-position / 2 + 100}px)`,
+          transform: `translateX(${-position / 3}px)`,
         }}
       >
         <Image src={mainImage6} fill alt="눕는 보리" sizes="(min-width: 35vw) 35vw, (min-width: 20vw) 20vw, 20vw" />
       </figure>
       <div className={styles.last_box}>
-        <figure style={{width: "25vw", height: "25vw", position: "relative"}}></figure>
-        <Image src={mainImage8} fill alt="애기보리" sizes="(min-width: 35vw) 35vw, (min-width: 20vw) 20vw, 20vw" />
+        <figure style={{width: "25vw", height: "25vw", position: "relative"}}>
+          <Image src={mainImage8} fill alt="애기보리" sizes="(min-width: 35vw) 35vw, (min-width: 20vw) 20vw, 20vw" />
+        </figure>
         <h1>어때 우리 귀여운 보리</h1>
         <h1>만나보지 않을래?</h1>
         <div className={styles.last_button_box}>
