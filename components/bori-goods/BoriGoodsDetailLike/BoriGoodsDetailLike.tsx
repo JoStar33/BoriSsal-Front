@@ -1,7 +1,7 @@
 import { useLikeGoodsMutation } from '@/hooks/bori-goods/useLikeGoodsMutation/useLikeGoodsMutation';
 import { IBoriGoods } from '@/types/boriGoods';
 import { IUser } from '@/types/user';
-import React, { Dispatch, MutableRefObject, SetStateAction } from 'react';
+import { Dispatch, MutableRefObject, SetStateAction } from 'react';
 import { AiFillHeart } from 'react-icons/ai';
 import styles from './bori_goods_detail_like.module.scss';
 

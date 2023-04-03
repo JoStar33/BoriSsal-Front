@@ -1,10 +1,10 @@
+import ShareButton from "@/components/common/ShareButton/ShareButton";
 import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
-import React from "react";
-import Image from "next/image";
 import { IBoriGallery } from "@/types/boriGallery";
 import { IUser } from "@/types/user";
-import styles from "./bori_gallery_detail_info.module.scss";
+import Image from "next/image";
 import BoriGalleryDetailLike from "../BoriGalleryDetailLike/BoriGalleryDetailLike";
+import styles from "./bori_gallery_detail_info.module.scss";
 
 interface IProps {
   gallery: IBoriGallery;
@@ -33,6 +33,7 @@ const BoriGalleryDetailInfo = ({ gallery, user }: IProps) => {
             gallery={gallery}
             user={user}
           />
+          <ShareButton/>
         </div>
         <p className={styles.gallery_description}>
           {gallery.bori_gallery_desc}
