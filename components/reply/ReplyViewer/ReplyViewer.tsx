@@ -65,7 +65,7 @@ const ReplyViewer = ({user, mutationData, goods_id, gallery_id, setLimit, limit,
       <div className={styles.reply_input_container}>
         <label htmlFor="goods_reply">댓글: </label>
         <input role="reply-input" ref={replyContent} id='goods_reply' type="text"/>
-        <button role="regist" onClick={replyRegist}>댓글 등록</button>
+        <button role="regist" aria-label="댓글 등록 버튼" onClick={replyRegist}>댓글 등록</button>
       </div>
       <div className={styles.reply_container}>
         {
@@ -86,7 +86,7 @@ const ReplyViewer = ({user, mutationData, goods_id, gallery_id, setLimit, limit,
         }
         {
           !mutationData.overflow && 
-          <button className={styles.more_show_button} onClick={() => showMoreReply()}>
+          <button aria-label="댓글 더보기 버튼" className={styles.more_show_button} onClick={() => showMoreReply()}>
             더보기
             <AiFillCaretDown></AiFillCaretDown>
           </button>

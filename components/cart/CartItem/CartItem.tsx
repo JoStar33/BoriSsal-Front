@@ -1,7 +1,9 @@
 import { errorMessage } from '@/apis/error/customError';
+import CartItemSkeleton from '@/components/loading/CartItemSkeleton/CartItemSkeleton';
 import { useCartUpdateMutation } from '@/hooks/user/useCartUpdateMutation/useCartUpdateMutation';
 import { useDeleteCartMutation } from '@/hooks/user/useDeleteCartMutation/useDeleteCartMutation';
 import { useCartStore } from '@/store/cart';
+import { usePageStore } from '@/store/page';
 import { ICartGoods } from '@/types/cart';
 import { validateCount } from '@/utils/validate';
 import Image from 'next/image';
@@ -10,9 +12,7 @@ import { AiFillCheckCircle } from 'react-icons/ai';
 import { BsFillArrowDownCircleFill, BsFillArrowUpCircleFill } from 'react-icons/bs';
 import { GrClose } from 'react-icons/gr';
 import { RiAlarmWarningFill } from 'react-icons/ri';
-import CartItemSkeleton from '@/components/loading/CartItemSkeleton/CartItemSkeleton';
 import styles from './cart_item.module.scss';
-import { usePageStore } from '@/store/page';
 
 interface IProps {
   cart_id: string; 
@@ -83,7 +83,7 @@ const CartItem = ({cart_id, cartGoods}: IProps) => {
                     주문수량:
                     <input role='count-input' ref={inputRef} type="number" onChange={handleOnChangeCount}/>
                     개
-                    <button onClick={handleUpdateCount} className={styles.count_update_button}>수정</button>
+                    <button aria-label="수정 버튼" onClick={handleUpdateCount} className={styles.count_update_button}>수정</button>
                     <div>
                       {updateCartMutation.isLoading && (
                         <div className={styles.mutation_handle_box}>

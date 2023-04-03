@@ -1,10 +1,9 @@
+import { errorMessage } from '@/apis/error/customError';
 import { useDuplicateCheckMutation } from '@/hooks/auth/useDuplicateCheckMutation/useDuplicateCheckMutation';
-import React from 'react';
-import styles from './duplicate_check_part.module.scss'
+import { AxiosError } from 'axios';
 import { AiFillCheckCircle } from "react-icons/ai";
 import { RiAlarmWarningFill } from "react-icons/ri";
-import { AxiosError } from 'axios';
-import { errorMessage } from '@/apis/error/customError';
+import styles from './duplicate_check_part.module.scss';
 
 interface IProps {
   validate: string | null,
@@ -26,6 +25,7 @@ const DuplicateCheckPart = ({
   return (
     <div className={styles.duplicate_container}>
       <button 
+        aria-label="중복확인 버튼"
         role='duplicate_button'
         className={styles.duplicate_button}
         onClick={() => handleOnClick()}>중복확인</button>

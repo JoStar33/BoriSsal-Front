@@ -27,7 +27,7 @@ const AdminChecker = ({ setAdminPass }: IProps) => {
       <div className={styles.admin_checker_container}>
         <h1>어드민 키 입력</h1>
         <input ref={adminKeyRef} type="password" />
-        <button onClick={() => handleAdminPass()}>확인하기</button>
+        <button onClick={() => handleAdminPass()} aria-label="어드민 키 확인">확인하기</button>
       </div>
     </>
   );

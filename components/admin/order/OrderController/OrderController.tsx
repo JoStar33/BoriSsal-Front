@@ -76,7 +76,7 @@ const OrderController = () => {
                 endDate={endDate}
               />
             </div>
-            <button role="search-button" className={styles.search_button} onClick={handleSearch}>검색하기</button>
+            <button role="search-button" className={styles.search_button} onClick={handleSearch} aria-label="주문 검색하기">검색하기</button>
           </div>
         </div>
         <div className={styles.list_container}>
@@ -91,7 +91,7 @@ const OrderController = () => {
           }
           {
             !data.overflow && 
-            <button className={styles.more_show_button} onClick={() => showMoreOrder()}>
+            <button className={styles.more_show_button} onClick={() => showMoreOrder()} aria-label="주문 더보기">
               더보기
               <AiFillCaretDown></AiFillCaretDown>
             </button>

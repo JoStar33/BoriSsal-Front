@@ -40,12 +40,12 @@ const OrderHistoryItem = ({ order }: IProps) => {
           </div>
           <div className={styles.button_container}> 
             {
-              order.order_status === "배송준비" && <button className={styles.order_cancel_button} onClick={() => mutate()}>주문 취소</button>
+              order.order_status === "배송준비" && <button aria-label="주문 취소 버튼" className={styles.order_cancel_button} onClick={() => mutate()}>주문 취소</button>
             }
             {
               goodsShow 
-              ? <button className={styles.order_list_button} onClick={() => setGoodsShow(!goodsShow)}>닫기</button>
-              : <button role="show-goods" className={styles.order_list_button} onClick={() => setGoodsShow(!goodsShow)}>구매 목록 보기</button>
+              ? <button className={styles.order_list_button} onClick={() => setGoodsShow(!goodsShow)} aria-label="닫기 버튼">닫기</button>
+              : <button role="show-goods" className={styles.order_list_button} onClick={() => setGoodsShow(!goodsShow)} aria-label="구매 목록 보기 버튼">구매 목록 보기</button>
             }
           </div>
         </div>

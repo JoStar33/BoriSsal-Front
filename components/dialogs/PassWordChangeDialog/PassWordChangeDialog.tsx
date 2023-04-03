@@ -136,7 +136,7 @@ const PassWordChangeDialog = ({ setDialog }: IProps) => {
               account.newPasswordCheck
             )}
           ></InputPart>
-          <button role="password_change" onClick={handlePassWordChange}>
+          <button aria-label="비밀번호 변경 버튼" role="password_change" onClick={handlePassWordChange}>
             비밀번호 변경
           </button>
           {!account.password &&

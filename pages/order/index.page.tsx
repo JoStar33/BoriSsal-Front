@@ -118,7 +118,7 @@ const OrderPage = () => {
                 }원
               </p>
             </div>
-            <button role="order-button" onClick={handleOrder} className={styles.order_button}>주문하기</button>
+            <button aria-label="최종 주문하기 버튼" role="order-button" onClick={handleOrder} className={styles.order_button}>주문하기</button>
           </div>
         : <ErrorPage errorText='잘못된 접근입니다!'/>
       }

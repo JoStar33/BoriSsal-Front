@@ -13,11 +13,11 @@ interface IProps {
 
 const BoriGoodsItem = ({goods_name, bori_goods_image, goods_like, bori_goods_price, category_name}: IProps) => {
   return (
-    <Link href={`/bori-goods/${goods_name}`}>
+    <Link href={`/bori-goods/${goods_name}`} aria-label={`${goods_name} 페이지로 이동`}>
       <div className={styles.bori_goods_item}>
         <div>
           <div style={{ position: 'relative', width: "25vw", height: "25vw" }}>
-            <Image src={`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}${bori_goods_image}`} alt={goods_name} fill></Image>
+            <Image src={`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}${bori_goods_image}`} alt={goods_name} sizes="(min-width: 25vw) 25vw" fill></Image>
           </div>
           <div className={styles.heart_box}>
             <AiFillHeart style={{ width: "2vw", height: "2vw" }}></AiFillHeart>

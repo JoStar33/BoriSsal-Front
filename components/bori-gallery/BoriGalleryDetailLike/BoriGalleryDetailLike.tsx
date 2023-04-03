@@ -30,6 +30,7 @@ const BoriGalleryDetailLike = ({validateText, setValidateDialog, gallery, user}:
       <div className={styles.gallery_like_container}>
         좋아요:
           <button onClick={handleLikeGoods}
+            aria-label="좋아요 버튼"
             role='like'>
             <AiFillHeart
               role="like-heart"

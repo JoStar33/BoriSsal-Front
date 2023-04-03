@@ -104,7 +104,7 @@ const Join = () => {
           <Image width={100} height={110} alt="비밀번호 확인 보리" src={join4}></Image>
           <InputPart validate={validatePasswordCheck(account.password, account.passwordCheck)} inputLabel="🐶비밀번호 확인:" inputName="passwordCheck" textOrPassword="password" onChangeAccount={onChangeAccount}></InputPart>
         </div>
-        <button className={styles.join_button} role="join" onClick={() => join()}>
+        <button aria-label="회원가입 버튼" className={styles.join_button} role="join" onClick={() => join()}>
           회원가입
         </button>
       </div>

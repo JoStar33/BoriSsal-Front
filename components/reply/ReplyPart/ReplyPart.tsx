@@ -53,19 +53,19 @@ const ReplyPart = ({ user, isGoods, reply, setDialog, dialogText }: IProps) => {
         <p>{reply.content}</p>
         {showChildReply 
         ? (
-          <button className={styles.child_reply_button} onClick={handleOnChilk}>
+          <button aria-label="닫기 버튼" className={styles.child_reply_button} onClick={handleOnChilk}>
             닫기
           </button>
           ) 
         : (
             reply.reply_child.length > 0 
             ? (
-              <button className={styles.child_reply_button} onClick={handleOnChilk}>
+              <button aria-label="답글 보기 버튼" className={styles.child_reply_button} onClick={handleOnChilk}>
                 답글 {reply.reply_child.length}개
               </button>
               ) 
             : (
-              <button role='child-reply' className={styles.child_reply_button} onClick={handleOnChilk}>
+              <button aria-label="최초 답글 버튼" role='child-reply' className={styles.child_reply_button} onClick={handleOnChilk}>
                 답글달기
               </button>
               )
@@ -85,7 +85,7 @@ const ReplyPart = ({ user, isGoods, reply, setDialog, dialogText }: IProps) => {
           <div className={styles.reply_input_container}>
             <label htmlFor="goods_child_reply">댓글: </label>
             <input ref={replyInputRef} id="goods_child_reply" type="text" />
-            <button onClick={replyRegist}>댓글 등록</button>
+            <button aria-label="댓글 등록 버튼" onClick={replyRegist}>댓글 등록</button>
           </div>
         </div>
       )}

@@ -98,6 +98,7 @@ const Login = () => {
           </div>
           <div>
             <button
+              aria-label="로그인 버튼"
               className={styles.login_button}
               onClick={() => handleLogin()}
               role="login"
@@ -105,7 +106,7 @@ const Login = () => {
               로그인
             </button>
             <Link href="/join" aria-label="회원가입 페이지로 이동">
-              <button className={styles.join_button}>회원가입</button>
+              <button aria-label="회원가입 버튼" className={styles.join_button}>회원가입</button>
             </Link>
           </div>
           <div style={{fontSize: '0.8rem', marginBottom: '1rem', fontWeight: 800}}>
@@ -113,13 +114,13 @@ const Login = () => {
           </div>
         </div>
         <Link href={`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/kakao`} aria-label="카카오 로그인하기">
-          <button className={styles.kakao_login_button}>
+          <button aria-label="카카오 로그인 버튼 버튼" className={styles.kakao_login_button}>
             <Image width={35} height={35} src={kakaoImage} alt="카카오 로그인" />
             카카오 로그인
           </button>
         </Link>
         <Link href={`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}/auth/google`} aria-label="구글 로그인하기">
-          <button className={styles.google_login_button}>
+          <button aria-label="구글 로그인 버튼" className={styles.google_login_button}>
             <Image width={35} height={35} src={googleImage} alt="구글 로그인" />
             구글 로그인
           </button>

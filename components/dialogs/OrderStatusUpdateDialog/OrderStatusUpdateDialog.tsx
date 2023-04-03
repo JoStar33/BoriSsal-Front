@@ -23,9 +23,9 @@ const OrderStatusUpdateDialog = ({setDialog, order_id}: IProps) => {
           <GrClose size={30}></GrClose>
         </div>
         <h1>배송상태 변경하기</h1>
-        <button role="deliver-ready" style={{color: "black", backgroundColor: "#ffffff"}} onClick={() => handleUpdateStatus("배송준비")}>배송준비</button>
-        <button role="deliver-on" style={{color: "white", backgroundColor: "#5B59C1"}} onClick={() => handleUpdateStatus("배송중")}>배송중</button>
-        <button role="deliver-over" style={{color: "white", backgroundColor: "#4DC667"}} onClick={() => handleUpdateStatus("배송완료")}>배송완료</button>
+        <button aria-label="배송준비" role="deliver-ready" style={{color: "black", backgroundColor: "#ffffff"}} onClick={() => handleUpdateStatus("배송준비")}>배송준비</button>
+        <button aria-label="배송중" role="deliver-on" style={{color: "white", backgroundColor: "#5B59C1"}} onClick={() => handleUpdateStatus("배송중")}>배송중</button>
+        <button aria-label="배송완료" role="deliver-over" style={{color: "white", backgroundColor: "#4DC667"}} onClick={() => handleUpdateStatus("배송완료")}>배송완료</button>
       </div>
     </div>
   );

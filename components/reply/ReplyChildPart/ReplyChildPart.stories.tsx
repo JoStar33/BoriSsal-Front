@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import ReplyChildPart from './ReplyChildPart';
 
 export default {
@@ -11,6 +11,7 @@ const Template: ComponentStory<typeof ReplyChildPart> = (args) => <ReplyChildPar
 export const ReplyPartTest = Template.bind({});
 ReplyPartTest.args = {
   replyChild: {
+    _id: '',
     email: 'string',
     content: 'string',
     created_at: String(new Date()),

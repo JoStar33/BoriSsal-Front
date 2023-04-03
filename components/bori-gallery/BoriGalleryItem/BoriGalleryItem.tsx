@@ -1,7 +1,6 @@
 import { IBoriGallery } from "@/types/boriGallery";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { AiFillHeart } from "react-icons/ai";
 import styles from './bori_gallery_item.module.scss';
 
@@ -11,7 +10,7 @@ interface IProps {
 
 const BoriGalleryItem = ({ gallery }: IProps) => {
   return (
-    <Link href={`/bori-gallery/${gallery.bori_gallery_title}`}>
+    <Link href={`/bori-gallery/${gallery.bori_gallery_title}`} aria-label={`${gallery.bori_gallery_title} 페이지로 이동`}>
       <div className={styles.bori_gallery_item}>
         <div style={{ position: 'relative', width: "25vw", height: "25vw" }}>
           <Image

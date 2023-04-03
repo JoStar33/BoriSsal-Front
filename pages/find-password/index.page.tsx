@@ -35,7 +35,7 @@ const FindPassWord = () => {
         <div className={styles.input_box}>
           <InputPart onChangeAccount={onChangeAccount} validate={validateEmail(email)} inputName='email' inputLabel='이메일 주소: ' textOrPassword='text'></InputPart>
         </div>
-        <button onClick={() => mutate()}>비밀번호 발급</button>
+        <button aria-label="비밀번호 발급 버튼" onClick={() => mutate()}>비밀번호 발급</button>
       </div>
     </>
   );
