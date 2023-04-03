@@ -12,8 +12,8 @@ const AdminViewerButton = ({ pageState, status, setPageState}: IProps) => {
     <div>
       {
         status === pageState
-        ? <button className={styles.pushed_button} onClick={() => setPageState(status)}>{status}</button>
-        : <button className={styles.normal_button} onClick={() => setPageState(status)}>{status}</button>
+        ? <button className={styles.pushed_button} role={status} onClick={() => setPageState(status)}>{status}</button>
+        : <button className={styles.normal_button} role={status} onClick={() => setPageState(status)}>{status}</button>
       }
     </div>
   );

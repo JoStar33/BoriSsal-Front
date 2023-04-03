@@ -94,6 +94,7 @@ jobs:
           NEXT_PUBLIC_ADDRESS_KEY: ${{ secrets.NEXT_PUBLIC_ADDRESS_KEY }}
           NEXT_PUBLIC_AXIOS_TIMEOUT: ${{ secrets.NEXT_PUBLIC_AXIOS_TIMEOUT }}
           NEXT_PUBLIC_BORI_SSAL_API_URL: ${{ secrets.NEXT_PUBLIC_BORI_SSAL_API_URL }}
+          NEXT_PUBLIC_ADMIN_KEY: ${{ secrets.NEXT_PUBLIC_ADMIN_KEY }}
   # Deployment job
   # deploy:
   #   environment:
