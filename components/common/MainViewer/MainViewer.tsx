@@ -33,7 +33,7 @@ const MainViewer = () => {
       <figure
         role="image_test1"
         className={styles.bori_img1}
-        style={{ width: "25vw", height: "35vw" }}
+        style={{ width: "25vw", height: "44.335vw" }}
       >
         <Image className={styles.bori_img1} fill src={mainImage7} sizes="(min-width: 25vw) 25vw, (min-width: 35vw) 35vw, 35vw" alt="웃는 보리" />
       </figure>
