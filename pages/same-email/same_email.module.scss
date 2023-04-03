@@ -7,6 +7,7 @@
 
 .same_email_container {
   @include center;
+  background-color: white;
   flex-direction: column;
   div {
     display: flex;

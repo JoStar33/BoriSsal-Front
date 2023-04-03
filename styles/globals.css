@@ -111,6 +111,8 @@ particule {
 
 html,
 body {
+  color: black;
+  background-color: white;
   max-width: 100vw;
   overflow-x: hidden;
 }

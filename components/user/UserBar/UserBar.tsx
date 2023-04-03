@@ -25,7 +25,7 @@ const UserBar = ({ user }: IProps) => {
       }
       <div className={styles.userbar_container}>
         <Link href='/cart-page' aria-label="장바구니 페이지로 이동">
-          <BsFillCartFill style={{width: "3vw", height: "3vw", position: "relative"}}></BsFillCartFill>
+          <BsFillCartFill color='black' style={{width: "3vw", height: "3vw", position: "relative"}}></BsFillCartFill>
         </Link>
         <Link className={styles.user_profile_container} href='/user' aria-label="사용자 페이지로 이동">
           {

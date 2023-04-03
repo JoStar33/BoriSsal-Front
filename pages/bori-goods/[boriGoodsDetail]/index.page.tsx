@@ -11,6 +11,7 @@ import { initReplyMutation, initUser } from "@/utils/initData";
 import { AxiosError } from "axios";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useState } from "react";
+import styles from './bori_goods_detail.module.scss';
 
 interface IProps {
   goods: IBoriGoods;
@@ -40,7 +41,7 @@ const BoriGoodsDetail = ({
     )
   }
   return (
-    <div>
+    <div className={styles.bori_goods_detail_container}>
       {/*굿즈의 상세정보 조회*/}
       <BoriGoodsDetailInfo 
         goods={goods}

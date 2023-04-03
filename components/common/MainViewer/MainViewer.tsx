@@ -15,10 +15,12 @@ import mainImage8 from "/public/images/main_image8.png";
 const MainViewer = () => {
   const [position, setPosition] = useState<number>(0);
   const onScroll = () => {
+    console.log(window.scrollY);
     setPosition(window.scrollY);
   };
   const { setPageState } = usePageStore();
   useEffect(() => {
+    console.log(window.innerHeight);
     setPageState('');
     window.addEventListener("scroll", onScroll);
     return () => {
@@ -75,7 +77,7 @@ const MainViewer = () => {
       <p
         className={styles.desc3}
         style={{
-          opacity: (position - 750) / 30,
+          opacity: (position - 850) / 30,
         }}
       >
         보리는 세상에서 제일 귀여운 강아지입니다.
@@ -83,7 +85,7 @@ const MainViewer = () => {
       <p
         className={styles.desc3}
         style={{
-          opacity: (position - 850) / 30,
+          opacity: (position - 950) / 30,
         }}
       >
         이렇게 귀여운 강아지를
@@ -91,7 +93,7 @@ const MainViewer = () => {
       <p
         className={styles.desc3}
         style={{
-          opacity: (position - 950) / 30,
+          opacity: (position - 1050) / 30,
         }}
       >
         저 혼자만 볼 순 없죠.
@@ -99,7 +101,7 @@ const MainViewer = () => {
       <p
         className={styles.desc3}
         style={{
-          opacity: (position - 1050) / 50,
+          opacity: (position - 1150) / 50,
         }}
       >
         보리의 매력에 빠져보세요!
