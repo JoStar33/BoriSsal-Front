@@ -11,6 +11,7 @@ import {
   validatePassword,
   validatePasswordCheck
 } from "@/utils/validate";
+import { NextSeo } from "next-seo";
 import Image from "next/image";
 import React, { useMemo, useState } from "react";
 import styles from "./join.module.scss";
@@ -71,6 +72,9 @@ const Join = () => {
   };
   return (
     <>
+      <NextSeo
+        title="회원가입"
+        description="회원가입이라니! 어서오세요ㅎㅎ 저희 보리쌀에서 보리를 보며 힐링하세요😁"/>
       {dialog && (
         renderDialog()
       )}

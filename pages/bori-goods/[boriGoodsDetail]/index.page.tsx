@@ -10,6 +10,7 @@ import { IBoriGoods, ICategory } from "@/types/boriGoods";
 import { initReplyMutation, initUser } from "@/utils/initData";
 import { AxiosError } from "axios";
 import { GetStaticPaths, GetStaticProps } from "next";
+import { NextSeo } from "next-seo";
 import { useState } from "react";
 import styles from './bori_goods_detail.module.scss';
 
@@ -41,24 +42,29 @@ const BoriGoodsDetail = ({
     )
   }
   return (
-    <div className={styles.bori_goods_detail_container}>
-      {/*굿즈의 상세정보 조회*/}
-      <BoriGoodsDetailInfo 
-        goods={goods}
-        category={category} user={user}></BoriGoodsDetailInfo>
-      {
-        isLoading 
-          ? <ReplyLoading></ReplyLoading>
-          : <ReplyViewer
-            user={user}
-            refetch={refetch}
-            setLimit={setLimit}
-            limit={limit}
-            goods_id={goods._id}
-            mutationData={boriGoodsReply}
-          ></ReplyViewer>
-      }
-    </div>
+    <>
+      <NextSeo
+        title={`${goods.bori_goods_name}`}
+        description={`${goods.bori_goods_desc}`}/>
+      <div className={styles.bori_goods_detail_container}>
+        {/*굿즈의 상세정보 조회*/}
+        <BoriGoodsDetailInfo 
+          goods={goods}
+          category={category} user={user}></BoriGoodsDetailInfo>
+        {
+          isLoading 
+            ? <ReplyLoading></ReplyLoading>
+            : <ReplyViewer
+              user={user}
+              refetch={refetch}
+              setLimit={setLimit}
+              limit={limit}
+              goods_id={goods._id}
+              mutationData={boriGoodsReply}
+            ></ReplyViewer>
+        }
+      </div>
+    </>
   );
 };
 

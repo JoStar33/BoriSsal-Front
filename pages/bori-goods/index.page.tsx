@@ -5,6 +5,7 @@ import ErrorPage from '@/components/error/ErrorPage/ErrorPage';
 import { useSearch } from '@/hooks/common/useSearch/useSearch';
 import { IBoriGoods, ICategory } from '@/types/boriGoods';
 import { AxiosError } from 'axios';
+import { NextSeo } from 'next-seo';
 import React, { useState } from 'react';
 import styles from './bori_goods_page.module.scss';
 
@@ -34,53 +35,58 @@ const BoriGoodsPage = ({goodsData, goodsErrorMessage, categoryData, categoryErro
     return <ErrorPage errorText={categoryErrorMessage}></ErrorPage>
   }
   return (
-    <div className={styles.bori_goods_page_container}>
-      <h1>보리 굿즈</h1>
-      <div className={styles.user_place}>
-        <p className={styles.show_count}>전체 (수량: {goodsData.length})</p>
-        {
-          renderSearch()
-        }
-        <p className={styles.category_label}>카테고리: </p>
-        <div className={styles.styled_select}>
-          <select onChange={handleSelectLayout}>
-            {
-              categoryData.map((category) => 
-                <option 
-                  key={category._id} 
-                  value={category._id}
-                >
-                  {
-                    category.category_name
-                  }
-                </option>)
-            }
-          </select>
+    <>
+      <NextSeo
+        title="보리 굿즈"
+        description="깜찍한 보리의 다양한 굿즈들을 구경하시고 구매하세요!"/>
+      <div className={styles.bori_goods_page_container}>
+        <h1>보리 굿즈</h1>
+        <div className={styles.user_place}>
+          <p className={styles.show_count}>전체 (수량: {goodsData.length})</p>
+          {
+            renderSearch()
+          }
+          <p className={styles.category_label}>카테고리: </p>
+          <div className={styles.styled_select}>
+            <select onChange={handleSelectLayout}>
+              {
+                categoryData.map((category) => 
+                  <option 
+                    key={category._id} 
+                    value={category._id}
+                  >
+                    {
+                      category.category_name
+                    }
+                  </option>)
+              }
+            </select>
+          </div>
+        </div>
+        <div className={styles.bori_goods_container}>
+          {
+            goodsData
+            .filter((searchGoods) =>
+              searchGoods.bori_goods_name.includes(searchInfo)
+            ).filter((cateGoods) => {
+              if (categoryInfo === '0')
+                return cateGoods;
+              if(cateGoods.category_id === categoryInfo)
+                return cateGoods;
+              }
+            ).map((goods) =>           
+              <BoriGoodsItem 
+                key={goods._id}
+                bori_goods_image={goods.bori_goods_image} 
+                goods_like={goods.bori_goods_like} 
+                goods_name={goods.bori_goods_name} 
+                bori_goods_price={goods.bori_goods_price} 
+                category_name={categoryName(goods)}></BoriGoodsItem>
+            )
+          }
         </div>
       </div>
-      <div className={styles.bori_goods_container}>
-        {
-          goodsData
-          .filter((searchGoods) =>
-            searchGoods.bori_goods_name.includes(searchInfo)
-          ).filter((cateGoods) => {
-            if (categoryInfo === '0')
-              return cateGoods;
-            if(cateGoods.category_id === categoryInfo)
-              return cateGoods;
-            }
-          ).map((goods) =>           
-            <BoriGoodsItem 
-              key={goods._id}
-              bori_goods_image={goods.bori_goods_image} 
-              goods_like={goods.bori_goods_like} 
-              goods_name={goods.bori_goods_name} 
-              bori_goods_price={goods.bori_goods_price} 
-              category_name={categoryName(goods)}></BoriGoodsItem>
-          )
-        }
-      </div>
-    </div>
+    </>
   );
 };
 

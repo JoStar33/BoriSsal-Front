@@ -10,7 +10,8 @@ import { IBoriGallery } from '@/types/boriGallery';
 import { initReplyMutation, initUser } from '@/utils/initData';
 import { AxiosError } from 'axios';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import React, { useState } from 'react';
+import { NextSeo } from 'next-seo';
+import { useState } from 'react';
 
 interface IProps {
   gallery: IBoriGallery,
@@ -33,22 +34,27 @@ const BoriGalleryDetail = ({gallery, galleryErrorMessage}: IProps) => {
     )
   }
   return (
-    <div>
-      <BoriGalleryDetailInfo 
-        gallery={gallery} 
-        user={user}/>
-      {
-        isLoading 
-        ? <ReplyLoading></ReplyLoading>
-        : <ReplyViewer 
-            user={user} 
-            gallery_id={gallery._id} 
-            mutationData={boriGalleryReply} 
-            limit={0} 
-            setLimit={setLimit} 
-            refetch={refetch}/>
-      }
-    </div>
+    <>
+      <NextSeo
+        title={`${gallery.bori_gallery_title}`}
+        description={`${gallery.bori_gallery_desc}`}/>
+      <div>
+        <BoriGalleryDetailInfo 
+          gallery={gallery}
+          user={user}/>
+        {
+          isLoading 
+          ? <ReplyLoading></ReplyLoading>
+          : <ReplyViewer 
+              user={user} 
+              gallery_id={gallery._id} 
+              mutationData={boriGalleryReply} 
+              limit={0} 
+              setLimit={setLimit} 
+              refetch={refetch}/>
+        }
+      </div>
+    </>
   );
 };
 

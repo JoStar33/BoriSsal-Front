@@ -7,6 +7,7 @@ import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateD
 import { ILogin } from "@/types/auth";
 import { validateEmail, validatePassword } from "@/utils/validate";
 import { AxiosError } from "axios";
+import { NextSeo } from "next-seo";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -53,6 +54,9 @@ const Login = () => {
   };
   return (
     <>
+      <NextSeo
+        title="로그인"
+        description="어서오세요! 로그인을 하시고 더 다양한 기능을 활용해보세요~"/>
       {isError && (
         <ValidateDialog
           text={errorMessage(error as AxiosError)}

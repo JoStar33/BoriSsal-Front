@@ -7,6 +7,7 @@ import { useDeliverAddressQuery } from "@/hooks/user/useDeliverAddressQuery/useD
 import { useProfileUpdateMutation } from "@/hooks/user/useProfileUpdateMutation/useProfileUpdateMutation";
 import { useUserQuery } from "@/hooks/user/useUserQuery/useUserQuery";
 import { initDeliver, initUser } from "@/utils/initData";
+import { NextSeo } from "next-seo";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useLayoutEffect, useState } from "react";
@@ -48,6 +49,9 @@ const UserPage = () => {
       {dialog && (
         <PassWordChangeDialog setDialog={setDialog}></PassWordChangeDialog>
       )}
+      <NextSeo
+        title="사용자 페이지"
+        description="사용자의 정보를 수정할 수 있는 페이지입니다."/>
       <div className={styles.userpage_container}>
         <div className={styles.user_image__deliver_info}>
           <div className={styles.user_image}>

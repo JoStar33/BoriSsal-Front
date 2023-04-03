@@ -11,6 +11,7 @@ import { useCartStore } from '@/store/cart';
 import { usePageStore } from '@/store/page';
 import { IPostDeliverAddress } from '@/types/deliverAddress';
 import { initUser } from '@/utils/initData';
+import { NextSeo } from 'next-seo';
 import { useMemo } from 'react';
 import styles from './orderpage.module.scss';
 
@@ -73,6 +74,9 @@ const OrderPage = () => {
   }
   return (
     <>
+      <NextSeo
+        title="주문하기"
+        description="저희 보리의 굿즈를 주문하시는 페이지에요!"/>
       {
         dialog && renderDialog()
       }
