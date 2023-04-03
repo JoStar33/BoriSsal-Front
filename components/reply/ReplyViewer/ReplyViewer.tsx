@@ -1,4 +1,5 @@
 import ReplySkeleton from '@/components/loading/ReplySkeleton/ReplySkeleton';
+import { useBoriGalleryReplyMutation } from '@/hooks/bori-gallery/useBoriGalleryReplyMutation/useBoriGalleryReplyMutation';
 import { useBoriGoodsReplyMutation } from '@/hooks/bori-goods/useBoriGoodsReplyMutation/useBoriGoodsReplyMutation';
 import { useValidateDialog } from '@/hooks/common/useValidateDialog/useValidateDialog';
 import { IReplyMutation } from '@/types/reply';
@@ -9,8 +10,6 @@ import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from 'react-
 import ReplyEmpty from '../ReplyEmpty/ReplyEmpty';
 import ReplyPart from '../ReplyPart/ReplyPart';
 import styles from './reply_viewer.module.scss';
-import { useBoriGalleryReplyMutation } from '@/hooks/bori-gallery/useBoriGalleryReplyMutation/useBoriGalleryReplyMutation';
-import dynamic from 'next/dynamic';
 
 interface IProps {
   user: IUser;
@@ -34,7 +33,7 @@ const ReplyViewer = ({user, mutationData, goods_id, gallery_id, setLimit, limit,
   const replyRegist = () => {
     if(!replyContent.current)
       return;
-    if (!user.email) {
+    if (user.email.length < 3) {
       dialogText.current = '로그인후 이용해주세요!';
       setDialog(true);
       return;

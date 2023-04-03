@@ -7,6 +7,7 @@ export interface IReply {
 }
 
 export interface IReplyChild {
+  _id: string;
   email: string;
   content: string;
   created_at: string;

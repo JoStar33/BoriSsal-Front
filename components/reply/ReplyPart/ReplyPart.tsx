@@ -1,3 +1,4 @@
+import { useBoriGalleryChildReplyMutation } from "@/hooks/bori-gallery/useBoriGalleryChildReplyMutation/useBoriGalleryChildReplyMutation";
 import { useBoriGoodsChildReplyMutation } from "@/hooks/bori-goods/useBoriGoodsChildReplyMutation/useBoriGoodsChildReplyMutation";
 import { IReply } from "@/types/reply";
 import { IUser } from "@/types/user";
@@ -5,7 +6,6 @@ import { initUser } from "@/utils/initData";
 import React, { useRef, useState } from "react";
 import ReplyChildPart from "../ReplyChildPart/ReplyChildPart";
 import styles from "./reply_part.module.scss";
-import { useBoriGalleryChildReplyMutation } from "@/hooks/bori-gallery/useBoriGalleryChildReplyMutation/useBoriGalleryChildReplyMutation";
 
 interface IProps {
   user: IUser;
@@ -30,7 +30,7 @@ const ReplyPart = ({ user, isGoods, reply, setDialog, dialogText }: IProps) => {
   const replyRegist = () => {
     if (!replyInputRef.current) return;
     if (!user) return;
-    if (!user.email) {
+    if (user.email.length < 3) {
       setDialog(true);
       dialogText.current = "로그인후 이용해주세요!";
       return;
