@@ -7,7 +7,7 @@ const ShareButton = () => {
   }
   return (
     <div onClick={handleShare} className={styles.share_button}>
-      <CiShare1 size={25}/>
+      <CiShare1 style={{width: "3vw", height: "3vw"}}/>
     </div>
   );
 };

@@ -69,7 +69,7 @@ const BoriGoodsDetailController = ({user, goods, validateText, setValidateDialog
   return (
     <div className={styles.button_container}>
       <button onClick={handleCart} className={styles.cart_button}>
-        <BsFillCartFill style={{width: "3vw", height: "3vw"}}></BsFillCartFill>장바구니 담기
+        <BsFillCartFill color='black' style={{width: "3vw", height: "3vw"}}></BsFillCartFill>장바구니 담기
       </button>
       <button onClick={handleOrder} className={styles.order_button}>주문하기</button>
     </div>

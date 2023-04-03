@@ -1,6 +1,7 @@
 @mixin center {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .userpage_container {
@@ -8,51 +9,49 @@
   color: black;
   position: relative;
   @include center;
-  flex-direction: row;
-  .user_image__deliver_info {
-    display: flex;
+  flex-direction: column;
+  .user_image {
+    margin: 5vw;
+    align-items: center;
     flex-direction: column;
-    .user_image {
-      @include center;
-      align-items: center;
+    margin-right: 25vw;
+    @include center;
+  }
+  .user_info_container {
+    h1 {
+      font-weight: 800;
+    }
+    min-width: 40vw;
+    margin-bottom: 3vw;
+    .user_info_part {
       flex-direction: column;
-      margin-right: 5vw;
-      h1 {
-        color: black;
-        display: inline-block;
+      p {
+        font-size: 1vw;
+        font-weight: 800;
+      }
+      button {
+        background-color: #CCCCFF;
+        font-size: 1.3rem;
+        font-weight: 800;
+        border: none;
+        cursor: pointer;
+        border-radius: 20px;
       }
     }
   }
-  .user_info_part {
-    flex-direction: column;
-    margin-top: 2.6rem;
-    margin-left: 3vw;
-    p {
-      font-size: 1vw;
-      font-weight: 800;
-    }
+  .button_container {
+    margin: 10vw;
+    width: 100vw;
+    @include center;
     button {
       background-color: #CCCCFF;
-      font-size: 1.3rem;
       font-weight: 800;
+      font-size: 1.5vw;
+      width: 20vw;
       border: none;
-      cursor: pointer;
       border-radius: 20px;
+      cursor: pointer;
     }
-  }
-}
-.button_container {
-  margin-top: 10vw;
-  width: 100vw;
-  @include center;
-  button {
-    background-color: #CCCCFF;
-    font-weight: 800;
-    font-size: 1.5vw;
-    width: 20vw;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
   }
 }
 

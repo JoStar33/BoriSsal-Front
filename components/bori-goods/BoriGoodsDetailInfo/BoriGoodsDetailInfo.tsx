@@ -74,6 +74,12 @@ const BoriGoodsDetailInfo = ({
             goods={goods}/>
           <p>상품가격: {goods.bori_goods_price}</p>
           <ShareButton/>
+          <p className={styles.goods_desc_label}>굿즈 설명</p>
+          <div className={styles.goods_desc}>
+            {
+              goods.bori_goods_desc
+            }
+          </div>
         </div>
       </div>
     </>
