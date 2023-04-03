@@ -5,6 +5,8 @@
 }
 
 .bori_goods_page_container {
+  color: black;
+  background-color: white;
   @include center;
   flex-direction: column;
   h1 {
@@ -51,6 +53,7 @@
 .styled_select:focus { outline: none; }
 
 .styled_select select {
+  color: black;
   height: 34px;
   padding: 5px 0 5px 5px;
   background: transparent;

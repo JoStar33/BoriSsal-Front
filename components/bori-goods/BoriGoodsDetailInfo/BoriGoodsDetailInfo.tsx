@@ -1,14 +1,13 @@
+import ShareButton from '@/components/common/ShareButton/ShareButton';
 import SuccessDialog from '@/components/dialogs/SuccessDialog/SuccessDialog';
 import ValidateDialog from '@/components/dialogs/ValidateDialog/ValidateDialog';
-import { useLikeGoodsMutation } from '@/hooks/bori-goods/useLikeGoodsMutation/useLikeGoodsMutation';
 import { IBoriGoods, ICategory } from "@/types/boriGoods";
 import { IUser } from '@/types/user';
+import dynamic from 'next/dynamic';
 import Image from "next/image";
-import { SetStateAction, useRef, useState } from 'react';
-import { AiFillHeart } from "react-icons/ai";
+import { useRef, useState } from 'react';
 import BoriGoodsDetailController from '../BoriGoodsDetailController/BoriGoodsDetailController';
 import styles from './bori_goods_detail_info.module.scss';
-import dynamic from 'next/dynamic';
 
 interface IProps {
   goods: IBoriGoods;
@@ -74,6 +73,13 @@ const BoriGoodsDetailInfo = ({
             user={user}
             goods={goods}/>
           <p>상품가격: {goods.bori_goods_price}</p>
+          <ShareButton/>
+          <p className={styles.goods_desc_label}>굿즈 설명</p>
+          <div className={styles.goods_desc}>
+            {
+              goods.bori_goods_desc
+            }
+          </div>
         </div>
       </div>
     </>

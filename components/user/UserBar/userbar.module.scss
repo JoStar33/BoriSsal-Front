@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   margin-right: 5vw;
+  color: black;
   .non_profile {
     background-color: #D9D9D9;
     width: 3vw;
@@ -17,6 +18,7 @@
 }
 
 .name_space {
+  color: black;
   width: 8vw;
   font-size: 1vw;
   margin-right: 1rem;
@@ -32,6 +34,7 @@
 }
 
 .logout_button {
+  color: black;
   height: 2vw;
   width: 8vw;
   background-color: #fff;

@@ -8,6 +8,7 @@ import { useCartStore } from '@/store/cart';
 import { usePageStore } from '@/store/page';
 import { pop, render } from '@/utils/congratulate';
 import { initDeliver, initUser } from '@/utils/initData';
+import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import { useEffect, useMemo } from 'react';
 import styles from './complete_order_page.module.scss';
@@ -42,6 +43,9 @@ const CompleteOrderPage = () => {
   }, []);
   return (
     <>
+      <NextSeo
+        title="결제완료"
+        description="구매해주셔서 감사합니다! 저희 보리간식 비용으로 사용하겠습니다"/>
       {
         !orderShow
         ? <div className={styles.order_container}>

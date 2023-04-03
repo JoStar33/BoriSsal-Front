@@ -7,7 +7,7 @@
     margin-left: 2vw;
     p {
       font-weight: 800;
-      font-size: 1.4rem;
+      font-size: 1.4vw;
     }
     .goods_category {
       display: flex;
@@ -18,5 +18,18 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+  }
+  .goods_desc_label {
+    font-size: 1.4vw;
+    margin-top: 5vw;
+  }
+  .goods_desc {
+    height: 24vw;
+    width: 45vw;
+    border-radius: 20px;
+    padding: 2vw;
+    box-shadow: 0 6px 6px 0 gray;
+    font-size: 1.2vw;
+    font-weight: 800;
   }
 }

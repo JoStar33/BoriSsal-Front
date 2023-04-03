@@ -1,9 +1,9 @@
-import React, { Dispatch, MutableRefObject, SetStateAction } from 'react';
-import { AiFillHeart } from 'react-icons/ai';
-import styles from './bori_gallery_detail_like.module.scss';
+import { useLikeGalleryMutation } from '@/hooks/bori-gallery/useLikeGalleryMutation/useLikeGalleryMutation';
 import { IBoriGallery } from '@/types/boriGallery';
 import { IUser } from '@/types/user';
-import { useLikeGalleryMutation } from '@/hooks/bori-gallery/useLikeGalleryMutation/useLikeGalleryMutation';
+import { Dispatch, MutableRefObject, SetStateAction } from 'react';
+import { AiFillHeart } from 'react-icons/ai';
+import styles from './bori_gallery_detail_like.module.scss';
 
 interface IProps {
   validateText: MutableRefObject<string>;
@@ -29,7 +29,6 @@ const BoriGalleryDetailLike = ({validateText, setValidateDialog, gallery, user}:
     <>
       <div className={styles.gallery_like_container}>
         좋아요:
-        <div>
           <button onClick={handleLikeGoods}
             role='like'>
             <AiFillHeart
@@ -45,7 +44,6 @@ const BoriGalleryDetailLike = ({validateText, setValidateDialog, gallery, user}:
             ></AiFillHeart>
           </button>
           {gallery.bori_gallery_like}
-        </div>
       </div>
     </>
   );

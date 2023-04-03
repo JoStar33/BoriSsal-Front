@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AdminViewerButton from "../AdminViewerButton/AdminViewerButton";
 import BoriGalleryList from "../bori-gallery/bori-gallery-list/BoriGalleryList/BoriGalleryList";
 import BoriGalleryRegister from "../bori-gallery/bori-gallery-register/BoriGalleryRegister/BoriGalleryRegister";
 import BoriGoodsList from "../bori-goods/bori-goods-list/BoriGoodsList/BoriGoodsList";
@@ -11,11 +12,11 @@ const AdminViewer = () => {
   return (
     <div className={styles.admin_viewer_container}>
       <div className={styles.viewer_change_button_container}>
-        <button role="boriGoodsShow" onClick={() => setPageState("boriGoods")}>boriGoods</button>
-        <button role="goodsListShow" onClick={() => setPageState("goodsList")}>goodsList</button>
-        <button role="boriGalleryShow" onClick={() => setPageState("boriGallery")}>boriGallery</button>
-        <button role="galleryListShow" onClick={() => setPageState("galleryList")}>galleryList</button>
-        <button role="orderControlShow" onClick={() => setPageState("orderControl")}>orderControl</button>
+        <AdminViewerButton status="boriGoods" pageState={pageState} setPageState={setPageState}/>
+        <AdminViewerButton status="goodsList" pageState={pageState} setPageState={setPageState}/>
+        <AdminViewerButton status="boriGallery" pageState={pageState} setPageState={setPageState}/>
+        <AdminViewerButton status="galleryList" pageState={pageState} setPageState={setPageState}/>
+        <AdminViewerButton status="orderControl" pageState={pageState} setPageState={setPageState}/>
       </div>
       <div className={styles.admin_viewer}>
         {
