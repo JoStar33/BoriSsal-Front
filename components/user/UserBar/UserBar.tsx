@@ -48,6 +48,7 @@ const UserBar = ({ user }: IProps) => {
           <p>{user.nick}</p>
         </div>
         <button 
+          aria-label="로그아웃 버튼"
           className={styles.logout_button} 
           onClick={() => mutate()}>
           Logout

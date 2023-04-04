@@ -88,7 +88,7 @@ const CompleteOrderPage = () => {
               </p>
             </div>
             <Link href='/'>
-              <button className={styles.order_button}>홈으로 가기</button>
+              <button aria-label="홈으로 가기 버튼" className={styles.order_button}>홈으로 가기</button>
             </Link>
           </div>
         : <ErrorPage errorText='잘못된 접근입니다!' ></ErrorPage>

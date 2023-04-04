@@ -55,10 +55,10 @@ const CartPage = () => {
         </div>
         {
           cartData.length > 0 
-          ? <button role="order" className={styles.order_button} onClick={() => handleOrder()}>
+          ? <button aria-label="주문 버튼" role="order" className={styles.order_button} onClick={() => handleOrder()}>
               주문하러 가기
             </button>
-          : <button className={styles.order_button} onClick={() => handleShowGoods()}>
+          : <button aria-label="굿즈 보기 버튼" className={styles.order_button} onClick={() => handleShowGoods()}>
               굿즈보러 가기
             </button>
         }

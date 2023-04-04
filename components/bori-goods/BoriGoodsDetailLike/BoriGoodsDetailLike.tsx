@@ -35,6 +35,7 @@ const BoriGoodsDetailLike = ({
         좋아요:
         <div>
           <button onClick={handleLikeGoods}
+            aria-label="좋아요 버튼"
             role='like'>
             <AiFillHeart
               role='like-heart'

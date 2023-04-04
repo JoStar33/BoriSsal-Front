@@ -54,6 +54,7 @@ const UserDeliverAddressPart = ({
         {dialog && (
           <div className={styles.address_dialog_background}>
             <button
+              aria-label="주소 다이얼로그 닫기 버튼"
               type="button"
               onClick={() => setDialog(false)}
               className={styles.postcode_button}
@@ -83,6 +84,7 @@ const UserDeliverAddressPart = ({
         )}
         {!(addressType === "address") ? (
           <button
+            aria-label="주소 수정 버튼"
             className={styles.modify_button}
             onClick={() => mutate()}
             role="modify_address_button"
@@ -91,6 +93,7 @@ const UserDeliverAddressPart = ({
           </button>
         ) : (
           <button
+            aria-label="주소 검색 버튼"
             className={styles.address_search_button}
             onClick={() => setDialog(true)}
           >

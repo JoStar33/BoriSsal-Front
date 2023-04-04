@@ -28,22 +28,23 @@
   justify-content: flex-start;
   p {
     margin: 0;
-    height: 1.4vw;
+    height: 1.3rem;
     font-weight: 800;
   }
 }
 
 .logout_button {
   color: black;
-  height: 2vw;
+  height: 2rem;
   width: 8vw;
   background-color: #fff;
   font-size: 1vw;
   font-weight: 800;
   display: flex;
   align-items: center;
+  justify-content: center;
   border: none;
-  border-radius: 20px;
+  border-radius: 12px;
   cursor: pointer;
   text-overflow: ellipsis;
 }

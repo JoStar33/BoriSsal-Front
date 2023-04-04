@@ -14,6 +14,8 @@ const Custom404 = () => {
           width={220}
           height={400}
           src={error_bori}
+          sizes="
+          33vw"
           alt='404 에러창입니다.'></Image>
         <div className={styles.text_container}>
           <h1>찾을 수 없는 페이지입니다.</h1>

@@ -89,7 +89,7 @@ const UserPage = () => {
           <div className={styles.user_info_part}>
             <p>회원 이메일: {user.email}</p>
             <p>회원 닉네임: {user.nick}</p>
-            <button onClick={() => setDialog(true)}>비밀번호 변경</button>
+            <button aria-label="비밀번호 변경 버튼" onClick={() => setDialog(true)}>비밀번호 변경</button>
           </div>
         </div>
         <UserDeliverAddressViewer 
@@ -97,8 +97,8 @@ const UserPage = () => {
           isLoading={isLoading} 
           isError={isError}/>
         <div className={styles.button_container}>
-          <Link href="/order-history">
-            <button>주문내역 보러가기</button>
+          <Link href="/order-history" aria-label="주문내역 보러가기 링크">
+            <button aria-label="주문내역 보러가기 버튼">주문내역 보러가기</button>
           </Link>
         </div>
       </div>
