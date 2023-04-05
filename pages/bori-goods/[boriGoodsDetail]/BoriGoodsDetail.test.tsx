@@ -41,12 +41,12 @@ test("BoriGoodsDetail의 getStaticPaths 동작 테스트", async () => {
     defaultLocale: undefined
   }
   const value = await getStaticPaths(locales);
-  expect((value.paths[0] as any).params.boriGoodsDetail).toEqual("보리 티셔츠");
+  expect((value.paths[0] as any).params.boriGoodsDetail).toEqual("23");
 });
 
 
 test("BoriGoodsDetail의 getStaticProps 동작 테스트", async () => {
-  const value = await getStaticProps({params: { boriGoodsDetail: '보리 티셔츠'}});
+  const value = await getStaticProps({params: { boriGoodsDetail: '23'}});
   expect(value).toEqual({props: {
     goods: {
       _id: "23",
