@@ -12,7 +12,6 @@ import { initReplyMutation, initUser } from "@/utils/initData";
 import { AxiosError } from "axios";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { NextSeo } from "next-seo";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import styles from './bori_goods_detail.module.scss';
 
@@ -78,7 +77,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     goodsData = res;
   });
   const paths = goodsData.map((goods) => ({
-    params: { boriGoodsDetail: goods.bori_goods_name },
+    params: { boriGoodsDetail: goods._id },
   }));
 
   return { paths, fallback: 'blocking' };
@@ -111,7 +110,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       categoryErrorMessage = errorMessage(error);
     });
   const goods = goodsData.find(
-    (goods) => goods.bori_goods_name === params.boriGoodsDetail
+    (goods) => goods._id === params.boriGoodsDetail
   );
   if (!goods){
     return {
