@@ -2,6 +2,7 @@ import { getBoriGoods, getCategory } from "@/apis/bori-goods/boriGoods";
 import { errorMessage } from "@/apis/error/customError";
 import BoriGoodsDetailInfo from "@/components/bori-goods/BoriGoodsDetailInfo/BoriGoodsDetailInfo";
 import ErrorPage from "@/components/error/ErrorPage/ErrorPage";
+import Loading from "@/components/loading/Loading/Loading";
 import ReplyLoading from "@/components/loading/ReplyLoading/ReplyLoading";
 import ReplyViewer from "@/components/reply/ReplyViewer/ReplyViewer";
 import { useBoriGoodsReplyQuery } from "@/hooks/bori-goods/useBoriGoodsReplyQuery/useBoriGoodsReplyQuery";
@@ -11,6 +12,7 @@ import { initReplyMutation, initUser } from "@/utils/initData";
 import { AxiosError } from "axios";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { NextSeo } from "next-seo";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import styles from './bori_goods_detail.module.scss';
 
@@ -27,9 +29,13 @@ const BoriGoodsDetail = ({
   categoryErrorMessage,
   goodsErrorMessage,
 }: IProps) => {
+  const router = useRouter();
   const [limit, setLimit] = useState<number>(1);
   let { data: user } = useUserQuery();
   let { data: boriGoodsReply, isLoading, refetch, error } = useBoriGoodsReplyQuery(goods._id, limit);
+  if(router.isFallback) {
+    return <Loading/>
+  }
   if (!user) {
     user = initUser;
   }
@@ -79,7 +85,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     params: { boriGoodsDetail: goods.bori_goods_name },
   }));
 
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
