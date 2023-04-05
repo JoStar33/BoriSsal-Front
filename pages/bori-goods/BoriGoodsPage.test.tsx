@@ -25,18 +25,18 @@ const initRender = () => {
       bori_goods_image: '/none',
       created_at: new Date,
     }
-  ]} errorMessage={""} categoryData={[
+  ]} categoryData={[
     {
       _id: "87",
-      category_name:"학용품"
+      category_name: "학용품"
     }, {
       _id: "88",
-      category_name:"의류"
+      category_name: "의류"
     }, {
       _id: "89",
       category_name: "생활용품"
     }
-  ]}></BoriGoodsPage>);
+  ]} goodsErrorMessage={""} categoryErrorMessage={""}></BoriGoodsPage>);
 };
 
 test("보리 굿즈 페이지 카테고리 반영 테스트", () => {
