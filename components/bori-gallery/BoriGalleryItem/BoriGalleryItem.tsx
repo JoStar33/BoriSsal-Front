@@ -10,7 +10,7 @@ interface IProps {
 
 const BoriGalleryItem = ({ gallery }: IProps) => {
   return (
-    <Link href={`/bori-gallery/${gallery.bori_gallery_title}`} aria-label={`${gallery.bori_gallery_title} 페이지로 이동`}>
+    <Link href={`/bori-gallery/${gallery._id}`} aria-label={`${gallery.bori_gallery_title} 페이지로 이동`}>
       <div className={styles.bori_gallery_item}>
         <div style={{ position: 'relative', width: "25vw", height: "25vw" }}>
           <Image

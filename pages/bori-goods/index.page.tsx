@@ -77,10 +77,7 @@ const BoriGoodsPage = ({goodsData, goodsErrorMessage, categoryData, categoryErro
             ).map((goods) =>           
               <BoriGoodsItem 
                 key={goods._id}
-                bori_goods_image={goods.bori_goods_image} 
-                goods_like={goods.bori_goods_like} 
-                goods_name={goods.bori_goods_name} 
-                bori_goods_price={goods.bori_goods_price} 
+                goods={goods}
                 category_name={categoryName(goods)}></BoriGoodsItem>
             )
           }

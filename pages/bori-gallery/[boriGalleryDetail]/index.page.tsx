@@ -69,7 +69,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     galleryData = res;
   });
   const paths = galleryData.map((gallery) => ({
-    params: { boriGalleryDetail: gallery.bori_gallery_title },
+    params: { boriGalleryDetail: gallery._id },
   }));
 
   return { paths, fallback: 'blocking' };
@@ -93,7 +93,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       galleryErrorMessage = errorMessage(error);
     });
   const gallery = galleryData.find(
-    (gallery) => gallery.bori_gallery_title === params.boriGalleryDetail
+    (gallery) => gallery._id === params.boriGalleryDetail
   );
   if (!gallery){
     return {
