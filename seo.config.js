@@ -9,14 +9,8 @@ export default {
   },
   additionalLinkTags: [
     {
-      rel: 'shortcut icon',
-      href: '/favicon.ico',
+      rel: 'icon',
+      href: 'favicon.ico',
     },
   ],
-  // additionalMetaTags: [
-  //   {
-  //     name: 'naver-site-verification',
-  //     content: '7bd885b384be0f905aad30d00607e0481d4be908',
-  //   },
-  // ],
 };
