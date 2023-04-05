@@ -7,6 +7,7 @@
   input {
     outline: none;
     border: none;
+    background-color: white;
     color: black;
   }
   width: 85vw;
@@ -28,6 +29,7 @@
       display: flex;
       flex-direction: row;
       input {
+        background-color: white;
         color: black;
         font-size: 2vw;
         font-weight: 800;
@@ -85,6 +87,8 @@
         font-weight: 800;
       }
       input {
+        background-color: white;
+        color: black;
         font-weight: 800;
         text-align: center;
         width: 3vw;
