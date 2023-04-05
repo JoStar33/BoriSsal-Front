@@ -4,16 +4,16 @@ import { useUserQuery } from '@/hooks/user/useUserQuery/useUserQuery';
 import { initUser } from '@/utils/initData';
 
 const HeaderUserPart = () => {
-  let { data: user, isError } = useUserQuery();
+  let { data: user, isError, isSuccess } = useUserQuery();
   if(!user) {
     user = initUser;
   }
   return (
     <>
-      { user && !isError ? (
-        <UserBar user={user}></UserBar>
-      ) : (
+      { !isSuccess ? (
         <LoginButton></LoginButton>
+      ) : (
+        <UserBar user={user}></UserBar>
       )}
     </>
   );

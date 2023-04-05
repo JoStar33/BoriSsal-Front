@@ -101,7 +101,16 @@ particule {
     --card-border-rgb: 200, 200, 200;
   }
 }
-input,
+input[type="text"] {
+  background-color: white;
+  color: black;
+}
+
+input[type="password"] {
+  background-color: white;
+  color: black;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
