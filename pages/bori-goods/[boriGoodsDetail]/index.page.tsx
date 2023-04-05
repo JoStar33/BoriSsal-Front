@@ -29,13 +29,9 @@ const BoriGoodsDetail = ({
   categoryErrorMessage,
   goodsErrorMessage,
 }: IProps) => {
-  const router = useRouter();
   const [limit, setLimit] = useState<number>(1);
   let { data: user } = useUserQuery();
   let { data: boriGoodsReply, isLoading, refetch, error } = useBoriGoodsReplyQuery(goods._id, limit);
-  if(router.isFallback) {
-    return <Loading/>
-  }
   if (!user) {
     user = initUser;
   }
@@ -85,7 +81,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     params: { boriGoodsDetail: goods.bori_goods_name },
   }));
 
-  return { paths, fallback: true };
+  return { paths, fallback: 'blocking' };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {

@@ -21,13 +21,9 @@ interface IProps {
 }
 
 const BoriGalleryDetail = ({gallery, galleryErrorMessage}: IProps) => {
-  const router = useRouter();
   const [limit, setLimit] = useState<number>(1);
   let { data: user } = useUserQuery();
-  let { data: boriGalleryReply, isLoading, refetch, error } = useBoriGalleryReplyQuery(gallery._id, limit);
-  if(router.isFallback) {
-    return <Loading/>
-  }
+  let { data: boriGalleryReply, isLoading, refetch, error } = useBoriGalleryReplyQuery(gallery?._id, limit);
   if (!user) {
     user = initUser;
   }
@@ -76,7 +72,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     params: { boriGalleryDetail: gallery.bori_gallery_title },
   }));
 
-  return { paths, fallback: true };
+  return { paths, fallback: 'blocking' };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
@@ -106,6 +102,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       }
     }
   } 
+  console.log(gallery);
   return {
     props: {
       gallery,
