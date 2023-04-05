@@ -64,6 +64,7 @@ const UserPage = () => {
                   <Image
                     style={{ borderRadius: "100px" }}
                     alt="프로필 이미지"
+                    placeholder="blur"
                     fill
                     src={
                       process.env.NEXT_PUBLIC_BORI_SSAL_API_URL +
