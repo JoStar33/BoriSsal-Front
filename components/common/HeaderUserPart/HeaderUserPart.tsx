@@ -4,7 +4,7 @@ import { useUserQuery } from '@/hooks/user/useUserQuery/useUserQuery';
 import { initUser } from '@/utils/initData';
 
 const HeaderUserPart = () => {
-  let { data: user, isError, isSuccess } = useUserQuery();
+  let { data: user, isSuccess } = useUserQuery();
   if(!user) {
     user = initUser;
   }
