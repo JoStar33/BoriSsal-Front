@@ -14,11 +14,11 @@
   margin-left: 1rem;
   @include center;
   flex-direction: row;
+  font-size: 0.8rem;
   .state_cover {
     @include center;
     width: 30px;
     height: 30px;
-    border: 3.5px solid black;
     border-radius: 100px;
   }
   font-weight: 800;

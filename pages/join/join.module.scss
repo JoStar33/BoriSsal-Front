@@ -8,9 +8,16 @@
   background-color: white;
   @include center;
   flex-direction: column;
+}
+
+.join_header {
+  margin-right: 3vw;
+  @include center;
+  flex-direction: row;
   h1 {
     font-size: 4vw;
-    margin: 6vh;
+    margin-top: 6vh;
+    margin-bottom: 6vh;
   }
 }
 
