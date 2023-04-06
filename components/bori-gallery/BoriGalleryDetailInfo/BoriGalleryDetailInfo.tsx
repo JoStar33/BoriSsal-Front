@@ -22,7 +22,7 @@ const BoriGalleryDetailInfo = ({ gallery, user }: IProps) => {
           <Image
             style={{ border: "2px solid black" }}
             fill
-            src={`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}${gallery.bori_gallery_image}`}
+            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${gallery.bori_gallery_image}`}
             alt={gallery.bori_gallery_title}
           ></Image>
         </figure>

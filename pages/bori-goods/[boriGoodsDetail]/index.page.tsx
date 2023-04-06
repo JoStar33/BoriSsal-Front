@@ -2,7 +2,6 @@ import { getBoriGoods, getCategory } from "@/apis/bori-goods/boriGoods";
 import { errorMessage } from "@/apis/error/customError";
 import BoriGoodsDetailInfo from "@/components/bori-goods/BoriGoodsDetailInfo/BoriGoodsDetailInfo";
 import ErrorPage from "@/components/error/ErrorPage/ErrorPage";
-import Loading from "@/components/loading/Loading/Loading";
 import ReplyLoading from "@/components/loading/ReplyLoading/ReplyLoading";
 import ReplyViewer from "@/components/reply/ReplyViewer/ReplyViewer";
 import { useBoriGoodsReplyQuery } from "@/hooks/bori-goods/useBoriGoodsReplyQuery/useBoriGoodsReplyQuery";
@@ -12,7 +11,7 @@ import { initReplyMutation, initUser } from "@/utils/initData";
 import { AxiosError } from "axios";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { NextSeo } from "next-seo";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import styles from './bori_goods_detail.module.scss';
 
 interface IProps {
@@ -30,7 +29,13 @@ const BoriGoodsDetail = ({
 }: IProps) => {
   const [limit, setLimit] = useState<number>(1);
   let { data: user } = useUserQuery();
-  let { data: boriGoodsReply, isLoading, refetch, error } = useBoriGoodsReplyQuery(goods._id, limit);
+  const goodsId = useMemo(() => {
+    if (!goods) {
+      return "none"
+    }
+    return goods._id
+  }, [goods]);
+  let { data: boriGoodsReply, isLoading, refetch, error } = useBoriGoodsReplyQuery(goodsId, limit);
   if (!user) {
     user = initUser;
   }

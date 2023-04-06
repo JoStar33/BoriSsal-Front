@@ -67,7 +67,7 @@ const UserPage = () => {
                     placeholder="blur"
                     fill
                     src={
-                      process.env.NEXT_PUBLIC_BORI_SSAL_API_URL +
+                      process.env.NEXT_PUBLIC_IMAGE_URL +
                       user.profile_image
                     }
                   ></Image>

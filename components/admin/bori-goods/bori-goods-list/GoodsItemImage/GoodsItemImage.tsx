@@ -41,7 +41,7 @@ const GoodsItemImage = ({boriGoods, setDialog, dialogText, setSuccessDialog, suc
         >
           <Image
             fill
-            src={`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}${boriGoods.bori_goods_image}`}
+            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${boriGoods.bori_goods_image}`}
             alt={boriGoods.bori_goods_name}
           />
         </figure>

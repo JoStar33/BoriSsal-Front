@@ -36,7 +36,7 @@ const UserBar = ({ user }: IProps) => {
                     style={{borderRadius: '100px'}}
                     fill
                     alt='프로필 이미지'
-                    src={process.env.NEXT_PUBLIC_BORI_SSAL_API_URL + user.profile_image}></Image>
+                    src={process.env.NEXT_PUBLIC_IMAGE_URL + user.profile_image}></Image>
                 </figure>
               : <div
                   role='non_profile'

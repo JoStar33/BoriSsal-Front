@@ -51,7 +51,7 @@ const BoriGoodsDetailInfo = ({
             <Image
               style={{border: '2px solid black'}}
               fill
-              src={`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}${goods.bori_goods_image}`}
+              src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${goods.bori_goods_image}`}
               alt={goods.bori_goods_name}
             ></Image>
           </figure>
