@@ -4,7 +4,7 @@ export default {
     type: "website",
     site_name: "보리쌀",
     images: [
-      { url: "https://nextjs.org/static/blog/next-13/twitter-card.png" },
+      { url: "https://borissal-bucket.s3.ap-northeast-2.amazonaws.com/img/bori-ssal-og-image.png" },
     ],
   },
   additionalLinkTags: [
