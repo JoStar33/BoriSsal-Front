@@ -13,7 +13,7 @@ const OrderGoodsItem = ({ boriGoods }: IProps) => {
         <Image 
           fill
           alt={boriGoods.bori_goods_name}
-          src={`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}${boriGoods.bori_goods_image}`}></Image>
+          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${boriGoods.bori_goods_image}`}></Image>
       </figure>
       <div className={styles.goods_info}>
         <p>{`상품명: ${boriGoods.bori_goods_name}`}</p>

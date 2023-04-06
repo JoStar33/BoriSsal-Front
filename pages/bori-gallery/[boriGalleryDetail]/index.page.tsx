@@ -2,7 +2,6 @@ import { getBoriGallery } from '@/apis/bori-gallery/boriGallery';
 import { errorMessage } from '@/apis/error/customError';
 import BoriGalleryDetailInfo from '@/components/bori-gallery/BoriGalleryDetailInfo/BoriGalleryDetailInfo';
 import ErrorPage from '@/components/error/ErrorPage/ErrorPage';
-import Loading from '@/components/loading/Loading/Loading';
 import ReplyLoading from '@/components/loading/ReplyLoading/ReplyLoading';
 import ReplyViewer from '@/components/reply/ReplyViewer/ReplyViewer';
 import { useBoriGalleryReplyQuery } from '@/hooks/bori-gallery/useBoriGalleryReplyQuery/useBoriGalleryReplyQuery';
@@ -12,8 +11,7 @@ import { initReplyMutation, initUser } from '@/utils/initData';
 import { AxiosError } from 'axios';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 interface IProps {
   gallery: IBoriGallery,
@@ -21,9 +19,15 @@ interface IProps {
 }
 
 const BoriGalleryDetail = ({gallery, galleryErrorMessage}: IProps) => {
+  const galleryId = useMemo(() => {
+    if (!gallery) {
+      return "none"
+    }
+    return gallery._id
+  }, [gallery]);
   const [limit, setLimit] = useState<number>(1);
   let { data: user } = useUserQuery();
-  let { data: boriGalleryReply, isLoading, refetch, error } = useBoriGalleryReplyQuery(gallery?._id, limit);
+  let { data: boriGalleryReply, isLoading, refetch, error } = useBoriGalleryReplyQuery(galleryId, limit);
   if (!user) {
     user = initUser;
   }

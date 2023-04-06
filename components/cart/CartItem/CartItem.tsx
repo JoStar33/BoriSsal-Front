@@ -58,7 +58,7 @@ const CartItem = ({cart_id, cartGoods}: IProps) => {
           <figure style={{width: '14vw', height: '14vw', position: 'relative'}}>
             <Image
               fill
-              src={`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}${cartGoods.bori_goods_image}`}
+              src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${cartGoods.bori_goods_image}`}
               alt={cartGoods.bori_goods_name}></Image>
           </figure>
           <div>

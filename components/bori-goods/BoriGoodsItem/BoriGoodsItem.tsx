@@ -1,8 +1,8 @@
+import { IBoriGoods } from '@/types/boriGoods';
 import Image from 'next/image';
 import Link from 'next/link';
 import { AiFillHeart } from 'react-icons/ai';
 import styles from './bori_goods_item.module.scss';
-import { IBoriGoods } from '@/types/boriGoods';
 
 interface IProps {
   goods: IBoriGoods;
@@ -15,7 +15,7 @@ const BoriGoodsItem = ({goods, category_name}: IProps) => {
       <div className={styles.bori_goods_item}>
         <div>
           <div style={{ position: 'relative', width: "25vw", height: "25vw" }}>
-            <Image src={`${process.env.NEXT_PUBLIC_BORI_SSAL_API_URL}${goods.bori_goods_image}`} alt={goods.bori_goods_name} sizes="(min-width: 25vw) 25vw" fill></Image>
+            <Image src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${goods.bori_goods_image}`} alt={goods.bori_goods_name} sizes="(min-width: 25vw) 25vw" fill></Image>
           </div>
           <div className={styles.heart_box}>
             <AiFillHeart style={{ width: "2vw", height: "2vw" }}></AiFillHeart>
