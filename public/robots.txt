@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://bori-ssal.vercel.app
+
+# Sitemaps
+Sitemap: https://bori-ssal.vercel.app/sitemap.xml

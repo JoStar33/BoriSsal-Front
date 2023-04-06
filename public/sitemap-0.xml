@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>https://bori-ssal.vercel.app</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/admin-page</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/bori-gallery</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/bori-goods</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/cart-page</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/complete-order</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/find-password</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/join</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/login</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/order</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/order-history</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/same-email</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/user</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/en/bori-goods</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/en/bori-gallery</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/bori-gallery/642e2a6cd42adf88f55b8349</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/bori-goods/6413ef52adb9b7cdb00e8789</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/bori-goods/64196d2665890a85382a7e76</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/bori-goods/64196d7f65890a85382a7e77</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/bori-goods/64196db665890a85382a7e78</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/bori-goods/64196e5765890a85382a7e79</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bori-ssal.vercel.app/bori-goods/64196f4565890a85382a7e7b</loc><lastmod>2023-04-06T06:09:40.968Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+</urlset>
