@@ -25,12 +25,12 @@ const UserBar = ({ user }: IProps) => {
       }
       <div className={styles.userbar_container}>
         <Link href='/cart-page' aria-label="장바구니 페이지로 이동">
-          <BsFillCartFill color='black' style={{width: "3vw", height: "3vw", position: "relative"}}></BsFillCartFill>
+          <BsFillCartFill color='black' style={{width: "3vw", height: "3vw", position: "relative", minWidth: "1.5rem", minHeight: "1.5rem"}}></BsFillCartFill>
         </Link>
         <Link className={styles.user_profile_container} href='/user' aria-label="사용자 페이지로 이동">
           {
             user.profile_image 
-              ? <figure style={{width: '3vw', height: "3vw", position: "relative", borderRadius: "100px"}}>
+              ? <figure style={{width: '3vw', height: "3vw", position: "relative", borderRadius: "100px", minWidth: "1.5rem", minHeight: "1.5rem"}}>
                   <Image
                     role='profile'
                     style={{borderRadius: '100px'}}
