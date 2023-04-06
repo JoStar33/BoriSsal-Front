@@ -1,4 +1,3 @@
-
 import { usePageStore } from "@/store/page";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,7 +18,7 @@ const MainViewer = () => {
   };
   const { setPageState } = usePageStore();
   useEffect(() => {
-    setPageState('');
+    setPageState("");
     window.addEventListener("scroll", onScroll);
     return () => {
       window.removeEventListener("scroll", onScroll);
@@ -31,9 +30,16 @@ const MainViewer = () => {
       <figure
         role="image_test1"
         className={styles.bori_img1}
-        style={{ width: "25vw", height: "44.335vw" }}
+        style={{ width: "27vw", height: "48vw" }}
       >
-        <Image className={styles.bori_img1} fill src={mainImage7} sizes="(min-width: 25vw) 25vw, (min-width: 35vw) 35vw, 35vw" alt="웃는 보리" />
+        <Image
+          className={styles.bori_img1}
+          fill
+          style={{objectFit: "cover"}}
+          src={mainImage7}
+          sizes="(min-width: 25vw) 25vw, (min-width: 35vw) 35vw, 35vw"
+          alt="웃는 보리"
+        />
       </figure>
       <div
         className={styles.bg}
@@ -56,21 +62,34 @@ const MainViewer = () => {
         className={styles.bori_img2}
         style={{
           width: "23vw",
-          height: "37vw",
+          height: "45vw",
           transform: `translateX(${-position}px)`,
         }}
       >
-        <Image src={mainImage5} fill alt="움직이는 보리1" sizes="(min-width: 23vw) 23vw, (min-width: 37vw) 37vw, 37vw"/>
+        <Image
+          src={mainImage5}
+          fill
+          style={{objectFit: "cover"}}
+          alt="움직이는 보리1"
+          sizes="(min-width: 23vw) 23vw, (min-width: 37vw) 37vw, 37vw"
+        />
       </figure>
       <figure
         className={styles.bori_img3}
         style={{
-          width: "35vw",
-          height: "20vw",
+          width: "40vw",
+          height: "21vw",
           transform: `translateX(${position}px)`,
         }}
       >
-        <Image role="image_test3" src={mainImage4} fill alt="움직이는 보리2" sizes="(min-width: 35vw) 35vw, (min-width: 20vw) 20vw, 20vw"/>
+        <Image
+          role="image_test3"
+          src={mainImage4}
+          fill
+          style={{objectFit: "cover"}}
+          alt="움직이는 보리2"
+          sizes="(min-width: 35vw) 35vw, (min-width: 20vw) 20vw, 20vw"
+        />
       </figure>
       <p
         className={styles.desc3}
@@ -108,48 +127,72 @@ const MainViewer = () => {
         className={styles.bori_img4}
         role="image_test"
         style={{
-          width: "33vw",
-          height: "20vw",
+          width: "33.4vw",
+          height: "23vw",
           transform: `translateY(${position / 2}px)`,
         }}
       >
-        <Image src={mainImage1} fill alt="멍보리" sizes="(min-width: 35vw) 35vw, (min-width: 20vw) 20vw, 20vw"/>
+        <Image
+          src={mainImage1}
+          fill
+          style={{objectFit: "cover"}}
+          alt="멍보리"
+          sizes="(min-width: 35vw) 35vw, (min-width: 20vw) 20vw, 20vw"
+        />
       </figure>
       <figure
         className={styles.bori_img5}
         style={{
           width: "14vw",
-          height: "20vw",
-          transform: `translateY(${position / 4}px)`,
+          height: "26vw",
+          transform: `translateY(${position / 8}px)`,
         }}
       >
-        <Image src={mainImage2} fill alt="흐릿보리" />
+        <Image src={mainImage2} fill alt="흐릿보리" style={{objectFit: "cover"}} />
       </figure>
       <figure
         className={styles.bori_img6}
         style={{
           width: "30vw",
-          height: "43vw",
+          height: "58vw",
           position: "relative",
           transform: `translateX(${-position / 3}px)`,
         }}
       >
-        <Image src={mainImage6} fill alt="눕는 보리" sizes="(min-width: 35vw) 35vw, (min-width: 20vw) 20vw, 20vw" />
+        <Image
+          style={{objectFit: "cover"}}
+          src={mainImage6}
+          fill
+          alt="눕는 보리"
+          sizes="(min-width: 35vw) 35vw, (min-width: 20vw) 20vw, 20vw"
+        />
       </figure>
       <div className={styles.last_box}>
-        <figure style={{width: "25vw", height: "25vw", position: "relative"}}>
-          <Image src={mainImage8} fill alt="애기보리" sizes="(min-width: 35vw) 35vw, (min-width: 20vw) 20vw, 20vw" />
+        <figure style={{ width: "26.1vw", height: "25vw", position: "relative" }}>
+          <Image
+            style={{objectFit: "cover"}}
+            src={mainImage8}
+            fill
+            alt="애기보리"
+            sizes="(min-width: 35vw) 35vw, (min-width: 20vw) 20vw, 20vw"
+          />
         </figure>
         <h1>어때 우리 귀여운 보리</h1>
         <h1>만나보지 않을래?</h1>
         <div className={styles.last_button_box}>
           <Link href="/bori-goods" aria-label="굿즈페이지로 이동">
-            <button aria-label="굿즈 페이지 가기" className={styles.goods_button}>
+            <button
+              aria-label="굿즈 페이지 가기"
+              className={styles.goods_button}
+            >
               굿즈페이지 가기
             </button>
           </Link>
           <Link href="/bori-gallery" aria-label="보리갤러리 페이지로 이동">
-            <button aria-label="보리갤러리 가기" className={styles.bori_gallery_button}>
+            <button
+              aria-label="보리갤러리 가기"
+              className={styles.bori_gallery_button}
+            >
               보리갤러리 가기
             </button>
           </Link>
