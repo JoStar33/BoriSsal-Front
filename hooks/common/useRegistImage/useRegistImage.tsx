@@ -35,7 +35,11 @@ export const useRegistImage = () => {
             <figure
               style={{ width: "30vw", height: "30vw", position: "relative" }}
             >
-              <Image fill src={image} alt={desc} />
+              <Image 
+                fill 
+                src={image} 
+                alt={desc} 
+                style={{objectFit: "cover"}} />
             </figure>
           </label>
         </>

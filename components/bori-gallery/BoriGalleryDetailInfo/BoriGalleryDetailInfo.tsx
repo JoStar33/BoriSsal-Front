@@ -20,7 +20,7 @@ const BoriGalleryDetailInfo = ({ gallery, user }: IProps) => {
         <h1>{gallery.bori_gallery_title}</h1>
         <figure style={{ position: "relative", width: "48vw", height: "48vw" }}>
           <Image
-            style={{ border: "2px solid black" }}
+            style={{ border: "2px solid black", objectFit: "cover" }}
             fill
             src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${gallery.bori_gallery_image}`}
             alt={gallery.bori_gallery_title}

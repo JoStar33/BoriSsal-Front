@@ -41,6 +41,7 @@ const GalleryItemImage = ({boriGallery, setDialog, dialogText, setSuccessDialog,
         >
           <Image
             fill
+            style={{objectFit: "cover"}}
             src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${boriGallery.bori_gallery_image}`}
             alt={boriGallery.bori_gallery_title}
           />
