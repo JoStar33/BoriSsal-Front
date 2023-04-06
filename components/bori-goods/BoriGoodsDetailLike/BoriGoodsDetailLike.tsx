@@ -20,6 +20,9 @@ const BoriGoodsDetailLike = ({
 }: IProps) => {
   const likeGoodsMutation = useLikeGoodsMutation(user.user_bori_goods_like, goods._id);
   const handleLikeGoods = () => {
+    if (likeGoodsMutation.isLoading) {
+      return;
+    }
     if (!user.email) {
       validateText.current = "로그인 이후에 누를 수 있어요!";
       return setValidateDialog(true);

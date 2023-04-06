@@ -106,7 +106,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       }
     }
   } 
-  console.log(gallery);
   return {
     props: {
       gallery,

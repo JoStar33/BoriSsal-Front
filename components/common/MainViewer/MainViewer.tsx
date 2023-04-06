@@ -15,12 +15,10 @@ import mainImage8 from "/public/images/main_image8.png";
 const MainViewer = () => {
   const [position, setPosition] = useState<number>(0);
   const onScroll = () => {
-    console.log(window.scrollY);
     setPosition(window.scrollY);
   };
   const { setPageState } = usePageStore();
   useEffect(() => {
-    console.log(window.innerHeight);
     setPageState('');
     window.addEventListener("scroll", onScroll);
     return () => {
