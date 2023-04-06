@@ -1,3 +1,4 @@
+import Loading from "@/components/loading/Loading/Loading";
 import { useRegistBoriGalleryMutaton } from "@/hooks/bori-gallery/useRegistBoriGalleryMutaton/useRegistBoriGalleryMutaton";
 import { IPostBoriGallery } from "@/types/boriGallery";
 import { Dispatch, MutableRefObject, SetStateAction } from "react";
@@ -26,7 +27,7 @@ const BoriGalleryRegisterController = ({
   setGalleryInfo,
   formData
 }: IProps) => {
-  const { mutate } = useRegistBoriGalleryMutaton(
+  const { mutate, isLoading } = useRegistBoriGalleryMutaton(
     galleryInfo,
     formData.current,
     setGalleryInfo,
@@ -55,13 +56,18 @@ const BoriGalleryRegisterController = ({
     mutate();
   };
   return (
-    <button
-      role="regist-button"
-      onClick={handleRegistBoriGoods}
-      className={styles.goods_register_button}
-    >
-      갤러리 등록
-    </button>
+    <>
+      {
+        isLoading && <Loading/>
+      }
+      <button
+        role="regist-button"
+        onClick={handleRegistBoriGoods}
+        className={styles.goods_register_button}
+      >
+        갤러리 등록
+      </button>
+    </>
   );
 };
 

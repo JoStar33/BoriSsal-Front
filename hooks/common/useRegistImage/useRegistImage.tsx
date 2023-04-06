@@ -10,7 +10,6 @@ export const useRegistImage = () => {
       return;
     }
     const file: File = e.target.files[0];
-    console.log(file);
     const fr = new FileReader();
     fr.readAsDataURL(file);
     fr.onload = (e) => {

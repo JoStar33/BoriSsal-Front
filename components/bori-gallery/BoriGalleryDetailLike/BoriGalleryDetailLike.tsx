@@ -16,6 +16,9 @@ interface IProps {
 const BoriGalleryDetailLike = ({validateText, setValidateDialog, gallery, user}: IProps) => {
   const likeGalleryMutation = useLikeGalleryMutation(user.user_bori_gallery_like, gallery._id);
   const handleLikeGoods = () => {
+    if (likeGalleryMutation.isLoading) {
+      return;
+    }
     if (!user.email) {
       validateText.current = "로그인 이후에 누를 수 있어요!";
       return setValidateDialog(true);
