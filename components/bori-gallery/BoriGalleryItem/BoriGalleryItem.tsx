@@ -16,6 +16,7 @@ const BoriGalleryItem = ({ gallery }: IProps) => {
           <Image
             src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${gallery.bori_gallery_image}`}
             alt={gallery.bori_gallery_title}
+            style={{objectFit: "cover"}}
             fill
           ></Image>
         </div>

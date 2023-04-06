@@ -33,7 +33,7 @@ const UserBar = ({ user }: IProps) => {
               ? <figure style={{width: '3vw', height: "3vw", position: "relative", borderRadius: "100px", minWidth: "1.5rem", minHeight: "1.5rem"}}>
                   <Image
                     role='profile'
-                    style={{borderRadius: '100px'}}
+                    style={{borderRadius: '100px', objectFit: "cover"}}
                     fill
                     alt='프로필 이미지'
                     src={process.env.NEXT_PUBLIC_IMAGE_URL + user.profile_image}></Image>

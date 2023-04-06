@@ -41,6 +41,7 @@ const GoodsItemImage = ({boriGoods, setDialog, dialogText, setSuccessDialog, suc
         >
           <Image
             fill
+            style={{objectFit: "cover"}}
             src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${boriGoods.bori_goods_image}`}
             alt={boriGoods.bori_goods_name}
           />
