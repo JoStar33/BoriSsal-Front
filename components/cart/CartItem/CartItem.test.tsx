@@ -1,3 +1,4 @@
+import StatusContainer from "@/components/common/StatusContainer/StatusContainer";
 import { usePageStore } from "@/store/page";
 import { fireEvent, render, renderHook, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -9,6 +10,7 @@ const initRender = (cart_id: string) => {
   const current = renderHook(() => usePageStore());
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <CartItem cart_id={cart_id} cartGoods={{
         bori_goods_id: '23',
         bori_goods_name: '보리쌀',

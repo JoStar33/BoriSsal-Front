@@ -21,8 +21,6 @@ test("useJoinMutation 훅 테스트", async () => {
           nick: "jojo",
           password: "123123123",
         },
-        setDialog: setState,
-        dialogText: setState,
       }),
     {
       wrapper: Wrapper,
@@ -49,9 +47,7 @@ test("useJoinMutation 훅 테스트 실패 케이스", async () => {
           email: "test@naver.com",
           nick: "jojo",
           password: "123123123",
-        },
-        setDialog: setState,
-        dialogText: setState,
+        }
       }),
     {
       wrapper: Wrapper,

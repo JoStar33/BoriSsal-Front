@@ -29,7 +29,7 @@ const OrderPage = () => {
   useLoginCheckQuery();
   const { cart } = useCartStore();
   const { pageState } = usePageStore();
-  const { dialog, setDialog, dialogText, renderDialog } = useValidateDialog();
+  const { setDialog, setDialogText } = useValidateDialog();
   let { data: deliverAddress } = useDeliverAddressQuery();
   let { data: user } = useUserQuery();
   if (!deliverAddress) {
@@ -61,12 +61,12 @@ const OrderPage = () => {
       deliverAddress = initData;
     }
     if (cart.length === 0) {
-      dialogText.current = '최소 하나의 상품이 있어야합니다!';
+      setDialogText('최소 하나의 상품이 있어야합니다!');
       setDialog(true);
       return;
     };
     if (!deliverAddress.phone_number || !deliverAddress.address || !deliverAddress.address_detail) {
-      dialogText.current = '배송지 정보 입력을 모두 마쳐야 해요!';
+      setDialogText('배송지 정보 입력을 모두 마쳐야 해요!');
       setDialog(true);
       return;
     };
@@ -77,9 +77,6 @@ const OrderPage = () => {
       <NextSeo
         title="주문하기"
         description="저희 보리의 굿즈를 주문하시는 페이지에요!"/>
-      {
-        dialog && renderDialog()
-      }
       {
         orderShow
         ? <div className={styles.order_container}>

@@ -1,13 +1,12 @@
 import { deleteBoriGallery } from "@/apis/bori-gallery/boriGallery";
-import { Dispatch, MutableRefObject, SetStateAction } from "react";
+import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { useMutation, useQueryClient } from "react-query";
 import { errorMessage } from './../../../apis/error/customError';
 
 export const useDeleteBoriGalleryMutation = (
-  bori_gallery_id: string,
-  setDialog: Dispatch<SetStateAction<boolean>>,
-  dialogText: MutableRefObject<string>
+  bori_gallery_id: string
 ) => {
+  const { setDialog, setDialogText } = useValidateDialog();
   const queryClient = useQueryClient();
   return useMutation(
     () => deleteBoriGallery(bori_gallery_id), {
@@ -16,7 +15,7 @@ export const useDeleteBoriGalleryMutation = (
       },
       onError: (error) => {
         setDialog(true);
-        dialogText.current = errorMessage(error);
+        setDialogText(errorMessage(error));
       }
     }
   );

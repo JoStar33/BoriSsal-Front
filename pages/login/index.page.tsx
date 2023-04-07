@@ -1,12 +1,9 @@
-import { errorMessage } from "@/apis/error/customError";
-import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
 import Loading from "@/components/loading/Loading/Loading";
 import { useLoginMutation } from "@/hooks/auth/useLoginMutation/useLoginMutation";
 import { useNotLoginCheckQuery } from "@/hooks/auth/useNotLoginCheckQuery/useNotLoginCheckQuery";
 import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { ILogin } from "@/types/auth";
 import { validateEmail, validatePassword } from "@/utils/validate";
-import { AxiosError } from "axios";
 import { NextSeo } from "next-seo";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,20 +13,18 @@ import googleImage from "/public/login/google.png";
 import kakaoImage from "/public/login/kakao.png";
 
 const Login = () => {
-  const { dialog, setDialog, dialogText, renderDialog } = useValidateDialog();
+  const { setDialog, setDialogText } = useValidateDialog();
   const [account, setAccount] = useState<ILogin>({
     email: "",
     password: "",
   });
-  const { isError, isLoading, error } = useNotLoginCheckQuery();
+  const { isLoading } = useNotLoginCheckQuery();
   const loginMutation = useLoginMutation({
-    loginInfo: account,
-    dialogText,
-    setDialog,
+    loginInfo: account
   });
   const handleLogin = () => {
     if (!(account.email && account.password)) {
-      dialogText.current = "이메일 비밀번호를 입력해주세요.";
+      setDialogText("이메일 비밀번호를 입력해주세요.");
       setDialog(true);
       return;
     }
@@ -57,16 +52,7 @@ const Login = () => {
       <NextSeo
         title="로그인"
         description="어서오세요! 로그인을 하시고 더 다양한 기능을 활용해보세요~"/>
-      {isError && (
-        <ValidateDialog
-          text={errorMessage(error as AxiosError)}
-          setDialog={setDialog}
-        ></ValidateDialog>
-      )}
       {(loginMutation.isLoading || isLoading) && <Loading></Loading>}
-      {dialog && (
-        renderDialog()
-      )}
       <div className={styles.login_container}>
         <h1>로그인</h1>
         <div className={styles.login_box}>

@@ -1,7 +1,5 @@
 import { useCategoryQuery } from "@/hooks/bori-goods/useCategoryQuery/useCategoryQuery";
 import { useRegistImage } from "@/hooks/common/useRegistImage/useRegistImage";
-import { useSuccessDialog } from "@/hooks/common/useSuccessDialog/useSuccessDialog";
-import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { IPostBoriGoods } from "@/types/boriGoods";
 import { useState } from "react";
 import BoriGoodsRegisterController from "../BoriGoodsRegisterController/BoriGoodsRegisterController";
@@ -21,22 +19,8 @@ const BoriGoodsRegister = () => {
   if (!categoryData) {
     categoryData = [];
   }
-  const { dialog, setDialog, dialogText, renderDialog } =
-    useValidateDialog();
-  const {
-    successDialog,
-    setSuccessDialog,
-    successDialogText,
-    renderSuccessDialog,
-  } = useSuccessDialog();
   return (
     <>
-      {dialog && (
-        <figure style={{ marginLeft: "-5vw" }}>{renderDialog()}</figure>
-      )}
-      {successDialog && (
-        <figure style={{ marginLeft: "-5vw" }}>{renderSuccessDialog()}</figure>
-      )}
       <div className={styles.bori_goods_register_container}>
         {
           renderRegistImage("굿즈 이미지", "bori_goods_images")
@@ -50,10 +34,6 @@ const BoriGoodsRegister = () => {
         <BoriGoodsRegisterController
           setGoodsInfo={setGoodsInfo}
           setImage={setImage}
-          setDialog={setDialog}
-          dialogText={dialogText}
-          setSuccessDialog={setSuccessDialog}
-          successDialogText={successDialogText}
           goodsInfo={goodsInfo}
           categoryInfo={categoryInfo}
           formData={formData}

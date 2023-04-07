@@ -1,4 +1,5 @@
 
+import StatusContainer from "@/components/common/StatusContainer/StatusContainer";
 import { server } from "@/mocks/server";
 import { useCartStore } from "@/store/cart";
 import { render, renderHook, screen } from "@testing-library/react";
@@ -14,6 +15,7 @@ const user = userEvent.setup();
 const initRender = () => {
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <CartPage></CartPage>
     </QueryClientProvider>)
 }

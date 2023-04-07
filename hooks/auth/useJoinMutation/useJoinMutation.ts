@@ -1,21 +1,19 @@
 import { errorMessage } from "@/apis/error/customError";
 import { join } from "@/apis/user/auth";
+import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { IJoin } from "@/types/auth";
 import { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 
 interface IProps {
-  setDialog: React.Dispatch<React.SetStateAction<boolean>>;
-  dialogText: React.MutableRefObject<string>;
   joinInfo: IJoin;
 };
 
 export const useJoinMutation = ({
-  joinInfo,
-  setDialog,
-  dialogText,
+  joinInfo
 }: IProps) => {
+  const { setDialog, setDialogText } = useValidateDialog();
   const router = useRouter();
   return useMutation(
     () => join(joinInfo.email, joinInfo.nick, joinInfo.password),
@@ -24,7 +22,7 @@ export const useJoinMutation = ({
         router.push("/");
       },
       onError: (error: AxiosError) => {
-        dialogText.current = errorMessage(error);
+        setDialogText(errorMessage(error));
         setDialog(true);
       },
     }

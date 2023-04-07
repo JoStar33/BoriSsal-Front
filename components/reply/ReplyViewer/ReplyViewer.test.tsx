@@ -1,4 +1,5 @@
 
+import StatusContainer from "@/components/common/StatusContainer/StatusContainer";
 import { IReplyMutation } from "@/types/reply";
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -20,6 +21,7 @@ const mutationInitData = {
     reply_child: [],
     created_at:  String(new Date())
   }],
+  bori_gallery_reply: [],
   overflow: false
 }
 const queryClient = new QueryClient();
@@ -30,6 +32,7 @@ const setState = jest.fn() as any;
 const initRender = () => {
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <ReplyViewer goods_id={"23"} mutationData={mutationInitData} limit={1} setLimit={setState} refetch={function <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined): Promise<QueryObserverResult<IReplyMutation, unknown>> {
         throw new Error("Function not implemented.");
       } } user={{
@@ -67,6 +70,7 @@ test("댓글 입력후 댓글 등록시에 (로그인을 하지 않았을시에)
 test("댓글 등록시에 (댓글의 글자가 없을경우)", async () => {
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <ReplyViewer goods_id={"23"} mutationData={mutationInitData} limit={1} setLimit={setState} refetch={function <TPageData>(options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined): Promise<QueryObserverResult<IReplyMutation, unknown>> {
         throw new Error("Function not implemented.");
       } } user={{

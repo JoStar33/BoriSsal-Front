@@ -1,8 +1,8 @@
-import { render, renderHook, screen } from "@testing-library/react";
+import StatusContainer from "@/components/common/StatusContainer/StatusContainer";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "react-query";
 import BoriGoodsDetailLike from "./BoriGoodsDetailLike";
-import { SetStateAction } from "react";
 
 const user = userEvent.setup();
 
@@ -13,9 +13,8 @@ const setState = jest.fn() as any;
 const initRender = () => {
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <BoriGoodsDetailLike 
-        validateText={setState} 
-        setValidateDialog={setState} 
         user={{
           email: "rhrhr@naver.com",
           nick: "hihi",

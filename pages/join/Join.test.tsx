@@ -1,9 +1,10 @@
+import StatusContainer from "@/components/common/StatusContainer/StatusContainer";
 import { fireEvent, render, screen } from "@testing-library/react";
-import Join from "./index.page";
-import { server } from "../../mocks/server";
-import { rest } from "msw";
-import { QueryClientProvider, QueryClient } from "react-query";
 import userEvent from "@testing-library/user-event";
+import { rest } from "msw";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { server } from "../../mocks/server";
+import Join from "./index.page";
 
 const user = userEvent.setup();
 
@@ -12,6 +13,7 @@ const queryClient = new QueryClient();
 test("회원가입에서 일반적으로 버튼을 클릭했을 경우.", async () => {
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <Join />
     </QueryClientProvider>
   );
@@ -36,6 +38,7 @@ test("회원가입에서 정상적으로 모든 input을 입력후 테스트를 
   );
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <Join />
     </QueryClientProvider>
   );

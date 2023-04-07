@@ -1,4 +1,5 @@
 
+import StatusContainer from "@/components/common/StatusContainer/StatusContainer";
 import { useCartStore } from "@/store/cart";
 import { usePageStore } from "@/store/page";
 import { render, renderHook, screen } from "@testing-library/react";
@@ -10,6 +11,7 @@ const queryClient = new QueryClient();
 const initRender = () => {
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <CompleteOrder></CompleteOrder>
     </QueryClientProvider>)
 }

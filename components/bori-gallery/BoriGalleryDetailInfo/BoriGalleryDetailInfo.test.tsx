@@ -1,4 +1,5 @@
-import { render, renderHook, screen } from "@testing-library/react";
+import StatusContainer from "@/components/common/StatusContainer/StatusContainer";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "react-query";
 import BoriGalleryDetailInfo from "./BoriGalleryDetailInfo";
@@ -10,6 +11,7 @@ const queryClient = new QueryClient();
 const initRender = () => {
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <BoriGalleryDetailInfo 
       user={{
         email: "",

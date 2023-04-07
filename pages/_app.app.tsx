@@ -1,4 +1,5 @@
 import DefaultHeader from "@/components/common/Header/Header";
+import StatusContainer from "@/components/common/StatusContainer/StatusContainer";
 import "@/styles/globals.css";
 import { DefaultSeo } from 'next-seo';
 import type { AppProps } from "next/app";
@@ -14,6 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <DefaultSeo {...SEO}/>
         <DefaultHeader/>
+        <StatusContainer/>
         {/* Global Site Tag (gtag.js) - Google Analytics */}
         <Script
           strategy="afterInteractive"

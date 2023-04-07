@@ -2,8 +2,6 @@ import { errorMessage } from "@/apis/error/customError";
 import Loading from "@/components/loading/Loading/Loading";
 import InputPart from "@/components/user/InputPart/InputPart";
 import { usePassWordChangeMutation } from "@/hooks/auth/usePassWordChangeMutation/usePassWordChangeMutation";
-import { useSuccessDialog } from "@/hooks/common/useSuccessDialog/useSuccessDialog";
-import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { IPasswordInfo, IPostPasswordInfo } from "@/types/auth";
 import { validatePassword, validatePasswordCheck } from "@/utils/validate";
 import { AxiosError } from "axios";
@@ -31,26 +29,8 @@ const PassWordChangeDialog = ({ setDialog }: IProps) => {
       newPassword: account.newPassword,
     };
   }, [account]);
-  const {
-    dialog: validateDialog,
-    setDialog: setValidateDialog,
-    dialogText,
-    renderDialog,
-  } = useValidateDialog();
-  const {
-    successDialog,
-    setSuccessDialog,
-    successDialogText,
-    renderSuccessDialog,
-  } = useSuccessDialog();
   const { mutate, isLoading, isError, error, isSuccess } =
-    usePassWordChangeMutation(
-      postPassWord,
-      setValidateDialog,
-      dialogText,
-      setSuccessDialog,
-      successDialogText
-    );
+    usePassWordChangeMutation(postPassWord);
   const onChangeAccount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAccount({
       ...account,
@@ -90,9 +70,7 @@ const PassWordChangeDialog = ({ setDialog }: IProps) => {
   }, [isSuccess, setDialog]);
   return (
     <>
-      {successDialog && renderSuccessDialog()}
       {isLoading && <Loading></Loading>}
-      {validateDialog && renderDialog()}
       <div className={styles.dialog_background}>
         {/*비밀번호 다이얼로그 배경*/}
         <div className={styles.dialog_container}>

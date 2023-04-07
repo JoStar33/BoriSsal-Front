@@ -1,3 +1,4 @@
+import StatusContainer from "@/components/common/StatusContainer/StatusContainer";
 import { server } from "@/mocks/server";
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -15,6 +16,7 @@ const setState = jest.fn() as any;
 const initRender = () => {
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <PassWordChangeDialog setDialog={setState} />
     </QueryClientProvider>
   );

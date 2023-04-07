@@ -1,24 +1,16 @@
 import { useBoriGoodsImageMutation } from '@/hooks/bori-goods/useBoriGoodsImageMutation/useBoriGoodsImageMutation';
 import { IBoriGoods } from '@/types/boriGoods';
 import Image from "next/image";
-import React, { Dispatch, MutableRefObject, SetStateAction, useRef } from 'react';
+import React, { useRef } from 'react';
 
 interface IProps {
-  boriGoods: IBoriGoods
-  setDialog: Dispatch<SetStateAction<boolean>>;
-  dialogText: MutableRefObject<string>;
-  setSuccessDialog: Dispatch<SetStateAction<boolean>>;
-  successDialogText: MutableRefObject<string>;
+  boriGoods: IBoriGoods;
 } 
 
-const GoodsItemImage = ({boriGoods, setDialog, dialogText, setSuccessDialog, successDialogText}: IProps) => {
+const GoodsItemImage = ({boriGoods}: IProps) => {
   const formData = useRef<FormData>(new FormData());
   const { mutate: updateBoriImage } = useBoriGoodsImageMutation(
-    boriGoods._id,
-    setDialog,
-    dialogText,
-    setSuccessDialog,
-    successDialogText
+    boriGoods._id
   );
   const handleOnChangeGoodsImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) {

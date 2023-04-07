@@ -1,3 +1,4 @@
+import StatusContainer from "@/components/common/StatusContainer/StatusContainer";
 import { render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import OrderGoodsItem from "./OrderGoodsItem";
@@ -7,6 +8,7 @@ const queryClient = new QueryClient();
 const initRender = () => {
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <OrderGoodsItem boriGoods={{
         bori_goods_id: "23",
         bori_goods_name: "보리 필통",

@@ -1,31 +1,28 @@
 import { errorMessage } from "@/apis/error/customError";
 import { login } from "@/apis/user/auth";
+import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { ILogin } from "@/types/auth";
 import { AxiosError } from "axios";
 import { useRouter } from "next/router";
-import { MutableRefObject } from "react";
 import { useMutation, useQueryClient } from "react-query";
 
 interface IProps {
-  setDialog: React.Dispatch<React.SetStateAction<boolean>>;
-  dialogText: MutableRefObject<string>;
   loginInfo: ILogin;
 };
 
 export const useLoginMutation = ({
-  loginInfo,
-  setDialog,
-  dialogText,
+  loginInfo
 }: IProps) => {
   const queryClient = useQueryClient();
   const router = useRouter();
+  const { setDialog, setDialogText } = useValidateDialog();
   return useMutation(() => login(loginInfo.email, loginInfo.password), {
-    onSuccess: (res) => {
+    onSuccess: () => {
       queryClient.invalidateQueries("user");
       router.push("/");
     },
     onError: (error: AxiosError) => {
-      dialogText.current = errorMessage(error);
+      setDialogText(errorMessage(error));
       setDialog(true);
     },
   });
