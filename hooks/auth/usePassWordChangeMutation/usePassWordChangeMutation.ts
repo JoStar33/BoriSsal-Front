@@ -1,24 +1,23 @@
 import { passwordChange } from "@/apis/user/auth";
+import { useSuccessDialog } from "@/hooks/common/useSuccessDialog/useSuccessDialog";
+import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { IPostPasswordInfo } from "@/types/auth";
-import { Dispatch, MutableRefObject, SetStateAction } from "react";
 import { useMutation } from "react-query";
 import { errorMessage } from './../../../apis/error/customError';
 
 export const usePassWordChangeMutation = (
-  { password, newPassword }: IPostPasswordInfo,
-  setDialog: Dispatch<SetStateAction<boolean>>,
-  dialogText: MutableRefObject<string>,
-  setSuccessDialog: Dispatch<SetStateAction<boolean>>,
-  successDialogText: MutableRefObject<string>
+  { password, newPassword }: IPostPasswordInfo
 ) => {
+  const { setDialog, setDialogText } = useValidateDialog();
+  const { setSuccessDialog, setSuccessDialogText } = useSuccessDialog();
   return useMutation(() => passwordChange(password, newPassword), {
     onSuccess: () => {
       setSuccessDialog(true)
-      successDialogText.current = "비밀번호 변경 성공!"
+      setSuccessDialogText("비밀번호 변경 성공!");
     },
     onError: (error) => {
       setDialog(true);
-      dialogText.current = errorMessage(error)
+      setDialogText(errorMessage(error));
     }
   });
 };

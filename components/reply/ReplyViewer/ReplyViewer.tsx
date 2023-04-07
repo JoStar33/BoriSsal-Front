@@ -22,7 +22,7 @@ interface IProps {
 }
 
 const ReplyViewer = ({user, mutationData, goods_id, gallery_id, setLimit, limit, refetch}: IProps) => {
-  const { renderDialog, dialog, setDialog, dialogText } = useValidateDialog();
+  const { setDialog, setDialogText } = useValidateDialog();
   const replyContent = useRef<HTMLInputElement>(null);
   if(!goods_id )
     goods_id = "null"
@@ -34,12 +34,12 @@ const ReplyViewer = ({user, mutationData, goods_id, gallery_id, setLimit, limit,
     if(!replyContent.current)
       return;
     if (user.email.length < 3) {
-      dialogText.current = '로그인후 이용해주세요!';
+      setDialogText('로그인후 이용해주세요!');
       setDialog(true);
       return;
     };
     if(replyContent.current.value.length < 2) {
-      dialogText.current = '최소 두글자는 입력해주세요!';
+      setDialogText('최소 두글자는 입력해주세요!');
       setDialog(true);
       return;
     };
@@ -59,9 +59,6 @@ const ReplyViewer = ({user, mutationData, goods_id, gallery_id, setLimit, limit,
   }
   return (
     <>
-      {
-        dialog && renderDialog()
-      }
       <div className={styles.reply_input_container}>
         <label htmlFor="goods_reply">댓글: </label>
         <input role="reply-input" ref={replyContent} id='goods_reply' type="text"/>
@@ -75,12 +72,12 @@ const ReplyViewer = ({user, mutationData, goods_id, gallery_id, setLimit, limit,
           goods_id !== "null" 
           ?  mutationData.bori_goods_reply.length !== 0
             ? mutationData.bori_goods_reply.map((reply)=>{
-              return <ReplyPart user={user} key={reply._id} isGoods={goods_id !== "null" ? true : false} reply={reply} setDialog={setDialog} dialogText={dialogText}></ReplyPart>
+              return <ReplyPart user={user} key={reply._id} isGoods={goods_id !== "null" ? true : false} reply={reply}></ReplyPart>
             })
             : <ReplyEmpty/>
           : mutationData.bori_gallery_reply.length !== 0
             ? mutationData.bori_gallery_reply.map((reply)=>{
-              return <ReplyPart user={user} key={reply._id} isGoods={goods_id !== "null" ? true : false} reply={reply} setDialog={setDialog} dialogText={dialogText}></ReplyPart>
+              return <ReplyPart user={user} key={reply._id} isGoods={goods_id !== "null" ? true : false} reply={reply}></ReplyPart>
             })
             : <ReplyEmpty/>
         }

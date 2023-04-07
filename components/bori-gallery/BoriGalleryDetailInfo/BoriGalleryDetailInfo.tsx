@@ -1,5 +1,4 @@
 import ShareButton from "@/components/common/ShareButton/ShareButton";
-import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { IBoriGallery } from "@/types/boriGallery";
 import { IUser } from "@/types/user";
 import Image from "next/image";
@@ -12,10 +11,8 @@ interface IProps {
 }
 
 const BoriGalleryDetailInfo = ({ gallery, user }: IProps) => {
-  const { renderDialog, setDialog, dialogText, dialog } = useValidateDialog();
   return (
     <>
-      {dialog && renderDialog()}
       <div className={styles.bori_gallery_detail_info_container}>
         <h1>{gallery.bori_gallery_title}</h1>
         <figure style={{ position: "relative", width: "48vw", height: "48vw" }}>
@@ -28,8 +25,6 @@ const BoriGalleryDetailInfo = ({ gallery, user }: IProps) => {
         </figure>
         <div className={styles.gallery_info}>
           <BoriGalleryDetailLike
-            validateText={dialogText}
-            setValidateDialog={setDialog}
             gallery={gallery}
             user={user}
           />

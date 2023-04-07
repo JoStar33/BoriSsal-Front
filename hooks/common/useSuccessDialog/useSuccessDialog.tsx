@@ -1,14 +1,14 @@
 import SuccessDialog from "@/components/dialogs/SuccessDialog/SuccessDialog";
-import { useRef, useState } from "react";
+import { useDialogStore } from "@/store/dialog";
 
 export const useSuccessDialog = () => {
-  const [successDialog, setSuccessDialog] = useState<boolean>(false);
-  const successDialogText = useRef<string>("");
+  const { successDialog, successDialogText, setSuccessDialog, setSuccessDialogText } = useDialogStore();
   const renderSuccessDialog =() => (
     <SuccessDialog
+      dialog={successDialog}
       setDialog={setSuccessDialog}
-      text={successDialogText.current}
+      text={successDialogText}
     />
   );
-  return { successDialog, setSuccessDialog, successDialogText, renderSuccessDialog }
+  return { successDialog, setSuccessDialog, setSuccessDialogText, renderSuccessDialog }
 }

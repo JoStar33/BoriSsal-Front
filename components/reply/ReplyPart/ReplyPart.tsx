@@ -1,9 +1,10 @@
 import { useBoriGalleryChildReplyMutation } from "@/hooks/bori-gallery/useBoriGalleryChildReplyMutation/useBoriGalleryChildReplyMutation";
 import { useBoriGoodsChildReplyMutation } from "@/hooks/bori-goods/useBoriGoodsChildReplyMutation/useBoriGoodsChildReplyMutation";
+import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { IReply } from "@/types/reply";
 import { IUser } from "@/types/user";
 import { initUser } from "@/utils/initData";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import ReplyChildPart from "../ReplyChildPart/ReplyChildPart";
 import styles from "./reply_part.module.scss";
 
@@ -11,11 +12,9 @@ interface IProps {
   user: IUser;
   isGoods: boolean;
   reply: IReply;
-  setDialog: React.Dispatch<React.SetStateAction<boolean>>;
-  dialogText: React.MutableRefObject<string>;
 }
 
-const ReplyPart = ({ user, isGoods, reply, setDialog, dialogText }: IProps) => {
+const ReplyPart = ({ user, isGoods, reply}: IProps) => {
   const [showChildReply, setShowChildReply] = useState<boolean>(false);
   const replyDate = useRef<Date>(new Date(reply.created_at));
   const replyInputRef = useRef<HTMLInputElement>(null);
@@ -24,6 +23,7 @@ const ReplyPart = ({ user, isGoods, reply, setDialog, dialogText }: IProps) => {
   }
   const goodsReplyChildMutation = useBoriGoodsChildReplyMutation(user.email, reply._id);
   const galleryReplyChildMutation = useBoriGalleryChildReplyMutation(user.email, reply._id);
+  const { setDialog, setDialogText } = useValidateDialog();
   const handleOnChilk = () => {
     setShowChildReply(!showChildReply);
   };
@@ -32,11 +32,11 @@ const ReplyPart = ({ user, isGoods, reply, setDialog, dialogText }: IProps) => {
     if (!user) return;
     if (user.email.length < 3) {
       setDialog(true);
-      dialogText.current = "로그인후 이용해주세요!";
+      setDialogText("로그인후 이용해주세요!");
       return;
     }
     if (replyInputRef.current.value.length < 2) {
-      dialogText.current = "최소 두글자는 입력해주세요!";
+      setDialogText("최소 두글자는 입력해주세요!");
       setDialog(true);
       return;
     }

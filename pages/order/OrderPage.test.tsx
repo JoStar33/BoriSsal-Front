@@ -1,3 +1,4 @@
+import StatusContainer from "@/components/common/StatusContainer/StatusContainer";
 import { server } from "@/mocks/server";
 import { useCartStore } from "@/store/cart";
 import { usePageStore } from "@/store/page";
@@ -16,6 +17,7 @@ const initRender = () => {
   pageCurrent.result.current.setPageState('order')
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <OrderPage />
     </QueryClientProvider>
   );

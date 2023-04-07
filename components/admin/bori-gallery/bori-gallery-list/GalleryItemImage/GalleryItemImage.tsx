@@ -1,24 +1,16 @@
 import { useBoriGalleryImageMutation } from "@/hooks/bori-gallery/useBoriGalleryImageMutation/useBoriGalleryImageMutation";
 import { IBoriGallery } from "@/types/boriGallery";
 import Image from "next/image";
-import { Dispatch, MutableRefObject, SetStateAction, useRef } from "react";
+import { useRef } from "react";
 
 interface IProps {
   boriGallery: IBoriGallery
-  setDialog: Dispatch<SetStateAction<boolean>>;
-  dialogText: MutableRefObject<string>;
-  setSuccessDialog: Dispatch<SetStateAction<boolean>>;
-  successDialogText: MutableRefObject<string>;
 } 
 
-const GalleryItemImage = ({boriGallery, setDialog, dialogText, setSuccessDialog, successDialogText}: IProps) => {
+const GalleryItemImage = ({boriGallery}: IProps) => {
   const formData = useRef<FormData>(new FormData());
   const { mutate: updateBoriImage } = useBoriGalleryImageMutation(
-    boriGallery._id,
-    setDialog,
-    dialogText,
-    setSuccessDialog,
-    successDialogText
+    boriGallery._id
   );
   const handleOnChangeGoodsImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) {

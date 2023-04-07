@@ -8,12 +8,12 @@ interface IProps {
 
 const AdminChecker = ({ setAdminPass }: IProps) => {
   const adminKeyRef = useRef<HTMLInputElement>(null);
-  const { dialog, setDialog, dialogText, renderDialog } = useValidateDialog();
+  const {setDialog, setDialogText} = useValidateDialog();
   const handleAdminPass = () => {
     if(!adminKeyRef.current)
       return;
     if(process.env.NEXT_PUBLIC_ADMIN_KEY !== adminKeyRef.current.value) {
-      dialogText.current = "어드민 키가 일치하지 않습니다. 다시 확인해주세요."
+      setDialogText("어드민 키가 일치하지 않습니다. 다시 확인해주세요.");
       setDialog(true);
       return;
     }
@@ -21,9 +21,6 @@ const AdminChecker = ({ setAdminPass }: IProps) => {
   }
   return (
     <> 
-      {
-        dialog && renderDialog()
-      }
       <div className={styles.admin_checker_container}>
         <h1>어드민 키 입력</h1>
         <input ref={adminKeyRef} type="password" />

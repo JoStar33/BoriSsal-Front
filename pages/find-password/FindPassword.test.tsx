@@ -1,3 +1,4 @@
+import StatusContainer from "@/components/common/StatusContainer/StatusContainer";
 import { server } from "@/mocks/server";
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -12,6 +13,7 @@ const queryClient = new QueryClient();
 const initRender = () => {
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <FindPassWord />
     </QueryClientProvider>
   );

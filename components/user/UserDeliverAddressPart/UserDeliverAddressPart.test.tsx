@@ -1,4 +1,5 @@
 
+import StatusContainer from "@/components/common/StatusContainer/StatusContainer";
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -23,6 +24,7 @@ const initRender = ({
 }: IProps) => {
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <UserDeliverAddressPart
         addressInfo={addressInfo}
         labelInfo={labelInfo}

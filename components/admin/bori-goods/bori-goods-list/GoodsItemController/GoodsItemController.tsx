@@ -1,25 +1,18 @@
 import Loading from "@/components/loading/Loading/Loading";
 import { useDeleteBoriGoodsMutation } from "@/hooks/bori-goods/useDeleteBoriGoodsMutation/useDeleteBoriGoodsMutation";
 import { useUpdateBoriGoodsMutation } from "@/hooks/bori-goods/useUpdateBoriGoodsMutation/useUpdateBoriGoodsMutation";
+import { useSuccessDialog } from "@/hooks/common/useSuccessDialog/useSuccessDialog";
+import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { IBoriGoods, IPostBoriGoods } from "@/types/boriGoods";
-import { Dispatch, MutableRefObject, SetStateAction } from "react";
 import styles from './goods_item_controller.module.scss';
 
 interface IProps {
-  setDialog: Dispatch<SetStateAction<boolean>>;
-  dialogText: MutableRefObject<string>;
-  setSuccessDialog: Dispatch<SetStateAction<boolean>>;
-  successDialogText: MutableRefObject<string>;
   boriGoods: IBoriGoods;
   goodsInfo: IPostBoriGoods;
   categoryInfo: string;
 }
 
 const GoodsItemController = ({
-  setDialog,
-  dialogText,
-  setSuccessDialog,
-  successDialogText,
   boriGoods,
   goodsInfo,
   categoryInfo,
@@ -30,15 +23,13 @@ const GoodsItemController = ({
   const { mutate: updateBoriGoods, isLoading: updateLoading } = useUpdateBoriGoodsMutation(
     categoryInfo,
     goodsInfo,
-    boriGoods._id,
-    setDialog,
-    dialogText
+    boriGoods._id
   );
   const { mutate: deleteBoriGoods, isLoading: deleteLoading } = useDeleteBoriGoodsMutation(
-    boriGoods._id,
-    setDialog,
-    dialogText
+    boriGoods._id
   );
+  const { setDialog, setDialogText } = useValidateDialog();
+  const { setSuccessDialog, setSuccessDialogText } = useSuccessDialog();
   const handleUpdateGoods = () => {
     if (
       !goodsInfo.bori_goods_name ||
@@ -46,17 +37,17 @@ const GoodsItemController = ({
       !goodsInfo.bori_goods_price ||
       !goodsInfo.bori_goods_stock
     ) {
-      dialogText.current = "값을 비운 상태로 수정이 불가능합니다.";
+      setDialogText("값을 비운 상태로 수정이 불가능합니다.");
       setDialog(true);
       return;
     }
     if (categoryInfo === "0") {
-      dialogText.current = "전체 카테고리 상태로 등록이 불가능합니다.";
+      setDialogText("전체 카테고리 상태로 등록이 불가능합니다.");
       setDialog(true);
       return;
     }
     setSuccessDialog(true);
-    successDialogText.current = "수정이 완료됐습니다!";
+    setSuccessDialogText("수정이 완료됐습니다!");
     updateBoriGoods();
   };
   return (

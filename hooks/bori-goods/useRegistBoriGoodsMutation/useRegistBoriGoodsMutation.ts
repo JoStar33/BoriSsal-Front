@@ -1,6 +1,8 @@
 import { postBoriGoods } from "@/apis/bori-goods/boriGoods";
+import { useSuccessDialog } from "@/hooks/common/useSuccessDialog/useSuccessDialog";
+import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { IPostBoriGoods } from "@/types/boriGoods";
-import { Dispatch, MutableRefObject, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { useMutation } from "react-query";
 import { errorMessage } from './../../../apis/error/customError';
 
@@ -9,12 +11,10 @@ export const useRegistBoriGoodsMutation = (
   bori_goods: IPostBoriGoods,
   bori_goods_image: FormData,
   setGoodsInfo: Dispatch<SetStateAction<IPostBoriGoods>>,
-  setImage: Dispatch<any>,
-  setDialog: Dispatch<SetStateAction<boolean>>,
-  dialogText: MutableRefObject<string>,
-  setSuccessDialog: Dispatch<SetStateAction<boolean>>,
-  successDialogText: MutableRefObject<string>
+  setImage: Dispatch<any>
 ) => {
+  const { setDialog, setDialogText } = useValidateDialog();
+  const { setSuccessDialog, setSuccessDialogText } = useSuccessDialog();
   return useMutation(
     () => postBoriGoods(category_id, bori_goods, bori_goods_image),
     {
@@ -30,11 +30,11 @@ export const useRegistBoriGoodsMutation = (
         bori_goods_image = new FormData();
         setImage("");
         setSuccessDialog(true);
-        successDialogText.current = ("굿즈 등록이 완료됐습니다!");
+        setSuccessDialogText("굿즈 등록이 완료됐습니다!");
       },
       onError: (error) => {
         setDialog(true);
-        dialogText.current = errorMessage(error);
+        setDialogText(errorMessage(error));
       }
     }
   );

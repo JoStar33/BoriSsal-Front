@@ -7,7 +7,7 @@ interface IProps {
 };
 
 
-const OrderStatusUpdateDialog = ({setDialog, order_id}: IProps) => {
+const OrderStatusUpdateDialog = ({order_id, setDialog}: IProps) => {
   const { mutate } = useOrderStatusMutation(order_id);
   const handleUpdateStatus = (status: string) => {
     mutate(status);

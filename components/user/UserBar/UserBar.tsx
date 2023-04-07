@@ -1,6 +1,5 @@
 import Loading from '@/components/loading/Loading/Loading';
 import { useLogoutMutation } from '@/hooks/auth/useLogoutMutation/useLogoutMutation';
-import { useValidateDialog } from '@/hooks/common/useValidateDialog/useValidateDialog';
 import { IUser } from '@/types/user';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,14 +11,9 @@ interface IProps {
 }
 
 const UserBar = ({ user }: IProps) => {
-  const { dialog, setDialog, dialogText, renderDialog } =
-    useValidateDialog();
-  const { mutate, isLoading } = useLogoutMutation(setDialog, dialogText);
+  const { mutate, isLoading } = useLogoutMutation();
   return (
     <>
-      {
-        dialog && renderDialog()
-      }
       {
         isLoading && <Loading></Loading>
       }

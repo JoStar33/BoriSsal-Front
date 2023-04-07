@@ -1,4 +1,5 @@
 
+import StatusContainer from "@/components/common/StatusContainer/StatusContainer";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -9,6 +10,7 @@ const user = userEvent.setup();
 const initRender = (deliverStatus: string) => {
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <OrderHistoryItem   
         order={{
           order_date: new Date,

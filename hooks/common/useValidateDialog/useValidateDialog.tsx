@@ -1,14 +1,14 @@
 import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
-import { useRef, useState } from "react";
+import { useDialogStore } from "@/store/dialog";
 
 export const useValidateDialog = () => {
-  const [dialog, setDialog] = useState<boolean>(false);
-  const dialogText = useRef<string>("");
+  const { dialog, dialogText, setDialog, setDialogText } = useDialogStore();
   const renderDialog =() => (
     <ValidateDialog
+      dialog={dialog}
       setDialog={setDialog}
-      text={dialogText.current}
+      text={dialogText}
     ></ValidateDialog>
   );
-  return { dialog, setDialog, dialogText, renderDialog }
+  return { dialog, setDialog, renderDialog, setDialogText }
 }

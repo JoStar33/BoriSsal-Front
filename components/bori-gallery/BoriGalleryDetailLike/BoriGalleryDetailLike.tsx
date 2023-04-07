@@ -1,27 +1,26 @@
 import { useLikeGalleryMutation } from '@/hooks/bori-gallery/useLikeGalleryMutation/useLikeGalleryMutation';
+import { useValidateDialog } from '@/hooks/common/useValidateDialog/useValidateDialog';
 import { IBoriGallery } from '@/types/boriGallery';
 import { IUser } from '@/types/user';
-import { Dispatch, MutableRefObject, SetStateAction } from 'react';
 import { AiFillHeart } from 'react-icons/ai';
 import styles from './bori_gallery_detail_like.module.scss';
 
 interface IProps {
-  validateText: MutableRefObject<string>;
-  setValidateDialog: Dispatch<SetStateAction<boolean>>;
   gallery: IBoriGallery;
   user: IUser;
 }
 
 
-const BoriGalleryDetailLike = ({validateText, setValidateDialog, gallery, user}: IProps) => {
+const BoriGalleryDetailLike = ({gallery, user}: IProps) => {
   const likeGalleryMutation = useLikeGalleryMutation(user.user_bori_gallery_like, gallery._id);
+  const { setDialog, setDialogText } = useValidateDialog();
   const handleLikeGoods = () => {
     if (likeGalleryMutation.isLoading) {
       return;
     }
     if (!user.email) {
-      validateText.current = "로그인 이후에 누를 수 있어요!";
-      return setValidateDialog(true);
+      setDialogText("로그인 이후에 누를 수 있어요!");
+      return setDialog(true);
     }
     user.user_bori_gallery_like.find((likeGallery) => likeGallery === gallery._id)
       ? gallery.bori_gallery_like--

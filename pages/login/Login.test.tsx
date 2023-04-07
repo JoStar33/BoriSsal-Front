@@ -1,4 +1,5 @@
-import { fireEvent, render, renderHook, screen } from "@testing-library/react";
+import StatusContainer from "@/components/common/StatusContainer/StatusContainer";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { rest } from "msw";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -12,6 +13,7 @@ const queryClient = new QueryClient();
 test("일반적으로 버튼을 클릭했을 경우.", async () => {
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <Login />
     </QueryClientProvider>
   );
@@ -25,6 +27,7 @@ test("일반적으로 버튼을 클릭했을 경우.", async () => {
 test("이메일과 비밀번호를 입력후 테스트를 시도했을 경우(성공 케이스)", async () => {
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <Login />
     </QueryClientProvider>
   );
@@ -50,6 +53,7 @@ test("이메일과 비밀번호를 입력후 테스트를 시도했을 경우(�
   );
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <Login />
     </QueryClientProvider>
   );

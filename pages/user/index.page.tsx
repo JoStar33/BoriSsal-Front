@@ -1,5 +1,4 @@
 import PassWordChangeDialog from "@/components/dialogs/PassWordChangeDialog/PassWordChangeDialog";
-import ValidateDialog from "@/components/dialogs/ValidateDialog/ValidateDialog";
 import Loading from "@/components/loading/Loading/Loading";
 import UserDeliverAddressViewer from "@/components/user/UserDeliverAddressViewer/UserDeliverAddressViewer";
 import { useLoginCheckQuery } from "@/hooks/auth/useLoginCheckQuery/useLoginCheckQuery";
@@ -42,9 +41,6 @@ const UserPage = () => {
   return (
     <>
       {loginCheck.isLoading && <Loading></Loading>}
-      {loginCheck.isError && (
-        <ValidateDialog text="로그인상태가 아닙니다!"></ValidateDialog>
-      )}
       {dialog && (
         <PassWordChangeDialog setDialog={setDialog}></PassWordChangeDialog>
       )}

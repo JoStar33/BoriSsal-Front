@@ -1,5 +1,3 @@
-import { useSuccessDialog } from "@/hooks/common/useSuccessDialog/useSuccessDialog";
-import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { IBoriGoods, ICategory, IPostBoriGoods } from "@/types/boriGoods";
 import { useEffect, useState } from "react";
 import GoodsItemController from "../GoodsItemController/GoodsItemController";
@@ -18,14 +16,6 @@ const GoodsListItem = ({ boriGoods, category }: IProps) => {
     bori_goods_stock: 0,
     bori_goods_desc: "",
   });
-  const { dialog, setDialog, dialogText, renderDialog } =
-    useValidateDialog();
-  const {
-    successDialog,
-    setSuccessDialog,
-    successDialogText,
-    renderSuccessDialog,
-  } = useSuccessDialog();
   const [categoryInfo, setCategoryInfo] = useState<string>("");
   useEffect(() => {
     setCategoryInfo(boriGoods.category_id);
@@ -51,15 +41,9 @@ const GoodsListItem = ({ boriGoods, category }: IProps) => {
   };
   return (
     <>
-      {dialog && renderDialog()}
-      {successDialog && renderSuccessDialog()}
       <div className={styles.goods_list_item_container}>
         <GoodsItemImage
           boriGoods={boriGoods}
-          setDialog={setDialog}
-          dialogText={dialogText}
-          setSuccessDialog={setSuccessDialog}
-          successDialogText={successDialogText}
         />
         <div className={styles.goods_info}>
           <input
@@ -114,10 +98,6 @@ const GoodsListItem = ({ boriGoods, category }: IProps) => {
           />
         </div>
         <GoodsItemController
-          setDialog={setDialog}
-          dialogText={dialogText}
-          setSuccessDialog={setSuccessDialog}
-          successDialogText={successDialogText}
           boriGoods={boriGoods}
           goodsInfo={goodsInfo}
           categoryInfo={categoryInfo}

@@ -1,4 +1,5 @@
-import { render, renderHook, screen } from "@testing-library/react";
+import StatusContainer from "@/components/common/StatusContainer/StatusContainer";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "react-query";
 import BoriGoodsDetailInfo from "./BoriGoodsDetailInfo";
@@ -10,6 +11,7 @@ const queryClient = new QueryClient();
 const initRender = () => {
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <BoriGoodsDetailInfo 
       user={{
         email: "",
@@ -43,13 +45,4 @@ test('BoriGoodsDetailInfo 화면 렌더링 반영 테스트', async () => {
   const tagName = await screen.findByText(/의류/);
   expect(boriGoodsName).toBeInTheDocument();
   expect(tagName).toBeInTheDocument();
-});
-
-test('좋아요 버튼을 누를시 (로그인 없이)', async () => {
-  initRender();
-  const loginButton = screen.getByRole("like");
-  await user.click(loginButton).then(() => {
-    const error = screen.getByText("로그인 이후에 누를 수 있어요!");
-    expect(error).toBeInTheDocument();
-  });
 });

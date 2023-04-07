@@ -1,28 +1,24 @@
-import { errorMessage } from '@/apis/error/customError';
+import { useValidateDialog } from '@/hooks/common/useValidateDialog/useValidateDialog';
 import { useCartMutation } from '@/hooks/user/useCartMutation/useCartMutation';
 import { useCartStore } from '@/store/cart';
 import { usePageStore } from '@/store/page';
 import { IBoriGoods } from '@/types/boriGoods';
 import { IUser } from '@/types/user';
-import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
 import { BsFillCartFill } from "react-icons/bs";
 import styles from './bori_goods_detail_controller.module.scss';
 
 interface IProps {
-  validateText: React.MutableRefObject<string>;
-  setValidateDialog: React.Dispatch<React.SetStateAction<boolean>>;
-  setSuccessDialog: React.Dispatch<React.SetStateAction<boolean>>;
   goods: IBoriGoods;
   user: IUser;
 }
 
-const BoriGoodsDetailController = ({user, goods, validateText, setValidateDialog, setSuccessDialog}: IProps) => {
+const BoriGoodsDetailController = ({user, goods}: IProps) => {
   const { setPageState } = usePageStore();
   const router = useRouter();
+  const { setDialog, setDialogText } = useValidateDialog();
   const { setCart } = useCartStore();
-  const { mutate, isError, isSuccess, error } = useCartMutation(
+  const { mutate} = useCartMutation(
     {
       bori_goods_id: goods._id,
       bori_goods_name: goods.bori_goods_name,
@@ -31,29 +27,18 @@ const BoriGoodsDetailController = ({user, goods, validateText, setValidateDialog
       bori_goods_price: goods.bori_goods_price
     }
   );
-  useEffect(() => {
-    if (isSuccess) {
-      setSuccessDialog(true);
-    };
-  }, [isSuccess, setSuccessDialog])
-  useEffect(() => {
-    if (isError) {
-      setValidateDialog(true);
-      validateText.current = errorMessage(error as AxiosError);
-    };
-  }, [error, isError, setValidateDialog, validateText]);
   const handleCart = () => {
     if (user.email.length < 2) {
-      setValidateDialog(true);
-      validateText.current = '로그인 후 이용 가능합니다.';
+      setDialog(true);
+      setDialogText("로그인 후 이용 가능합니다.");
       return;
     }
     mutate();
   };
   const handleOrder = () => {
     if (user.email.length < 2) {
-      setValidateDialog(true);
-      validateText.current = '로그인 후 이용 가능합니다.';
+      setDialog(true);
+      setDialogText("로그인 후 이용 가능합니다.");
       return;
     }
     setCart([{

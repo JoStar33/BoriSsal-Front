@@ -1,7 +1,6 @@
 
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import ReplyPart from "./ReplyPart";
 const queryClient = new QueryClient();
@@ -28,9 +27,7 @@ const initRender = () => {
       content: '헬로우 헬로우',
       reply_child: [],
       created_at: String(new Date())
-    }} setDialog={function (value: React.SetStateAction<boolean>): void {
-      throw new Error("Function not implemented.");
-    } } isGoods={true} dialogText={validateText}></ReplyPart>
+    }} isGoods={true}></ReplyPart>
     </QueryClientProvider>
   );
 }

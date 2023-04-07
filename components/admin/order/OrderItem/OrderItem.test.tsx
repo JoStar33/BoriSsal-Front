@@ -1,3 +1,4 @@
+import StatusContainer from "@/components/common/StatusContainer/StatusContainer";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SetStateAction } from "react";
@@ -13,6 +14,7 @@ const updateOrderId = jest.fn() as any;
 const initRender = () => {
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <OrderItem order={{
           _id: '',
           order_date: new Date,
@@ -55,6 +57,7 @@ test('배송상태에 따른 색상 테스트(배송준비)', () => {
 test('배송상태에 따른 색상 테스트(배송중)', () => {
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <OrderItem order={{
           _id: '',
           order_date: new Date,
@@ -77,6 +80,7 @@ test('배송상태에 따른 색상 테스트(배송중)', () => {
 test('배송상태에 따른 색상 테스트(배송완료)', () => {
   render(
     <QueryClientProvider client={queryClient}>
+      <StatusContainer/>
       <OrderItem order={{
           _id: '',
           order_date: new Date,

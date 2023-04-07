@@ -1,4 +1,3 @@
-import SuccessDialog from "@/components/dialogs/SuccessDialog/SuccessDialog";
 import Loading from "@/components/loading/Loading/Loading";
 import DuplicateCheckPart from "@/components/user/DuplicateCheckPart/DuplicateCheckPart";
 import InputPart from "@/components/user/InputPart/InputPart";
@@ -29,7 +28,7 @@ const Join = () => {
     password: "",
     passwordCheck: "",
   });
-  const { dialog, setDialog, dialogText, renderDialog } = useValidateDialog();
+  const { setDialog, setDialogText } = useValidateDialog();
   const joinInfo = useMemo<IJoin>(() => {
     return {
       email: account.email,
@@ -37,14 +36,12 @@ const Join = () => {
       password: account.password,
     }
   }, [account]);
-  const { mutate, isLoading, isSuccess } = useJoinMutation({
-    joinInfo,
-    dialogText,
-    setDialog,
+  const { mutate, isLoading } = useJoinMutation({
+    joinInfo
   });
   const join = async () => {
     if (!(account.email && account.nick && account.password)) {
-      dialogText.current = "닉네임 이메일 비밀번호를 입력해주세요.";
+      setDialogText("닉네임 이메일 비밀번호를 입력해주세요.");
       setDialog(true);
       return;
     }
@@ -73,14 +70,8 @@ const Join = () => {
       <NextSeo
         title="회원가입"
         description="회원가입이라니! 어서오세요ㅎㅎ 저희 보리쌀에서 보리를 보며 힐링하세요😁"/>
-      {dialog && (
-        renderDialog()
-      )}
       {
         isLoading && <Loading></Loading>
-      }
-      {
-        isSuccess && <SuccessDialog text="회원가입에 성공했어요!"></SuccessDialog>
       }
       <div className={styles.join_container}>
         <div className={styles.join_header}>

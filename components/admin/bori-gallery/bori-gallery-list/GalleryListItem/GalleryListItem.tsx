@@ -1,10 +1,8 @@
-import { useSuccessDialog } from "@/hooks/common/useSuccessDialog/useSuccessDialog";
-import { useValidateDialog } from "@/hooks/common/useValidateDialog/useValidateDialog";
 import { IBoriGallery, IPostBoriGallery } from "@/types/boriGallery";
 import { useEffect, useState } from "react";
 import styles from '../../../bori-goods/bori-goods-list/GoodsListItem/goods_list_item.module.scss';
-import GalleryItemImage from "../GalleryItemImage/GalleryItemImage";
 import GalleryItemController from "../GalleryItemController/GalleryItemController";
+import GalleryItemImage from "../GalleryItemImage/GalleryItemImage";
 
 interface IProps {
   boriGallery: IBoriGallery;
@@ -15,8 +13,6 @@ const GalleryListItem = ({ boriGallery }: IProps) => {
     bori_gallery_title: "",
     bori_gallery_desc: ""
   });
-  const { dialog, setDialog, dialogText, renderDialog } = useValidateDialog();
-  const { successDialog, setSuccessDialog, successDialogText, renderSuccessDialog } = useSuccessDialog();
   useEffect(() => {
     setGalleryInfo({
       bori_gallery_title: boriGallery.bori_gallery_title,
@@ -33,19 +29,9 @@ const GalleryListItem = ({ boriGallery }: IProps) => {
   };
   return (
     <>
-      {
-        dialog && renderDialog() 
-      }
-      {
-        successDialog && renderSuccessDialog()
-      }
       <div className={styles.goods_list_item_container}>
         <GalleryItemImage
-          boriGallery={boriGallery}
-          setDialog={setDialog}
-          dialogText={dialogText}
-          setSuccessDialog={setSuccessDialog}
-          successDialogText={successDialogText}/>
+          boriGallery={boriGallery}/>
         <div className={styles.goods_info}>
           <input
             style={{marginLeft: "9vw", marginRight: "9vw"}}
@@ -66,9 +52,7 @@ const GalleryListItem = ({ boriGallery }: IProps) => {
         </div>
         <GalleryItemController 
           boriGallery={boriGallery} 
-          galleryInfo={galleryInfo} 
-          setDialog={setDialog} 
-          dialogText={dialogText}/>
+          galleryInfo={galleryInfo}/>
       </div>
     </>
   );
