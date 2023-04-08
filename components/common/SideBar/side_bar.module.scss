@@ -1,5 +1,6 @@
 .side_bar {
   position: fixed;
+  overflow: hidden;
   top: 0;
   left: 0;
   width: 15vw;
@@ -22,7 +23,7 @@
 .menu_box {
   cursor: pointer;
   user-select: none;
-  font-size: 2rem;
+  font-size: 1.2rem;
   font-weight: 900;
   height: 4rem;
   width: 15vw;
