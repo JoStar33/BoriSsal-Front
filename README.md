@@ -17,10 +17,6 @@ https://www.figma.com/file/ostLEtK2oJDRCU3HInhDbD/%EB%B3%B4%EB%A6%AC%EC%8C%80?no
 
 ## 🐶3. 브랜치
 
-### 메인 브랜치명
-
-- main
-
 ### 배포 브랜치명
 
 - release
