@@ -9,13 +9,13 @@ export interface ILogin {
   password: string;
 };
 
-export interface IPostPasswordInfo {
+export interface IPasswordInfo {
   password: string;
   newPassword: string;
+  newPasswordCheck: string;
 };
 
-
-export interface IPasswordInfo extends IPostPasswordInfo {
+export interface IPostPasswordInfo {
   password: string;
   newPassword: string;
 };
