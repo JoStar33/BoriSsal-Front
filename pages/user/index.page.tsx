@@ -58,7 +58,7 @@ const UserPage = () => {
               {user.profile_image ? (
                 <div>
                   <Image
-                    style={{ borderRadius: "200px" }}
+                    style={{ borderRadius: "200px", objectFit: "cover" }}
                     alt="프로필 이미지"
                     placeholder="blur"
                     fill
