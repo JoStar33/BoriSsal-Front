@@ -31,6 +31,7 @@
     margin-top: 3.5vw;
     margin-bottom: 1vw;
     .bori_gallery_title {
+      @include center;
       width: 70%;
       font-size: 1.4vw;
       font-weight: 800;
