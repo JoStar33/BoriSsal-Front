@@ -2,13 +2,19 @@ import ShareButton from "@/components/common/ShareButton/ShareButton";
 import { IBoriGallery } from "@/types/boriGallery";
 import { IUser } from "@/types/user";
 import Image from "next/image";
-import BoriGalleryDetailLike from "../BoriGalleryDetailLike/BoriGalleryDetailLike";
+// import BoriGalleryDetailLike from "../BoriGalleryDetailLike/BoriGalleryDetailLike";
+import dynamic from "next/dynamic";
 import styles from "./bori_gallery_detail_info.module.scss";
 
 interface IProps {
   gallery: IBoriGallery;
   user: IUser;
 }
+
+const BoriGalleryDetailLike = dynamic(
+  () => import("../BoriGalleryDetailLike/BoriGalleryDetailLike"),
+  { ssr: false }
+);
 
 const BoriGalleryDetailInfo = ({ gallery, user }: IProps) => {
   return (
