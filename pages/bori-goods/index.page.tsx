@@ -14,73 +14,54 @@ interface IProps {
   goodsErrorMessage: string;
   categoryData: ICategory[];
   categoryErrorMessage: string;
-};
+}
 
-const BoriGoodsPage = ({goodsData, goodsErrorMessage, categoryData, categoryErrorMessage}: IProps) => {
+const BoriGoodsPage = ({ goodsData, goodsErrorMessage, categoryData, categoryErrorMessage }: IProps) => {
   const [categoryInfo, setCategoryInfo] = useState<string>('0');
   const { searchInfo, renderSearch } = useSearch();
   const categoryName = (goods: IBoriGoods) => {
-    const findCategoryData = categoryData.find(category => category._id === goods.category_id)
-    if(!findCategoryData)
-      return ''
+    const findCategoryData = categoryData.find((category) => category._id === goods.category_id);
+    if (!findCategoryData) return '';
     return findCategoryData.category_name;
-  }
+  };
   const handleSelectLayout = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCategoryInfo(e.target.value)
+    setCategoryInfo(e.target.value);
   };
   if (goodsErrorMessage) {
-    return <ErrorPage errorText={goodsErrorMessage}></ErrorPage>
+    return <ErrorPage errorText={goodsErrorMessage} />;
   }
   if (categoryErrorMessage) {
-    return <ErrorPage errorText={categoryErrorMessage}></ErrorPage>
+    return <ErrorPage errorText={categoryErrorMessage} />;
   }
   return (
     <>
-      <NextSeo
-        title="보리 굿즈"
-        description="깜찍한 보리의 다양한 굿즈들을 구경하시고 구매하세요!"/>
+      <NextSeo title="보리 굿즈" description="깜찍한 보리의 다양한 굿즈들을 구경하시고 구매하세요!" />
       <div className={styles.bori_goods_page_container}>
         <h1>보리 굿즈</h1>
         <div className={styles.user_place}>
           <p className={styles.show_count}>전체 (수량: {goodsData.length})</p>
-          {
-            renderSearch()
-          }
+          {renderSearch()}
           <p className={styles.category_label}>카테고리: </p>
           <div className={styles.styled_select}>
             <select onChange={handleSelectLayout}>
-              {
-                categoryData.map((category) => 
-                  <option 
-                    key={category._id} 
-                    value={category._id}
-                  >
-                    {
-                      category.category_name
-                    }
-                  </option>)
-              }
+              {categoryData.map((category) => (
+                <option key={category._id} value={category._id}>
+                  {category.category_name}
+                </option>
+              ))}
             </select>
           </div>
         </div>
         <div className={styles.bori_goods_container}>
-          {
-            goodsData
-            .filter((searchGoods) =>
-              searchGoods.bori_goods_name.includes(searchInfo)
-            ).filter((cateGoods) => {
-              if (categoryInfo === '0')
-                return cateGoods;
-              if(cateGoods.category_id === categoryInfo)
-                return cateGoods;
-              }
-            ).map((goods) =>           
-              <BoriGoodsItem 
-                key={goods._id}
-                goods={goods}
-                category_name={categoryName(goods)}></BoriGoodsItem>
-            )
-          }
+          {goodsData
+            .filter((searchGoods) => searchGoods.bori_goods_name.includes(searchInfo))
+            .filter((cateGoods) => {
+              if (categoryInfo === '0') return cateGoods;
+              if (cateGoods.category_id === categoryInfo) return cateGoods;
+            })
+            .map((goods) => (
+              <BoriGoodsItem key={goods._id} goods={goods} category_name={categoryName(goods)} />
+            ))}
         </div>
       </div>
     </>
@@ -97,18 +78,20 @@ export async function getStaticProps() {
   await getBoriGoods()
     .then((res) => {
       goodsData = res;
-    }).catch((error: AxiosError) => {
-      goodsErrorMessage = errorMessage(error)
+    })
+    .catch((error: AxiosError) => {
+      goodsErrorMessage = errorMessage(error);
     });
   await getCategory()
-    .then((res) => { 
+    .then((res) => {
       categoryData = res;
       categoryData.unshift({
         _id: '0',
-        category_name: '전체'
-      })
-    }).catch((error: AxiosError) => {
-      categoryErrorMessage = errorMessage(error)
+        category_name: '전체',
+      });
+    })
+    .catch((error: AxiosError) => {
+      categoryErrorMessage = errorMessage(error);
     });
   return {
     props: { goodsData, goodsErrorMessage, categoryData, categoryErrorMessage },

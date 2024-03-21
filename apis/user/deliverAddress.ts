@@ -1,16 +1,13 @@
-import { IDeliverAddress, IPatchDeliverAddress } from "@/types/deliverAddress";
-import { customAxios } from "../axios/customAxios";
+import { IDeliverAddress, IPatchDeliverAddress } from '@/types/deliverAddress';
+import { requests } from '../axios/customAxios';
 
-const getDeliverAddress = () => {
-  const deliverAddresss = customAxios.get(`/deliver-address`)
-    .then(res => res)
-    .then(res => res.data)
-    .then((data: IDeliverAddress) => data);
-  return deliverAddresss;
+const getDeliverAddress = async () => {
+  const deliverAddress = await requests.get<IDeliverAddress>(`/deliver-address`);
+  return deliverAddress;
 };
 
-const patchDeliverAddress = (deliverAddress: IPatchDeliverAddress) => {
-  return customAxios.patch("/deliver-address", deliverAddress);
+const patchDeliverAddress = async (deliverAddress: IPatchDeliverAddress) => {
+  return await requests.patch('/deliver-address', deliverAddress);
 };
 
 export { getDeliverAddress, patchDeliverAddress };

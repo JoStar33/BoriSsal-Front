@@ -5,16 +5,13 @@ import { initUser } from '@/utils/initData';
 
 const HeaderUserPart = () => {
   let { data: user, isSuccess } = useUserQuery();
-  if(!user) {
+  if (!user) {
     user = initUser;
   }
   return (
     <>
-      { !isSuccess ? (
-        <LoginButton></LoginButton>
-      ) : (
-        <UserBar user={user}></UserBar>
-      )}
+      {!isSuccess && <LoginButton />}
+      {isSuccess && <UserBar user={user} />}
     </>
   );
 };

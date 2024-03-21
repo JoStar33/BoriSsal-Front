@@ -10,8 +10,7 @@ interface IProps {
   user: IUser;
 }
 
-
-const BoriGalleryDetailLike = ({gallery, user}: IProps) => {
+const BoriGalleryDetailLike = ({ gallery, user }: IProps) => {
   const likeGalleryMutation = useLikeGalleryMutation(user.user_bori_gallery_like, gallery._id);
   const { setDialog, setDialogText } = useValidateDialog();
   const handleLikeGoods = () => {
@@ -19,7 +18,7 @@ const BoriGalleryDetailLike = ({gallery, user}: IProps) => {
       return;
     }
     if (!user.email) {
-      setDialogText("로그인 이후에 누를 수 있어요!");
+      setDialogText('로그인 이후에 누를 수 있어요!');
       return setDialog(true);
     }
     user.user_bori_gallery_like.find((likeGallery) => likeGallery === gallery._id)
@@ -31,22 +30,14 @@ const BoriGalleryDetailLike = ({gallery, user}: IProps) => {
     <>
       <div className={styles.gallery_like_container}>
         좋아요:
-          <button onClick={handleLikeGoods}
-            aria-label="좋아요 버튼"
-            role='like'>
-            <AiFillHeart
-              role="like-heart"
-              color={
-                user.user_bori_gallery_like.find(
-                  (likeGoods) => likeGoods === gallery._id
-                )
-                  ? "red"
-                  : "black"
-              }
-              size={25}
-            ></AiFillHeart>
-          </button>
-          {gallery.bori_gallery_like}
+        <button onClick={handleLikeGoods} aria-label="좋아요 버튼" role="like">
+          <AiFillHeart
+            role="like-heart"
+            color={user.user_bori_gallery_like.find((likeGoods) => likeGoods === gallery._id) ? 'red' : 'black'}
+            size={25}
+          />
+        </button>
+        {gallery.bori_gallery_like}
       </div>
     </>
   );

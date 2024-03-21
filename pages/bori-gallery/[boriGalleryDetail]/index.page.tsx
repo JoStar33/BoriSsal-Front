@@ -14,18 +14,18 @@ import { NextSeo } from 'next-seo';
 import { useMemo, useState } from 'react';
 
 interface IProps {
-  gallery: IBoriGallery,
-  galleryErrorMessage: string
+  gallery: IBoriGallery;
+  galleryErrorMessage: string;
 }
 
-const BoriGalleryDetail = ({gallery, galleryErrorMessage}: IProps) => {
+const BoriGalleryDetail = ({ gallery, galleryErrorMessage }: IProps) => {
   const galleryId = useMemo(() => {
     if (!gallery) {
-      return "none"
+      return 'none';
     }
-    return gallery._id
+    return gallery._id;
   }, [gallery]);
-  const [limit, setLimit] = useState<number>(1);
+  const [limit, setLimit] = useState(1);
   let { data: user } = useUserQuery();
   let { data: boriGalleryReply, isLoading, refetch, error } = useBoriGalleryReplyQuery(galleryId, limit);
   if (!user) {
@@ -35,30 +35,24 @@ const BoriGalleryDetail = ({gallery, galleryErrorMessage}: IProps) => {
     boriGalleryReply = initReplyMutation;
   }
   if (galleryErrorMessage) {
-    return (
-      <ErrorPage error={error} errorText={galleryErrorMessage}/>
-    )
+    return <ErrorPage error={error} errorText={galleryErrorMessage} />;
   }
   return (
     <>
-      <NextSeo
-        title={`${gallery.bori_gallery_title}`}
-        description={`${gallery.bori_gallery_desc}`}/>
+      <NextSeo title={`${gallery.bori_gallery_title}`} description={`${gallery.bori_gallery_desc}`} />
       <div>
-        <BoriGalleryDetailInfo 
-          gallery={gallery}
-          user={user}/>
-        {
-          isLoading 
-          ? <ReplyLoading></ReplyLoading>
-          : <ReplyViewer 
-              user={user} 
-              gallery_id={gallery._id} 
-              mutationData={boriGalleryReply} 
-              limit={0} 
-              setLimit={setLimit} 
-              refetch={refetch}/>
-        }
+        <BoriGalleryDetailInfo gallery={gallery} user={user} />
+        {isLoading && <ReplyLoading />}
+        {!isLoading && (
+          <ReplyViewer
+            user={user}
+            gallery_id={gallery._id}
+            mutationData={boriGalleryReply}
+            limit={0}
+            setLimit={setLimit}
+            refetch={refetch}
+          />
+        )}
       </div>
     </>
   );
@@ -68,8 +62,7 @@ export default BoriGalleryDetail;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   let galleryData: IBoriGallery[] = [];
-  await getBoriGallery()
-  .then((res) => {
+  await getBoriGallery().then((res) => {
     galleryData = res;
   });
   const paths = galleryData.map((gallery) => ({
@@ -82,12 +75,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   let galleryData: IBoriGallery[] = [];
   let galleryErrorMessage = null;
-  if(!params) {
-    return{
+  if (!params) {
+    return {
       props: {
-        galleryErrorMessage: "잘못된 정보입니다."
+        galleryErrorMessage: '잘못된 정보입니다.',
       },
-    }
+    };
   }
   await getBoriGallery()
     .then((res) => {
@@ -96,20 +89,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     .catch((error: AxiosError) => {
       galleryErrorMessage = errorMessage(error);
     });
-  const gallery = galleryData.find(
-    (gallery) => gallery._id === params.boriGalleryDetail
-  );
-  if (!gallery){
+  const gallery = galleryData.find((gallery) => gallery._id === params.boriGalleryDetail);
+  if (!gallery) {
     return {
       props: {
-        galleryErrorMessage: "갤러리 데이터가 존재하지 않습니다."
-      }
-    }
-  } 
+        galleryErrorMessage: '갤러리 데이터가 존재하지 않습니다.',
+      },
+    };
+  }
   return {
     props: {
       gallery,
-      galleryErrorMessage
+      galleryErrorMessage,
     },
   };
 };

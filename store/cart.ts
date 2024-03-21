@@ -1,8 +1,8 @@
-import { ICartGoods } from "@/types/cart";
-import { stat } from "fs";
-import produce from "immer";
-import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
+import { ICartGoods } from '@/types/cart';
+import { stat } from 'fs';
+import produce from 'immer';
+import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 interface ICartState {
   cart: ICartGoods[];
@@ -23,59 +23,68 @@ interface IStore extends ICartState {
 }
 
 const initCart = {
-  cart: []
-}
-
+  cart: [],
+};
 
 export const useCartStore = create<IStore>()(
   persist(
     (set) => ({
       ...initCart,
       setCart: (payload: ICartGoods[]) =>
-        set(produce((state: ICartState) => {
-          state.cart = payload
-      })),
+        set(
+          produce((state: ICartState) => {
+            state.cart = payload;
+          }),
+        ),
       resetCart: () => {
-        set(produce((state: ICartState) => {
-          state.cart = initCart.cart
-        }))
+        set(
+          produce((state: ICartState) => {
+            state.cart = initCart.cart;
+          }),
+        );
       },
       increaseCart: (payload: ICartGoods) =>
-        set(produce((state: ICartState) => {
-          state.cart = state.cart.map(cart => {
-            if(cart.bori_goods_id === payload.bori_goods_id)
-              cart.bori_goods_count++;
-            return cart;
-          })
-      })),
+        set(
+          produce((state: ICartState) => {
+            state.cart = state.cart.map((cart) => {
+              if (cart.bori_goods_id === payload.bori_goods_id) cart.bori_goods_count++;
+              return cart;
+            });
+          }),
+        ),
       updateCartCount: (payload: IUpdateCart) => {
-        set(produce((state: ICartState) => {
-          state.cart = state.cart.map(cart => {
-            if(cart.bori_goods_id === payload.cart_id) {
-              cart.bori_goods_count = payload.bori_goods_count;
-            }
-            return cart;
-          })
-        }));
+        set(
+          produce((state: ICartState) => {
+            state.cart = state.cart.map((cart) => {
+              if (cart.bori_goods_id === payload.cart_id) {
+                cart.bori_goods_count = payload.bori_goods_count;
+              }
+              return cart;
+            });
+          }),
+        );
       },
       decreaseCart: (payload: ICartGoods) =>
-        set(produce((state: ICartState) => {
-          state.cart = state.cart.map(cart => {
-            if(cart.bori_goods_id === payload.bori_goods_id)
-              cart.bori_goods_count--;
-            return cart;
-          })
-      })),
+        set(
+          produce((state: ICartState) => {
+            state.cart = state.cart.map((cart) => {
+              if (cart.bori_goods_id === payload.bori_goods_id) cart.bori_goods_count--;
+              return cart;
+            });
+          }),
+        ),
       deleteCart: (payload: ICartGoods) =>
-        set(produce((state: ICartState) => {
-          state.cart = state.cart.filter((cartElement) => {
-            cartElement.bori_goods_id !== payload.bori_goods_id
-          });
-      })),
+        set(
+          produce((state: ICartState) => {
+            state.cart = state.cart.filter((cartElement) => {
+              cartElement.bori_goods_id !== payload.bori_goods_id;
+            });
+          }),
+        ),
     }),
     {
       name: 'cart-storage',
-      storage: createJSONStorage(() => sessionStorage)
-    }
-  )
+      storage: createJSONStorage(() => sessionStorage),
+    },
+  ),
 );

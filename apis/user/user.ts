@@ -1,17 +1,14 @@
-import { IUser, IUserProfileUpload } from "@/types/user";
-import { customAxios } from "../axios/customAxios";
+import { IUser, IUserProfileUpload } from '@/types/user';
+import { requests } from '../axios/customAxios';
 
 const getUser = () => {
-  return customAxios.get(`/user`)
-    .then(res => res)
-    .then(res => res.data)
-    .then((data: IUser) => data);;
+  return requests.get<IUser>(`/user`);
 };
 
 const postProfileImage = (userProfileInfo: IUserProfileUpload) => {
-  return customAxios.post(`/user/profile-image`, userProfileInfo.image, {
+  return requests.post(`/user/profile-image`, userProfileInfo.image, {
     headers: {
-      "Content-Type": "multipart/form-data",
+      'Content-Type': 'multipart/form-data',
     },
   });
 };

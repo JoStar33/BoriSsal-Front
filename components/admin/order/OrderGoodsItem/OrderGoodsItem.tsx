@@ -4,16 +4,13 @@ import styles from './order_goods_item.module.scss';
 
 interface IProps {
   boriGoods: ICartGoods;
-};
+}
 
 const OrderGoodsItem = ({ boriGoods }: IProps) => {
   return (
     <div className={styles.order_goods_item_container}>
-      <figure style={{width: "8vw", height: "8vw", margin: "2vw", position: "relative"}}>
-        <Image 
-          fill
-          alt={boriGoods.bori_goods_name}
-          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${boriGoods.bori_goods_image}`}></Image>
+      <figure style={{ width: '8vw', height: '8vw', margin: '2vw', position: 'relative' }}>
+        <Image fill alt={boriGoods.bori_goods_name} src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${boriGoods.bori_goods_image}`} />
       </figure>
       <div className={styles.goods_info}>
         <p>{`상품명: ${boriGoods.bori_goods_name}`}</p>
