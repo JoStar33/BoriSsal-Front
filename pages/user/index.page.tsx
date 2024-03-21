@@ -18,7 +18,7 @@ const UserPage = () => {
   let formData: FormData;
   useLayoutEffect(() => {
     formData = new FormData();
-  });
+  }, []);
   let { data: deliverAddress, isError, isLoading } = useDeliverAddressQuery();
   const loginCheck = useLoginCheckQuery();
   const { mutate } = useProfileUpdateMutation();

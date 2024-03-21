@@ -11,7 +11,7 @@ const SameEmail = () => {
     setTimeout(() => {
       router.push('/login');
     }, 3000);
-  });
+  }, []);
   return (
     <>
       <NextSeo title="중복된 이메일" description="중복된 이메일로 접근하셨군요... 다시 확인하시고 로그인 해보세요!" />
