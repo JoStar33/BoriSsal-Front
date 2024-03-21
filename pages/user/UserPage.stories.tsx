@@ -1,11 +1,10 @@
-
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { QueryClient, QueryClientProvider } from "react-query";
-import UserPage from "./index.page";
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import UserPage from './index.page';
 const queryClient = new QueryClient();
 
 export default {
-  title: "페이지/회원정보 페이지",
+  title: '페이지/회원정보 페이지',
   component: UserPage,
 } as ComponentMeta<typeof UserPage>;
 

@@ -17,21 +17,22 @@ const CompleteOrderPage = () => {
   useLoginCheckQuery();
   let { data: user } = useUserQuery();
   let { data: deliverAddress } = useDeliverAddressQuery();
-  if(!deliverAddress) {
+  if (!deliverAddress) {
     deliverAddress = initDeliver;
   }
-  if(!user) {
+  if (!user) {
     user = initUser;
   }
   const { pageState, setPageState } = usePageStore();
   const { cart } = useCartStore();
-  const totalPrice = useMemo(() => {
-    return cart.reduce((_total, cartElement) => {
-      return _total + (cartElement.bori_goods_count * cartElement.bori_goods_price)}, 0);
-  }, [cart]);
-  const orderShow = useMemo(() => {
-    return pageState === 'order' ? false : true;
-  }, [pageState]);
+
+  const totalPrice = useMemo(
+    () => cart.reduce((_total, cartElement) => _total + cartElement.bori_goods_count * cartElement.bori_goods_price, 0),
+    [cart],
+  );
+
+  const orderShow = useMemo(() => (pageState === 'order' ? false : true), [pageState]);
+
   useEffect(() => {
     if (!orderShow) {
       pop();
@@ -41,58 +42,50 @@ const CompleteOrderPage = () => {
       setPageState('');
     };
   }, []);
+
   return (
     <>
-      <NextSeo
-        title="결제완료"
-        description="구매해주셔서 감사합니다! 저희 보리간식 비용으로 사용하겠습니다"/>
-      {
-        !orderShow
-        ? <div className={styles.order_container}>
-            <div>
-              <h1>결제가 완료됐습니다!</h1>
-            </div>
-            <h1 className={styles.info_head}>회원정보</h1>
-            <UserInfoViewer user={user}/>
-            <h1 className={styles.info_head}>배송지 정보</h1>
-            <div className={styles.info_container}>
-              <div className={styles.deliver_container}>
-                <p>전화번호:</p>
-                <p>{deliverAddress.phone_number}</p>
-              </div>
-              <div className={styles.deliver_container}>
-                <p>주소:</p>
-                <p>{deliverAddress.address}</p>
-              </div>
-              <div className={styles.deliver_container}>
-                <p>상세주소:</p>
-                <p>{deliverAddress.address_detail}</p>
-              </div>
-            </div>
-            <h1 className={styles.info_head}>주문 상품 정보</h1>
-            <div className={styles.cart_container}>
-              {
-                cart.map(cartElement => 
-                  <CartItem 
-                    key={cartElement.bori_goods_id}
-                    cart_id={''} 
-                    cartGoods={cartElement}/>)
-              }
-            </div>
-            <div className={styles.total_price_container} style={{marginTop: '2vw'}}>
-              <p>최종 결제금액: </p>
-              <p className={styles.total_price}>
-                {
-                  totalPrice
-                }원
-              </p>
-            </div>
-            <Link href='/'>
-              <button aria-label="홈으로 가기 버튼" className={styles.order_button}>홈으로 가기</button>
-            </Link>
+      <NextSeo title="결제완료" description="구매해주셔서 감사합니다! 저희 보리간식 비용으로 사용하겠습니다" />
+      {!orderShow && (
+        <div className={styles.order_container}>
+          <div>
+            <h1>결제가 완료됐습니다!</h1>
           </div>
-        : <ErrorPage errorText='잘못된 접근입니다!' ></ErrorPage>
-      }
+          <h1 className={styles.info_head}>회원정보</h1>
+          <UserInfoViewer user={user} />
+          <h1 className={styles.info_head}>배송지 정보</h1>
+          <div className={styles.info_container}>
+            <div className={styles.deliver_container}>
+              <p>전화번호:</p>
+              <p>{deliverAddress.phone_number}</p>
+            </div>
+            <div className={styles.deliver_container}>
+              <p>주소:</p>
+              <p>{deliverAddress.address}</p>
+            </div>
+            <div className={styles.deliver_container}>
+              <p>상세주소:</p>
+              <p>{deliverAddress.address_detail}</p>
+            </div>
+          </div>
+          <h1 className={styles.info_head}>주문 상품 정보</h1>
+          <div className={styles.cart_container}>
+            {cart.map((cartElement) => (
+              <CartItem key={cartElement.bori_goods_id} cart_id={''} cartGoods={cartElement} />
+            ))}
+          </div>
+          <div className={styles.total_price_container} style={{ marginTop: '2vw' }}>
+            <p>최종 결제금액: </p>
+            <p className={styles.total_price}>{totalPrice}원</p>
+          </div>
+          <Link href="/">
+            <button aria-label="홈으로 가기 버튼" className={styles.order_button}>
+              홈으로 가기
+            </button>
+          </Link>
+        </div>
+      )}
+      {orderShow && <ErrorPage errorText="잘못된 접근입니다!" />}
     </>
   );
 };

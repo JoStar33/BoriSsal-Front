@@ -1,13 +1,13 @@
-import OrderStatusUpdateDialog from "@/components/dialogs/OrderStatusUpdateDialog/OrderStatusUpdateDialog";
-import OrderItemSkeleton from "@/components/loading/admin/OrderItemSkeleton/OrderItemSkeleton";
-import OrderEmpty from "@/components/order/OrderEmpty/OrderEmpty";
-import { useSearch } from "@/hooks/common/useSearch/useSearch";
-import { useAllOrderQuery } from "@/hooks/order/useAllOrderQuery/useAllOrderQuery";
-import { useRef, useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { AiFillCaretDown } from "react-icons/ai";
-import OrderItem from "../OrderItem/OrderItem";
+import OrderStatusUpdateDialog from '@/components/dialogs/OrderStatusUpdateDialog/OrderStatusUpdateDialog';
+import OrderItemSkeleton from '@/components/loading/admin/OrderItemSkeleton/OrderItemSkeleton';
+import OrderEmpty from '@/components/order/OrderEmpty/OrderEmpty';
+import { useSearch } from '@/hooks/common/useSearch/useSearch';
+import { useAllOrderQuery } from '@/hooks/order/useAllOrderQuery/useAllOrderQuery';
+import { useRef, useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { AiFillCaretDown } from 'react-icons/ai';
+import OrderItem from '../OrderItem/OrderItem';
 import styles from './order_controller.module.scss';
 
 const OrderController = () => {
@@ -18,12 +18,12 @@ const OrderController = () => {
   const updateOrderId = useRef<string>('');
   const { searchInfo, renderSearch } = useSearch();
   let { data, refetch, isLoading } = useAllOrderQuery(limit, searchInfo, startDate, endDate);
-  if(!data) {
+  if (!data) {
     data = {
       order: [],
-      overflow: true
+      overflow: true,
     };
-  };
+  }
   const showMoreOrder = async () => {
     setLimit(() => {
       return limit + 1;
@@ -42,24 +42,21 @@ const OrderController = () => {
   };
   return (
     <>
-      {
-        dialog && 
-        <figure style={{marginLeft: "-5vw"}}>
-          <OrderStatusUpdateDialog setDialog={setDialog} order_id={updateOrderId.current}/>
+      {dialog && (
+        <figure style={{ marginLeft: '-5vw' }}>
+          <OrderStatusUpdateDialog setDialog={setDialog} order_id={updateOrderId.current} />
         </figure>
-      }
+      )}
       <div className={styles.order_controller_container}>
         <div className={styles.controller_container}>
-          {
-            renderSearch()
-          }
+          {renderSearch()}
           <div className={styles.date_box}>
             <div className={styles.date_container}>
               <p>시작일: </p>
               <DatePicker
                 dateFormat="yyyy-MM-dd"
                 selected={startDate}
-                onChange={date => setStartDate(date)}
+                onChange={(date) => setStartDate(date)}
                 selectsStart
                 startDate={startDate}
                 endDate={endDate}
@@ -70,32 +67,33 @@ const OrderController = () => {
               <DatePicker
                 dateFormat="yyyy-MM-dd"
                 selected={endDate}
-                onChange={date => setEndDate(date)} 
+                onChange={(date) => setEndDate(date)}
                 selectsEnd
                 minDate={startDate}
                 endDate={endDate}
               />
             </div>
-            <button role="search-button" className={styles.search_button} onClick={handleSearch} aria-label="주문 검색하기">검색하기</button>
+            <button role="search-button" className={styles.search_button} onClick={handleSearch} aria-label="주문 검색하기">
+              검색하기
+            </button>
           </div>
         </div>
         <div className={styles.list_container}>
-          {
-            isLoading 
-            ? new Array(3)
-              .fill(1)
-              .map((_, index) => <OrderItemSkeleton key={index}/>)
-            : data.order.length !== 0
-              ? data.order.map(orderElement => <OrderItem key={orderElement._id} order={orderElement} updateOrderId={updateOrderId} setDialog={setDialog}/>)
-              : <OrderEmpty/>
-          }
-          {
-            !data.overflow && 
+          {isLoading ? (
+            new Array(3).fill(1).map((_, index) => <OrderItemSkeleton key={index} />)
+          ) : data.order.length !== 0 ? (
+            data.order.map((orderElement) => (
+              <OrderItem key={orderElement._id} order={orderElement} updateOrderId={updateOrderId} setDialog={setDialog} />
+            ))
+          ) : (
+            <OrderEmpty />
+          )}
+          {!data.overflow && (
             <button className={styles.more_show_button} onClick={() => showMoreOrder()} aria-label="주문 더보기">
               더보기
-              <AiFillCaretDown></AiFillCaretDown>
+              <AiFillCaretDown />
             </button>
-          }
+          )}
         </div>
       </div>
     </>

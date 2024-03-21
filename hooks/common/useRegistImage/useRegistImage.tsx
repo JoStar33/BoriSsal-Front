@@ -1,9 +1,9 @@
-import Image from "next/image";
-import { useRef, useState } from "react";
+import Image from 'next/image';
+import { useRef, useState } from 'react';
 import styles from './use_regist_image.module.scss';
 
 export const useRegistImage = () => {
-  const [image, setImage] = useState<any>("");
+  const [image, setImage] = useState<any>('');
   const formData = useRef<FormData>(new FormData());
   const handleOnChangeImage = (e: React.ChangeEvent<HTMLInputElement>, imageType: string) => {
     if (!e.target.files) {
@@ -23,36 +23,28 @@ export const useRegistImage = () => {
   };
   const renderRegistImage = (desc: string, imageType: string) => (
     <>
-      {!image ? 
+      {!image ? (
         <label className={styles.regist_image} htmlFor="input-file">
-          {
-            desc
-          }
+          {desc}
         </label>
-      : 
+      ) : (
         <>
           <label className={styles.regist_image} htmlFor="input-file">
-            <figure
-              style={{ width: "30vw", height: "30vw", position: "relative" }}
-            >
-              <Image 
-                fill 
-                src={image} 
-                alt={desc} 
-                style={{objectFit: "cover"}} />
+            <figure style={{ width: '30vw', height: '30vw', position: 'relative' }}>
+              <Image fill src={image} alt={desc} style={{ objectFit: 'cover' }} />
             </figure>
           </label>
         </>
-      }
+      )}
       <input
         id="input-file"
         type="file"
         role="upload"
-        onChange={event => handleOnChangeImage(event, imageType)}
-        style={{ display: "none" }}
+        onChange={(event) => handleOnChangeImage(event, imageType)}
+        style={{ display: 'none' }}
         accept="image/png, image/jpeg"
       />
     </>
   );
-  return { image, setImage, formData, handleOnChangeImage, renderRegistImage};
+  return { image, setImage, formData, handleOnChangeImage, renderRegistImage };
 };
