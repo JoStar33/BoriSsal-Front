@@ -7,14 +7,19 @@ interface IProps {
   setPageState: Dispatch<SetStateAction<string>>;
 }
 
-const AdminViewerButton = ({ pageState, status, setPageState}: IProps) => {
+const AdminViewerButton = ({ pageState, status, setPageState }: IProps) => {
   return (
     <div>
-      {
-        status === pageState
-        ? <button className={styles.pushed_button} role={status} onClick={() => setPageState(status)}>{status}</button>
-        : <button className={styles.normal_button} role={status} onClick={() => setPageState(status)}>{status}</button>
-      }
+      {status === pageState && (
+        <button className={styles.pushed_button} role={status} onClick={() => setPageState(status)}>
+          {status}
+        </button>
+      )}
+      {status !== pageState && (
+        <button className={styles.normal_button} role={status} onClick={() => setPageState(status)}>
+          {status}
+        </button>
+      )}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import styles from './use_search.module.scss';
 
 export const useSearch = () => {
@@ -9,11 +9,11 @@ export const useSearch = () => {
   const renderSearch = () => (
     <div className={styles.search_container}>
       <label htmlFor="search_goods">검색:</label>
-      <input role="search" id='search_goods' type="text" onChange={handleSearch}/>
+      <input role="search" id="search_goods" type="text" onChange={handleSearch} />
     </div>
   );
   return {
     searchInfo,
-    renderSearch
-  }
-}
+    renderSearch,
+  };
+};

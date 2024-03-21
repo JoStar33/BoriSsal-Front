@@ -1,6 +1,48 @@
 {
-  "extends": "next/core-web-vitals",
+  "extends": ["plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
+  "plugins": ["react-hooks", "import"],
   "env": {
     "jest": true
+  },
+  "rules": {
+    "react-hooks/rules-of-hooks": "warn",
+    "react-hooks/exhaustive-deps": "warn",
+    "import/no-anonymous-default-export": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "no-explicit-any": "off",
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "import/order": [
+      "warn",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "object", "type"],
+        "pathGroups": [
+          {
+            "pattern": "next*",
+            "group": "builtin",
+            "position": "before"
+          },
+          {
+            "pattern": "@api",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "@utils",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@**",
+            "group": "internal",
+            "position": "after"
+          }
+        ]
+      }
+    ]
   }
 }
